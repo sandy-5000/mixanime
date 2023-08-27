@@ -15,7 +15,6 @@ export default function UserController() {
                 email: usermail,
                 passwd,
             })
-            console.log(user)
             try {
                 var result = await user.save()
                 return { status: 201, result }
