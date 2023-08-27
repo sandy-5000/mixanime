@@ -1,0 +1,102 @@
+{% macro get(slider) %}
+
+<style>
+    :root {
+        --anime-width: 200px;
+        --anime-height: 300px;
+        --arrow-width: 20px;
+        --slider-py: 200px;
+    }
+
+    @media only screen and (max-width: 950px) {
+        :root {
+            --anime-width: 35vw;
+            --anime-height: 200px;
+        }
+    }
+
+    .tgreen {
+		color: #02dbbe;
+	}
+
+    .slider {
+        height: auto !important;
+        width: 100% !important;
+        overflow-x: scroll;
+        white-space: nowrap;
+        position: relative;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    .anime {
+        width: var(--anime-width);
+        height: var(--anime-height);
+        display: inline-block;
+        position: relative;
+        color: white;
+        padding: 0 2px;
+        font-size: 0.8rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .anime:first-child {
+        margin-left: var(--arrow-width);
+    }
+
+    .anime:last-child {
+        margin-right: var(--arrow-width);
+    }
+
+    .anime .img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        background-size: cover !important;
+        background-position: center !important;
+        border-radius: 0px !important;
+        /* background-blend-mode: lighten; */
+    }
+
+    @media only screen and (min-width: 900px) {
+        .anime:hover {
+            transform: scale(1.15);
+            z-index: 2;
+        }
+
+        .anime:hover>.img {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+</style>
+
+<section class="container-fluid m-0 p-0 mt-5">
+    <h3 class="h2 tgreen mx-4 mb-3 p-0" style="font-size: 30px; ">Trending</h3>
+    <div class="slider" id="mySlider">
+        {% for item in slider %}
+            <div class="anime">
+                <div class="img lazy-bg" data-bg="background-image: url('{{item.coverImage.large or item.coverImage.extraLarge}}')">
+                    <div class="d-flex flex-column justify-content-end p-2 h-100">
+                        <div>
+                            <a href="/details/{{item.id}}">
+                            <button class="rounded-pill btn-flat waves-effect waves-light teal accent-4 text-light">
+                                <span class="d-lg-block d-md-block d-none">
+                                    <span>Watch Now</span>
+                                    <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
+                                </span>
+                                <span class="d-lg-none d-md-none d-block">
+                                    <i class="bi bi-caret-right"></i>
+                                </span>
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endmacro %}

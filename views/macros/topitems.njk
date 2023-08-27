@@ -1,0 +1,125 @@
+{% macro get(topitems) %}
+
+{% set keys = ['topAiring', 'popularSeries', 'popularMovies', 'completedSeries'] %}
+{% set names = ['Top Airing', 'Popular Series', 'Popular Movies', 'Completed Series'] %}
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .boxes {
+        border-radius: 2px !important;
+    }
+
+    .show-more:hover {
+        background-color: #00bfa5;
+    }
+
+    .tgreenl {
+        color: #00bfa5 !important;
+        font-weight: 600 !important;
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        tippy('.mytippy-topitems', {
+                content(reference) {
+                    const id = reference.getAttribute('data-template')
+                    const template = document.getElementById(id)
+                    return template.innerHTML
+                },
+                animation: 'scale',
+                allowHTML: true,
+                interactive: true,
+                placement: 'top',
+                inertia: true,
+                delay: [300, 50],
+                duration: [100, 50],
+            }
+        )
+    })
+</script>
+
+<section class="row m-0">
+    {% for key in keys %}
+        <div class="col-lg-3 col-md-6 col-12 p-0">
+            <div class="boxes d-flex flex-column justify-content-between bg-ldark m-1" style="height: 500px;">
+                <div class="py-3 px-4">
+                    <span class="h5 tgreenl">{{names[loop.index0]}}</span>
+                </div>
+                <div style="height: 420px; overflow-y: scroll;">
+                    {% for item in topitems[key] %}
+                    <div class="{{'bg-ldark' if loop.index0 % 2 else 'bg-dark'}} d-flex w-100 px-4 py-2" style="height: 100px !important">
+                        <div class="col-2 mytippy-topitems" data-template="{{key}}-{{loop.index0}}">
+                            <img loading="lazy" class="rounded" style="width: 55px;" src="{{item.coverImage.medium or item.coverImage.large}}" alt="">
+                        </div>
+                        <a href="/details/{{item.id}}">
+                        <div class="col-10 px-4 d-flex flex-column justify-content-center">
+                            <p class="text-light m-1 text-truncate" style="font-weight: 500;">{{(item.title.english or item.title.romaji) | truncate(20, true, '...')}}</p>
+                            <p class="text-light m-1">
+                                {{item.format}} <i class="bi bi-dot"></i>
+                                {% set totalEpisodes = (item.episodes if item.episodes else '?') %}
+                                {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
+                                Ep {{currentEpisode}}/{{totalEpisodes}} <i class="bi bi-dot"></i>
+                                {{item.duration}}min
+                            </p>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <button style="height: 100% !important;"
+                        class="show-more btn-flat waves-effect waves-light text-light w-100">
+                        View more <i style="font-size: small;" class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div style="display: none;">
+        {% for key in keys %}
+            {% for item in topitems[key] %}
+                <div id="{{key}}-{{loop.index0}}">
+                    <div class="m-0 p-3 blue-grey darken-4 w-100" style="border-radius: 10px !important;">
+                        <p class="h5">{{item.title.english or item.title.romaji}}</p>
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                {% set totalEpisodes = (item.episodes if item.episodes else '?') %}
+                                {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
+                                <i class="text-warning bi bi-star-fill"></i> {{ item.averageScore / 10 if item.averageScore else 'NA'}}
+                                <i class="bi bi-dot"></i> Ep {{currentEpisode}}/{{totalEpisodes}}
+                            </div>
+                            <div>
+                                <span class="rounded teal accent-4 py-1 px-2 mx-3">{{item.format}}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>{{ item.description | truncate(256, true, "...") | safe }}</strong>
+                        </div>
+                        <div class="mt-3">
+                            <a href="/details/{{item.id}}">
+                            <button class="text-light btn-flat rounded-pill teal accent-4 waves-effect waves-light px-3">
+                                Watch Now
+                                <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
+                            </button>
+                            </a>
+                            <a href="/add-to-list/{{item.id}}">
+                            <button class="btn-flat waves-effect bg-light accent-4 text-dark rounded-pill">
+                                <i class="fa-solid fa-plus" style="color: #08162c; font-size: medium;"></i>
+                                Add To List
+                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endmacro %}

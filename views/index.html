@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% import "./macros/carousel.njk" as Carousel %}
+{% import "./macros/slider.njk" as Slider %}
+{% import "./macros/topitems.njk" as TopItems %}
+{% import "./macros/recent.njk" as Recent %}
+
+{% block title %}Home | {{ super() }}{% endblock %}
+
+{% block content %}
+    {{ Carousel.get(carousel.data.Page.media) }}
+    {{ Slider.get(trending.data.Page.media) }}
+    {{ TopItems.get({
+            topAiring: topAiring.data.Page.media,
+            popularSeries: popularSeries.data.Page.media,
+            popularMovies: popularMovies.data.Page.media,
+            completedSeries: completedSeries.data.Page.media
+        }) }}
+    <div class="mt-4"></div>
+    {{ Recent.get({
+            latestEpisodes: latestEpisodes.data.Page.media,
+            newlyAdded: newlyAdded.data.Page.media,
+            carousel: carousel.data.Page.media
+        }) }}
+{% endblock %}

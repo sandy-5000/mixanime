@@ -1,0 +1,158 @@
+{% set months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
+
+{% extends "layout.html" %}
+
+{% block title %}Watch | {{ super() }}{% endblock %}
+
+{% block content %}
+
+<style>
+    .top-container {
+        min-height: 850px !important;
+    }
+
+    .bag-image {
+        width: 100%;
+        background: linear-gradient(to right, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%),
+        url('{{item.bannerImage}}');
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    .left-content {
+        padding-top: 50px;
+    }
+
+    .detail-content {
+        padding-top: 50px;
+    }
+
+    .right-content {
+        padding-top: 50px;
+    }
+
+    .content {
+        backdrop-filter: blur(25px) !important;
+    }
+
+    @media only screen and (max-width: 991px) {
+        .right-content {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 0;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .left-content {
+            padding-top: 30px;
+            height: 300px !important;
+        }
+
+        .right-content,
+        .detail-content {
+            padding-top: 30px;
+        }
+    }
+
+    .ep-btn {
+        background-color: #bdbdbd;
+        color: black;
+    }
+
+    .ep-btn:hover {
+        background-color: #37474f;
+        color: aliceblue;
+    }
+</style>
+
+{% set totalEpisodes = item.episodes or '?' %}
+{% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
+
+
+<div class="top-container" style="margin-top: 75px !important; margin-bottom: 75px;">
+    <div class="bag-image d-flex">
+        <div class="content d-flex">
+            <div class="d-lg-flex m-0 p-0 inner-content">
+                <div class="col-lg-9 col-12 d-lg-flex d-md-flex">
+                    <div class="left-content col-lg-3 col-md-3 col-12 px-1">
+                        <div style="max-height: 460px; overflow: scroll !important;" class="btn-container col-12 row justify-content-center">
+
+                        </div>
+                    </div>
+                    <div class="detail-content col-lg-9 col-md-9 col-12 px-4">
+                        <div class="mb-2">
+                            <a href="/home"><strong>Home</strong></a> <i style="font-size: medium;"
+                                class="text-light bi bi-dot"></i>
+                            <strong class="tgreen">{{(item.title.english or item.title.romaji or item.title.native) |
+                                capitalize}}</strong>
+                        </div>
+                        <body>
+                            <iframe allowfullscreen="true" id="playerframe" style="height: calc(0.5625 * 800px); width: 800px;"
+                                src="{{item.link}}"></iframe>
+                        </body>
+                        <div class="my-5"></div>
+                    </div>
+                </div>
+                <div class="right-content col-lg-3 col-12" style="background-color: rgba(255, 255, 255, 0.25);">
+                    <div class="mx-4">
+                        <p class="text-light p-0 mb-3"><strong>Format :</strong> <span class="mx-2">{{item.format}}</span></p>
+                        <hr class="text-light" />
+                        <p class="text-light p-0 mb-3"><strong>Native Title :</strong> <span class="mx-2">{{item.title.native}}</span></p>
+                        <p class="text-light p-0 mb-3"><strong>Romaji Title :</strong> <span class="mx-2">{{item.title.romaji}}</span></p>
+                        <hr class="text-light" />
+                        <p class="text-light p-0 mb-3"><strong>Started On :</strong> <span class="mx-2">{{months[item.startDate.month]}} {{item.startDate.day}}, {{item.startDate.year}}</span></p>
+                        <p class="text-light p-0 mb-3"><strong>Season :</strong> <span class="mx-2">{{item.season | title}}</span></p>
+                        <p class="text-light p-0 mb-3"><strong>Type :</strong> <span class="mx-2">{{item.type}}</span></p>
+                        <p class="text-light p-0 mb-3"><strong>Status :</strong> <span class="mx-2">{{item.status | title}}</span></p>
+                        <p class="text-light p-0 mb-3"><strong>Total Episodes :</strong> <span class="mx-2">{{totalEpisodes}}</span></p>
+                        <hr class="text-light" />
+                        <p class="text-light p-0 mb-3"><strong>Genres :</strong> <span class="mx-2">{{item.genres | join(', ')}}</span></p>
+                        <hr class="text-light" />
+                        <p class="text-light p-0 mb-3"><strong>Average Score :</strong> <span class="mx-2">{{item.averageScore}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getButton(n) {
+        return `
+            <button onclick="getLink(${n})" class="px-2 m-1 ep-btn btn-flat waves-effect waves-light shadow-lg" style="height: 40px; width: 60px;"><strong>${n}</strong></button>
+        `
+    }
+
+    function watchInit() {
+        let n = '{{currentEpisode}}'
+        if (n != '?') {
+            n = parseInt(n)
+            for (let i = 1; i <= 6; ++i) {
+                $('.btn-container').append(getButton(i))
+            }
+        }
+    }
+
+    function getLink(episode) {
+        const romaji = '{{item.title.romaji}}'.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+        $.ajax({
+            type: 'GET',
+            url: '/api/' + romaji + '/' + episode,
+            contentType: 'application/json',
+            success: function (result) {
+                console.log(JSON.stringify(result))
+                $('#playerframe').attr("src", result.link)
+            },
+            error: function () {
+                console.log('Error')
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        watchInit()
+    })
+</script>
+
+{% endblock %}

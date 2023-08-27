@@ -1,0 +1,177 @@
+{% set months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %}
+
+{% extends "layout.html" %}
+
+{% block title %}Details | {{ super() }}{% endblock %}
+
+{% block content %}
+
+<style>
+    .banner {
+        background-image: url('{{item.bannerImage}}');
+        background-position: center;
+        background-size: cover;
+    }
+
+    .banner {
+        width: 100vw;
+        height: calc(100vw / 4);
+    }
+
+    .cover-image {
+        margin-top: -75%;
+    }
+
+    .heading {
+        color: #00bfa5;
+    }
+
+    .recommend {
+        height: 240px;
+    }
+
+    .relative {
+        height: 550px;
+    }
+
+    @media (max-width: 768px) {
+        .banner {
+            height: calc(100vw / 2);
+        }
+
+        .cover-image {
+            margin-top: -30% !important;
+        }
+
+        .recommend {
+            height: 100px;
+        }
+
+        .relative {
+            height: 260px;
+        }
+    }
+</style>
+
+<div class="banner w-100" style="margin-top: 70px;"></div>
+
+<div class="mx-lg-5 mx-4 mt-4 d-lg-flex d-md-flex d-block">
+    <div class="col-lg-2 col-md-2 col-12">
+        <div style="width: 100%;" class="cover-image d-lg-block d-md-block d-flex justify-content-around">
+            <div class="col-lg-12 col-md-12 col-5">
+                <img src="{{item.coverImage.extraLarge}}" style="width: 100%;" class="rounded-3" alt="coverimage" />
+            </div>
+            <div class="col-lg-12 col-md-12 col-5 d-flex flex-column justify-content-end">
+                <div class="row m-0 p-0 mt-2 justify-content-around" style="padding: 0 !important;">
+                    <div class="col-lg-9 col-12 px-lg-1 px-0 mt-2">
+                        <button style="height: 38px !important; width: 100% !important;"
+                            class="btn-flat waves-effect border bg-light accent-4 text-dark rounded valign-center">
+                            <i class="fa-solid fa-plus" style="color: #08162c; font-size: small;"></i>
+                            <span class="display-6" style="font-size: 16px; font-weight: 450;">Add To List</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-3 col-12 px-lg-1 px-0 mt-2">
+                        <button style="height: 38px !important;"
+                            class="w-100 btn-flat waves-effect deep-orange accent-3 rounded valign-center">
+                            <i class="fa-solid fa-heart" style="color: #ffffff; font-size: small;"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="px-lg-1 px-0">
+                        <a href="/watch/{{item.id}}/{{item.title.romaji}}/1">
+                            <button style="height: 38px !important; width: 100%;"
+                                class="btn-flat waves-effect waves-light teal accent-4 text-light rounded valign-center">
+                                <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
+                                <span class="display-6" style="font-size: 16px; font-weight: 450;">Watch Now</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mx-lg-5 mx-2">
+        <p class="h3 mt-3 text-light">{{(item.title.english or item.title.romaji or item.title.native) | title}}</p>
+        <div class="mt-4">
+            <span class="bg-light px-3 text-dark" style="border-radius: 5px;"><strong>{{item.format | upper}}</strong></span>
+            <i style="font-size: medium;" class="text-light bi bi-dot"></i>
+            <span class="bg-transparent border border-light px-1 text-light" style="border-radius: 5px;"><strong>{{'HD' | upper}}</strong></span>
+            <i style="font-size: medium;" class="text-light bi bi-dot"></i>
+            {% set totalEpisodes = item.episodes or '?' %}
+            {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
+            <span class="text-light"><strong>EP {{currentEpisode}}/{{totalEpisodes}}</strong></span>
+            <i style="font-size: medium;" class="text-light bi bi-dot"></i>
+            <span class="text-light">{{item.duration}}min</span>
+        </div>
+        <p class="mt-4" style="color: rgb(166, 179, 181);">
+            {{item.description | safe}}
+        </p>
+    </div>
+</div>
+
+<div class="mx-lg-5 mx-4 mt-4 d-lg-flex d-md-flex mb-5 d-block rounded-3">
+    <div class="col-lg-3 col-md-3 col-12 mt-4">
+        <div class="mx-1">
+            <p class="text-light p-0 mb-3"><strong class="heading">Format :</strong> <span class="mx-2">{{item.format}}</span></p>
+            <hr class="text-light" />
+            <p class="text-light p-0 mb-3"><strong class="heading">Romaji Title :</strong> <span class="mx-2">{{item.title.romaji}}</span></p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Native Title :</strong> <span class="mx-2">{{item.title.native}}</span></p>
+            <hr class="text-light" />
+            <p class="text-light p-0 mb-3"><strong class="heading">Started On :</strong> <span class="mx-2">{{months[item.startDate.month]}} {{item.startDate.day}}, {{item.startDate.year}}</span>
+            </p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Season :</strong> <span class="mx-2">{{item.season | title}}</span></p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Type :</strong> <span class="mx-2">{{item.type}}</span></p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Status :</strong> <span class="mx-2">{{item.status | title}}</span></p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Total Episodes :</strong> <span class="mx-2">{{totalEpisodes}}</span></p>
+            <hr class="text-light" />
+            <p class="text-light p-0 mb-3"><strong class="heading">Genres :</strong> <span class="mx-2">{{item.genres | join(', ')}}</span></p>
+            <hr class="text-light" />
+            <p class="text-light p-0 mb-3"><strong class="heading">Average Score :</strong> <span class="mx-2">{{item.averageScore}}</span></p>
+            <p class="text-light p-0 mb-3"><strong class="heading">Favourites :</strong> <span class="mx-2">{{item.favourites}}</span></p>
+            <hr class="text-light" />
+            <p class="text-light p-0 mb-3"><strong class="heading">Synonyms :</strong></p>
+            {% for i in item.synonyms %}
+            <p class="text-light">{{i}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="vr mx-1 d-lg-block d-none"></div>
+    <div class="col-lg-9 col-md-9 col-12 px-lg-3 px-md-3 px-1">
+        <p class="h2 heading mb-3">Recommendations</p>
+        <div class="row justify-content-between">
+            {% for i in item.recommendations.nodes %}
+            <div class="col-lg-2 col-3 m-0 px-1">
+                <div class="col-12 h-100">
+                    <a href="/details/{{i.mediaRecommendation.id}}">
+                        <div class="recommend">
+                            <img loading="lazy" style="height: 100%; width: 100%;" class="rounded img-fluid" src="{{i.mediaRecommendation.coverImage.large}}" alt="">
+                        </div>
+                        <p class="text-truncate text-light mt-1" style="font-weight: 500">{{i.mediaRecommendation.title.english or i.mediaRecommendation.title.romaji}}</p>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="h2 heading mb-3">Relative</p>
+        <div class="relative row" style="overflow-y: scroll;">
+            {% for i in item.relations.nodes %}
+            {% if i.type == 'ANIME' or i.type == 'MOVIE' %}
+            <div class="col-lg-2 col-3 m-0 px-1">
+                <div class="col-12 h-100">
+                    <a href="/details/{{i.id}}">
+                        <div class="recommend">
+                            <img loading="lazy" style="height: 100%; width: 100%;" class="rounded img-fluid"
+                                src="{{i.coverImage.large}}" alt="">
+                        </div>
+                        <p class="text-truncate text-light mt-1" style="font-weight: 500">{{i.title.english or i.title.romaji}}</p>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
