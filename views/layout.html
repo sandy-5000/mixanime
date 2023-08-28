@@ -219,19 +219,28 @@
             </button>
         </div>
         <div class="m-1 my-4">
-            <a href="/" class="tgreenl">Home</a>
+            <a href="/" class="tgreenl">
+                <i class="fa-solid fa-house" style="color: #28bdac; font-size: small;"></i>
+                Home
+            </a>
         </div>
         <div class="m-1 my-4">
-            <a href="#" class="tgreenl">A-Z List</a>
+            <a href="#" class="tgreenl">
+                <i class="fa-solid fa-arrow-down-a-z" style="color: #28bdac; font-size: small;"></i>
+                A-Z List
+            </a>
         </div>
         <div class="m-1 my-4">
-            <a href="/advancedsearch" class="tgreenl">Advanced Search</a>
+            <a href="/advancedsearch" class="tgreenl">
+                <i class="fa-solid fa-magnifying-glass" style="color: #28bdac; font-size: small;"></i>
+                Advanced Search
+            </a>
         </div>
         <div class="my-5"></div>
         <p class="display-6 text-light" style="font-size: 22px;">Genre</p>
         <div class="row">
             {% for genre in genres %}
-            <a href="/advancedsearch?genre={{genre}}" class="col-6 text-light my-2" style="font-weight: 500">{{genre}}</a>
+            <a href="/advancedsearch?genre={{genre}}" class="genre col-6 my-2" style="font-weight: 500">{{genre}}</a>
             {% endfor %}
         </div>
     </div>
@@ -381,9 +390,7 @@
                 {% endfor %}
             </div>
             <div class="mt-4">
-                <p class="m-0 text-light"><small>Mix Anime does not store any files on our server, we only linked to
-                        the
-                        media which is hosted on 3rd party services.</small></p>
+                <p class="m-0 text-light"><small>Mix Anime does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</small></p>
                 <p class="text-light">© Mix Anime</p>
             </div>
         </div>
@@ -566,10 +573,28 @@
 
     const debouncedSearch = getDebounce(findAnime)
 
+    function getColor() {
+        const randomInt = (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        var h = randomInt(0, 360)
+        var s = randomInt(75, 100)
+        var l = randomInt(70, 90)
+        return `hsl(${h},${s}%,${l}%)`
+    }
+
+    function setGenre() {
+        $('.genre').each(function () {
+            $(this).css('color', getColor())
+        })
+    }
+
     $(document).ready(function () {
         toggleSearchBar()
         init()
         lazyBG()
+        setGenre()
     })
 
     function goToTop() {

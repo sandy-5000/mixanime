@@ -102,7 +102,7 @@
                             <div class="ep-btn p-2">
                                 {% set totalEpisodes = (item.episodes if item.episodes else '?') %}
                                 {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
-                                <span class="teal p-1 rounded text-light" style="font-weight: 500;">EP {{currentEpisode}}</span>
+                                <span class="teal p-1 rounded text-light" style="font-weight: 500;">ep{{currentEpisode}}</span>
                             </div>
                         </div>
                         <a href="/details/{{item.id}}">
@@ -141,7 +141,7 @@
         <h5 class="tgreen mb-3">Genres</h5>
         <div class="row">
             {% for genre in genres %}
-                <a href="/advancedsearch?genre={{genre}}" class="col-lg-4 col-md-2 col-4 text-light my-2" style="cursor: pointer; font-weight: 500">{{genre}}</a>
+                <a href="/advancedsearch?genre={{genre}}" class="genre col-lg-4 col-md-2 col-4 my-2" style="cursor: pointer; font-weight: 500">{{genre}}</a>
             {% endfor %}
         </div>
         <div class="col-lg-12 col-md-5 col-12">

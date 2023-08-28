@@ -232,6 +232,48 @@
             transform: translateY(-700px) rotate(600deg);
         }
     }
+
+
+    /* button */
+    .btn {
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #e74c3c;
+        color: #e74c3c;
+        cursor: pointer;
+        display: flex;
+        align-self: center;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.2;
+        margin: 10px 0;
+        padding: 0.5em 2em;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 500;
+        border-radius: 5px !important;
+    }
+
+    .btn:hover,
+    .btn:focus {
+        color: #fff;
+        outline: 0;
+    }
+
+    .fourth {
+        border-color: #50a3a2;
+        color: #50a3a2;
+        background-image: linear-gradient(45deg, #50a3a2 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 400%;
+        transition: background 300ms ease-in-out;
+    }
+    .fourth:hover {
+        background-position: 0;
+    }
 </style>
 
 <body>
@@ -245,7 +287,6 @@
                         <div>
                             <div class="d-flex justify-content-between">
                                 <p class="h5"><a href="/" style="color: #369c72; font-weight: 700;">Mix</a>Anime</p>
-                                <p style="font-weight: 450;"> - Login -</p>
                             </div>
                             <form name="login-form" action="/user/login" method="post" class="form mt-3">
                                 <div class="input-group mb-3">
@@ -271,8 +312,7 @@
                                                 href="/user/register">Sign Up</a></p>
                                     </div>
                                     <div>
-                                        <button class="btn my-2" style="background-color: #fff;" type="submit"
-                                            id="login-button">Login</button>
+                                        <button class="btn fourth" type="submit" id="login-button">Login</button>
                                     </div>
                                 </div>
                             </form>
@@ -282,7 +322,6 @@
                         <div>
                             <div class="d-flex justify-content-between">
                                 <p class="h5"><a href="/" style="color: #369c72; font-weight: 700;">Mix</a>Anime</p>
-                                <p style="font-weight: 450;"> - Register -</p>
                             </div>
                             <form name="register-form" action="/user/register" method="post" class="form mt-3">
                                 <div class="input-group mb-3">
@@ -324,8 +363,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <button class="btn my-2" style="background-color: #fff;" type="submit"
-                                            id="register-button">Register</button>
+                                        <button class="btn fourth" type="submit" id="register-button">Register</button>
                                     </div>
                                 </div>
                             </form>
