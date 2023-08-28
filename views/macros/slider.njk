@@ -58,6 +58,20 @@
         /* background-blend-mode: lighten; */
     }
 
+    .anime-name {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        text-transform: capitalize;
+        font-weight: 900;
+        transform-origin: bottom right;
+        transform: rotate(-90deg);
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        background: transparent !important;
+        margin-bottom: 23px;
+    }
+
     @media only screen and (min-width: 900px) {
         .anime:hover {
             transform: scale(1.15);
@@ -69,6 +83,15 @@
             border-bottom-right-radius: 0;
         }
     }
+
+    @media only screen and (max-width: 768px) {
+        .anime-name {
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+    }
+
+
 </style>
 
 <section class="container-fluid m-0 p-0 mt-5">
@@ -76,17 +99,17 @@
     <div class="slider" id="mySlider">
         {% for item in slider %}
             <div class="anime">
-                <div class="img lazy-bg" data-bg="background-image: url('{{item.coverImage.large or item.coverImage.extraLarge}}')">
-                    <div class="d-flex flex-column justify-content-end p-2 h-100">
-                        <div>
+                <div class="d-flex img lazy-bg" data-bg="background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('{{item.coverImage.large or item.coverImage.extraLarge}}')">
+                    <div class="col-2 d-flex flex-column justify-content-end" style="overflow-y: hidden;">
+                        <p class="h6 genre anime-name">{{ ('0' + loop.index) if loop.index < 9 else loop.index}}. {{(item.title.english or item.title.native)}}</p>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-end p-2 h-100">
+                        <div class="d-flex justify-content-end">
                             <a href="/details/{{item.id}}">
-                            <button class="rounded-pill btn-flat waves-effect waves-light teal accent-4 text-light">
-                                <span class="d-lg-block d-md-block d-none">
-                                    <span>Watch Now</span>
-                                    <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
-                                </span>
-                                <span class="d-lg-none d-md-none d-block">
-                                    <i class="bi bi-caret-right"></i>
+                            <button class="rounded-3 btn-flat mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                                <span class="d-flex">
+                                    <i style="font-size: medium;"class="bi bi-caret-right"></i>
+                                    <span>Watch <span class="d-lg-inline d-md-inline d-none">Now</span></span>
                                 </span>
                             </button>
                             </a>

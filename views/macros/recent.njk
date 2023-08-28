@@ -102,7 +102,7 @@
                             <div class="ep-btn p-2">
                                 {% set totalEpisodes = (item.episodes if item.episodes else '?') %}
                                 {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else totalEpisodes) %}
-                                <span class="teal p-1 rounded text-light" style="font-weight: 500;">ep{{currentEpisode}}</span>
+                                <span class="p-1 rounded text-dark" style="font-weight: 500; background-color: #e0f2f1b9;"><strong>EP{{currentEpisode}}</strong></span>
                             </div>
                         </div>
                         <a href="/details/{{item.id}}">
