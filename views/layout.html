@@ -253,7 +253,9 @@
                 <div class="d-flex flex-column justify-content-center">
                     <a href="/">
                         <span style="margin-right: 20px;" class="d-flex">
-                            <img loading="lazy" style="height: 70px;" src="/images/graph.png" />
+                            <div style="height: 70px;" class="valign-wrapper mx-2">
+                                <img loading="lazy" style="height: 70px;" src="/images/graph.png" />
+                            </div>
                             <div class="d-flex flex-column justify-content-end">
                                 <span class="h5 text-light mb-4"><span style="font-weight: bolder; color: #5de4d2;;">Mix</span>Anime</span>
                             </div>
@@ -555,6 +557,14 @@
                 $('.loader').hide()
             },
         })
+    }
+
+    function scrollItemsLeft(className) {
+        $("." + className).scrollLeft($("." + className).scrollLeft() - 300)
+    }
+
+    function scrollItemsRight(className) {
+        $("." + className).scrollLeft($("." + className).scrollLeft() + 300)
     }
 
     function lazyBG() {

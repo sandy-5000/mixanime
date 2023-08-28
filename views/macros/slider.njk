@@ -95,7 +95,17 @@
 </style>
 
 <section class="container-fluid m-0 p-0 mt-5">
-    <h3 class="h2 tgreen mx-4 mb-3 p-0" style="font-size: 30px; ">Trending</h3>
+    <div class="d-flex justify-content-between" style="margin-top: 60px; !important">
+        <h3 class="h2 tgreen mx-4 mb-1 p-0" style="font-size: 30px; ">Trending</h3>
+        <div class="d-flex ">
+            <button onclick="scrollItemsLeft('slider')" class="rounded-3 btn-flat mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                <i style="font-size: medium;"class="bi bi-caret-left"></i>
+            </button>
+            <button onclick="scrollItemsRight('slider')" class="rounded-3 btn-flat mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                <i style="font-size: medium;"class="bi bi-caret-right"></i>
+            </button>
+        </div>
+    </div>
     <div class="slider" id="mySlider">
         {% for item in slider %}
             <div class="anime">
@@ -120,6 +130,5 @@
         {% endfor %}
     </div>
 </section>
-
 
 {% endmacro %}

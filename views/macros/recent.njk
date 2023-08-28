@@ -86,13 +86,27 @@
 
     <div class="col-lg-9 col-12 m-0 p-2">
         <div class="d-flex justify-content-between mb-2">
-            <p class="tgreen">Latest Episodes</p>
-            <button class="btn-flat waves-effect waves-light text-light">
-                View More
-                <i style="font-size: medium;" class="bi bi-chevron-right"></i>
-            </button>
+            <div class="valign-wrapper">
+                <p class="tgreen mx-2 mb-0">Latest Episodes</p>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex valign-wrapper">
+                    <div class="d-flex">
+                        <button onclick="scrollItemsLeft('latest')" class="rounded-3 mx-1 py-0 waves-effect waves-light text-dark" style="height: 30px; background-color: #e0f2f1b9;">
+                            <i style="font-size: medium;"class="bi bi-caret-left"></i>
+                        </button>
+                        <button onclick="scrollItemsRight('latest')" class="rounded-3 mx-1 py-0 waves-effect waves-light text-dark" style="height: 30px; background-color: #e0f2f1b9;">
+                            <i style="font-size: medium;"class="bi bi-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-flat waves-effect waves-light text-light">
+                    View More
+                    <i style="font-size: medium;" class="bi bi-chevron-right"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-12 d-flex" style="overflow-x: scroll;">
+        <div class="col-12 d-flex latest" style="overflow-x: scroll;">
             {% for item in recent.latestEpisodes %}
                 <div class="col-lg-2 col-md-2 col-3 m-0 px-2">
                     <div class="col-12 h-100" style="overflow-y: hidden;">
@@ -114,13 +128,27 @@
         </div>
 
         <div class="d-flex justify-content-between mb-2">
-            <p class="tgreen mx-2">Newly Added</p>
-            <button class="btn-flat waves-effect waves-light text-light">
-                View More
-                <i style="font-size: medium;" class="bi bi-chevron-right"></i>
-            </button>
+            <div class="valign-wrapper">
+                <p class="tgreen mx-2 mb-0">Newly Added</p>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex valign-wrapper">
+                    <div class="d-flex">
+                        <button onclick="scrollItemsLeft('newly')" class="rounded-3 mx-1 py-0 waves-effect waves-light text-dark" style="height: 30px; background-color: #e0f2f1b9;">
+                            <i style="font-size: medium;"class="bi bi-caret-left"></i>
+                        </button>
+                        <button onclick="scrollItemsRight('newly')" class="rounded-3 mx-1 py-0 waves-effect waves-light text-dark" style="height: 30px; background-color: #e0f2f1b9;">
+                            <i style="font-size: medium;"class="bi bi-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn-flat waves-effect waves-light text-light">
+                    View More
+                    <i style="font-size: medium;" class="bi bi-chevron-right"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-12 d-flex" style="overflow-x: scroll;">
+        <div class="col-12 d-flex newly" style="overflow-x: scroll;">
             {% for item in recent.newlyAdded %}
                 <div class="col-lg-2 col-md-2 col-3 m-0 px-2">
                     <div class="col-12 h-100" style="overflow-y: hidden;">
