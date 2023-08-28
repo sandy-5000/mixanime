@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="progress p-0 m-0 transparent" style="z-index: 2">
-            <div class="determinate teal accent-3" style="width: {{loop.index}}0%; height: 1px"></div>
+            <div class="determinate teal accent-3" style="width: {{(loop.index * 100 / 9)}}%; height: 1px"></div>
         </div>
     </div>
     {% endfor %}
