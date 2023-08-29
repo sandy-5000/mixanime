@@ -15,6 +15,9 @@
 
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!--FONT AWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -335,10 +338,25 @@
                                                 href="/user/register">Sign Up</a></p>
                                     </div>
                                     <div>
-                                        <button class="btn fourth" type="submit" id="login-button">Login</button>
+                                        <button class="btn fourth" type="button" onclick="loginUser()" id="login-button">Login</button>
                                     </div>
                                 </div>
                             </form>
+                            <script>
+                                function loginUser() {
+                                    const passwd = $('#login-passwd').val() + '&' + $('#login-usermail').val()
+                                    const hPasswd = CryptoJS.SHA256(passwd).toString(CryptoJS.enc.Hex)
+                                    $('#login-passwd').val(hPasswd)
+                                    $('form[name="login-form"]').submit()
+                                }
+                                $(document).ready(function() {
+                                    $('form[name="login-form"]').on('keyup', function (e) {
+                                        if (e.key == 'Enter') {
+                                            loginUser()
+                                        }
+                                    })
+                                })
+                            </script>
                         </div>
                         {% endif %}
                         {% if type == 'register' %}
@@ -400,10 +418,26 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <button class="btn fourth" type="submit" id="register-button">Register</button>
+                                        <button class="btn fourth" type="button" onclick="registerUser()" id="register-button">Register</button>
                                     </div>
                                 </div>
                             </form>
+                            <script>
+                                function registerUser() {
+                                    const passwd = $('#register-passwd').val() + '&' + $('#register-usermail').val()
+                                    const hPasswd = CryptoJS.SHA256(passwd).toString(CryptoJS.enc.Hex)
+                                    $('#register-passwd').val(hPasswd)
+                                    $('#register-cpasswd').val(hPasswd)
+                                    $('form[name="register-form"]').submit()
+                                }
+                                $(document).ready(function () {
+                                    $('form[name="register-form"]').on('keyup', function (e) {
+                                        if (e.key == 'Enter') {
+                                            registerUser()
+                                        }
+                                    })
+                                })
+                            </script>
                         </div>
                         {% endif %}
                         {% if type == 'home' %}
