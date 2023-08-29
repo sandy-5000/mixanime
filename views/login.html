@@ -277,7 +277,11 @@
     }
 
     .bg-ldark {
-        background-color: #01100e75;
+        background-color: #01100e9c;
+    }
+
+    .alert > span {
+        font-weight: 500;
     }
 </style>
 
@@ -312,6 +316,18 @@
                                         placeholder="Password" aria-label="Userpass"
                                         aria-describedby="login-password-at" required>
                                 </div>
+                                {% if error %}
+                                <div class="alert alert-warning" role="alert">
+                                    <span>{{error}}</span>
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                        setInterval(() => {
+                                            $('.alert').remove()
+                                        }, 3000)
+                                    })
+                                </script>
+                                {% endif %}
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a style="font-size: 14px;" href="#">Forgot Password?</a>
@@ -365,6 +381,18 @@
                                         placeholder="Confirm Password" aria-label="Userpass"
                                         aria-describedby="register-cpassword-at" required>
                                 </div>
+                                {% if error %}
+                                <div class="alert alert-warning" role="alert">
+                                    <span>{{error}}</span>
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                        setInterval(() => {
+                                            $('.alert').remove()
+                                        }, 3000)
+                                    })
+                                </script>
+                                {% endif %}
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex flex-column justify-content-end">
                                         <p style="font-size: 13px; font-weight: 450;" class="text-light">Already have an account? <a

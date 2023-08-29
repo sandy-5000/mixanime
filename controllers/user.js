@@ -15,11 +15,14 @@ export default function UserController() {
                 email: usermail,
                 passwd,
             })
+            let errors = {
+                11000: 'User already exists!'
+            }
             try {
                 var result = await user.save()
                 return { status: 201, result }
             } catch (e) {
-                return { status: 400, result: e }
+                return { status: 400, result: (errors[e.code] || 'User Creation failed!') }
             }
         },
     }

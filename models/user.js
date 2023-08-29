@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: function (v) {
-                return /^[a-zA-Z0-9\.]{1,26}@gmail.com$/.test(v)
+                return /^[a-zA-Z0-9\.]{1,64}@[a-zA-Z0-9]{3,10}.com$/.test(v)
             }
         },
     },
