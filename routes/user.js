@@ -23,7 +23,6 @@ app.route('/login')
             return
         }
         req.session.user = data
-        console.log(req.session.user)
         res.render('login.html', { type: 'home' })
     })
 

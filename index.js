@@ -33,14 +33,12 @@ const MONGO_DB_URL = process.env.MONGO_DB_URL
 
 app.get("/", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
-    console.log(logged)
     const result = await getDate('homePage')
     res.render('index.html', { ...result.data, logged })
 })
 
 app.get("/home", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
-    console.log(req.session.user)
     const result = await getDate('homePage')
     res.render('index.html', { ...result.data, logged })
 })
