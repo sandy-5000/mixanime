@@ -9,6 +9,10 @@ const userCtrl = UserController()
 
 app.route('/login')
     .get(async (req, res) => {
+        if (req.session.user) {
+            res.render('login.html', { type: 'home' })
+            return
+        }
         res.render('login.html', { type: 'login' })
     })
     .post(async (req, res) => {
@@ -32,6 +36,10 @@ app.route('/logout')
 
 app.route('/register')
     .get(async (req, res) => {
+        if (req.session.user) {
+            res.render('login.html', { type: 'home' })
+            return
+        }
         res.render('login.html', { type: 'register' })
     })
     .post(async (req, res) => {
