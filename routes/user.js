@@ -18,7 +18,16 @@ app.route('/login')
             res.render('login.html', { type: 'login', error: 'Usermail or password incorrect!' })
             return
         }
+        req.session.user = data
+        console.log(req.session.user)
         res.render('login.html', { type: 'home' })
+    })
+
+app.route('/logout')
+    .get(async (req, res) => {
+        req.session.destroy(err => {
+            res.render('login.html', { type: 'login' })
+        })
     })
 
 app.route('/register')

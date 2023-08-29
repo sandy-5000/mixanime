@@ -306,7 +306,7 @@
                 </div>
             </div>
             <div style="height: 70px;" class="valign-wrapper">
-                <a href="/user/login" style="background-color: #e0f2f1b9;" class="btn-flat waves-effect waves-light text-dark mx-4">Login</a>
+                <a href="/user/{{logged}}" style="background-color: #e0f2f1b9;" class="btn-flat waves-effect waves-light text-dark mx-4">{{logged | title}}</a>
             </div>
         </header>
         <div class="progress transparent loader p-0 m-0">
@@ -333,7 +333,7 @@
                 </div>
             </div>
             <div style="height: 70px;" class="valign-wrapper">
-                <a href="/user/login" class="btn-flat waves-effect waves-light text-light mx-4">Login</a>
+                <a href="/user/{{logged}}" class="btn-flat waves-effect waves-light text-light mx-4">{{logged | title}}</a>
             </div>
         </header>
         <div class="search-bar">
