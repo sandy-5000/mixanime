@@ -94,7 +94,7 @@
         }
 
         .vr {
-            border-left: 3px solid #00bfa5;
+            border-left: 3px solid #5DE4B5;
         }
 
         .header-div {
@@ -104,8 +104,13 @@
             z-index: 12;
         }
 
+        .alphabets {
+            color: #f1f2f3;
+        }
+
         .alphabets:hover {
-            background-color: #00bfa5 !important;
+            color: #000000b5;
+            background-color: #5DE4B5 !important;
         }
 
         .sidebar {
@@ -123,14 +128,16 @@
         }
 
         .tgreen {
-            color: #00bfa5 !important;
+            color: #5DE4B5 !important;
             font-weight: bold !important;
         }
 
         .tgreenl {
-            color: #00bfa5 !important;
+            color: #5DE4B5 !important;
             font-weight: 600 !important;
         }
+
+
 
         .blocker,
         .sblocker {
@@ -156,7 +163,7 @@
             height: 40px;
             border: none;
             border-radius: 50%;
-            background-color: #00bfa5;
+            background-color: #4aaa89;
             color: #fff;
             font-size: 24px;
             cursor: pointer;
@@ -202,6 +209,22 @@
         .bg-ldark {
             background-color: #222427 !important;
         }
+
+        .text-ldark {
+            color: #000000b5 !important;
+        }
+
+        .teal .accent-4, .sgreen {
+            background-color: #5DE4B5 !important;
+        }
+
+        .text-sgreen {
+            color: #5DE4B5 !important;
+        }
+
+        .sgreen-light {
+            background-color: #9fe6cd !important;
+        }
     </style>
 </head>
 
@@ -214,26 +237,26 @@
 
     <div class="bg-dark sidebar p-4">
         <div class="d-flex mb-4 justify-content-end">
-            <button onclick="closeMenu()" class="btn-flat rounded-pill waves-light teal accent-4 text-light">
+            <button onclick="closeMenu()" class="btn-flat rounded-pill waves-light sgreen text-dark">
                 <i class="bi bi-arrow-left mx-4"></i>
             </button>
         </div>
         <div class="m-1 my-4">
-            <a href="/" class="tgreenl">
-                <i class="fa-solid fa-house" style="color: #28bdac; font-size: small;"></i>
-                Home
+            <a href="/" class="text-sgreen">
+                <i class="fa-solid fa-house" style="font-size: small;"></i>
+                <span style="font-weight: 550;">Home</span>
             </a>
         </div>
         <div class="m-1 my-4">
-            <a href="#" class="tgreenl">
+            <a href="#" class="text-sgreen">
                 <i class="fa-solid fa-arrow-down-a-z" style="color: #28bdac; font-size: small;"></i>
-                A-Z List
+                <span style="font-weight: 550;">A-Z List</span>
             </a>
         </div>
         <div class="m-1 my-4">
-            <a href="/advancedsearch" class="tgreenl">
-                <i class="fa-solid fa-magnifying-glass" style="color: #28bdac; font-size: small;"></i>
-                Advanced Search
+            <a href="/advancedsearch" class="text-sgreen">
+                <i class="fa-solid fa-magnifying-glass" style="font-size: small;"></i>
+                <span style="font-weight: 550;">Advanced Search</span>
             </a>
         </div>
         <div class="my-5"></div>
@@ -254,24 +277,21 @@
                     <a href="/">
                         <span style="margin-right: 20px;" class="d-flex">
                             <div style="height: 70px;" class="valign-wrapper mx-2">
-                                <img loading="lazy" style="height: 70px;" src="/images/graph.png" />
-                            </div>
-                            <div class="d-flex flex-column justify-content-end">
-                                <span class="h5 text-light mb-4"><span style="font-weight: bolder; color: #5de4d2;;">Mix</span>Anime</span>
+                                <img loading="lazy" style="height: 40px;" src="/images/graph-pixel.png" />
                             </div>
                         </span>
                     </a>
                 </div>
                 <div class="search-bar-big">
                     <div class="input-field mx-4" style="min-width: 300px !important">
-                        <i class="text-lights material-icons prefix">search</i>
+                        <i class="test-sgreen material-icons prefix">search</i>
                         <input type="text" placeholder="Search anime..." class="text-light find-item"
                             autocomplete="off">
                         <!-- <label for="autocomplete-input">Search anime...</label> -->
                     </div>
                 </div>
                 <div class="valign-wrapper search-bar-big">
-                    <a href="/advancedsearch" class="btn-flat waves-effect waves-light teal accent-4"><strong>Filter</strong></a>
+                    <a href="/advancedsearch" class="btn-flat waves-effect waves-light sgreen text-dark"><strong>Filter</strong></a>
                 </div>
                 <div class="valign-wrapper mx-3">
                     <div>
@@ -303,10 +323,7 @@
                     <a href="/">
                         <span style="margin-right: 20px;" class="d-flex">
                             <div class="valign-wrapper">
-                                <img loading="lazy" style="height: 60px;" src="/images/graph.png" />
-                            </div>
-                            <div class="valign-wrapper" style="height: 60px;">
-                                <span class="h5 text-light m-0"><span style="font-weight: bolder; color: #5de4d2;">Mix</span>Anime</span>
+                                <img loading="lazy" style="height: 35px; margin-top: 10px;" src="/images/graph-pixel.png" />
                             </div>
                         </span>
                     </a>
@@ -329,7 +346,7 @@
                     </div>
                 </div>
                 <div class="valign-wrapper">
-                    <a href="/advancedsearch" class="btn-flat waves-effect waves-light teal accent-4"><strong>Filter</strong></a>
+                    <a href="/advancedsearch" class="btn-flat waves-effect waves-light sgreen"><strong>Filter</strong></a>
                 </div>
                 <div class="valign-wrapper mx-3">
                     <div>
@@ -349,10 +366,10 @@
         <div class="d-flex mb-1" style="min-height: 120px">
             <div class="d-flex flex-column justify-content-center">
                 <div class="d-lg-block d-md-block d-none">
-                    <img loading="lazy" style="height: 160px;" class="mx-3" src="/images/graph.png" />
+                    <img loading="lazy" style="height: 60px;" class="mx-3" src="/images/graph-pixel.png" />
                 </div>
                 <div class="d-lg-none d-md-none d-block">
-                    <img loading="lazy" style="height: 100px;" class="mx-3" src="/images/graph.png" />
+                    <img loading="lazy" style="height: 40px;" class="mx-3" src="/images/graph-pixel.png" />
                 </div>
             </div>
             <div class="vr"></div>
@@ -361,7 +378,7 @@
                     <div>
                         <span class="p text-light">Join Us Now</span>
                         <br />
-                        <span class="h5 text-light"><span style="font-weight: bolder; color: #00bfa5;">Mix</span>Anime</span>
+                        <span class="h5 text-light"><span style="font-weight: bolder; color: #5DE4B5;">Mix</span>Anime</span>
                     </div>
                     <div class="valign-wrapper mx-3">
                         <div>
@@ -387,10 +404,10 @@
             </div>
             <div class="mt-4">
                 {% for x in ['All', '#', '0-9'] %}
-                <a href="#" class="alphabets btn-flat waves-light p text-light"><strong>{{x}}</strong></a>
+                <a href="#" class="alphabets btn-flat waves-light p"><strong>{{x}}</strong></a>
                 {% endfor %}
                 {% for x in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
-                <a href="#" class="alphabets btn-flat waves-light p text-light"><strong>{{x}}</strong></a>
+                <a href="#" class="alphabets btn-flat waves-light p"><strong>{{x}}</strong></a>
                 {% endfor %}
             </div>
             <div class="mt-4">

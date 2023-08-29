@@ -99,12 +99,12 @@
 
     a {
         text-decoration: none;
-        color: #128473;
+        color: #ade3db;
         font-weight: 450;
     }
 
     a:hover {
-        color: #00bfa5;
+        color: #1dffe1;
     }
 
     .bg-bubbles {
@@ -259,20 +259,24 @@
 
     .btn:hover,
     .btn:focus {
-        color: #fff;
+        color: #01100eb5;
         outline: 0;
     }
 
     .fourth {
-        border-color: #50a3a2;
-        color: #50a3a2;
-        background-image: linear-gradient(45deg, #50a3a2 50%, transparent 50%);
+        border-color: #ade3db;
+        color: #ade3db;
+        background-image: linear-gradient(45deg, #ade3db 50%, transparent 50%);
         background-position: 100%;
         background-size: 400%;
         transition: background 300ms ease-in-out;
     }
     .fourth:hover {
         background-position: 0;
+    }
+
+    .bg-ldark {
+        background-color: #01100e75;
     }
 </style>
 
@@ -281,12 +285,14 @@
         <div class="container" style="height: 100%;">
             <div style="height: 100%;" class="d-flex flex-column justify-content-center">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-light col-lg-4 col-md-6 col-12 py-5 px-lg-5 px-md-5 px-4 rounded-3 shadow-lg"
+                    <div class="bg-ldark col-lg-4 col-md-6 col-12 py-5 px-lg-5 px-md-5 px-4 rounded-3 shadow-lg"
                         style="z-index: 3;">
                         {% if type == 'login' %}
                         <div>
                             <div class="d-flex justify-content-between">
-                                <p class="h5"><a href="/" style="color: #369c72; font-weight: 700;">Mix</a>Anime</p>
+                                <a href="/">
+                                    <img loading="lazy" style="height: 40px;" src="/images/graph-pixel.png" />
+                                </a>
                             </div>
                             <form name="login-form" action="/user/login" method="post" class="form mt-3">
                                 <div class="input-group mb-3">
@@ -308,7 +314,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a style="font-size: 14px;" href="#">Forgot Password?</a>
-                                        <p style="font-size: 13px; font-weight: 450;">Don't have account? <a
+                                        <p style="font-size: 13px; font-weight: 450;" class="text-light">Don't have account? <a
                                                 href="/user/register">Sign Up</a></p>
                                     </div>
                                     <div>
@@ -321,7 +327,9 @@
                         {% if type == 'register' %}
                         <div>
                             <div class="d-flex justify-content-between">
-                                <p class="h5"><a href="/" style="color: #369c72; font-weight: 700;">Mix</a>Anime</p>
+                                <a href="/">
+                                    <img loading="lazy" style="height: 40px;" src="/images/graph-pixel.png" />
+                                </a>
                             </div>
                             <form name="register-form" action="/user/register" method="post" class="form mt-3">
                                 <div class="input-group mb-3">
@@ -358,7 +366,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex flex-column justify-content-end">
-                                        <p style="font-size: 13px; font-weight: 450;">Already have an account? <a
+                                        <p style="font-size: 13px; font-weight: 450;" class="text-light">Already have an account? <a
                                                 href="/user/login">Sign In</a>
                                         </p>
                                     </div>
@@ -372,10 +380,12 @@
                         {% if type == 'home' %}
                         <div>
                             <div class="d-flex justify-content-between">
-                                <p class="h5"><a href="/" style="color: #369c72; font-weight: 700;">Mix</a>Anime</p>
+                                <a href="/">
+                                    <img loading="lazy" style="height: 40px;" src="/images/graph-pixel.png" />
+                                </a>
                             </div>
                             <div>
-                                <p>Redirecting to home...</p>
+                                <p class="text-light">Redirecting to home...</p>
                                 <script>
                                     $(document).ready(function () {
                                         location.href = '/'

@@ -48,16 +48,12 @@
     }
 
     .form-control:focus, .form-select:focus {
-        border-color: #00bfa5;
-        box-shadow: 0 0 0 0.1rem #00bfa5;
+        border-color: #5DE4B5;
+        box-shadow: 0 0 0 0.1rem #5DE4B5;
     }
 
     .form-select {
         height: 35px !important;
-    }
-
-    .form-select option:checked, option:hover {
-        background-color: #00bfa5 !important;
     }
 
     .filter-box {
@@ -91,11 +87,11 @@
 <div class="search-container d-flex">
     <div class="col-lg-9 col-12" style="height: 100%; overflow-y: scroll;">
         <form name="search-form" class="search-form">
-            <div class="mt-3 search-content">
+            <div class="my-3 search-content">
                 <div class="d-flex justify-content-between">
-                    <h5 class="tgreen mx-3 mb-4">Search Results</h5>
-                    <button type="button" class="d-lg-none d-block mx-4 btn-flat rounded-pill waves-light teal accent-4 text-light" onclick="toggleFilter()">
-                        <i class="fa-solid fa-filter mx-2" style="color: #edeff2;"></i>
+                    <span class="h4 mx-3 my-3 text-light" style="font-weight: 500;">Search <span class="text-sgreen">Results</span></span>
+                    <button type="button" class="d-lg-none d-block mx-4 btn-flat rounded-pill waves-light sgreen text-light" onclick="toggleFilter()">
+                        <i class="fa-solid fa-filter mx-2 text-dark"></i>
                     </button>
                 </div>
                 <div class="row justify-content-center m-0 p-0">
@@ -129,7 +125,7 @@
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
                     {% endif %}
-                    <span class="btn mx-2" aria-disabled="true"><strong style="font-size: 18px;">{{pageno}}</strong></span>
+                    <span class="btn sgreen text-dark mx-2" aria-disabled="true"><strong style="font-size: 18px;">{{pageno}}</strong></span>
                     {% if pageno != pageInfo.lastPage %}
                     <button class="nextPage btn bg-light text-dark" onclick="formSubmit(1)" type="button">
                         <i class="fa-solid fa-arrow-right"></i>
@@ -141,9 +137,9 @@
         <div class="filter-box col-lg-3 d-lg-block filter-hide bg-ldark z-depth-3" style="height: 100%; overflow-y: scroll;">
             <div class="mt-4 px-4">
                 <div class="d-flex justify-content-between">
-                    <span class="h3 tgreen text-light">Filtering</span>
-                    <button onclick="toggleFilter()" type="button" class="btn-flat d-lg-none d-block rounded-pill waves-light teal accent-4 text-light">
-                        <i class="bi bi-arrow-right mx-2"></i>
+                    <span class="h3 text-sgreen text-light">Filtering</span>
+                    <button onclick="toggleFilter()" type="button" class="btn-flat d-lg-none d-block rounded-pill waves-light sgreen text-light">
+                        <i class="bi bi-arrow-right mx-2 text-dark"></i>
                     </button>
                 </div>
                 <div>
@@ -239,7 +235,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="mt-3 mx-4 btn-flat teal accent-3 waves-effect waves-light" type="button" onclick="formSubmit(0)"><strong>Filter</strong></button>
+                        <button class="mt-3 mx-4 btn-flat sgreen waves-effect waves-light" type="button" onclick="formSubmit(0)"><strong>Filter</strong></button>
                     </div>
                     <div class="my-5"></div>
                 </div>
@@ -261,7 +257,7 @@
                     <i class="bi bi-dot"></i> Ep {{currentEpisode}}/{{totalEpisodes}}
                 </div>
                 <div>
-                    <span class="rounded teal accent-4 py-1 px-2 mx-3">{{item.format}}</span>
+                    <span class="rounded text-dark sgreen-light py-1 px-2 mx-3">{{item.format}}</span>
                 </div>
             </div>
             <div>
@@ -269,9 +265,9 @@
             </div>
             <div class="mt-3">
                 <a href="/details/{{item.id}}">
-                    <button class="text-light btn-flat rounded-pill teal accent-4 waves-effect waves-light px-3">
-                        Watch Now
-                        <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
+                    <button class="text-dark d-flex btn-flat rounded-pill sgreen-light waves-effect waves-light px-3">
+                        <i style="font-size: medium;" class="bi bi-caret-right"></i>
+                        <span style="margin-top: 1px">Watch Now</span>
                     </button>
                 </a>
             </div>

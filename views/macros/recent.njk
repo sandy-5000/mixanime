@@ -57,7 +57,7 @@
     }
 
     .custom-border {
-        border-bottom: 2px solid #00bfa5;
+        border-bottom: 2px solid #5DE4B5;
     }
 </style>
 
@@ -87,7 +87,7 @@
     <div class="col-lg-9 col-12 m-0 p-2">
         <div class="d-flex justify-content-between mb-2">
             <div class="valign-wrapper">
-                <p class="tgreen mx-2 mb-0">Latest Episodes</p>
+                <p class="text-light mx-2 mb-0" style="font-weight: 600;">Latest <span class="text-sgreen">Episodes</span></p>
             </div>
             <div class="d-flex">
                 <div class="d-flex valign-wrapper">
@@ -129,7 +129,7 @@
 
         <div class="d-flex justify-content-between mb-2">
             <div class="valign-wrapper">
-                <p class="tgreen mx-2 mb-0">Newly Added</p>
+                <p class="text-light mx-2 mb-0" style="font-weight: 600;">Newly <span class="text-sgreen">Added</span></p>
             </div>
             <div class="d-flex">
                 <div class="d-flex valign-wrapper">
@@ -166,14 +166,14 @@
     </div>
 
     <div class="col-lg-3 col-12 m-0 p-0">
-        <h5 class="tgreen mb-3">Genres</h5>
+        <h5 class="text-sgreen mb-3" style="font-weight: 550;">Genres</h5>
         <div class="row">
             {% for genre in genres %}
                 <a href="/advancedsearch?genre={{genre}}" class="genre col-lg-4 col-md-2 col-4 my-2" style="cursor: pointer; font-weight: 500">{{genre}}</a>
             {% endfor %}
         </div>
         <div class="col-lg-12 col-md-5 col-12">
-            <h5 class="tgreen my-3">Most Visited</h5>
+            <p class="h4 text-light my-3 mt-5">Most <span class="text-sgreen">Visited</span></p>
             {% for item in recent.carousel %}
                 <div class="most-v d-flex w-100 px-4 py-2" style="height: 100px !important">
                     <div class="col-2 valign-center d-flex flex-column justify-content-center">
@@ -214,19 +214,19 @@
                                 <i class="bi bi-dot"></i> Ep {{currentEpisode}}/{{totalEpisodes}}
                             </div>
                             <div>
-                                <span class="rounded teal accent-4 py-1 px-2 mx-3">{{item.format}}</span>
+                                <span class="rounded text-dark sgreen-light py-1 px-2 mx-3">{{item.format}}</span>
                             </div>
                         </div>
                         <div>
                             <strong>{{ item.description | truncate(256, true, "...") | safe }}</strong>
                         </div>
-                        <div class="mt-3">
-                            <button class="text-light btn-flat rounded-pill teal accent-4 waves-effect waves-light px-3">
-                                <i style="font-size: medium;" class="bi bi-caret-right-fill"></i>
-                                Watch Now
+                        <div class="mt-3 d-flex">
+                            <button class="text-dark d-flex btn-flat rounded-pill sgreen-light waves-effect waves-light px-3">
+                                <i style="font-size: medium;" class="bi bi-caret-right"></i>
+                                <span style="margin-top: 1px">Watch Now</span>
                             </button>
                             <a href="/add-to-list/{{item.id}}">
-                            <button class="btn-flat waves-effect bg-light accent-4 text-dark rounded-pill">
+                            <button class="mx-1 btn-flat waves-effect bg-light accent-4 text-dark rounded-pill">
                                 <i class="fa-solid fa-plus" style="color: #08162c; font-size: medium;"></i>
                                 Add To List
                             </button>
