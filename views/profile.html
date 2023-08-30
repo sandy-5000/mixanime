@@ -1,0 +1,186 @@
+{% extends "layout.html" %}
+{% block title %}Profile | {{ super() }}{% endblock %}
+
+{% block content %}
+
+<style>
+    .glowing-border {
+        border: 2px solid transparent;
+        border-radius: 30px;
+        cursor: pointer;
+        animation: glow 2s infinite alternate;
+    }
+
+    a {
+        text-decoration: none;
+        color: #ade3db;
+        font-weight: 450;
+    }
+
+    a:hover {
+        color: #1dffe1;
+    }
+
+    .btn-k {
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #e74c3c;
+        color: #e74c3c;
+        cursor: pointer;
+        display: flex;
+        align-self: center;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.2;
+        margin: 10px 0;
+        padding: 0.5em 2em;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 500;
+        border-radius: 5px !important;
+    }
+
+    .btn-k:hover,
+    .btn-k:focus {
+        color: #01100eb5;
+        outline: 0;
+    }
+
+    .fourth {
+        border: 2px solid #ade3db !important;
+        color: #ade3db;
+        background-image: linear-gradient(45deg, #ade3db 50%, transparent 50%);
+        background-position: 100%;
+        background-size: 400%;
+        transition: background 300ms ease-in-out;
+    }
+
+    .fourth:hover {
+        background-position: 0;
+    }
+
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 20px #5de4b58d;
+            /* rgba(0, 191, 165, 0.6); */
+        }
+
+        100% {
+            box-shadow: 0 0 30px #5de4b5f5
+                /* rgba(0, 191, 165, 0.9); */
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div style="margin-top: 70px;" class="p-2">
+    <div class="d-lg-flex d-md-flex d-block">
+        <div class="col-lg-3 col-md-4 col-12 p-4">
+            <div style="height: 100%;" class="d-flex flex-column justify-content-center">
+                <img src="/images/profile-img.jpg" style="width: 100%;" alt="profile"
+                    class="profile-img glowing-border rounded-circle">
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8 col-12">
+            <div style="height: 100%;" class="d-flex flex-column justify-content-center px-lg-5 px-md-4 px-1">
+                <hr style="height: 3px;" class="text-sgreen" />
+                <form name="profile-form" action="/user/profile" method="post" class="form mt-3">
+                    <p class="h5 mb-4 text-light">Update <span class="text-sgreen">Profile</span></p>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-light" id="update-usermail-at">
+                            <i class="fa-solid fa-at" style="color: #68768d;"></i>
+                        </span>
+                        <input type="text" class="browser-default form-control" id="update-usermail" placeholder="Email"
+                            aria-label="Usermail" value="{{user.email}}" aria-describedby="update-usermail-at" disabled>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-light" id="update-username-at">
+                            <i class="fa-solid fa-user" style="color: #68768d;"></i>
+                        </span>
+                        <input type="text" class="browser-default form-control" name="username" id="update-username"
+                            placeholder="Name" aria-label="Username" value="{{user.name}}"
+                            aria-describedby="update-username-at" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-light" id="update-npassword-at">
+                            <i class="fa-solid fa-shield-halved" style="color: #68768d;"></i>
+                        </span>
+                        <input type="password" class="browser-default form-control" name="npasswd" id="update-npasswd"
+                            placeholder="New Password" aria-label="nUserpass" aria-describedby="update-npassword-at"
+                            required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text bg-light" id="update-password-at">
+                            <i class="fa-solid fa-lock" style="color: #68768d;"></i>
+                        </span>
+                        <input type="password" class="browser-default form-control" name="passwd" id="update-passwd"
+                            placeholder="Password" aria-label="Userpass" aria-describedby="update-password-at" required>
+                    </div>
+                    {% if error %}
+                    <div class="alert alert-warning" role="alert">
+                        <span>{{error}}</span>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            setTimeout(() => {
+                                $('.alert').remove()
+                            }, 3000)
+                        })
+                    </script>
+                    {% endif %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a style="font-size: 14px;" href="#">Forgot Password?</a>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-k fourth mx-1" onclick="reset()">Reset</div>
+                            <button class="btn-k fourth" type="button" onclick="updateUser()"
+                                id="update-button">Update</button>
+                        </div>
+                    </div>
+                </form>
+                <hr style="height: 3px;" class="text-sgreen" />
+            </div>
+            <script>
+                function reset() {
+                    $('#update-username').val('{{user.name}}')
+                    $('#update-passwd').val('')
+                    $('#update-npasswd').val('')
+                }
+                function updateUser() {
+                    if (
+                        $('#update-passwd').val() == '' ||
+                        $('#update-username').val() == '') {
+                        return
+                    }
+                    const passwd = $('#update-passwd').val() + '&' + $('#update-usermail').val()
+                    const hPasswd = CryptoJS.SHA256(passwd).toString(CryptoJS.enc.Hex)
+                    $('#update-passwd').val(hPasswd)
+                    console.log(hPasswd)
+                    if ($('#update-npasswd').val()) {
+                        const npasswd = $('#update-npasswd').val() + '&' + $('#update-usermail').val()
+                        const nhPasswd = CryptoJS.SHA256(npasswd).toString(CryptoJS.enc.Hex)
+                        $('#update-npasswd').val(nhPasswd)
+                        console.log(nhPasswd)
+                    }
+                    $('form[name="profile-form"]').submit()
+                }
+                $(document).ready(function () {
+                    $('form[name="profile-form"]').on('keyup', function (e) {
+                        if (e.key == 'Enter') {
+                            updateUser()
+                        }
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

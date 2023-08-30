@@ -23,12 +23,42 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    created_on: {
+        type: Date,
+        default: new Date()
+    },
     userList: {
-        type: [Number],
+        type: [{
+            id: {
+                type: Number,
+                required: true,
+            },
+            coverImage: {
+                type: String,
+                required: true,
+            },
+            title: {
+                type: String,
+                required: true,
+            }
+        }],
         default: [],
     },
     favourites: {
-        type: [Number],
+        type: [{
+            id: {
+                type: Number,
+                required: true,
+            },
+            coverImage: {
+                type: String,
+                required: true,
+            },
+            title: {
+                type: String,
+                required: true,
+            }
+        }],
         default: [],
     },
 })

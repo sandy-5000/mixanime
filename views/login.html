@@ -293,7 +293,7 @@
         <div class="container" style="height: 100%;">
             <div style="height: 100%;" class="d-flex flex-column justify-content-center">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-ldark col-lg-4 col-md-6 col-12 py-5 px-lg-5 px-md-5 px-4 rounded-3 shadow-lg"
+                    <div class="bg-ldark col-lg-4 col-md-8 col-12 py-5 px-lg-5 px-md-5 px-4 rounded-3 shadow-lg"
                         style="z-index: 3;">
                         {% if type == 'login' %}
                         <div>
@@ -325,7 +325,7 @@
                                 </div>
                                 <script>
                                     $(document).ready(function () {
-                                        setInterval(() => {
+                                        setTimeout(() => {
                                             $('.alert').remove()
                                         }, 3000)
                                     })
@@ -350,6 +350,7 @@
                                     $('form[name="login-form"]').submit()
                                 }
                                 $(document).ready(function() {
+                                    localStorage.clear()
                                     $('form[name="login-form"]').on('keyup', function (e) {
                                         if (e.key == 'Enter') {
                                             loginUser()
@@ -383,21 +384,24 @@
                                         placeholder="Email" aria-label="Usermail"
                                         aria-describedby="register-usermail-at" required>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-light" id="register-password-at">
-                                        <i class="fa-solid fa-lock fa-bounce" style="color: #68768d;"></i>
-                                    </span>
-                                    <input type="password" class="form-control" name="passwd" id="register-passwd"
-                                        placeholder="Password" aria-label="Userpass"
-                                        aria-describedby="register-password-at" required>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text bg-light" id="register-cpassword-at">
-                                        <i class="fa-solid fa-shield fa-flip" style="color: #68768d;"></i>
-                                    </span>
-                                    <input type="password" class="form-control" name="cpasswd" id="register-cpasswd"
-                                        placeholder="Confirm Password" aria-label="Userpass"
-                                        aria-describedby="register-cpassword-at" required>
+                                <div class="d-flex">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-light" id="register-password-at">
+                                            <i class="fa-solid fa-lock fa-bounce" style="color: #68768d;"></i>
+                                        </span>
+                                        <input type="password" class="form-control" name="passwd" id="register-passwd"
+                                            placeholder="Password" aria-label="Userpass"
+                                            aria-describedby="register-password-at" required>
+                                    </div>
+                                    <div class="mx-1"></div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-light" id="register-cpassword-at">
+                                            <i class="fa-solid fa-shield fa-flip" style="color: #68768d;"></i>
+                                        </span>
+                                        <input type="password" class="form-control" name="cpasswd" id="register-cpasswd"
+                                            placeholder="Confirm" aria-label="Userpass"
+                                            aria-describedby="register-cpassword-at" required>
+                                    </div>
                                 </div>
                                 {% if error %}
                                 <div class="alert alert-warning" role="alert">
@@ -405,7 +409,7 @@
                                 </div>
                                 <script>
                                     $(document).ready(function () {
-                                        setInterval(() => {
+                                        setTimeout(() => {
                                             $('.alert').remove()
                                         }, 3000)
                                     })
@@ -431,6 +435,7 @@
                                     $('form[name="register-form"]').submit()
                                 }
                                 $(document).ready(function () {
+                                    localStorage.clear()
                                     $('form[name="register-form"]').on('keyup', function (e) {
                                         if (e.key == 'Enter') {
                                             registerUser()
@@ -440,18 +445,18 @@
                             </script>
                         </div>
                         {% endif %}
-                        {% if type == 'home' %}
+                        {% if type == 'other' %}
                         <div>
                             <div class="d-flex justify-content-between">
-                                <a href="/">
+                                <a href="{{route}}">
                                     <img loading="lazy" style="height: 40px;" src="/images/graph-pixel.png" />
                                 </a>
                             </div>
                             <div>
-                                <p class="text-light">Redirecting to home...</p>
+                                <p class="text-light">Redirecting to...</p>
                                 <script>
                                     $(document).ready(function () {
-                                        location.href = '/'
+                                        location.href = "{{route}}"
                                     })
                                 </script>
                             </div>

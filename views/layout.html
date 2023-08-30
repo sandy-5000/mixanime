@@ -306,7 +306,29 @@
                 </div>
             </div>
             <div style="height: 70px;" class="valign-wrapper">
-                <a href="/user/{{logged}}" style="background-color: #e0f2f1b9;" class="btn-flat waves-effect waves-light text-dark mx-4">{{logged | title}}</a>
+                {% if logged == 'login' %}
+                <a href="/user/login" style="background-color: #e0f2f1b9;" class="btn-flat waves-effect waves-light text-dark mx-4">
+                    Login
+                </a>
+                {% endif %}
+                {% if logged == 'logout' %}
+                <div class="dropdown mx-2">
+                    <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/images/profile.jpg" alt="profile" width="40" height="40" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li class="px-3">Welcome User!</li>
+                        <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <script>
+                    localStorage.setItem('logged', 'true')
+                </script>
+                {% endif %}
             </div>
         </header>
         <div class="progress transparent loader p-0 m-0">
@@ -333,7 +355,28 @@
                 </div>
             </div>
             <div style="height: 70px;" class="valign-wrapper">
-                <a href="/user/{{logged}}" class="btn-flat waves-effect waves-light text-light mx-4">{{logged | title}}</a>
+                {% if logged == 'login' %}
+                <a href="/user/login" class="btn-flat waves-effect waves-light text-light mx-4">Login</a>
+                {% endif %}
+                {% if logged == 'logout' %}
+                <div class="dropdown mx-2">
+                    <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/images/profile.jpg" alt="profile" width="40" height="40" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li class="px-3">Welcome User!</li>
+                        <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <script>
+                    localStorage.setItem('logged', 'true')
+                </script>
+                {% endif %}
             </div>
         </header>
         <div class="search-bar">
@@ -516,6 +559,63 @@
                 </div>
             </div>
         `
+    }
+
+    function addToList(id, title, coverImage) {
+        if (!id || id == '') {
+            return
+        }
+        if (localStorage.getItem('logged') != 'true') {
+            location.href = '/user/login'
+            return
+        }
+        const data = {
+            id, title, coverImage
+        }
+        $.ajax({
+            type: "POST",
+            url: "/user/add-to-list",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+                const id = result.id
+                $('.addToList-' + id).addClass('d-none')
+                $('.removeFromList-' + id).removeClass('d-none')
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+    function addToFavourites(id, title, coverImage) {
+        if (!id || id == '') {
+            return
+        }
+        if (localStorage.getItem('logged') != 'true') {
+            location.href = '/user/login'
+            return
+        }
+        const data = {
+            id, title, coverImage
+        }
+        $.ajax({
+            type: "POST",
+            url: "/user/add-to-list",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                const id = result.id
+                $('.addToList-' + id).addClass('d-none')
+                $('.removeFromList-' + id).removeClass('d-none')
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
     }
 
     function findAnime(animename) {

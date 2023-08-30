@@ -64,10 +64,13 @@
             <div class="col-lg-12 col-md-12 col-5 d-flex flex-column justify-content-end">
                 <div class="row m-0 p-0 mt-2 justify-content-around" style="padding: 0 !important;">
                     <div class="col-lg-9 col-12 px-lg-1 px-0 mt-2">
-                        <button style="height: 38px !important; width: 100% !important;"
-                            class="btn-flat waves-effect border bg-light accent-4 text-dark rounded valign-center">
+                        <button style="height: 38px !important; width: 100% !important;" onclick="addToList({{item.id}}, `{{item.title.english or item.title.romaji or item.title.native}}`, `{{item.coverImage.large or item.coverImage.extraLarge}}`)" class="addToList-{{item.id}} btn-flat waves-effect border bg-light accent-4 text-dark rounded valign-center">
                             <i class="fa-solid fa-plus" style="color: #08162c; font-size: small;"></i>
                             <span class="display-6" style="font-size: 16px; font-weight: 450;">Add To List</span>
+                        </button>
+                        <button style="height: 38px !important; width: 100% !important;" onclick="removeFromList({{item.id}})" class="removeFromList-{{item.id}} d-none btn-flat waves-effect border bg-light accent-4 text-dark rounded valign-center">
+                            <i class="fa-solid fa-xmark" style="color: #08162c; font-size: small;"></i>
+                            <span class="display-6" style="font-size: 16px; font-weight: 450;">Delete From List</span>
                         </button>
                     </div>
                     <div class="col-lg-3 col-12 px-lg-1 px-0 mt-2">
