@@ -73,6 +73,98 @@
                 /* rgba(0, 191, 165, 0.9); */
         }
     }
+
+
+    :root {
+        --anime-width: 200px;
+        --anime-height: 300px;
+        --arrow-width: 20px;
+        --slider-py: 200px;
+    }
+
+    @media only screen and (max-width: 950px) {
+        :root {
+            --anime-width: 35vw;
+            --anime-height: 200px;
+        }
+    }
+
+    .tgreen {
+		color: #02dbbe;
+	}
+
+    .slider {
+        height: auto !important;
+        width: 100% !important;
+        overflow-x: scroll;
+        white-space: nowrap;
+        position: relative;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    .anime {
+        width: var(--anime-width);
+        height: var(--anime-height);
+        display: inline-block;
+        position: relative;
+        color: white;
+        padding: 0 2px;
+        font-size: 0.8rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .anime:first-child {
+        margin-left: var(--arrow-width);
+    }
+
+    .anime:last-child {
+        margin-right: var(--arrow-width);
+    }
+
+    .anime .img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        background-size: cover !important;
+        background-position: center !important;
+        border-radius: 0px !important;
+        /* background-blend-mode: lighten; */
+    }
+
+    .anime-name {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        text-transform: capitalize;
+        font-weight: 900;
+        transform-origin: bottom right;
+        transform: rotate(-90deg);
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        background: transparent !important;
+        margin-bottom: 23px;
+    }
+
+    @media only screen and (min-width: 900px) {
+        .anime:hover {
+            transform: scale(1.15);
+            z-index: 2;
+        }
+
+        .anime:hover>.img {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .anime-name {
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+    }
+
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
@@ -180,6 +272,105 @@
                 })
             </script>
         </div>
+        
+    </div>
+    <div >
+        <!-- playlist -->
+        <section class="container-fluid m-0 p-0 mt-5">
+            <div class="d-flex justify-content-between" style="margin-top: 60px !important">
+                <span class="h5 text-light mx-4 p-0">{{user.name}}'s <span class="text-sgreen">PlayList</span></span>
+                <div class="d-flex mx-2">
+                    <button onclick="scrollItemsLeft('slider')" class="rounded-3 mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                        <i style="font-size: medium;"class="bi bi-caret-left"></i>
+                    </button>
+                    <button onclick="scrollItemsRight('slider')" class="rounded-3 mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                        <i style="font-size: medium;"class="bi bi-caret-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="slider" id="mySlider">
+                {% for item in user.userList %}
+                    <div class="anime" id="userlist-{{item.id}}">
+                        <div class="d-flex img lazy-bg" data-bg="background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('{{item.coverImage}}')">
+                            <div class="col-2 d-flex flex-column justify-content-end" style="overflow-y: hidden;">
+                                <p class="h6 genre anime-name">{{(item.title)}}</p>
+                            </div>
+                            <div class="col-10 d-flex flex-column p-2 h-100">
+                                <div class="d-flex justify-content-end">
+                                    <a href="/details/{{item.id}}">
+                                    <button class="rounded-3 btn-flat mx-1 waves-effect waves-light text-light removebutton d-none" style="background-color: #c04a4a;">
+                                        <span class="d-flex ">
+                                            <i style="font-size: medium; margin-top: 8px; margin-right:10px;"class="bi fa-solid fa-trash"></i>
+                                            <span>Remove<span class="d-lg-inline d-md-inline d-none"></span></span>
+                                        </span>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Favorites -->
+            <div class="d-flex justify-content-between" style="margin-top: 60px !important">
+                <span class="h5 text-light mx-4 p-0">Your <span class="text-sgreen">Favorites</span></span>
+                <div class="d-flex mx-2">
+                    <button onclick="scrollItemsLeft('slider')" class="rounded-3 mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                        <i style="font-size: medium;"class="bi bi-caret-left"></i>
+                    </button>
+                    <button onclick="scrollItemsRight('slider')" class="rounded-3 mx-1 waves-effect waves-light text-dark" style="background-color: #e0f2f1b9;">
+                        <i style="font-size: medium;"class="bi bi-caret-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="slider" id="mySlider">
+                {% for item in user.userList %}
+                    <div class="anime fav" id="favlist-{{item.id}}">
+                        <div class="d-flex img lazy-bg" data-bg="background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('{{item.coverImage}}')">
+                            <div class="col-2 d-flex flex-column justify-content-end" style="overflow-y: hidden;">
+                                <p class="h6 genre anime-name">{{(item.title)}}</p>
+                            </div>
+                            <div class="col-10 d-flex flex-column p-2 h-100">
+                                <div class="d-flex justify-content-end">
+                                    <a href="/details/{{item.id}}">
+                                    <button class="rounded-3 btn-flat mx-1 waves-effect waves-light text-light favbutton" style="">
+                                        <span class="d-flex ">
+                                            <i style="font-size: medium; margin-top: 8px; margin-right:10px; color: #e00f0f;"class="bi fa-solid fa-heart fav-icon"></i>
+                                            <span class="favspan"></span>
+                                        </span>
+                                    </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <script>
+            $(document).ready(function (){
+                $('.anime').on('mouseenter',function (){
+                    $(this).find('.removebutton').removeClass('d-none')
+                })
+                $('.anime').on('mouseleave',function (){
+                    $(this).find('.removebutton').addClass('d-none')
+                })
+                $('.fav').on('mouseleave',function (){
+                    $(this).find('.fav-icon').removeClass('fa-regular')
+                    $(this).find('.fav-icon').addClass('fa-solid')
+                    $(this).find('.favspan').text('')
+                    $(this).find('.favbutton').css('background-color','#0b0b0b00')
+
+                })
+                $('.fav').on('mouseenter',function (){
+                    $(this).find('.fav-icon').removeClass('fa-solid')
+                    $(this).find('.fav-icon').addClass('fa-regular')
+                    $(this).find('.favspan').text('Unfavorite')
+                    $(this).find('.favbutton').css('background-color','#0b0b0b')
+                })
+                
+            })
+        </script>
     </div>
 </div>
 
