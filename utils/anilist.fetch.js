@@ -17,7 +17,7 @@ export const fetchHomePage = async () => {
             perPage: 9,
         },
         trending: {
-            page: 1,
+            page: 2,
             perPage: 10,
         },
         topAiring: {
