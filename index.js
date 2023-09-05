@@ -80,6 +80,17 @@ app.get("/watch/:id/:romji/:episode", async (req, res) => {
     res.render('watch.html', { item: result.data, logged })
 })
 
+app.get("/viewmore",async (req,res)=>{
+    const logged = req.session.user ? 'logout' : 'login'
+    let {pageno,type} = req.params
+    const result = await searchAnimeList(req.query)
+    res.render('viewmore.html', {
+        items: result.data.data.Page.media,
+        pageInfo: result.data.data.Page.pageInfo,
+        logged
+    })
+})
+
 const cache = new Map()
 const getDate = async (page, ...params) => {
     const utilFunctions = {
