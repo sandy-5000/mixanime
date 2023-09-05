@@ -52,7 +52,7 @@ app.get("/advancedsearch", async (req, res) => {
         logged
     })
 })
-
+~
 app.get("/details/:id", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
     const id = parseInt(req.params.id)
