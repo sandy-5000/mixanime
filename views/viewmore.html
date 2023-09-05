@@ -2,11 +2,6 @@
 {% block title %}Search | {{ super() }}{% endblock %}
 {% block content %}
 
-{% set genres = ["Action", "Adult Cast", "Adventure", "Animation", "Comedy", "Detective", "Drama",
-"Ecchi", "Family", "Fantasy", "Isekai", "Kids", "Martial Arts", "Mecha", "Military",
-"Mystery", "Otaku Culture", "Reality", "Romance", "School", "Sci-Fi", "Seinen", "Shounen",
-"Slice of Life", "Sports", "Super Power", "SuperHero", "Supernatural", "TV Movie"] %}
-
 <style>
     .search-container {
         height: calc(145vh - 70px) !important;
@@ -55,8 +50,6 @@
     .form-select {
         height: 35px !important;
     }
-
-   
 
     @media only screen and (max-width: 991px) {
         .anime-item {
@@ -122,10 +115,8 @@
 </div>
 
 
-
 <script>
-
-    function initSearchPage() {
+    function initViewMorePage() {
         tippy('.mytippy-search', {
             content(reference) {
                 const id = reference.getAttribute('data-template')
@@ -142,42 +133,16 @@
         })
     }
 
-    function setParams() {
-        const queryString = location.search
-        const queryParams = new URLSearchParams(queryString)
-        const params = {}
-        for (const [param, value] of queryParams.entries()) {
-            if (param == 'animename') {
-                $("#" + param).attr('value', value)
-            } else if (param == 'genre') {
-                $(`.check-it[value='${value}']`).prop("checked", true)
-            } else {
-                $("#" + param).val(value)
-            }
-            params[param] = value
-        }
-        console.log(params)
-    }
-
     function formSubmit(x) {
         $('#pageno').val(+$('#pageno').val() + x)
         console.log($('#pageno').val())
         $('form[name="search-form"]').submit()
     }
 
-    function toggleFilter() {
-        if ($('.filter-box').hasClass('filter-hide')) {
-            $('.filter-box').removeClass('filter-hide')
-        } else {
-            $('.filter-box').addClass('filter-hide')
-        }
-    }
-
     $(document).ready(function () {
         $('.search-bar').remove()
         $('.search-bar-big').remove()
-        initSearchPage()
-        setParams()
+        initViewMorePage()
     })
 </script>
 

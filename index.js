@@ -52,7 +52,7 @@ app.get("/advancedsearch", async (req, res) => {
         logged
     })
 })
-~
+
 app.get("/details/:id", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
     const id = parseInt(req.params.id)
@@ -80,9 +80,9 @@ app.get("/watch/:id/:romji/:episode", async (req, res) => {
     res.render('watch.html', { item: result.data, logged })
 })
 
-app.get("/viewmore",async (req,res)=>{
+app.get("/viewmore", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
-    let {pageno,type} = req.params
+    let { pageno, type } = req.params
     const result = await searchAnimeList(req.query)
     res.render('viewmore.html', {
         items: result.data.data.Page.media,
@@ -150,7 +150,6 @@ app.get("/api/:romji/:episode", async (req, res) => {
 })
 
 app.use('/user', user)
-
 
 mongoose
     .connect(MONGO_DB_URL)
