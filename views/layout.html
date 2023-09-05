@@ -676,6 +676,38 @@
         })
     }
 
+    function setLists() {
+        if (localStorage.getItem('logged') != 'true') {
+            return
+        }
+        let userList = JSON.parse(localStorage.getItem('userList'))
+        if (userList) {
+            for (const item of userList) {
+                $('.addToList-' + item.id).addClass('d-none')
+                $('.removeFromList-' + item.id).removeClass('d-none')
+            }
+        }
+    }
+
+    function getList() {
+        if (localStorage.getItem('logged') != 'true') {
+            return
+        }
+        $.ajax({
+            type: "GET",
+            url: "/user/get-data",
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) {
+                localStorage.setItem('userList', JSON.stringify(result.userList))
+                setLists()
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
     function scrollItemsLeft(className) {
         $("." + className).scrollLeft($("." + className).scrollLeft() - 300)
     }
@@ -724,6 +756,22 @@
         init()
         lazyBG()
         setGenre()
+        $('.most-item').on('mouseenter', function () {
+            setTimeout(() => {
+                if (!localStorage.getItem('userList')) {
+                    getList()
+                } else {
+                    setLists()
+                }
+            }, 1000)
+        })
+        {
+            if (!localStorage.getItem('userList')) {
+                getList()
+            } else {
+                setLists()
+            }
+        }
     })
 
     function goToTop() {

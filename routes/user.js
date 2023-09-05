@@ -97,5 +97,16 @@ app.route('/add-to-list')
         return res.status(data.status).json({ id })
     })
 
+app.route('/get-data')
+    .get(async (req, res) => {
+        if (!req.session.user) {
+            return res.status(200).json({ message: 'User not logged in' })
+        }
+        let data = {
+            userList: req.session.user.result.userList,
+        }
+        return res.status(200).json(data)
+    })
+
 const user = app
 export default user
