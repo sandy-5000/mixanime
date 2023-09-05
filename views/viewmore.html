@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+{% block title %}Search | {{ super() }}{% endblock %}
+{% block content %}
+
+{% set genres = ["Action", "Adult Cast", "Adventure", "Animation", "Comedy", "Detective", "Drama",
+"Ecchi", "Family", "Fantasy", "Isekai", "Kids", "Martial Arts", "Mecha", "Military",
+"Mystery", "Otaku Culture", "Reality", "Romance", "School", "Sci-Fi", "Seinen", "Shounen",
+"Slice of Life", "Sports", "Super Power", "SuperHero", "Supernatural", "TV Movie"] %}
+
+<style>
+    .search-container {
+        height: calc(145vh - 70px) !important;
+        margin-top: 70px;
+    }
+
+    .image-overlay {
+        position: absolute;
+        bottom: 0;
+        z-index: 3;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    }
+
+    .image-overlay:hover {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    }
+
+    .aspect-ratio-container {
+        position: relative;
+        width: 100%;
+        padding-top: 50%;
+        /* 3:4 aspect ratio (133.33% = 4 / 3) */
+    }
+
+    .aspect-ratio-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .anime-item {
+        width: 20% !important;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #5DE4B5;
+        box-shadow: 0 0 0 0.1rem #5DE4B5;
+    }
+
+    .form-select {
+        height: 35px !important;
+    }
+
+   
+
+    @media only screen and (max-width: 991px) {
+        .anime-item {
+            width: 25% !important;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .anime-item {
+            width: 50% !important;
+        }
+    }
+</style>
+
+<div class="search-container d-flex">
+    <div class="col-12" style="height: 100%; overflow-y: scroll;">
+        <form name="search-form" class="search-form">
+            <div class="my-3 search-content">
+                <div class="d-flex justify-content-between">
+                    <span class="h4 mx-3 my-3 text-light" style="font-weight: 500;">Most <span class="text-sgreen">Recent</span></span>
+                </div>
+                <div class="row justify-content-center m-0 p-0">
+                    {% for item in items %}
+                    <div class="m-0 px-2 anime-item">
+                        <div class="col-12 h-100" style="overflow-y: hidden;">
+                            <div class="aspect-ratio-container mytippy-search" data-template="item-{{loop.index0}}">
+                                <a href="/details/{{item.id}}">
+                                    <div class="image-overlay"></div>
+                                    <img class="rounded aspect-ratio-content img-fluid" src="{{item.coverImage.extraLarge}}" alt="">
+                                    <div class="ep-btn p-2">
+                                        {% set totalEpisodes = (item.episodes if item.episodes else '?') %}
+                                        {% set currentEpisode = (item.nextAiringEpisode.episode - 1 if item.nextAiringEpisode else
+                                        totalEpisodes) %}
+                                        <span class="teal p-1 rounded text-light" style="font-weight: 500;">EP
+                                            {{currentEpisode}}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <p class="text-truncate text-light mt-1" style="font-weight: 500">{{item.title.english or item.title.romaji or item.title.native}}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-center">
+                    {% set pageno = pageInfo.currentPage %}
+                    <input type="hidden" name="pageno" class="pageno" id="pageno" value="{{pageno}}" />
+                    {% if pageno != 1 %}
+                    <button class="prevPage btn bg-light text-dark" onclick="formSubmit(-1)" type="button">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    {% endif %}
+                    <span class="btn sgreen text-dark mx-2" aria-disabled="true"><strong style="font-size: 18px;">{{pageno}}</strong></span>
+                    {% if pageno != pageInfo.lastPage %}
+                    <button class="nextPage btn bg-light text-dark" onclick="formSubmit(1)" type="button">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    function initSearchPage() {
+        tippy('.mytippy-search', {
+            content(reference) {
+                const id = reference.getAttribute('data-template')
+                const template = document.getElementById(id)
+                return template.innerHTML
+            },
+            allowHTML: true,
+            interactive: true,
+            placement: 'top',
+            inertia: true,
+            animation: 'scale',
+            delay: [300, 50],
+            duration: [100, 50],
+        })
+    }
+
+    function setParams() {
+        const queryString = location.search
+        const queryParams = new URLSearchParams(queryString)
+        const params = {}
+        for (const [param, value] of queryParams.entries()) {
+            if (param == 'animename') {
+                $("#" + param).attr('value', value)
+            } else if (param == 'genre') {
+                $(`.check-it[value='${value}']`).prop("checked", true)
+            } else {
+                $("#" + param).val(value)
+            }
+            params[param] = value
+        }
+        console.log(params)
+    }
+
+    function formSubmit(x) {
+        $('#pageno').val(+$('#pageno').val() + x)
+        console.log($('#pageno').val())
+        $('form[name="search-form"]').submit()
+    }
+
+    function toggleFilter() {
+        if ($('.filter-box').hasClass('filter-hide')) {
+            $('.filter-box').removeClass('filter-hide')
+        } else {
+            $('.filter-box').addClass('filter-hide')
+        }
+    }
+
+    $(document).ready(function () {
+        $('.search-bar').remove()
+        $('.search-bar-big').remove()
+        initSearchPage()
+        setParams()
+    })
+</script>
+
+
+{% endblock %}
