@@ -87,7 +87,7 @@
     <div class="col-lg-9 col-12 m-0 p-2">
         <div class="d-flex justify-content-between mb-2">
             <div class="valign-wrapper">
-                <p class="text-light mx-2 mb-0" style="font-weight: 600;">Latest <span class="text-sgreen">Episodes</span></p>
+                <p class="text-light mx-2 mb-0 side-heading">Latest <span class="text-sgreen">Episodes</span></p>
             </div>
             <div class="d-flex">
                 <div class="d-flex valign-wrapper">
@@ -129,7 +129,7 @@
 
         <div class="d-flex justify-content-between mb-2">
             <div class="valign-wrapper">
-                <p class="text-light mx-2 mb-0" style="font-weight: 600;">Newly <span class="text-sgreen">Added</span></p>
+                <p class="text-light mx-2 mb-0 side-heading">Newly <span class="text-sgreen">Added</span></p>
             </div>
             <div class="d-flex">
                 <div class="d-flex valign-wrapper">
@@ -166,14 +166,14 @@
     </div>
 
     <div class="col-lg-3 col-12 m-0 p-0">
-        <h5 class="text-sgreen mb-3" style="font-weight: 550;">Genres</h5>
+        <h5 class="text-sgreen mb-3 mx-2" style="font-weight: 550;">Genres</h5>
         <div class="row">
             {% for genre in genres %}
                 <a href="/advancedsearch?genre={{genre}}" class="genre col-lg-4 col-md-2 col-4 my-2" style="cursor: pointer; font-weight: 500">{{genre}}</a>
             {% endfor %}
         </div>
         <div class="col-lg-12 col-md-5 col-12">
-            <p class="h4 text-light my-3 mt-5">Most <span class="text-sgreen">Visited</span></p>
+            <p class="h5 text-light my-3 mt-5 mx-2 side-heading">Most <span class="text-sgreen">Visited</span></p>
             {% for item in recent.carousel %}
                 <div class="most-v d-flex w-100 px-4 py-2" style="height: 100px !important">
                     <div class="col-2 valign-center d-flex flex-column justify-content-center">

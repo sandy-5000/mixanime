@@ -74,10 +74,16 @@
                         </button>
                     </div>
                     <div class="col-lg-3 col-12 px-lg-1 px-0 mt-2">
-                        <button style="height: 38px !important;"
-                            class="w-100 btn-flat waves-effect deep-orange accent-3 rounded valign-center">
-                            <i class="fa-solid fa-heart" style="color: #ffffff; font-size: small;"></i>
-                        </button>
+                        <div class="addToFavourites-{{item.id}}">
+                            <button style="height: 38px !important;" onclick="addToFavourites({{item.id}}, `{{item.title.english or item.title.romaji or item.title.native}}`, `{{item.coverImage.large or item.coverImage.extraLarge}}`)" class="w-100 btn-flat waves-effect deep-orange accent-3 rounded valign-center">
+                                <i class="fa-solid fa-heart" style="color: #ffffff; font-size: small;"></i>
+                            </button>
+                        </div>
+                        <div class="removeFromFavourites-{{item.id}} d-none">
+                            <button style="height: 38px !important;" onclick="removeFromFavourites({{item.id}})" class="w-100 btn-flat waves-effect deep-orange accent-2 rounded valign-center">
+                                <i class="fa-regular fa-heart" style="color: #ffffff; font-size: small;"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-2">

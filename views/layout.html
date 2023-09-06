@@ -225,6 +225,12 @@
         .sgreen-light {
             background-color: #9fe6cd !important;
         }
+
+        .side-heading {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -259,12 +265,12 @@
                 <span style="font-weight: 550;">Advanced Search</span>
             </a>
         </div>
-        <div class="m-1 my-4">
+        <!-- <div class="m-1 my-4">
             <a href="/viewmore" class="text-sgreen">
                 <i class="fa-regular fa-newspaper" style="font-size: small;"></i>
                 <span style="font-weight: 550;">View More</span>
             </a>
-        </div>
+        </div> -->
         <div class="my-5"></div>
         <p class="display-6 text-light" style="font-size: 22px;">Genre</p>
         <div class="row">
@@ -316,6 +322,9 @@
                 <a href="/user/login" style="background-color: #e0f2f1b9;" class="btn-flat waves-effect waves-light text-dark mx-4">
                     Login
                 </a>
+                <script>
+                    localStorage.clear()
+                </script>
                 {% endif %}
                 {% if logged == 'logout' %}
                 <div class="dropdown mx-2">
@@ -595,6 +604,31 @@
         })
     }
 
+    function removeFromList(id) {
+        if (!id || id == '') {
+            return
+        }
+        if (localStorage.getItem('logged') != 'true') {
+            location.href = '/user/login'
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: "/user/remove-from-list",
+            contentType: 'application/json',
+            data: JSON.stringify({ id }),
+            dataType: 'json',
+            success: function (result) {
+                const id = result.id
+                $('.removeFromList-' + id).addClass('d-none')
+                $('.addToList-' + id).removeClass('d-none')
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
     function addToFavourites(id, title, coverImage) {
         if (!id || id == '') {
             return
@@ -608,15 +642,39 @@
         }
         $.ajax({
             type: "POST",
-            url: "/user/add-to-list",
+            url: "/user/add-to-favourites",
             contentType: 'application/json',
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-                console.log(result)
                 const id = result.id
-                $('.addToList-' + id).addClass('d-none')
-                $('.removeFromList-' + id).removeClass('d-none')
+                $('.addToFavourites-' + id).addClass('d-none')
+                $('.removeFromFavourites-' + id).removeClass('d-none')
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+    function removeFromFavourites(id) {
+        if (!id || id == '') {
+            return
+        }
+        if (localStorage.getItem('logged') != 'true') {
+            location.href = '/user/login'
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: "/user/remove-from-favourites",
+            contentType: 'application/json',
+            data: JSON.stringify({ id }),
+            dataType: 'json',
+            success: function (result) {
+                const id = result.id
+                $('.removeFromFavourites-' + id).addClass('d-none')
+                $('.addToFavourites-' + id).removeClass('d-none')
             },
             error: function (error) {
                 console.log(error)
@@ -693,6 +751,13 @@
                 $('.removeFromList-' + item.id).removeClass('d-none')
             }
         }
+        let favourites = JSON.parse(localStorage.getItem('userList'))
+        if (favourites) {
+            for (const item of favourites) {
+                $('.addToFavourites-' + item.id).addClass('d-none')
+                $('.removeFromFavourites-' + item.id).removeClass('d-none')
+            }
+        }
     }
 
     function getList() {
@@ -706,6 +771,7 @@
             dataType: 'json',
             success: function (result) {
                 localStorage.setItem('userList', JSON.stringify(result.userList))
+                localStorage.setItem('favourites', JSON.stringify(result.favourites))
                 setLists()
             },
             error: function (error) {

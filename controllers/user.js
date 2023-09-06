@@ -58,6 +58,22 @@ export default function UserController() {
                 return { status: 400, result: 'Add to List failed!' }
             }
         },
+        removeFromList: async function ({ email, id }) {
+            try {
+                let result = await MAUser.findOneAndUpdate({ email }, {
+                    $pull: {
+                        userList: { id: id }
+                    }
+                }, { new: true })
+                if (!result) {
+                    return { status: 400, result: 'Not Removed to list' }
+                }
+                return { status: 201, result }
+            } catch (e) {
+                console.error(e)
+                return { status: 400, result: 'Remove from List failed!' }
+            }
+        },
         addToFavourites: async function ({ email, id, title, coverImage }) {
             try {
                 const item = {
@@ -71,6 +87,22 @@ export default function UserController() {
                 return { status: 201, result }
             } catch (e) {
                 return { status: 400, result: 'Add to Favourites failed!' }
+            }
+        },
+        removeFromFavourites: async function ({ email, id }) {
+            try {
+                let result = await MAUser.findOneAndUpdate({ email }, {
+                    $pull: {
+                        favourites: { id: id }
+                    }
+                }, { new: true })
+                if (!result) {
+                    return { status: 400, result: 'Not Removed to list' }
+                }
+                return { status: 201, result }
+            } catch (e) {
+                console.error(e)
+                return { status: 400, result: 'Remove from List failed!' }
             }
         },
     }

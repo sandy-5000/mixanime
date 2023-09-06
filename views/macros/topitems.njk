@@ -48,12 +48,12 @@
         <div class="col-lg-3 col-md-6 col-12 p-0">
             <div class="boxes d-flex flex-column justify-content-between bg-ldark m-1" style="height: 500px;">
                 <div class="py-3 px-4">
-                    <span class="h5 text-light">{{names[loop.index0][0]}} <span class="text-sgreen">{{names[loop.index0][1]}}</span></span>
+                    <span class="h6 text-light side-heading">{{names[loop.index0][0]}} <span class="text-sgreen">{{names[loop.index0][1]}}</span></span>
                 </div>
                 <div style="height: 420px; overflow-y: scroll;">
                     {% for item in topitems[key] %}
                     <div class="{{'bg-ldark' if loop.index0 % 2 else 'bg-dark'}} d-flex w-100 px-4 py-2" style="height: 100px !important">
-                        <div class="col-2 mytippy-topitems" data-template="{{key}}-{{loop.index0}}">
+                        <div class="col-2 mytippy-topitems most-item" data-template="{{key}}-{{loop.index0}}">
                             <img loading="lazy" class="rounded" style="width: 55px;" src="{{item.coverImage.medium or item.coverImage.large}}" alt="">
                         </div>
                         <a href="/details/{{item.id}}">
