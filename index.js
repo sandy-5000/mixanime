@@ -82,7 +82,6 @@ app.get("/watch/:id/:romji/:episode", async (req, res) => {
 
 app.get("/viewmore", async (req, res) => {
     const logged = req.session.user ? 'logout' : 'login'
-    let { pageno, type } = req.params
     const result = await searchAnimeList(req.query)
     res.render('viewmore.html', {
         items: result.data.data.Page.media,

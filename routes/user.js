@@ -21,7 +21,6 @@ app.route('/login')
             return res.render('login.html', { type: 'login', error: 'Usermail or password incorrect!' })
         }
         req.session.user = data
-        // console.log(data.result)
         return res.render('login.html', { type: 'other', route: '/home' })
     })
 
