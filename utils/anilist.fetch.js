@@ -10,7 +10,7 @@ async function write(data) {
 const url = 'https://graphql.anilist.co'
 
 export const fetchHomePage = async () => {
-    // return { data: homeData, status: 200 }
+    return { data: homeData, status: 200 }
     const variables = {
         carousel: {
             page: 1,
@@ -77,7 +77,7 @@ export const fetchHomePage = async () => {
 }
 
 export const findAnimeList = async (animename) => {
-    // return { data: findAnime, status: 200 }
+    return { data: findAnime, status: 200 }
     const variables = {
         page: 1,
         perPage: 5,
@@ -116,7 +116,7 @@ export const searchAnimeList = async ({
     status,
     averageScore
 }) => {
-    // return { data: searchData, status: 200 }
+    return { data: searchData, status: 200 }
     pageno = parseInt(pageno)
     if (pageno == NaN) {
         pageno = 1
@@ -192,7 +192,7 @@ export const searchAnimeList = async ({
 }
 
 export const animeDetails = async (id) => {
-    // return { data: sampleAnimeDetails, status: 200 }
+    return { data: sampleAnimeDetails, status: 200 }
     const variables = {
         id: id,
     }
