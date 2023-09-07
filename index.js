@@ -10,6 +10,8 @@ dotenv.config()
 import { fetchHomePage, findAnimeList, searchAnimeList, animeDetails } from "./utils/anilist.fetch.js"
 import { getVideoLink } from "./utils/scrapper.js"
 import user from "./routes/user.js"
+import EpisodeController from "./controllers/episode.js"
+import AnimeController from "./controllers/anime.js"
 
 
 const app = express()
@@ -71,12 +73,9 @@ app.get("/watch/:id/:romji/:episode", async (req, res) => {
     if (!romji || !episode || episode < 0 || romji.trim() == '') {
         res.status(404).json({ error: 'page not found' })
     }
-    romji = romji.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
-    let uuid = romji + '-episode-' + episode
-    const linkResult = await getDate('episodeLink', uuid)
     let result = await getDate('animeDetails', id)
-    // result.data.link = 'https://www.jdoodle.com/'
-    result.data.link = linkResult.link
+    const link = await getLink(+id, +episode, romji)
+    result.data.link = link
     res.render('watch.html', { item: result.data, logged })
 })
 
@@ -108,6 +107,43 @@ const getDate = async (page, ...params) => {
         console.info('cache hit')
     }
     return cache.get(key)
+}
+
+const animes = new Map()
+const animeCtrl = AnimeController()
+const episodes = new Map()
+const episodeCtrl = EpisodeController()
+const getLink = async (id, episode, romaji) => {
+    try {
+        if (episodes.has(id + '-' + episode)) {
+            return episodes.get(id + '-' + episode)
+        }
+        let { result, status } = await episodeCtrl.getLinks({ anilist_id: id, episode_no: episode })
+        if (status == 200) {
+            episodes.set(id + '-' + episode, result.links[0])
+            return result.links[0]
+        }
+        if (animes.has(id)) {
+            romaji = animes.get(id)
+        } else {
+            let anime = await animeCtrl.getAnime({ anilist_id: id })
+            if (anime.status == 200) {
+                romaji = anime.result.romaji
+                animes.set(id, romaji)
+            }
+        }
+        romaji = romaji.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+        let uuid = romaji + '-episode-' + episode
+        let link = await getDate('episodeLink', uuid)
+        link = link.link
+        if (link != null) {
+            await episodeCtrl.putLink({ anilist_id: id, episode_no: episode, link })
+            episodes.set(id + '-' + episode, link)
+        }
+        return link
+    } catch (e) {
+        return null
+    }
 }
 
 let count = 0
