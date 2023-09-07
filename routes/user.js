@@ -195,6 +195,7 @@ app.route('/get-data')
         }
         let data = {
             userList: req.session.user.result.userList,
+            favourites: req.session.user.result.favourites,
         }
         return res.status(200).json(data)
     })

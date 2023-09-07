@@ -229,7 +229,7 @@
         .side-heading {
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 500;
+            font-weight: 550;
         }
     </style>
 </head>
@@ -597,6 +597,7 @@
                 const id = result.id
                 $('.addToList-' + id).addClass('d-none')
                 $('.removeFromList-' + id).removeClass('d-none')
+                updateList('userList', 'add', id)
             },
             error: function (error) {
                 console.log(error)
@@ -622,6 +623,7 @@
                 const id = result.id
                 $('.removeFromList-' + id).addClass('d-none')
                 $('.addToList-' + id).removeClass('d-none')
+                updateList('userList', 'delete', id)
             },
             error: function (error) {
                 console.log(error)
@@ -650,6 +652,7 @@
                 const id = result.id
                 $('.addToFavourites-' + id).addClass('d-none')
                 $('.removeFromFavourites-' + id).removeClass('d-none')
+                updateList('favourites', 'add', id)
             },
             error: function (error) {
                 console.log(error)
@@ -675,6 +678,7 @@
                 const id = result.id
                 $('.removeFromFavourites-' + id).addClass('d-none')
                 $('.addToFavourites-' + id).removeClass('d-none')
+                updateList('favourites', 'delete', id)
             },
             error: function (error) {
                 console.log(error)
@@ -740,6 +744,30 @@
         })
     }
 
+    function updateList(type, operation, id) {
+        if (type == 'userList') {
+            let userList = JSON.parse(localStorage.getItem('userList'))
+            if (userList) {
+                if (operation == 'delete') {
+                    userList = userList.filter(x => x.id != id)
+                } else if (operation == 'add') {
+                    userList.push({ id })
+                }
+                localStorage.setItem('userList', JSON.stringify(userList))
+            }
+        } else if (type == 'favourites') {
+            let favourites = JSON.parse(localStorage.getItem('favourites'))
+            if (favourites) {
+                if (operation == 'delete') {
+                    favourites = favourites.filter(x => x.id != id)
+                } else if (operation == 'add') {
+                    favourites.push({ id })
+                }
+                localStorage.setItem('favourites', JSON.stringify(favourites))
+            }
+        }
+    }
+
     function setLists() {
         if (localStorage.getItem('logged') != 'true') {
             return
@@ -751,7 +779,7 @@
                 $('.removeFromList-' + item.id).removeClass('d-none')
             }
         }
-        let favourites = JSON.parse(localStorage.getItem('userList'))
+        let favourites = JSON.parse(localStorage.getItem('favourites'))
         if (favourites) {
             for (const item of favourites) {
                 $('.addToFavourites-' + item.id).addClass('d-none')

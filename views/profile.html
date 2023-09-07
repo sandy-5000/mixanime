@@ -82,9 +82,16 @@
         --slider-py: 200px;
     }
 
-    @media only screen and (max-width: 950px) {
+    @media only screen and (max-width: 992px) {
         :root {
-            --anime-width: 35vw;
+            --anime-width: 25vw;
+            --anime-height: 200px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        :root {
+            --anime-width: 50vw;
             --anime-height: 200px;
         }
     }
@@ -160,7 +167,7 @@
 
     @media only screen and (max-width: 768px) {
         .anime-name {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             padding: 5px;
         }
     }
@@ -303,9 +310,13 @@
                                         </span>
                                     </a>
                                     <button onclick="removeProfileList('{{item.id}}')" class="rounded-3 btn-flat mx-1 waves-effect waves-light text-light removebutton d-none" style="background-color: #c04a4a;">
-                                        <span class="d-flex ">
-                                            <i style="font-size: medium; margin-top: 8px; margin-right:10px;"class="bi fa-solid fa-trash"></i>
-                                            <span>Remove<span class="d-lg-inline d-md-inline d-none"></span></span>
+                                        <span class="d-flex">
+                                            <div class="valign-wrapper">
+                                                <i style="font-size: medium;"class="bi fa-solid fa-trash"></i>
+                                            </div>
+                                            <div class="valign-wrapper">
+                                                <span style=" margin-left: 5px;" class="d-lg-block d-none">Remove<span class="d-lg-inline d-md-inline d-none"></span></span>
+                                            </div>
                                         </span>
                                     </button>
                                 </div>
