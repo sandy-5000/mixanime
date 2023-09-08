@@ -1,4 +1,5 @@
 import MAAnimes from '../models/anime.js'
+import MAEpisodes from '../models/episode.js'
 
 export default function AnimeController() {
     return {
@@ -15,6 +16,7 @@ export default function AnimeController() {
         },
         setAnime: async function ({ anilist_id, romaji }) {
             try {
+                await MAEpisodes.deleteMany({ anilist_id })
                 const anime = new MAAnimes({
                     anilist_id,
                     romaji
@@ -27,6 +29,7 @@ export default function AnimeController() {
         },
         updateAnime: async function ({ anilist_id, romaji }) {
             try {
+                await MAEpisodes.deleteMany({ anilist_id })
                 const result = await MAAnimes.findOneAndUpdate({ anilist_id }, { romaji })
                 if (!result) {
                     return { result, status: 400 }

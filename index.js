@@ -12,6 +12,7 @@ import { getVideoLink } from "./utils/scrapper.js"
 import user from "./routes/user.js"
 import EpisodeController from "./controllers/episode.js"
 import AnimeController from "./controllers/anime.js"
+import admin from "./routes/admin.js"
 
 
 const app = express()
@@ -172,19 +173,28 @@ app.get("/api/details/:id", async (req, res) => {
     res.status(result.status).json(result.data)
 })
 
-app.get("/api/:romji/:episode", async (req, res) => {
-    let { romji, episode } = req.params
+app.get("/api/:id/:romji/:episode", async (req, res) => {
+    let { id, romji, episode } = req.params
     episode = parseInt(episode)
     if (!romji || !episode || episode < 0 || romji.trim() == '') {
         res.status(404).json({ error: 'page not found' })
     }
-    romji = romji.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
-    let uuid = romji + '-episode-' + episode
-    const linkResult = await getDate('episodeLink', uuid)
-    res.status(linkResult.status).json({ link: linkResult.link })
+    const link = await getLink(+id, +episode, romji)
+    res.status(200).json({ link: link })
+})
+
+app.get("/reset", async (req, res) => {
+    if (req.session.user?.result.email != 'sandyblaze911@gmail.com') {
+        return res.status(403).json({ message: 'FY' })
+    }
+    animes.clear()
+    episodes.clear()
+    cache.clear()
+    res.status(200).json({ message: 'done' })
 })
 
 app.use('/user', user)
+app.use('/admin', admin)
 
 mongoose
     .connect(MONGO_DB_URL)

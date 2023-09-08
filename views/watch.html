@@ -88,7 +88,7 @@
                                 capitalize}}</strong>
                         </div>
                         <body>
-                            <iframe allowfullscreen="true" id="playerframe" style="height: calc(0.5625 * 800px); width: 800px;"
+                            <iframe allowfullscreen="true" id="playerframe" style="height: calc(0.5625 * 800px + 10px); width: 800px;"
                                 src="{{item.link}}"></iframe>
                         </body>
                         <div class="my-5"></div>
@@ -120,7 +120,7 @@
 <script>
     function getButton(n) {
         return `
-            <button onclick="getLink(${n})" class="px-2 m-1 ep-btn btn-flat waves-effect waves-light shadow-lg" style="height: 40px; width: 60px;"><strong>${n}</strong></button>
+            <button onclick="getLink(${n})" class="px-2 m-1 ep-btn btn-flat waves-effect waves-green shadow-lg" style="height: 40px; width: 60px;"><strong>${n}</strong></button>
         `
     }
 
@@ -128,7 +128,7 @@
         let n = '{{currentEpisode}}'
         if (n != '?') {
             n = parseInt(n)
-            for (let i = 1; i <= 6; ++i) {
+            for (let i = 1; i <= n; ++i) {
                 $('.btn-container').append(getButton(i))
             }
         }
@@ -138,7 +138,7 @@
         const romaji = '{{item.title.romaji}}'.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
         $.ajax({
             type: 'GET',
-            url: '/api/' + romaji + '/' + episode,
+            url: '/api/{{item.id}}/' + romaji + '/' + episode,
             contentType: 'application/json',
             success: function (result) {
                 console.log(JSON.stringify(result))
@@ -152,6 +152,8 @@
 
     $(document).ready(function () {
         watchInit()
+        $('.sidebar').remove()
+        $('.sidebar-opener').remove()
     })
 </script>
 
