@@ -12,7 +12,7 @@
     }
 
     .bag-image {
-        width: 100%;
+        min-width: (100%, 800px) !important;
         background: linear-gradient(to right, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%),
         url('{{item.bannerImage}}');
         background-size: cover !important;
@@ -45,13 +45,20 @@
 
     @media only screen and (max-width: 767px) {
         .left-content {
-            padding-top: 30px;
-            height: 300px !important;
+            height: 270px !important;
         }
 
         .right-content,
         .detail-content {
             padding-top: 30px;
+        }
+
+        .right-content {
+            margin-top: 350px;
+        }
+
+        .bag-image {
+            background: transparent;
         }
     }
 
@@ -64,6 +71,10 @@
         background-color: #37474f;
         color: aliceblue;
     }
+
+    .blocked {
+        display: none !important;
+    }
 </style>
 
 {% set totalEpisodes = item.episodes or '?' %}
@@ -71,26 +82,26 @@
 
 
 <div class="top-container" style="margin-top: 75px !important; margin-bottom: 75px;">
-    <div class="bag-image d-flex">
+    <div class="bag-image">
         <div class="content d-flex">
             <div class="d-lg-flex m-0 p-0 inner-content">
-                <div class="col-lg-9 col-12 d-lg-flex d-md-flex">
+                <div class="col-lg-9 col-12 d-flex flex-lg-row flex-md-row flex-column-reverse">
                     <div class="left-content col-lg-3 col-md-3 col-12 px-1">
-                        <div style="max-height: 460px; overflow: scroll !important;" class="btn-container col-12 row justify-content-center">
-
+                        <div style="max-height: 550px; overflow: scroll !important;" class="btn-container col-12 row justify-content-center">
                         </div>
                     </div>
                     <div class="detail-content col-lg-9 col-md-9 col-12 px-4">
                         <div class="mb-2">
                             <a href="/home"><strong>Home</strong></a> <i style="font-size: medium;"
-                                class="text-light bi bi-dot"></i>
+                            class="text-light bi bi-dot"></i>
                             <strong class="text-sgreen">{{(item.title.english or item.title.romaji or item.title.native) |
                                 capitalize}}</strong>
+                            <h5 class="my-3 text-center text-light">To avoid ads use brave browser</h5>
                         </div>
-                        <body>
+                        <div class="d-flex justify-content-center valign-wrapper">
                             <iframe allowfullscreen="true" id="playerframe" style="height: calc(0.5625 * 800px + 10px); width: 800px;"
-                                src="{{item.link}}"></iframe>
-                        </body>
+                            src="{{item.link}}"></iframe>
+                        </div>
                         <div class="my-5"></div>
                     </div>
                 </div>
@@ -150,8 +161,21 @@
         })
     }
 
+    const blockedKeywords = ['ad', 'advertisement', 'sponsored', 'promo']
+
+    function containsBlockedKeywords(element) {
+        const text = element.text().toLowerCase()
+        return blockedKeywords.some(keyword => text.includes(keyword))
+    }
+
     $(document).ready(function () {
         watchInit()
+        count = 0
+        // $('.video div').each(function () {
+        //     if (containsBlockedKeywords($(this))) {
+        //         $(this).addClass('blocked')
+        //     }
+        // })
         $('.sidebar').remove()
         $('.sidebar-opener').remove()
     })
