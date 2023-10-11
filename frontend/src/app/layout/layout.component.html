@@ -1,12 +1,12 @@
 <div class="w-screen h-screen">
     <header class="h-[60px] z-10 flex justify-between">
         <div class="a-center px-5 py-2">
-            <button class="bg-gray-800 shadow-inner a-center p-1 mr-3 rounded-xl">
+            <div (click)="goToRoute('/home')" class="cursor-pointer bg-gray-800 shadow-inner a-center p-1 mr-3 rounded-xl">
                 <ng-icon class="text-slate-200 text-2xl" name="heroSquares2x2"></ng-icon>
-            </button>
+            </div>
             <img class="w-[120px]" src="/assets/images/graph-pixel.png" alt="logo">
         </div>
-        <div class="a-center py-3 lg:w-[600px] md:w-[400px] w-0">
+        <div class="a-center py-3 lg:w-[600px] md:w-[400px] w-auto">
             <div class="relative w-full lg:block md:block hidden">
                 <input type="text" placeholder=""
                     class="text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-500 placeholder-shown:border-t-slate-500 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-[#409e7d] " />
@@ -19,10 +19,10 @@
                 </div>
             </div>
         </div>
-        <div class="a-center px-5">
-            <button class="bg-gray-700 shadow-inner a-center p-1 mr-2 rounded-xl">
+        <div class="a-center pl-5 pr-2">
+            <div class="cursor-pointer bg-gray-700 shadow-inner a-center p-1 mr-2 rounded-xl">
                 <ng-icon class="text-xl mr-1 text-slate-200" name="heroShare"></ng-icon>
-            </button>
+            </div>
             <button class="btn py-2 pr-5 pl-4 bg-[#f5f5f5] flex">
                 <div class="a-center">
                     <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangle"></ng-icon>
@@ -38,8 +38,8 @@
         <div class="flex h-full">
             <nav class="flex-none w-[80px] z-[1] border-r border-gray-700 lg:inline md:inline hidden">
                 <div class="py-5">
-                    <div class="a-center py-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav home-nav a-center py-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/home')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroHomeModern"></ng-icon>
                             </div>
@@ -48,8 +48,8 @@
                             </div>
                         </button>
                     </div>
-                    <div class="a-center py-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav trending-nav a-center py-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/trending')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroPresentationChartLine"></ng-icon>
                             </div>
@@ -58,8 +58,8 @@
                             </div>
                         </button>
                     </div>
-                    <div class="a-center py-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav recent-nav a-center py-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/recent')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroTicket"></ng-icon>
                             </div>
@@ -71,18 +71,18 @@
                 </div>
                 <hr class="border-gray-700 mb-5" />
                 <div>
-                    <div class="a-center py-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav profile-nav a-center py-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/profile')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroIdentification"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">Edit User Profile</span>
+                                <span class="text-sm mt-1 text-slate-200">Edit Your Profile</span>
                             </div>
                         </button>
                     </div>
-                    <div class="a-center py-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav search-nav a-center py-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/search')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroCubeTransparent"></ng-icon>
                             </div>
@@ -91,7 +91,7 @@
                             </div>
                         </button>
                     </div>
-                    <div class="a-center py-3 hover:bg-slate-600">
+                    <div class="nav schedule-nav a-center py-3 hover:bg-slate-600">
                         <button>
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroCalendarDays"></ng-icon>
@@ -103,56 +103,56 @@
                     </div>
                 </div>
             </nav>
-            <nav class="absolute lg:hidden md:hidden left-0 bottom-0 z-[3] bg-[#040e11]">
+            <nav class="absolute w-screen lg:hidden md:hidden left-0 bottom-0 z-[3] bg-[#040e11]">
                 <hr class="border-gray-700" />
                 <div class="w-full flex justify-between">
-                    <div class="w-1/5 a-center p-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav trending-nav w-1/5 a-center p-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/trending')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroPresentationChartLine"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">Trending Anime</span>
+                                <span class="text-sm mt-1 text-slate-200">Trending</span>
                             </div>
                         </button>
                     </div>
-                    <div class="w-1/5 a-center p-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav recent-nav w-1/5 a-center p-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/recent')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroTicket"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">Recently Released</span>
+                                <span class="text-sm mt-1 text-slate-200">Recents</span>
                             </div>
                         </button>
                     </div>
-                    <div class="w-1/5 a-center p-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav search-nav w-1/5 a-center p-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/search')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroCubeTransparent"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">Advanced Search</span>
+                                <span class="text-sm mt-1 text-slate-200">Search</span>
                             </div>
                         </button>
                     </div>
-                    <div class="w-1/5 a-center p-3 hover:bg-slate-600">
-                        <button>
+                    <div class="nav profile-nav w-1/5 a-center p-3 hover:bg-slate-600">
+                        <button (click)="goToRoute('/profile')">
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroIdentification"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">User Profile</span>
+                                <span class="text-sm mt-1 text-slate-200">Profile</span>
                             </div>
                         </button>
                     </div>
-                    <div class="w-1/5 a-center p-3 hover:bg-slate-600">
+                    <div class="nav schedule-nav w-1/5 a-center p-3 hover:bg-slate-600">
                         <button>
                             <div class="a-center">
                                 <ng-icon class="text-slate-200 text-[25px]" name="heroCalendarDays"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1 text-slate-200">Weekly Schedule</span>
+                                <span class="text-sm mt-1 text-slate-200">Schedule</span>
                             </div>
                         </button>
                     </div>
@@ -163,17 +163,14 @@
                 <hr class="border-gray-700 mb-3 lg:block md:block hidden" />
                 <footer class="px-5">
                     <div>
-                        <div class="lg:block md:block hidden">
-                            <img loading="lazy" class="h-[50px]" src="assets/images/graph-pixel.png" />
-                        </div>
-                        <div class="lg:hidden md:hidden block">
-                            <img loading="lazy" class="h-[40px]" src="assets/images/graph-pixel.png" />
+                        <div>
+                            <img alt="logo" loading="lazy" class="h-[40px]" src="assets/images/graph-pixel.png" />
                         </div>
                     </div>
                     <p class="text-slate-200 mb-5"><small>Mix Anime does not store any files on our server, we only
                             linked to
                             the media which is hosted on 3rd party services.</small></p>
-                    <div class="lg:hidden md:hidden block my-28"></div>
+                    <div class="lg:hidden md:hidden block my-24"></div>
                 </footer>
             </main>
         </div>

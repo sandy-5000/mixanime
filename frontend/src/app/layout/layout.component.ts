@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
+import { SharedviewService } from '../services/sharedview/sharedview.service'
 
 @Component({
 	selector: 'app-layout',
@@ -7,8 +9,15 @@ import { Component } from '@angular/core'
 })
 export class LayoutComponent {
 
-	constructor() { }
+	constructor(
+		private router: Router,
+		private sharedView: SharedviewService
+	) { }
 
 	ngOnInit(): void { }
+
+	goToRoute(path: string): void {
+		this.router.navigateByUrl(path)
+	}
 
 }

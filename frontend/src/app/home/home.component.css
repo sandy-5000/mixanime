@@ -1,0 +1,7 @@
+.cpos {
+    width: 100%;
+    aspect-ratio: 2/1 !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}

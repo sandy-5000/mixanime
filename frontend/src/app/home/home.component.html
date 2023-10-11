@@ -1,10 +1,22 @@
-<div class="w-full h-screen a-center">
-    <h1 class="text-2xl flex font-semibold text-slate-200">
-        <div class="a-center mr-1">
-            <ng-icon name="heroBolt"></ng-icon>
+<div class="w-full h-screen relative">
+    <div *ngIf="loading" class="absolute opacity-30 bg-blue-gray-600 z-[2] left-0 top-0 w-full h-full a-center">
+        <div>
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+                    fill="rgb(255, 255, 255)"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
         </div>
-        <div class="a-center">
-            <span>MixAnime!</span>
+    </div>
+    <div class="m-5 carousel relative">
+        <div *ngFor="let item of carouselData; index as i" class="absolute cpos overflow-x-hidden no-thing lazy-bg slide-{{i}}"
+            style="background: linear-gradient(to right, rgba(1, 1, 1, 0.7) 90%, rgba(1, 1, 1, 0.7) 90%, rgba(1, 1, 1, 0.7) 90%), url('{{item.bannerImage}}');">
+            <div class="progress p-0 m-0 transparent" style="z-index: 2">
+                <div class="determinate sgreen" style="width: 50%; height: 1px"></div>
+            </div>
         </div>
-    </h1>
+    </div>
 </div>
