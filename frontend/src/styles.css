@@ -22,6 +22,9 @@
 * {
     scroll-behavior: smooth;
 }
+p::-webkit-scrollbar {
+    display: none;
+}
 
 
 .a-center {

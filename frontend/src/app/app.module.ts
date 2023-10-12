@@ -12,7 +12,7 @@ import { SearchComponent } from './search/search.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import {
-	heroBolt, heroSquares2x2, heroArrowRightOnRectangle, heroShare, heroMagnifyingGlassCircle,
+	heroBolt, heroSquares2x2, heroArrowRightOnRectangle, heroShare, heroMagnifyingGlassCircle, heroPlay,
 	heroHomeModern, heroPresentationChartLine, heroTicket, heroIdentification, heroCubeTransparent, heroCalendarDays
 } from '@ng-icons/heroicons/outline';
 
@@ -31,7 +31,7 @@ import {
 		BrowserModule,
 		AppRoutingModule,
 		NgIconsModule.withIcons({
-			heroBolt, heroSquares2x2, heroArrowRightOnRectangle, heroShare, heroMagnifyingGlassCircle,
+			heroBolt, heroSquares2x2, heroArrowRightOnRectangle, heroShare, heroMagnifyingGlassCircle, heroPlay,
 			heroHomeModern, heroPresentationChartLine, heroTicket, heroIdentification, heroCubeTransparent, heroCalendarDays
 		})
 	],

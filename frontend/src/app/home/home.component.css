@@ -1,7 +1,60 @@
-.cpos {
-    width: 100%;
-    aspect-ratio: 2/1 !important;
+.carousel-card {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+    @apply absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[2/1] overflow-x-hidden
+}
+
+.no-thing {
+    display: none;
+}
+
+.image-container {
+    transform: rotate(15deg) !important;
+}
+
+.image {
+    position: relative;
+    top: 15%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+.title {
+    color: #5DE4B5;
+    font-size: min(30px, 3vw);
+    font-weight: bolder;
+}
+
+.a-yslide-hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-100%);
+    transition: all 0.5s;
+}
+
+.a-yslide-show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+.a-xslide-hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 0.8s;
+}
+
+.a-xslide-show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+@media (prefers-reduced-motion) {
+    .a-slide-hidden {
+        transition: none;
+    }
 }
