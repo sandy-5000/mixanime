@@ -12,17 +12,25 @@ import { SearchComponent } from './search/search.component'
 import { ProfileComponent } from './profile/profile.component'
 
 import {
-	heroBolt, heroSquares2x2, heroShare, heroMagnifyingGlassCircle,
-	heroHome, heroNewspaper, heroCalendarDays
+	heroBolt, heroRectangleGroup, heroPlayCircle, heroMagnifyingGlass,
+	heroNewspaper
 } from '@ng-icons/heroicons/outline'
 import {
 	heroArrowRightOnRectangleMini,
-	heroPresentationChartBarMini, heroIdentificationMini
+	heroIdentificationMini
 } from '@ng-icons/heroicons/mini'
 import {
-	matHomeOutline, matMapOutline, matPlayCircleOutline, matChevronRightOutline
+	matHomeOutline, matChevronRightOutline
 } from '@ng-icons/material-icons/outline'
-
+import {
+	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord
+} from '@ng-icons/simple-icons'
+import {
+	iconoirHomeSimpleDoor, iconoirHomeSimple
+} from '@ng-icons/iconoir'
+import {
+	tablerCalendarTime
+} from '@ng-icons/tabler-icons'
 
 @NgModule({
 	declarations: [
@@ -38,9 +46,9 @@ import {
 		BrowserModule,
 		AppRoutingModule,
 		NgIconsModule.withIcons({
-			heroBolt, heroSquares2x2, heroArrowRightOnRectangleMini, heroShare, heroMagnifyingGlassCircle,
-			matPlayCircleOutline, matHomeOutline, matChevronRightOutline,
-			heroHome, heroPresentationChartBarMini, heroNewspaper, heroIdentificationMini, matMapOutline, heroCalendarDays
+			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
+			matHomeOutline, matChevronRightOutline, heroPlayCircle,
+			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],
 	providers: [],

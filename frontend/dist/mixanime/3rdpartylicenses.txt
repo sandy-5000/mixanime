@@ -16,7 +16,16 @@ MIT
 @ng-icons/heroicons
 MIT
 
+@ng-icons/iconoir
+MIT
+
 @ng-icons/material-icons
+MIT
+
+@ng-icons/simple-icons
+CC0-1.0
+
+@ng-icons/tabler-icons
 MIT
 
 rxjs

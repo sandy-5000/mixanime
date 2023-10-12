@@ -18,13 +18,16 @@ export class HomeComponent {
 	setNavButton() {
 		const navs = document.querySelectorAll('.nav')
 		navs.forEach(x => {
-			x.classList.remove('active')
+			x.classList.remove('bg-sgreen')
+			x.classList.remove('text-slate-800')
 		})
 		const navButtons = document.querySelectorAll('.home-nav')
 		navButtons.forEach(x => {
-			x.classList.add('active')
+			x.classList.add('bg-sgreen')
+			x.classList.add('text-slate-800')
 		})
 	}
+
 	setEvents() {
 		const setCarousel = async () => {
 
@@ -60,9 +63,15 @@ export class HomeComponent {
 				const carouselLoop = setInterval(() => {
 					let previous = (index + n - 1) % n
 					const previousElement = document.querySelector(`.slide-${previous}`)
-					previousElement?.classList.add('no-thing')
 					const element = document.querySelector(`.slide-${index}`)
-					element?.classList.remove('no-thing')
+					element?.classList.remove('hidden')
+					setTimeout(() => {
+						previousElement?.classList.remove('the-thing')
+						element?.classList.add('the-thing')
+						setTimeout(() => {
+							previousElement?.classList.add('hidden')
+						}, 800)
+					}, 800)
 					index = (index + 1) % n
 				}, 5000)
 				this.unSubscribeEvents.push({
