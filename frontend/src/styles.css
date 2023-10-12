@@ -54,6 +54,11 @@ body {
     .vr {
         border-left: 3px solid #5de4b5;
     }
+
+    .active {
+        /* background-color: #5de4b5; */
+        @apply bg-slate-700
+    }
 }
 
 * {

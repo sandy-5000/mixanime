@@ -1,5 +1,5 @@
 <div class="w-screen h-screen">
-    <header class="h-[60px] z-10 flex justify-between">
+    <header class="h-[60px] z-10 flex justify-between bg-[#0e121a]">
         <div class="a-center px-5 py-2">
             <div (click)="goToRoute('/home')" class="cursor-pointer bg-gray-800 shadow-inner a-center p-1 mr-3 rounded-xl">
                 <ng-icon class="text-slate-200 text-2xl" name="heroSquares2x2"></ng-icon>
@@ -25,7 +25,7 @@
             </div>
             <button class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#5de4b5] flex">
                 <div class="a-center">
-                    <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangle"></ng-icon>
+                    <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangleMini"></ng-icon>
                 </div>
                 <div class="a-center">
                     <span class="text-[14px] font-semibold">sign in</span>
@@ -33,38 +33,38 @@
             </button>
         </div>
     </header>
-    <hr class="border-gray-700" />
+    <!-- <hr class="border-gray-700" /> -->
     <section style="height: calc(100% - 61px);">
-        <div class="flex h-full">
-            <nav class="flex-none w-[80px] z-[1] border-r border-gray-700 lg:inline md:inline hidden">
+        <div class="bg-[#0e121a] flex h-full">
+            <nav class="flex-none w-[80px] z-[1] lg:inline md:inline hidden">
                 <div class="py-5">
                     <div class="nav home-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/home')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroHomeModern"></ng-icon>
+                                <ng-icon class="text-[28px]" name="heroHome"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Navigate to Home</span>
+                                <span class="text-sm mt-1">Home</span>
                             </div>
                         </button>
                     </div>
                     <div class="nav trending-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/trending')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroPresentationChartLine"></ng-icon>
+                                <ng-icon class="text-[28px]" name="heroPresentationChartBarMini"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Trending Anime</span>
+                                <span class="text-sm mt-1">Trending</span>
                             </div>
                         </button>
                     </div>
                     <div class="nav recent-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/recent')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroTicket"></ng-icon>
+                                <ng-icon class="text-[28px]" name="heroNewspaper"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Recently Released</span>
+                                <span class="text-sm mt-1">Recent</span>
                             </div>
                         </button>
                     </div>
@@ -74,42 +74,43 @@
                     <div class="nav profile-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/profile')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroIdentification"></ng-icon>
+                                <ng-icon class="text-[28px]" name="heroIdentificationMini"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Edit Your Profile</span>
+                                <span class="text-sm mt-1">Profile</span>
                             </div>
                         </button>
                     </div>
                     <div class="nav search-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/search')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroCubeTransparent"></ng-icon>
+                                <ng-icon class="text-[28px]" name="matMapOutline"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Advanced Search</span>
+                                <span class="text-sm mt-1">Explore</span>
                             </div>
                         </button>
                     </div>
                     <div class="nav schedule-nav a-center py-3 text-slate-200 hover:bg-slate-600">
                         <button>
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroCalendarDays"></ng-icon>
+                                <ng-icon class="text-[28px]" name="heroCalendarDays"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Weekly Schedule</span>
+                                <span class="text-sm mt-1">Schedule</span>
                             </div>
                         </button>
                     </div>
                 </div>
             </nav>
-            <nav class="absolute w-screen lg:hidden md:hidden left-0 bottom-0 z-[3] bg-[#040e11]">
-                <hr class="border-gray-700" />
+            <!-- bg-[#040e11] -->
+            <nav class="absolute w-screen bg-[#0e121a] lg:hidden md:hidden left-0 bottom-0 z-[3]">
+                <!-- <hr class="border-gray-700" /> -->
                 <div class="w-full flex justify-between">
                     <div class="nav trending-nav w-1/5 a-center p-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/trending')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroPresentationChartLine"></ng-icon>
+                                <ng-icon class="text-[25px]" name="heroPresentationChartBarMini"></ng-icon>
                             </div>
                             <div class="a-center">
                                 <span class="text-sm mt-1">Trending</span>
@@ -119,7 +120,7 @@
                     <div class="nav recent-nav w-1/5 a-center p-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/recent')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroTicket"></ng-icon>
+                                <ng-icon class="text-[25px]" name="heroNewspaper"></ng-icon>
                             </div>
                             <div class="a-center">
                                 <span class="text-sm mt-1">Recents</span>
@@ -129,17 +130,17 @@
                     <div class="nav search-nav w-1/5 a-center p-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/search')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroCubeTransparent"></ng-icon>
+                                <ng-icon class="text-[25px]" name="matMapOutline"></ng-icon>
                             </div>
                             <div class="a-center">
-                                <span class="text-sm mt-1">Search</span>
+                                <span class="text-sm mt-1">Explore</span>
                             </div>
                         </button>
                     </div>
                     <div class="nav profile-nav w-1/5 a-center p-3 text-slate-200 hover:bg-slate-600">
                         <button (click)="goToRoute('/profile')">
                             <div class="a-center">
-                                <ng-icon class="text-[25px]" name="heroIdentification"></ng-icon>
+                                <ng-icon class="text-[25px]" name="heroIdentificationMini"></ng-icon>
                             </div>
                             <div class="a-center">
                                 <span class="text-sm mt-1">Profile</span>
