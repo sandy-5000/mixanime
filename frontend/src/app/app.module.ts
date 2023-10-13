@@ -13,7 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { LoaderComponent } from './components/loader/loader.component'
 
 import {
-	heroBolt, heroRectangleGroup, heroPlayCircle, heroMagnifyingGlass,
+	heroBolt, heroPlayCircle, heroMagnifyingGlass,
 	heroNewspaper
 } from '@ng-icons/heroicons/outline'
 import {
