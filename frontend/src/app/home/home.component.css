@@ -2,7 +2,7 @@
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    @apply absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[2/1] overflow-x-hidden
+    @apply left-0 top-0 absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[2/1] overflow-x-hidden
 }
 
 .no-thing {

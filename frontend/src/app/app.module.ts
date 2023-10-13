@@ -20,7 +20,7 @@ import {
 	heroIdentificationMini
 } from '@ng-icons/heroicons/mini'
 import {
-	matHomeOutline, matChevronRightOutline
+	matHomeOutline, matChevronRightOutline, matNewspaperOutline
 } from '@ng-icons/material-icons/outline'
 import {
 	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord
@@ -29,7 +29,7 @@ import {
 	iconoirHomeSimpleDoor, iconoirHomeSimple
 } from '@ng-icons/iconoir'
 import {
-	tablerCalendarTime
+	tablerCalendarTime, tablerSquareRoundedArrowRight
 } from '@ng-icons/tabler-icons'
 
 @NgModule({
@@ -47,7 +47,7 @@ import {
 		AppRoutingModule,
 		NgIconsModule.withIcons({
 			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
-			matHomeOutline, matChevronRightOutline, heroPlayCircle,
+			matHomeOutline, matChevronRightOutline, heroPlayCircle, matNewspaperOutline, tablerSquareRoundedArrowRight,
 			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],
