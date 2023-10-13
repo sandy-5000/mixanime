@@ -37,6 +37,34 @@ export class AnilistService {
 				}
 			}
 		`,
+		recent: `
+			query ($page: Int, $perPage: Int, $search: String) {
+				Page(page: $page, perPage: $perPage) {
+					media(search: $search, isAdult: false, popularity_greater: 20000, countryOfOrigin: JP, type: ANIME, status: RELEASING, sort: START_DATE_DESC) {
+						id
+						title {
+							english
+							romaji
+							native
+						}
+						format
+						duration
+						episodes
+						nextAiringEpisode {
+							episode
+						}
+						updatedAt
+						description
+						coverImage {
+							large
+							extraLarge
+						}
+						bannerImage
+						averageScore
+					}
+				}
+			}
+		`,
 	}
 
 	public static homePage() {
@@ -49,17 +77,36 @@ export class AnilistService {
 						'Accept': 'application/json',
 					},
 					body: JSON.stringify({
-						query: this.queries?.carousel || '',
+						query: this.queries.carousel,
 						variables: variables
 					})
 				}
-				fetch(AnilistService.url, options)
+				fetch(this.url, options)
 					.then(response => response.json())
 					.then(result => {
 						const data = result.data.Page.media
 						callback(data)
 					})
 			},
+			recent: (variables: any, callback: any) => {
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					},
+					body: JSON.stringify({
+						query: this.queries.recent,
+						variables: variables
+					})
+				}
+				fetch(this.url, options)
+					.then(response => response.json())
+					.then(result => {
+						const data = result.data.Page.media
+						callback(data)
+					})
+			}
 		}
 	}
 

@@ -15,17 +15,23 @@ export class HomeComponent {
 	}
 
 	loading: any = {
-		carousel: true
+		carousel: true,
+		recent: true,
 	}
 	dataMethods: any = {}
 	unSubscribeEvents: any = []
 
 	carouselData: any = []
+	recentData: any = []
 
 	variables: any = {
 		carousel: {
 			page: 1,
 			perPage: 10,
+		},
+		recent: {
+			page: 1,
+			perPage: 12,
 		},
 	}
 
@@ -86,14 +92,21 @@ export class HomeComponent {
 				addAnimation()
 			}, 100)
 			this.loading.carousel = false
+		},
+		recent: (data: any) => {
+			this.recentData = data
+			this.loading.recent = false
 		}
 	}
 
 	setEvents() {
 		this.loading.carousel = true
 		this.dataMethods.carousel(this.variables.carousel, (data: any) => {
-			console.log(data)
 			this.setPageData.carousel(data)
+		})
+		this.loading.recent = true
+		this.dataMethods.recent(this.variables.recent, (data: any) => {
+			this.setPageData.recent(data)
 		})
 	}
 

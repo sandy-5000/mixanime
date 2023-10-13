@@ -31,7 +31,8 @@ import {
 } from '@ng-icons/iconoir'
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight
-} from '@ng-icons/tabler-icons'
+} from '@ng-icons/tabler-icons';
+import { FooterComponent } from './components/footer/footer.component'
 
 @NgModule({
 	declarations: [
@@ -42,7 +43,8 @@ import {
 		RecentComponent,
 		SearchComponent,
 		ProfileComponent,
-		LoaderComponent
+		LoaderComponent,
+  FooterComponent
 	],
 	imports: [
 		BrowserModule,

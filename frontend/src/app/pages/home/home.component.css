@@ -2,7 +2,18 @@
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    @apply left-0 top-0 absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[2/1] overflow-x-hidden
+    @apply left-0 top-0 absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[9/5] overflow-x-hidden
+}
+
+.recent {
+    min-height: 400px;
+}
+
+.recent-card {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    @apply lg:aspect-[9/5] md:aspect-[8/5] aspect-[7/5]
 }
 
 .no-thing {
