@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { HomeComponent } from './home/home.component'
 import { NgIconsModule } from '@ng-icons/core'
 import { LayoutComponent } from './layout/layout.component'
-import { TrendingComponent } from './trending/trending.component'
-import { RecentComponent } from './recent/recent.component'
-import { SearchComponent } from './search/search.component'
-import { ProfileComponent } from './profile/profile.component'
+import { HomeComponent } from './pages/home/home.component'
+import { TrendingComponent } from './pages/trending/trending.component'
+import { RecentComponent } from './pages/recent/recent.component'
+import { SearchComponent } from './pages/search/search.component'
+import { ProfileComponent } from './pages/profile/profile.component'
+import { LoaderComponent } from './components/loader/loader.component'
 
 import {
 	heroBolt, heroRectangleGroup, heroPlayCircle, heroMagnifyingGlass,
@@ -40,7 +41,8 @@ import {
 		TrendingComponent,
 		RecentComponent,
 		SearchComponent,
-		ProfileComponent
+		ProfileComponent,
+		LoaderComponent
 	],
 	imports: [
 		BrowserModule,

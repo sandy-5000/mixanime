@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { HomeComponent } from './home/home.component'
-import { TrendingComponent } from './trending/trending.component'
-import { RecentComponent } from './recent/recent.component'
-import { ProfileComponent } from './profile/profile.component'
-import { SearchComponent } from './search/search.component'
+import { HomeComponent } from './pages/home/home.component'
+import { TrendingComponent } from './pages/trending/trending.component'
+import { RecentComponent } from './pages/recent/recent.component'
+import { ProfileComponent } from './pages/profile/profile.component'
+import { SearchComponent } from './pages/search/search.component'
 
 const routes: Routes = [
 	{

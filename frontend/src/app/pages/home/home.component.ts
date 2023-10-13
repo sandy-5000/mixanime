@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import { AnilistService } from '../services/anilist/anilist.service'
-import { SharedviewService } from '../services/sharedview/sharedview.service'
+import { AnilistService } from '../../services/anilist/anilist.service'
+import { SharedviewService } from '../../services/sharedview/sharedview.service'
 
 @Component({
 	selector: 'app-home',
@@ -10,44 +10,34 @@ import { SharedviewService } from '../services/sharedview/sharedview.service'
 
 export class HomeComponent {
 
-	constructor(private sharedView: SharedviewService) { }
+	constructor(private sharedView: SharedviewService) {
+		this.dataMethods = AnilistService.homePage()
+	}
 
-	loading: Boolean = false
-	carouselData: any = []
+	loading: any = {
+		carousel: true
+	}
+	dataMethods: any = {}
 	unSubscribeEvents: any = []
 
-	setEvents() {
-		const setCarousel = async () => {
+	carouselData: any = []
 
+	variables: any = {
+		carousel: {
+			page: 1,
+			perPage: 10,
+		},
+	}
+
+	setPageData: any = {
+		carousel: (data: any) => {
 			if (this.carouselData.length != 0) {
-				console.log(this.carouselData)
-				this.loading = false
+				this.loading.carousel = false
 				return
 			}
-			const variables = {
-				carousel: {
-					page: 1,
-					perPage: 10,
-				},
-			}
-			let options = {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Accept': 'application/json',
-				},
-				body: JSON.stringify({
-					query: AnilistService.queries?.carousel || '',
-					variables: variables.carousel
-				})
-			}
-			const response = await fetch(AnilistService.url, options)
-			const result = await response.json()
-			this.carouselData = result.data.Page.media
-
 			const startCarousel = () => {
 				let index = 1
-				const n = variables.carousel.perPage
+				const n = this.carouselData.length
 				const carouselLoop = setInterval(() => {
 					let previous = (index + n - 1) % n
 					const previousElement = document.querySelector(`.slide-${previous}`)
@@ -66,8 +56,6 @@ export class HomeComponent {
 					close: () => clearInterval(carouselLoop)
 				})
 			}
-			startCarousel()
-
 			const addAnimation = () => {
 				const observerX = new IntersectionObserver(entries => {
 					entries.forEach(entry => {
@@ -92,15 +80,21 @@ export class HomeComponent {
 				const hiddenElementsX = document.querySelectorAll('.a-xslide-hidden')
 				hiddenElementsX.forEach(element => observerX.observe(element))
 			}
+			this.carouselData = data
 			setTimeout(() => {
+				startCarousel()
 				addAnimation()
 			}, 100)
-
-			this.loading = false
+			this.loading.carousel = false
 		}
+	}
 
-		setCarousel()
-
+	setEvents() {
+		this.loading.carousel = true
+		this.dataMethods.carousel(this.variables.carousel, (data: any) => {
+			console.log(data)
+			this.setPageData.carousel(data)
+		})
 	}
 
 	ngOnInit(): void {
@@ -108,7 +102,6 @@ export class HomeComponent {
 			method: 'setNavButton',
 			params: ['home']
 		})
-		this.loading = true
 		this.setEvents()
 	}
 

@@ -39,6 +39,30 @@ export class AnilistService {
 		`,
 	}
 
+	public static homePage() {
+		return {
+			carousel: (variables: any, callback: any) => {
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					},
+					body: JSON.stringify({
+						query: this.queries?.carousel || '',
+						variables: variables
+					})
+				}
+				fetch(AnilistService.url, options)
+					.then(response => response.json())
+					.then(result => {
+						const data = result.data.Page.media
+						callback(data)
+					})
+			},
+		}
+	}
+
 	constructor() { }
 
 }

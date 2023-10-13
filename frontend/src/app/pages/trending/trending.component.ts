@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SharedviewService } from '../services/sharedview/sharedview.service';
+import { SharedviewService } from '../../services/sharedview/sharedview.service';
 
 @Component({
 	selector: 'app-trending',
