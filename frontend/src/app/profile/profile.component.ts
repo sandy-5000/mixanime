@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedviewService } from '../services/sharedview/sharedview.service';
 
 @Component({
 	selector: 'app-profile',
@@ -7,18 +8,12 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
-	constructor() { }
+	constructor(private sharedView: SharedviewService) { }
 
 	ngOnInit(): void {
-		const navs = document.querySelectorAll('.nav')
-		navs.forEach(x => {
-			x.classList.remove('bg-sgreen')
-			x.classList.remove('text-slate-800')
-		})
-		const navButtons = document.querySelectorAll('.profile-nav')
-		navButtons.forEach(x => {
-			x.classList.add('bg-sgreen')
-			x.classList.add('text-slate-800')
+		this.sharedView.changeState({
+			method: 'setNavButton',
+			params: ['profile']
 		})
 	}
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { AnilistService } from '../services/anilist/anilist.service'
+import { SharedviewService } from '../services/sharedview/sharedview.service'
 
 @Component({
 	selector: 'app-home',
@@ -9,24 +10,11 @@ import { AnilistService } from '../services/anilist/anilist.service'
 
 export class HomeComponent {
 
+	constructor(private sharedView: SharedviewService) { }
+
 	loading: Boolean = false
 	carouselData: any = []
 	unSubscribeEvents: any = []
-
-	constructor() { }
-
-	setNavButton() {
-		const navs = document.querySelectorAll('.nav')
-		navs.forEach(x => {
-			x.classList.remove('bg-sgreen')
-			x.classList.remove('text-slate-800')
-		})
-		const navButtons = document.querySelectorAll('.home-nav')
-		navButtons.forEach(x => {
-			x.classList.add('bg-sgreen')
-			x.classList.add('text-slate-800')
-		})
-	}
 
 	setEvents() {
 		const setCarousel = async () => {
@@ -116,8 +104,11 @@ export class HomeComponent {
 	}
 
 	ngOnInit(): void {
+		this.sharedView.changeState({
+			method: 'setNavButton',
+			params: ['home']
+		})
 		this.loading = true
-		this.setNavButton()
 		this.setEvents()
 	}
 
