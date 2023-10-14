@@ -11,6 +11,8 @@ import { RecentComponent } from './pages/recent/recent.component'
 import { SearchComponent } from './pages/search/search.component'
 import { ProfileComponent } from './pages/profile/profile.component'
 import { LoaderComponent } from './components/loader/loader.component'
+import { FooterComponent } from './components/footer/footer.component'
+import { CountdownComponent } from './components/countdown/countdown.component'
 
 import {
 	heroBolt, heroPlayCircle, heroMagnifyingGlass,
@@ -30,9 +32,11 @@ import {
 	iconoirHomeSimpleDoor, iconoirHomeSimple
 } from '@ng-icons/iconoir'
 import {
-	tablerCalendarTime, tablerSquareRoundedArrowRight
-} from '@ng-icons/tabler-icons';
-import { FooterComponent } from './components/footer/footer.component'
+	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
+	tablerCircleDashed
+} from '@ng-icons/tabler-icons'
+import { FormsModule } from '@angular/forms'
+
 
 @NgModule({
 	declarations: [
@@ -44,14 +48,17 @@ import { FooterComponent } from './components/footer/footer.component'
 		SearchComponent,
 		ProfileComponent,
 		LoaderComponent,
-  FooterComponent
+		FooterComponent,
+		CountdownComponent
 	],
 	imports: [
 		BrowserModule,
+		FormsModule,
 		AppRoutingModule,
 		NgIconsModule.withIcons({
 			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
 			matHomeOutline, matChevronRightOutline, heroPlayCircle, matNewspaperOutline, tablerSquareRoundedArrowRight,
+			tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft, tablerCircleDashed,
 			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

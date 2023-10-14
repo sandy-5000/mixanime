@@ -76,23 +76,96 @@
                         <h1 class="text-slate-200 text-lg">Recently Released</h1>
                     </div>
                 </div>
+                <div class="flex">
+                    <div class="cursor-pointer flex justify-center mr-2">
+                        <div class="a-center hover:scale-125">
+                            <ng-icon (click)="scrollLeft()" class="text-sgreen text-2xl"
+                                name="tablerSquareRoundedChevronsLeft"></ng-icon>
+                        </div>
+                        <div class="a-center hover:scale-125">
+                            <ng-icon (click)="scrollRight()" class="text-sgreen text-2xl"
+                                name="tablerSquareRoundedChevronsRight"></ng-icon>
+                        </div>
+                    </div>
+                    <div class="cursor-pointer flex justify-center">
+                        <div class="a-center">
+                            <span class="text-slate-200 mr-1 text-sm lg:inline-flex md:inline-flex hidden">View
+                                more</span>
+                            <span class="text-slate-200 mr-1 text-sm lg:hidden md:hidden inline-flex">More</span>
+                        </div>
+                        <div class="a-center hover:scale-110">
+                            <ng-icon class="text-sgreen text-2xl" name="tablerSquareRoundedArrowRight"></ng-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-container w-full overflow-x-scroll relative min-h-[100px]">
+                <app-loader *ngIf="loading.recent"></app-loader>
+                <div class="recent flex flex-nowrap relative">
+                    <div *ngFor="let item of recentData; index as i"
+                        class="hidden-recent-card lg:w-1/4 md:w-1/3 sm:w-1/3 w-1/2 p-2">
+                        <div class="recent-card relative p-2 rounded-lg"
+                            style="background-image: url({{item.coverImage.extraLarge}});">
+                            <div
+                                class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
+                                {{item.duration || 23}}:00</div>
+                        </div>
+                        <h1 class="text-sm pt-2 font-semibold text-sgreen cursor-pointer">{{item.title.english ||
+                            item.title.romaji}}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lg:m-10 m-5">
+            <div class="flex justify-between mb-2">
+                <div class="flex">
+                    <div class="a-center">
+                        <ng-icon class="text-sgreen text-[30px] mr-1" name="matNewspaperOutline"></ng-icon>
+                    </div>
+                    <div class="a-center font-semibold">
+                        <h1 class="text-slate-200 text-lg">This year <span
+                                class="capitalize">{{variables.season.season.toLowerCase()}}</span> Releases</h1>
+                    </div>
+                </div>
                 <div class="cursor-pointer flex justify-center">
                     <div class="a-center">
-                        <span class="text-slate-200 mr-1 text-sm">View more</span>
+                        <span class="text-slate-200 mr-1 text-sm lg:inline-flex md:inline-flex hidden">View more</span>
+                        <span class="text-slate-200 mr-1 text-sm lg:hidden md:hidden inline-flex">More</span>
                     </div>
                     <div class="a-center hover:scale-110">
                         <ng-icon class="text-sgreen text-2xl" name="tablerSquareRoundedArrowRight"></ng-icon>
                     </div>
                 </div>
             </div>
-            <div class="recent flex flex-wrap relative">
+            <div class="season-container w-full overflow-x-scroll relative min-h-[100px]">
                 <app-loader *ngIf="loading.recent"></app-loader>
-                <div *ngFor="let item of recentData; index as i" class="lg:w-1/4 md:w-1/3 sm:w-1/3 w-1/2 p-2">
-                    <div class="recent-card relative p-2 rounded-lg"
-                        style="background-image: url({{item.coverImage.extraLarge}});">
-                        <div class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">{{item.duration || 23}}:00</div>
+                <div class="season flex flex-wrap relative">
+                    <div *ngFor="let item of seasonData; index as i"
+                        class="hidden-season-card lg:w-1/6 md:w-1/4 sm:w-1/4 w-1/3 p-2">
+                        <div class="season-scard w-full">
+                            <div class="season-card relative p-2 rounded-lg"
+                                style="background-image: url({{item.coverImage.extraLarge}});">
+                                <div
+                                    class="rounded-md bg-sgreen absolute top-2 left-2 bg-black bg-opacity-60 px-2 text-[15px] font-[550]">
+                                    {{item.format}}</div>
+                                <div
+                                    class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
+                                    {{item.duration || 23}}:00</div>
+                            </div>
+                            <p class="pt-2 text-xs text-slate-200 lg:flex md:flex justify-between">
+                                <span>
+                                    Airing <span class="lg:inline-flex md:inline-flex hidden">from</span>:
+                                </span>
+                                <span class="text-right">
+                                    {{ item.startDate.day + '/' + item.startDate.month + '/' + item.startDate.year }}
+                                </span>
+                            </p>
+                            <h1 class="truncate text-sm pt-1 font-normal text-sgreen cursor-pointer">{{item.title.english ||
+                                item.title.romaji}}
+                            </h1>
+                        </div>
                     </div>
-                    <h1 class="text-sm pt-1 text-sgreen cursor-pointer">{{item.title.english || item.title.romaji}}</h1>
                 </div>
             </div>
         </div>

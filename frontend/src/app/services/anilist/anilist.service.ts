@@ -65,11 +65,68 @@ export class AnilistService {
 				}
 			}
 		`,
+		season: `
+			query ($seasonYear: Int, $season: MediaSeason, $page: Int, $perPage: Int, $search: String) {
+				Page(page: $page, perPage: $perPage) {
+					media(search: $search, seasonYear: $seasonYear, season: $season, isAdult: false, countryOfOrigin: JP, type: ANIME, sort: TRENDING_DESC) {
+						id
+						title {
+							english
+							romaji
+							native
+						}
+						format
+						duration
+						startDate {
+							year
+							month
+							day
+						}
+						nextAiringEpisode {
+							episode
+							timeUntilAiring
+						}
+						episodes
+						updatedAt
+						description
+						coverImage {
+							large
+							extraLarge
+						}
+						bannerImage
+						averageScore
+					}
+				}
+			}
+		`,
+		find: `
+			query ($page: Int, $perPage: Int, $search: String) {
+				Page(page: $page, perPage: $perPage) {
+					media(search: $search, type: ANIME, sort: TRENDING_DESC) {
+						id
+						title {
+							english
+							romaji
+							native
+						}
+						startDate {
+							year
+						}
+						format
+						status
+						episodes
+						coverImage {
+							large
+						}
+					}
+				}
+			}
+		`,
 	}
 
-	public static homePage() {
+	public static fetcher() {
 		return {
-			carousel: (variables: any, callback: any) => {
+			get: (query: string, variables: any, callback: any) => {
 				const options = {
 					method: 'POST',
 					headers: {
@@ -77,7 +134,7 @@ export class AnilistService {
 						'Accept': 'application/json',
 					},
 					body: JSON.stringify({
-						query: this.queries.carousel,
+						query: this.queries[query],
 						variables: variables
 					})
 				}
@@ -88,25 +145,6 @@ export class AnilistService {
 						callback(data)
 					})
 			},
-			recent: (variables: any, callback: any) => {
-				const options = {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Accept': 'application/json',
-					},
-					body: JSON.stringify({
-						query: this.queries.recent,
-						variables: variables
-					})
-				}
-				fetch(this.url, options)
-					.then(response => response.json())
-					.then(result => {
-						const data = result.data.Page.media
-						callback(data)
-					})
-			}
 		}
 	}
 

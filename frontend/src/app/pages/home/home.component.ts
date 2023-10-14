@@ -11,18 +11,20 @@ import { SharedviewService } from '../../services/sharedview/sharedview.service'
 export class HomeComponent {
 
 	constructor(private sharedView: SharedviewService) {
-		this.dataMethods = AnilistService.homePage()
+		this.dataMethods = AnilistService.fetcher()
 	}
 
 	loading: any = {
 		carousel: true,
 		recent: true,
+		season: true,
 	}
 	dataMethods: any = {}
 	unSubscribeEvents: any = []
 
 	carouselData: any = []
 	recentData: any = []
+	seasonData: any = []
 
 	variables: any = {
 		carousel: {
@@ -30,6 +32,10 @@ export class HomeComponent {
 			perPage: 10,
 		},
 		recent: {
+			page: 1,
+			perPage: 12,
+		},
+		season: {
 			page: 1,
 			perPage: 12,
 		},
@@ -63,16 +69,7 @@ export class HomeComponent {
 				})
 			}
 			const addAnimation = () => {
-				const observerX = new IntersectionObserver(entries => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add('a-xslide-show')
-						} else {
-							entry.target.classList.remove('a-xslide-show')
-						}
-					})
-				})
-				const observerY = new IntersectionObserver(entries => {
+				const observerHeader = new IntersectionObserver(entries => {
 					entries.forEach(entry => {
 						if (entry.isIntersecting) {
 							entry.target.classList.add('a-yslide-show')
@@ -81,10 +78,19 @@ export class HomeComponent {
 						}
 					})
 				})
+				const observerDescription = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('a-xslide-show')
+						} else {
+							entry.target.classList.remove('a-xslide-show')
+						}
+					})
+				})
 				const hiddenElementsY = document.querySelectorAll('.a-yslide-hidden')
-				hiddenElementsY.forEach(element => observerY.observe(element))
+				hiddenElementsY.forEach(element => observerHeader.observe(element))
 				const hiddenElementsX = document.querySelectorAll('.a-xslide-hidden')
-				hiddenElementsX.forEach(element => observerX.observe(element))
+				hiddenElementsX.forEach(element => observerDescription.observe(element))
 			}
 			this.carouselData = data
 			setTimeout(() => {
@@ -94,19 +100,86 @@ export class HomeComponent {
 			this.loading.carousel = false
 		},
 		recent: (data: any) => {
+			const addAnimation = () => {
+				const observerRecent = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							const delay = entry.target.getAttribute('delay')
+							setTimeout(() => {
+								entry.target.classList.add('show-recent-card')
+							}, parseInt(delay || '0'))
+						} else {
+							entry.target.classList.remove('show-recent-card')
+						}
+					})
+				})
+				const hiddenElements = document.querySelectorAll('.hidden-recent-card')
+				hiddenElements.forEach((element, i) => {
+					element.setAttribute('delay', (0 * (i + 1)) + '')
+					observerRecent.observe(element)
+				})
+			}
+			setTimeout(() => {
+				addAnimation()
+			}, 100)
 			this.recentData = data
 			this.loading.recent = false
-		}
+		},
+		season: (data: any) => {
+			const addAnimation = () => {
+				const observerRecent = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							const delay = entry.target.getAttribute('delay')
+							setTimeout(() => {
+								entry.target.classList.add('show-season-card')
+							}, parseInt(delay || '0'))
+						} else {
+							entry.target.classList.remove('show-season-card')
+						}
+					})
+				})
+				const hiddenElements = document.querySelectorAll('.hidden-season-card')
+				hiddenElements.forEach((element, i) => {
+					element.setAttribute('delay', (100 * (i % 6 + 1)) + '')
+					observerRecent.observe(element)
+				})
+			}
+			setTimeout(() => {
+				addAnimation()
+			}, 100)
+			this.seasonData = data
+			this.loading.season = false
+		},
+	}
+
+	scrollLeft() {
+		const recent = document.querySelector('.recent-container') || document.body
+		recent.scrollLeft -= 500
+	}
+	scrollRight() {
+		const recent = document.querySelector('.recent-container') || document.body
+		recent.scrollLeft += 550
 	}
 
 	setEvents() {
 		this.loading.carousel = true
-		this.dataMethods.carousel(this.variables.carousel, (data: any) => {
+		this.dataMethods.get('carousel', this.variables.carousel, (data: any) => {
 			this.setPageData.carousel(data)
 		})
+
 		this.loading.recent = true
-		this.dataMethods.recent(this.variables.recent, (data: any) => {
+		this.dataMethods.get('recent', this.variables.recent, (data: any) => {
 			this.setPageData.recent(data)
+		})
+
+		const data = new Date()
+		const seasons = ['WINTER', 'SPRING', 'SUMMER', 'FALL']
+		this.variables.season.seasonYear = data.getFullYear()
+		this.variables.season.season = seasons[Math.floor(data.getMonth() / 3)]
+		this.loading.season = true
+		this.dataMethods.get('season', this.variables.season, (data: any) => {
+			this.setPageData.season(data)
 		})
 	}
 
