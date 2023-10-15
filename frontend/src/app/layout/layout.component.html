@@ -9,7 +9,7 @@
                 </div>
                 <img class="w-[120px]" src="/assets/images/graph-pixel.png" alt="logo">
             </div>
-            <div class="a-center py-3 lg:w-[600px] md:w-[400px] sm:w-[350px] w-auto">
+            <div class="a-center py-3 lg:w-[550px] md:w-[400px] sm:w-[350px] w-auto">
                 <div class="relative w-full lg:block md:block sm:block hidden">
                     <input #searchInputBig type="text" placeholder="" [(ngModel)]="searchBar"
                         (keyup)="searchBarChanged($event)"
@@ -79,7 +79,7 @@
         </div>
         <div *ngIf="searchBG" class="w-full z-10 absolute top-full a-center pt-2">
             <div
-                class="lg:w-[600px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
+                class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
                 <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#132323]">
                     <div class="flex">
                         <div class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
@@ -89,7 +89,7 @@
                             <div class="w-full">
                                 <p class="text-slate-200 text-sm">Title: {{item.title.english || item.title.romaji}}</p>
                                 <p class="text-slate-200 text-sm">Year: {{item.startDate.year}}</p>
-                                <p class="text-slate-200 text-sm">Status: {{item.status}}</p>
+                                <p class="text-slate-200 text-sm">Status: {{(item.status).replaceAll('_', ' ').toLowerCase()}}</p>
                             </div>
                         </div>
                     </div>

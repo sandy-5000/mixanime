@@ -15,7 +15,7 @@
                                     style="font-weight: 700;">{{'#' + (i + 1) + '
                                     SPOTLIGHT'}}</p>
                                 <h3 class="a-yslide-hidden lg:mb-3 md:mb-3 m-0 p-0 title text-sgreen">
-                                    {{item.title.english ||
+                                    {{item.title.english || item.title.romaji ||
                                     item.title.native}}</h3>
                                 <p class="a-xslide-hidden lg:block md:block hidden text-[14px] text-slate-200 overflow-scroll"
                                     style="max-height: 30% !important; width: 120%;" [innerHTML]="item.description">
@@ -87,7 +87,7 @@
                                 name="tablerSquareRoundedChevronsRight"></ng-icon>
                         </div>
                     </div>
-                    <div class="cursor-pointer flex justify-center">
+                    <div class="cursor-pointer flex justify-center" (click)="goToRoute('recent')">
                         <div class="a-center">
                             <span class="text-slate-200 mr-1 text-sm lg:inline-flex md:inline-flex hidden">View
                                 more</span>
@@ -105,15 +105,19 @@
                     <div *ngFor="let item of recentData; index as i"
                         class="hidden-recent-card lg:w-1/4 md:w-1/3 sm:w-1/3 w-1/2 p-2">
                         <div class="recent-card relative p-2 rounded-lg"
-                            style="background-image: url({{item.coverImage.extraLarge}});">
+                            style="background-image: url({{item.media.coverImage.extraLarge}});">
                             <div class="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
-                                {{item.format}}</div>
+                                {{item.media.format}}</div>
                             <div
                                 class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
-                                {{item.duration || 23}}:00</div>
+                                {{item.media.duration || 23}}:00</div>
                         </div>
-                        <h1 class="text-sm pt-2 font-semibold text-sgreen cursor-pointer">{{item.title.english ||
-                            item.title.romaji}}
+                        <h1 class="text-sm pt-2 flex justify-between text-slate-200">
+                            <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired at:</span>
+                            <span>{{date(item.airingAt)}}</span>
+                        </h1>
+                        <h1 class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
+                            item.media.title.romaji || item.media.title.native}}
                         </h1>
                     </div>
                 </div>
@@ -130,7 +134,7 @@
                                 class="capitalize">{{variables.season.season.toLowerCase()}}</span> Releases</h1>
                     </div>
                 </div>
-                <div class="cursor-pointer flex justify-center">
+                <div class="cursor-pointer flex justify-center" (click)="goToRoute('trending')">
                     <div class="a-center">
                         <span class="text-slate-200 mr-1 text-sm lg:inline-flex md:inline-flex hidden">View more</span>
                         <span class="text-slate-200 mr-1 text-sm lg:hidden md:hidden inline-flex">More</span>
@@ -141,7 +145,7 @@
                 </div>
             </div>
             <div class="season-container w-full overflow-x-scroll relative min-h-[100px]">
-                <app-loader *ngIf="loading.recent"></app-loader>
+                <app-loader *ngIf="loading.season"></app-loader>
                 <div class="season flex flex-wrap relative">
                     <div *ngFor="let item of seasonData; index as i"
                         class="hidden-season-card lg:w-1/6 md:w-1/4 sm:w-1/4 w-1/3 p-2">

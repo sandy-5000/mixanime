@@ -38,29 +38,29 @@ export class AnilistService {
 			}
 		`,
 		recent: `
-			query ($page: Int, $perPage: Int, $search: String) {
+			query ($page: Int, $perPage: Int) {
 				Page(page: $page, perPage: $perPage) {
-					media(search: $search, isAdult: false, popularity_greater: 20000, countryOfOrigin: JP, type: ANIME, status: RELEASING, sort: START_DATE_DESC) {
+					airingSchedules(notYetAired: false, sort: TIME_DESC) {
 						id
-						title {
-							english
-							romaji
-							native
+						airingAt
+						episode
+						media {
+							id
+							title {
+								romaji
+								english
+								native
+							}
+							countryOfOrigin
+							format
+							duration
+							description
+							bannerImage
+							coverImage {
+								extraLarge
+								large
+							}
 						}
-						format
-						duration
-						episodes
-						nextAiringEpisode {
-							episode
-						}
-						updatedAt
-						description
-						coverImage {
-							large
-							extraLarge
-						}
-						bannerImage
-						averageScore
 					}
 				}
 			}
@@ -141,8 +141,13 @@ export class AnilistService {
 				fetch(this.url, options)
 					.then(response => response.json())
 					.then(result => {
-						const data = result.data.Page.media
-						callback(data)
+						if (query == 'recent') {
+							const data = result.data.Page.airingSchedules
+							callback(data)
+						} else {
+							const data = result.data.Page.media
+							callback(data)
+						}
 					})
 			},
 		}

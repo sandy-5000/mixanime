@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { AnilistService } from '../../services/anilist/anilist.service'
 import { SharedviewService } from '../../services/sharedview/sharedview.service'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'app-home',
@@ -10,8 +11,26 @@ import { SharedviewService } from '../../services/sharedview/sharedview.service'
 
 export class HomeComponent {
 
-	constructor(private sharedView: SharedviewService) {
+	constructor(private sharedView: SharedviewService, private router: Router) {
+		this.date = (x: number) => {
+			let p: any = new Date(x * 1000)
+			let dateExtention = 'th', date = p.getDate()
+			if (date < 11 || 13 < date) {
+				if (date % 10 == 1) {
+					dateExtention = 'st'
+				} else if (date % 10 == 2) {
+					dateExtention = 'nd'
+				} else if (date % 10 == 3) {
+					dateExtention = 'rd'
+				}
+			}
+			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
+		}
 		this.dataMethods = AnilistService.fetcher()
+	}
+
+	goToRoute(path: string) {
+		this.router.navigateByUrl(path)
 	}
 
 	loading: any = {
@@ -21,6 +40,7 @@ export class HomeComponent {
 	}
 	dataMethods: any = {}
 	unSubscribeEvents: any = []
+	date: any = null
 
 	carouselData: any = []
 	recentData: any = []
@@ -33,7 +53,7 @@ export class HomeComponent {
 		},
 		recent: {
 			page: 1,
-			perPage: 12,
+			perPage: 48,
 		},
 		season: {
 			page: 1,
@@ -122,7 +142,7 @@ export class HomeComponent {
 			setTimeout(() => {
 				addAnimation()
 			}, 100)
-			this.recentData = data
+			this.recentData = data.filter((x: any) => x.media.countryOfOrigin === 'JP').slice(0, 24)
 			this.loading.recent = false
 		},
 		season: (data: any) => {

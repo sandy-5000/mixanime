@@ -1,71 +1,9 @@
+/* carousel section */
 .carousel-card {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     @apply left-0 top-0 absolute rounded-lg w-full lg:aspect-[3/1] md:aspect-[5/2] aspect-[9/5] overflow-x-hidden
-}
-
-.recent {
-    width: 600% !important;
-    min-height: 100px;
-}
-@media (min-width: 640px) {
-    .recent {
-        width: 400% !important;
-    }
-}
-@media (min-width: 1024px) {
-    .recent {
-        width: 300% !important;
-    }
-}
-
-
-.recent-card {
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    transform: scale(1);
-    transition: all 0.2s;
-    @apply lg:aspect-[9/5] md:aspect-[8/5] aspect-[7/5]
-}
-
-.recent-card:hover, .season-scard:hover {
-    transform: scale(1.05);
-}
-
-.hidden-recent-card {
-    opacity: 0;
-    transform: translateX(-40%);
-    transition: all 0.5s;
-}
-
-.show-recent-card {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.season-card {
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[2/3]
-}
-
-.hidden-season-card {
-    opacity: 0;
-    transform: translateX(-60%);
-    transition: all 0.3s;
-}
-
-.show-season-card {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.season-scard {
-    transform: scale(1);
-    transition: all 0.2s;
 }
 
 .no-thing {
@@ -131,4 +69,70 @@
     .a-slide-hidden {
         transition: none;
     }
+}
+
+
+/* recent section */
+.recent {
+    width: 1200% !important;
+    min-height: 100px;
+}
+@media (min-width: 640px) {
+    .recent {
+        width: 800% !important;
+    }
+}
+@media (min-width: 1024px) {
+    .recent {
+        width: 600% !important;
+    }
+}
+
+.recent-card {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    transform: scale(1);
+    transition: all 0.2s;
+    @apply lg:aspect-[9/5] md:aspect-[8/5] aspect-[7/5]
+}
+
+.recent-card:hover, .season-scard:hover {
+    transform: scale(1.05);
+}
+
+.hidden-recent-card {
+    opacity: 0;
+    transform: translateX(-40%);
+    transition: all 0.5s;
+}
+
+.show-recent-card {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* season section */
+.season-card {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[2/3]
+}
+
+.hidden-season-card {
+    opacity: 0;
+    transform: translateX(-60%);
+    transition: all 0.3s;
+}
+
+.show-season-card {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.season-scard {
+    transform: scale(1);
+    transition: all 0.2s;
 }
