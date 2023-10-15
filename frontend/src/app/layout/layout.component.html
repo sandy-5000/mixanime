@@ -1,5 +1,5 @@
 <div class="w-screen h-screen">
-    <div *ngIf="searchBG" (click)="searchBGTap()" class="fixed top-0 left-0 z-[9] w-screen h-screen search-bg bg-gray-900 bg-opacity-60"></div>
+    <!-- <div *ngIf="searchBG"  class="fixed top-0 left-0 z-[9] w-screen h-screen search-bg bg-gray-900 bg-opacity-60"></div> -->
     <header class="z-10 bg-[#0e1a1a] relative">
         <div class="h-[60px] flex relative justify-between">
             <div class="a-center px-5 py-2">
@@ -9,24 +9,30 @@
                 </div>
                 <img class="w-[120px]" src="/assets/images/graph-pixel.png" alt="logo">
             </div>
-            <div class="a-center py-3 lg:w-[600px] md:w-[400px] w-auto">
-                <div class="relative w-full lg:block md:block hidden">
-                    <input type="text" placeholder="" [(ngModel)]="searchBar" (keyup)="searchBarChanged($event)"
-                        class="text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
+            <div class="a-center py-3 lg:w-[600px] md:w-[400px] sm:w-[350px] w-auto">
+                <div class="relative w-full lg:block md:block sm:block hidden">
+                    <input #searchInputBig type="text" placeholder="" [(ngModel)]="searchBar"
+                        (keyup)="searchBarChanged($event)"
+                        class="search-bar text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
                     <label
                         class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-[#409e7d] transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-0 before:border-t peer-focus:before:border-t before:border-l peer-focus:before:border-l before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-0 after:border-t peer-focus:after:border-t after:border-r peer-focus:after:border-r after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-slate-400 peer-focus:text-[#5de4b5] before:border-blue-gray-200 peer-focus:before:!border-[#409e7d] after:border-blue-gray-200 peer-focus:after:!border-[#409e7d]">
                         Search Anime
                     </label>
-                    <div *ngIf="!loading.find" class="absolute top-0 right-0 h-full a-center">
+                    <div *ngIf="!loading.find && searchBar == ''" class="absolute top-0 right-0 h-full a-center">
                         <ng-icon class="text-slate-400 z-10 text-xl mr-2" name="heroMagnifyingGlass"></ng-icon>
+                    </div>
+                    <div *ngIf="!loading.find && searchBar != ''" class="absolute top-0 right-0 h-full a-center">
+                        <ng-icon (click)="searchBGTap('searchInputBig')"
+                            class="cursor-pointer text-slate-400 z-10 text-xl mr-2" name="heroXMark"></ng-icon>
                     </div>
                     <div *ngIf="loading.find" class="absolute top-0 right-0 h-full a-center">
                         <ng-icon class="animate-spin text-white z-10 text-xl font-extrabold mr-2"
                             name="tablerCircleDashed"></ng-icon>
                     </div>
                 </div>
-                <div class="lg:hidden md:hidden flex justify-end">
-                    <ng-icon (click)="toggleSearchBar()" class="text-slate-400 font-extrabold text-2xl" name="heroMagnifyingGlass"></ng-icon>
+                <div class="lg:hidden md:hidden sm:hidden flex justify-end">
+                    <ng-icon (click)="toggleSearchBar()" class="text-slate-200 font-extrabold text-2xl"
+                        name="heroMagnifyingGlassCircle"></ng-icon>
                 </div>
             </div>
             <div class="a-center pl-2 pr-2">
@@ -46,14 +52,19 @@
         </div>
         <div class="w-full lg:hidden md:hidden small-search-hide pt-1 pb-2 px-3">
             <div class="relative">
-                <input type="text" placeholder="" [(ngModel)]="searchBar" (keyup)="searchBarChanged($event)"
-                    class="text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
+                <input #searchInputSml type="text" placeholder="" [(ngModel)]="searchBar"
+                    (keyup)="searchBarChanged($event)"
+                    class="search-bar text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
                 <label
                     class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-[#409e7d] transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-0 before:border-t peer-focus:before:border-t before:border-l peer-focus:before:border-l before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-0 after:border-t peer-focus:after:border-t after:border-r peer-focus:after:border-r after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-slate-400 peer-focus:text-[#5de4b5] before:border-blue-gray-200 peer-focus:before:!border-[#409e7d] after:border-blue-gray-200 peer-focus:after:!border-[#409e7d]">
                     Search Anime
                 </label>
-                <div *ngIf="!loading.find" class="absolute top-0 right-0 h-full a-center">
+                <div *ngIf="!loading.find && searchBar == ''" class="absolute top-0 right-0 h-full a-center">
                     <ng-icon class="text-slate-400 z-10 text-xl mr-2" name="heroMagnifyingGlass"></ng-icon>
+                </div>
+                <div *ngIf="!loading.find && searchBar != ''" class="absolute top-0 right-0 h-full a-center">
+                    <ng-icon (click)="searchBGTap('searchInputSml')"
+                        class="cursor-pointer text-slate-400 z-10 text-xl mr-2" name="heroXMark"></ng-icon>
                 </div>
                 <div *ngIf="loading.find" class="absolute top-0 right-0 h-full a-center">
                     <ng-icon class="animate-spin text-white z-10 text-xl font-extrabold mr-2"
@@ -64,6 +75,33 @@
         <div *ngIf="loading.find" class="w-full absolute bottom-0">
             <div class='h-[2px] w-full bg-transparent overflow-hidden'>
                 <div class='progress w-full h-full bg-sgreen left-right'></div>
+            </div>
+        </div>
+        <div *ngIf="searchBG" class="w-full z-10 absolute top-full a-center pt-2">
+            <div
+                class="lg:w-[600px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
+                <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#132323]">
+                    <div class="flex">
+                        <div class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
+                            <img src="{{item.coverImage.large}}" class="w-full aspect-[3/4]" alt="anime-img">
+                        </div>
+                        <div class="lg:w-10/12 md:w-10/12 w-9/12 p-2 a-center">
+                            <div class="w-full">
+                                <p class="text-slate-200 text-sm">Title: {{item.title.english || item.title.romaji}}</p>
+                                <p class="text-slate-200 text-sm">Year: {{item.startDate.year}}</p>
+                                <p class="text-slate-200 text-sm">Status: {{item.status}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end my-2">
+                    <button class="bg-sgreen hover:scale-110 flex text-sm rounded-sm py-1 px-3 mx-2">
+                        <div class="a-center">
+                            <span class="text-sm">Show More</span>
+                            <ng-icon class="text-md mx-1" name="tablerTransitionRight"></ng-icon>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </header>

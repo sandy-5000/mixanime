@@ -15,15 +15,15 @@ import { FooterComponent } from './components/footer/footer.component'
 import { CountdownComponent } from './components/countdown/countdown.component'
 
 import {
-	heroBolt, heroPlayCircle, heroMagnifyingGlass,
-	heroNewspaper
+	heroBolt, heroPlayCircle, heroMagnifyingGlass, heroXMark,
+	heroNewspaper, heroMagnifyingGlassCircle, heroSwatch
 } from '@ng-icons/heroicons/outline'
 import {
 	heroArrowRightOnRectangleMini,
 	heroIdentificationMini
 } from '@ng-icons/heroicons/mini'
 import {
-	matHomeOutline, matChevronRightOutline, matNewspaperOutline
+	matHomeOutline, matChevronRightOutline
 } from '@ng-icons/material-icons/outline'
 import {
 	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord
@@ -33,7 +33,7 @@ import {
 } from '@ng-icons/iconoir'
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
-	tablerCircleDashed
+	tablerCircleDashed, tablerTransitionRight
 } from '@ng-icons/tabler-icons'
 import { FormsModule } from '@angular/forms'
 
@@ -57,8 +57,9 @@ import { FormsModule } from '@angular/forms'
 		AppRoutingModule,
 		NgIconsModule.withIcons({
 			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
-			matHomeOutline, matChevronRightOutline, heroPlayCircle, matNewspaperOutline, tablerSquareRoundedArrowRight,
+			heroSwatch, matHomeOutline, matChevronRightOutline, heroPlayCircle, tablerSquareRoundedArrowRight,
 			tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft, tablerCircleDashed,
+			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight,
 			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

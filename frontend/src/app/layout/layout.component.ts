@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 import { SharedviewService } from '../services/sharedview/sharedview.service'
 import { AnilistService } from '../services/anilist/anilist.service'
@@ -9,6 +9,8 @@ import { AnilistService } from '../services/anilist/anilist.service'
 	styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
+	@ViewChild('searchInputBig') searchInputBig: ElementRef | undefined
+	@ViewChild('searchInputSml') searchInputSml: ElementRef | undefined
 
 	searchBar: string = ''
 	previousSearchBar: string = ''
@@ -42,6 +44,7 @@ export class LayoutComponent {
 			}, (data: any) => {
 				console.log(data)
 				this.searchBG = data.length != 0
+				this.searchData = data
 				this.previousSearchBar = search
 				this.loading.find = false
 			})
@@ -63,11 +66,15 @@ export class LayoutComponent {
 		this.debounceSearch(this.searchBar)
 	}
 
-	searchBGTap() {
+	searchBGTap(elementToFocus: string) {
 		this.searchBar = ''
 		this.searchBG = false
-		const bar = document.querySelector('.small-search-hide')
-		bar?.classList.remove('small-search-show')
+		this.searchData = []
+		if (elementToFocus === 'searchInputBig') {
+			this.searchInputBig?.nativeElement.focus()
+		} else if (elementToFocus === 'searchInputSml') {
+			this.searchInputSml?.nativeElement.focus()
+		}
 	}
 
 	toggleSearchBar() {
