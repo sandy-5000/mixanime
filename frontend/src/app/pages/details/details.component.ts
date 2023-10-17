@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SharedviewService } from 'src/app/services/sharedview/sharedview.service';
 
 @Component({
 	selector: 'app-details',
@@ -10,8 +11,18 @@ export class DetailsComponent {
 
 	id: string | null = ''
 
-	constructor(private route: ActivatedRoute) {
+	constructor(
+		private route: ActivatedRoute,
+		private sharedView: SharedviewService
+	) {
 		this.id = this.route.snapshot.paramMap.get('id')
+	}
+
+	ngOnInit() {
+		this.sharedView.changeState({
+			method: 'setNavButton',
+			params: ['details']
+		})
 	}
 
 }

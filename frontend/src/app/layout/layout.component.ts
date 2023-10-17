@@ -110,6 +110,9 @@ export class LayoutComponent {
 
 	goToRoute(path: string): void {
 		this.router.navigateByUrl(path)
+		this.previousSearchBar = ''
+		this.searchBG = false
+		this.searchData = []
 	}
 
 }

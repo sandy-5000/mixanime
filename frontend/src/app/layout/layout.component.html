@@ -12,7 +12,7 @@
             <div class="a-center py-3 lg:w-[550px] md:w-[400px] sm:w-[350px] w-auto">
                 <div class="relative w-full lg:block md:block sm:block hidden">
                     <input #searchInputBig type="text" placeholder="" [(ngModel)]="searchBar"
-                        (keyup)="searchBarChanged($event)"
+                        (input)="searchBarChanged($event)"
                         class="search-bar text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
                     <label
                         class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-[#409e7d] transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-0 before:border-t peer-focus:before:border-t before:border-l peer-focus:before:border-l before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-0 after:border-t peer-focus:after:border-t after:border-r peer-focus:after:border-r after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-slate-400 peer-focus:text-[#5de4b5] before:border-blue-gray-200 peer-focus:before:!border-[#409e7d] after:border-blue-gray-200 peer-focus:after:!border-[#409e7d]">
@@ -53,7 +53,7 @@
         <div class="w-full lg:hidden md:hidden small-search-hide pt-1 pb-2 px-3">
             <div class="relative">
                 <input #searchInputSml type="text" placeholder="" [(ngModel)]="searchBar"
-                    (keyup)="searchBarChanged($event)"
+                    (input)="searchBarChanged($event)"
                     class="search-bar text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#409e7d] " />
                 <label
                     class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-[#409e7d] transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-0 before:border-t peer-focus:before:border-t before:border-l peer-focus:before:border-l before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-0 after:border-t peer-focus:after:border-t after:border-r peer-focus:after:border-r after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-slate-400 peer-focus:text-[#5de4b5] before:border-blue-gray-200 peer-focus:before:!border-[#409e7d] after:border-blue-gray-200 peer-focus:after:!border-[#409e7d]">
@@ -82,7 +82,7 @@
                 class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
                 <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#132323]">
                     <div class="flex">
-                        <div class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
+                        <div (click)="goToRoute('/details/' + item.id)" class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
                             <img src="{{item.coverImage.large}}" class="w-full aspect-[3/4]" alt="anime-img">
                         </div>
                         <div class="lg:w-10/12 md:w-10/12 w-9/12 p-2 a-center">
