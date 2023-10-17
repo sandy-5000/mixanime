@@ -29,10 +29,6 @@ export class HomeComponent {
 		this.dataMethods = AnilistService.fetcher()
 	}
 
-	goToRoute(path: string) {
-		this.router.navigateByUrl(path)
-	}
-
 	loading: any = {
 		carousel: true,
 		recent: true,
@@ -209,6 +205,10 @@ export class HomeComponent {
 			params: ['home']
 		})
 		this.setEvents()
+	}
+
+	goToRoute(path: string) {
+		this.router.navigateByUrl(path)
 	}
 
 	ngOnDestroy(): void {

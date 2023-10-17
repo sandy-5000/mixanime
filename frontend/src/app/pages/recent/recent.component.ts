@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { SharedviewService } from '../../services/sharedview/sharedview.service'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
+import { Router } from '@angular/router'
 
 @Component({
 	selector: 'app-recent',
@@ -9,7 +10,7 @@ import { AnilistService } from 'src/app/services/anilist/anilist.service'
 })
 export class RecentComponent {
 
-	constructor(private sharedView: SharedviewService) {
+	constructor(private sharedView: SharedviewService, private router: Router) {
 		this.date = (x: number) => {
 			let p: any = new Date(x * 1000)
 			let dateExtention = 'th', date = p.getDate()
@@ -132,6 +133,10 @@ export class RecentComponent {
 			params: ['recent']
 		})
 		this.setEvents()
+	}
+
+	goToRoute(path: string): void {
+		this.router.navigateByUrl(path)
 	}
 
 }
