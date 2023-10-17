@@ -107,13 +107,13 @@
                         <div class="recent-card relative p-2 rounded-lg"
                             style="background-image: url({{item.media.coverImage.extraLarge}});">
                             <div class="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
-                                {{item.media.format}}</div>
+                                {{item.media.format.replaceAll('_', ' ')}}</div>
                             <div
                                 class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
                                 {{item.media.duration || 23}}:00</div>
                         </div>
                         <h1 class="text-sm pt-2 flex justify-between text-slate-200">
-                            <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired at:</span>
+                            <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
                         <h1 class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
@@ -154,7 +154,7 @@
                                 style="background-image: url({{item.coverImage.extraLarge}});">
                                 <div
                                     class="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
-                                    {{item.format}}</div>
+                                    {{item.format.replaceAll('_', ' ')}}</div>
                                 <div
                                     class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
                                     {{item.duration || 23}}:00</div>

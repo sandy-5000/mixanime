@@ -24,7 +24,6 @@ export class RecentComponent {
 			}
 			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
 		}
-		this.currentPage = 1
 		this.dataMethods = AnilistService.fetcher()
 	}
 
@@ -34,7 +33,6 @@ export class RecentComponent {
 	dataMethods: any = {}
 	date: any = null
 	recentData: any = []
-	currentPage: number = 0
 
 	variables: any = {
 		recent: {
@@ -70,6 +68,55 @@ export class RecentComponent {
 			this.recentData = data
 			this.loading.recent = false
 		},
+	}
+
+	modal: boolean = false
+	inputPageNo: number = 1
+
+	showModal() {
+		this.modal = true
+	}
+
+	hideModal() {
+		this.modal = false
+	}
+
+	prevPage() {
+		if (this.inputPageNo <= 1) {
+			return
+		}
+		this.inputPageNo -= 1
+		this.submitPage()
+	}
+
+	nextPage() {
+		if (this.recentData.length < 24) {
+			return
+		}
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			this.inputPageNo = 1
+		}
+		this.inputPageNo += 1
+		this.submitPage()
+	}
+
+	pageNoOnChange(event: Event) {
+		const input = event.target as HTMLInputElement
+		this.inputPageNo = parseInt(input.value)
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			input.value = ''
+		}
+	}
+
+	submitPage() {
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			this.inputPageNo = 1
+		}
+		console.log(this.inputPageNo, 'Submit')
+		this.hideModal()
+		this.recentData = []
+		this.variables.recent.page = this.inputPageNo
+		this.setEvents()
 	}
 
 	setEvents() {

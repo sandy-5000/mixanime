@@ -45,7 +45,7 @@ export class TrendingComponent {
 	setPageData: any = {
 		season: (data: any) => {
 			const addAnimation = () => {
-				const observerRecent = new IntersectionObserver(entries => {
+				const observerseason = new IntersectionObserver(entries => {
 					entries.forEach(entry => {
 						if (entry.isIntersecting) {
 							const delay = entry.target.getAttribute('delay')
@@ -60,7 +60,7 @@ export class TrendingComponent {
 				const hiddenElements = document.querySelectorAll('.hidden-season-card')
 				hiddenElements.forEach((element, i) => {
 					element.setAttribute('delay', (100 * (i % 6 + 1)) + '')
-					observerRecent.observe(element)
+					observerseason.observe(element)
 				})
 			}
 			setTimeout(() => {
@@ -70,6 +70,55 @@ export class TrendingComponent {
 			this.loading.season = false
 		},
 	}
+
+	modal: boolean = false
+	inputPageNo: number = 1
+
+	showModal() {
+		this.modal = true
+	}
+
+	hideModal() {
+		this.modal = false
+	}
+
+	prevPage() {
+		if (this.inputPageNo <= 1) {
+			return
+		}
+		this.inputPageNo -= 1
+		this.submitPage()
+	}
+
+	nextPage() {
+		if (this.seasonData.length < 24) {
+			return
+		}
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			this.inputPageNo = 1
+		}
+		this.inputPageNo += 1
+		this.submitPage()
+	}
+
+	pageNoOnChange(event: Event) {
+		const input = event.target as HTMLInputElement
+		this.inputPageNo = parseInt(input.value)
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			input.value = ''
+		}
+	}
+
+	submitPage() {
+		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
+			this.inputPageNo = 1
+		}
+		this.hideModal()
+		this.seasonData = []
+		this.variables.season.page = this.inputPageNo
+		this.setEvents()
+	}
+
 
 	setEvents() {
 		const data = new Date()

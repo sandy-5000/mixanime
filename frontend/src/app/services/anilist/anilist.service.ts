@@ -127,6 +127,15 @@ export class AnilistService {
 	public static fetcher() {
 		return {
 			get: (query: string, variables: any, callback: any) => {
+				// temp cache start
+				const key = query + '-' + JSON.stringify(variables)
+				const cacheData = localStorage.getItem(key)
+				if (cacheData) {
+					console.log('cache data', key)
+					callback(JSON.parse(cacheData))
+					return
+				}
+				// temp cache end
 				const options = {
 					method: 'POST',
 					headers: {
@@ -142,12 +151,14 @@ export class AnilistService {
 					.then(response => response.json())
 					.then(result => {
 						if (query == 'recent') {
-							const data = result.data.Page.airingSchedules
-							callback(data)
+							result = result.data.Page.airingSchedules
 						} else {
-							const data = result.data.Page.media
-							callback(data)
+							result = result.data.Page.media
 						}
+						// temp cache start
+						localStorage.setItem(key, JSON.stringify(result))
+						// temp cache end
+						callback(result)
 					})
 			},
 		}
