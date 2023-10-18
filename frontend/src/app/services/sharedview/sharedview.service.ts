@@ -25,6 +25,7 @@ export class SharedviewService {
 
 	changeDetails(data: any) {
 		this.animeId = parseInt(data) || 21
+		localStorage.setItem('animeId', this.animeId + '')
 		this.detailsId?.next(data)
 	}
 

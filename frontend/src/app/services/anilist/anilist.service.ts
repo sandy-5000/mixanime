@@ -130,6 +130,7 @@ export class AnilistService {
 						english
 						romaji
 						native
+						userPreferred
 					}
 					startDate {
 						year
@@ -156,7 +157,7 @@ export class AnilistService {
 							}
 						}
 					}
-					recommendations(page: 1, perPage: 5, sort: RATING_DESC) {
+					recommendations(page: 1, perPage: 6, sort: RATING_DESC) {
 						nodes {
 							mediaRecommendation {
 								id

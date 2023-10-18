@@ -16,10 +16,25 @@ export class DetailsComponent {
 		private sharedView: SharedviewService
 	) {
 		this.dataMethods = AnilistService.fetcher()
+		this.date = (year: number, month: number, day: number) => {
+			let p: any = new Date(year, month - 1, day)
+			let dateExtention = 'th', date = p.getDate()
+			if (date < 11 || 13 < date) {
+				if (date % 10 == 1) {
+					dateExtention = 'st'
+				} else if (date % 10 == 2) {
+					dateExtention = 'nd'
+				} else if (date % 10 == 3) {
+					dateExtention = 'rd'
+				}
+			}
+			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
+		}
 	}
 
-	item: any = {}
+	item: any = null
 	dataMethods: any = {}
+	date: any = null
 
 	setPageData: any = {
 		details: (data: any) => {
@@ -29,6 +44,7 @@ export class DetailsComponent {
 	}
 
 	fetchData() {
+		this.item = null
 		this.dataMethods.get('details', { id: this.id }, (data: any) => {
 			this.setPageData.details(data)
 		})
@@ -40,8 +56,10 @@ export class DetailsComponent {
 			params: ['details']
 		})
 		try {
-			this.id = this.sharedView.animeId
-			this.fetchData()
+			this.id = parseInt(localStorage.getItem('animeId') || '21')
+			setTimeout(() => {
+				this.fetchData()
+			}, 100)
 			this.sharedView.currentDetails.subscribe((data: any) => {
 				this.id = parseInt(data) || 21
 				this.fetchData()
@@ -49,6 +67,11 @@ export class DetailsComponent {
 		} catch (e) {
 			console.error(e)
 		}
+	}
+
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
 	}
 
 }

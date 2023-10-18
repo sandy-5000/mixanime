@@ -111,7 +111,11 @@
                                 {{item.media.duration || 23}}:00</div>
                         </div>
                         <h1 class="text-sm pt-2 flex justify-between text-slate-200">
-                            <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
+                            <span>Episode:</span>
+                            <span>{{item.episode}}</span>
+                        </h1>
+                        <h1 class="text-sm pt-0 flex justify-between text-slate-200">
+                            <span>Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
                         <h1 (click)="goToDetails(item.media.id)"
