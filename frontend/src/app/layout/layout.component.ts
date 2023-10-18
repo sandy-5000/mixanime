@@ -42,7 +42,6 @@ export class LayoutComponent {
 				perPage: 5,
 				search: search
 			}, (data: any) => {
-				console.log(data)
 				this.searchBG = data.length != 0
 				this.searchData = data
 				this.previousSearchBar = search
@@ -70,6 +69,7 @@ export class LayoutComponent {
 		this.searchBar = ''
 		this.searchBG = false
 		this.searchData = []
+		this.previousSearchBar = ''
 		if (elementToFocus === 'searchInputBig') {
 			this.searchInputBig?.nativeElement.focus()
 		} else if (elementToFocus === 'searchInputSml') {
@@ -97,7 +97,8 @@ export class LayoutComponent {
 
 	ngOnInit(): void {
 		const methods: { [key: string]: (...args: any[]) => void } = {
-			setNavButton: this.setNavButton
+			setNavButton: this.setNavButton,
+			clearSearch: this.clearSearch
 		}
 		try {
 			this.sharedView.current.subscribe((data: any) => {
@@ -110,6 +111,17 @@ export class LayoutComponent {
 
 	goToRoute(path: string): void {
 		this.router.navigateByUrl(path)
+		this.clearSearch()
+	}
+
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
+		this.clearSearch()
+		this.router.navigateByUrl('/details')
+	}
+
+	clearSearch(): void {
 		this.previousSearchBar = ''
 		this.searchBG = false
 		this.searchData = []

@@ -211,6 +211,12 @@ export class HomeComponent {
 		this.router.navigateByUrl(path)
 	}
 
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
+		this.router.navigateByUrl('/details')
+	}
+
 	ngOnDestroy(): void {
 		for (let event of this.unSubscribeEvents) {
 			event.close()

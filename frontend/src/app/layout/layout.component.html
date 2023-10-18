@@ -77,12 +77,12 @@
                 <div class='progress w-full h-full bg-sgreen left-right'></div>
             </div>
         </div>
-        <div *ngIf="searchBG" class="w-full z-10 absolute top-full a-center pt-2">
+        <div *ngIf="searchBG" class="w-full z-10 absolute top-full flex justify-center pt-2" style="height: calc(100vh - 65px);">
             <div
                 class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
                 <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#132323]">
                     <div class="flex">
-                        <div (click)="goToRoute('/details/' + item.id)" class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
+                        <div (click)="goToDetails(item.id)" class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
                             <img src="{{item.coverImage.large}}" class="w-full aspect-[3/4]" alt="anime-img">
                         </div>
                         <div class="lg:w-10/12 md:w-10/12 w-9/12 p-2 a-center">

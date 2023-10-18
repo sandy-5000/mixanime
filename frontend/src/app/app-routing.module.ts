@@ -34,7 +34,7 @@ const routes: Routes = [
 		component: SearchComponent
 	},
 	{
-		path: 'details/:id',
+		path: 'details',
 		component: DetailsComponent
 	},
 	{

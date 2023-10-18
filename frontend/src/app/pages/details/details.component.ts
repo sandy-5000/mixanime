@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AnilistService } from 'src/app/services/anilist/anilist.service';
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service';
 
 @Component({
@@ -9,13 +10,28 @@ import { SharedviewService } from 'src/app/services/sharedview/sharedview.servic
 })
 export class DetailsComponent {
 
-	id: string | null = ''
+	id: number = 21
 
 	constructor(
-		private route: ActivatedRoute,
 		private sharedView: SharedviewService
 	) {
-		this.id = this.route.snapshot.paramMap.get('id')
+		this.dataMethods = AnilistService.fetcher()
+	}
+
+	item: any = {}
+	dataMethods: any = {}
+
+	setPageData: any = {
+		details: (data: any) => {
+			this.item = data
+			console.log(this.item)
+		}
+	}
+
+	fetchData() {
+		this.dataMethods.get('details', { id: this.id }, (data: any) => {
+			this.setPageData.details(data)
+		})
 	}
 
 	ngOnInit() {
@@ -23,6 +39,16 @@ export class DetailsComponent {
 			method: 'setNavButton',
 			params: ['details']
 		})
+		try {
+			this.id = this.sharedView.animeId
+			this.fetchData()
+			this.sharedView.currentDetails.subscribe((data: any) => {
+				this.id = parseInt(data) || 21
+				this.fetchData()
+			})
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 }

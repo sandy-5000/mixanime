@@ -61,7 +61,7 @@
                             <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
-                        <h1 (click)="goToRoute('/details/' + item.media.id)" class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
+                        <h1 (click)="goToDetails(item.media.id)" class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
                             item.media.title.romaji || item.media.title.native}}
                         </h1>
                     </div>

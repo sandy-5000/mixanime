@@ -1,10 +1,24 @@
-<div class="w-full h-screen a-center">
-    <h1 class="text-2xl flex font-semibold text-slate-200">
-        <div class="a-center mr-1">
-            <ng-icon name="heroBolt"></ng-icon>
+<div class="w-full relative">
+    <section>
+        <div class="banner-image"
+            style="background: linear-gradient(to right, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%, rgba(1, 1, 1, 0.5) 90%), url({{item.bannerImage || '/assets/images/stars.jpg'}});"
+            alt="banner"></div>
+        <div class="lg:m-20 m-5 lg:mt-5 lg:flex md:flex justify-between">
+            <div class="xl:w-2/12 lg:w-3/12 md:w-4/12 w-full py-3">
+                <div class="lg:block md:block flex justify-between">
+                    <div class="lg:w-full md:w-full w-6/12 a-center">
+                        <div class="cover-image rounded-md"
+                            style="background-image: url({{item.coverImage.extraLarge}});">
+                        </div>
+                    </div>
+                    <div class="lg:w-full md:w-full w-6/12 p-5">
+                        <button class="text-slate-200">Watch Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="xl:w-10/12 lg:w-9/12 md:w-8/12 w-full p-5">
+                <h1 class="text-2xl text-slate-200">{{item.title.english}}</h1>
+            </div>
         </div>
-        <div class="a-center">
-            <span>MixAnime Details for {{id}}!</span>
-        </div>
-    </h1>
+    </section>
 </div>

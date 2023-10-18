@@ -11,10 +11,21 @@ export class SharedviewService {
 	})
 	observer: any = null
 
+	currentDetails = new Observable(observer => {
+		this.detailsId = observer
+	})
+	detailsId: any = null
+	animeId: number = 21
+
 	constructor() { }
 
 	changeState(data: any) {
 		this.observer?.next(data)
+	}
+
+	changeDetails(data: any) {
+		this.animeId = parseInt(data) || 21
+		this.detailsId?.next(data)
 	}
 
 }

@@ -144,4 +144,10 @@ export class TrendingComponent {
 		this.router.navigateByUrl(path)
 	}
 
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
+		this.router.navigateByUrl('/details')
+	}
+
 }
