@@ -24,6 +24,8 @@
     "@ng-icons/material-icons": "^25.4.0",
     "@ng-icons/simple-icons": "^25.4.0",
     "@ng-icons/tabler-icons": "^25.4.0",
+    "axios": "^1.5.1",
+    "cheerio": "^1.0.0-rc.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

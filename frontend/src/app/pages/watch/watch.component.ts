@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
+import { ScraperService } from 'src/app/services/scraper/scraper.service'
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service'
 
 @Component({
@@ -12,8 +13,9 @@ export class WatchComponent {
 
 	constructor(
 		private sharedView: SharedviewService,
-		private route: ActivatedRoute
-	) { 
+		private route: ActivatedRoute,
+		private scaper: ScraperService
+	) {
 		this.dataMethods = AnilistService.fetcher()
 	}
 
@@ -62,6 +64,13 @@ export class WatchComponent {
 	setPageData: any = {
 		watch: (data: any) => {
 			this.item = data
+			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
+			let uuid: string = romaji + '-episode-' + this.episode
+			uuid = 'one-piece-episode-1'
+			console.log(uuid)
+			this.scaper.scrape(uuid, (urlData: any) => {
+				console.log(urlData)
+			})
 			console.log(this.item)
 		}
 	}
