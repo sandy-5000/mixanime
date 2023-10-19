@@ -14,6 +14,12 @@
     @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl
 }
 
-section * {
-    z-index: 1;
+
+.relatived, .recommended {
+    transform: scale(1);
+    transition: all 0.3s;
+}
+
+.relatived:hover, .recommended:hover {
+    transform: scale(1.05);
 }

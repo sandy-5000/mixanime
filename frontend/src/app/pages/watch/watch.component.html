@@ -1,0 +1,12 @@
+<div class="w-full h-screen a-center">
+    <div class="flex flex-col">
+        <h1 class="text-2xl a-center flex font-semibold text-slate-200">
+            <div class="flex flex-col">
+                <span class="text-center">Anime id: {{params.id}}</span>
+                <span class="text-center">Episode: {{episode}}</span>
+            </div>
+        </h1>
+        <button (click)="nextEpisode()" class="mt-4 p-3 hover:scale-95 rounded-md text-2xl bg-slate-200 font-semibold text-slate-800">Next Episode</button>
+        <button (click)="prevEpisode()" class="mt-4 p-3 hover:scale-95 rounded-md text-2xl bg-slate-200 font-semibold text-slate-800">Prev Episode</button>
+    </div>
+</div>

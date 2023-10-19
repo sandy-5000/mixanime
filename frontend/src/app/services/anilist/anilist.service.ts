@@ -185,6 +185,41 @@ export class AnilistService {
 				}
 			}
 		`,
+		watch: `
+			query ($id: Int) {
+				Media(id: $id) {
+					id
+					title {
+						english
+						romaji
+						native
+						userPreferred
+					}
+					startDate {
+						year
+						month
+						day
+					}
+					season
+					type
+					format
+					status
+					episodes
+					favourites
+					nextAiringEpisode {
+						episode
+					}
+					duration
+					genres
+					averageScore
+					description
+					coverImage {
+						extraLarge
+					}
+					bannerImage
+				}
+			}
+		`,
 	}
 
 	public static fetcher() {
@@ -216,6 +251,8 @@ export class AnilistService {
 						if (query == 'recent') {
 							result = result.data.Page.airingSchedules
 						} else if (query == 'details') {
+							result = result.data.Media
+						} else if (query == 'watch') {
 							result = result.data.Media
 						} else {
 							result = result.data.Page.media

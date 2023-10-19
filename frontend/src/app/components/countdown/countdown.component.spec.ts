@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CountdownComponent } from './countdown.component';
+import { CountdownComponent } from './countdown.component'
 
 describe('CountdownComponent', () => {
-  let component: CountdownComponent;
-  let fixture: ComponentFixture<CountdownComponent>;
+	let component: CountdownComponent
+	let fixture: ComponentFixture<CountdownComponent>
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [CountdownComponent]
-    });
-    fixture = TestBed.createComponent(CountdownComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			declarations: [CountdownComponent]
+		})
+		fixture = TestBed.createComponent(CountdownComponent)
+		component = fixture.componentInstance
+		fixture.detectChanges()
+	})
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+	it('should create', () => {
+		expect(component).toBeTruthy()
+	})
+})

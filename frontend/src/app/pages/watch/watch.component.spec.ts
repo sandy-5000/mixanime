@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { RecentComponent } from './recent.component'
+import { WatchComponent } from './watch.component'
 
-describe('RecentComponent', () => {
-	let component: RecentComponent
-	let fixture: ComponentFixture<RecentComponent>
+describe('WatchComponent', () => {
+	let component: WatchComponent
+	let fixture: ComponentFixture<WatchComponent>
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [RecentComponent]
+			declarations: [WatchComponent]
 		})
-		fixture = TestBed.createComponent(RecentComponent)
+		fixture = TestBed.createComponent(WatchComponent)
 		component = fixture.componentInstance
 		fixture.detectChanges()
 	})

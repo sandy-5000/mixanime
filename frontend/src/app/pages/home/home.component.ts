@@ -217,6 +217,16 @@ export class HomeComponent {
 		this.router.navigateByUrl('/details')
 	}
 
+	goToWatch(id: number, episode: number) {
+		this.sharedView.episode = episode
+		this.router.navigate(
+			['/watch'],
+			{
+				queryParams: { id }
+			}
+		)
+	}
+
 	ngOnDestroy(): void {
 		for (let event of this.unSubscribeEvents) {
 			event.close()

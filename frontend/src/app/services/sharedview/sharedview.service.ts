@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
 
 @Injectable({
 	providedIn: 'root'
@@ -16,6 +16,8 @@ export class SharedviewService {
 	})
 	detailsId: any = null
 	animeId: number = 21
+
+	episode: number = 1
 
 	constructor() { }
 

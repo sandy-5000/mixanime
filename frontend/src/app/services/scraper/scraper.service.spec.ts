@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing'
 
-import { AnilistService } from './anilist.service'
+import { ScraperService } from './scraper.service'
 
-describe('AnilistService', () => {
-	let service: AnilistService
+describe('ScraperService', () => {
+	let service: ScraperService
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({})
-		service = TestBed.inject(AnilistService)
+		service = TestBed.inject(ScraperService)
 	})
 
 	it('should be created', () => {

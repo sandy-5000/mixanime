@@ -6,6 +6,7 @@ import { RecentComponent } from './pages/recent/recent.component'
 import { ProfileComponent } from './pages/profile/profile.component'
 import { SearchComponent } from './pages/search/search.component'
 import { DetailsComponent } from './pages/details/details.component'
+import { WatchComponent } from './pages/watch/watch.component'
 
 const routes: Routes = [
 	{
@@ -36,6 +37,10 @@ const routes: Routes = [
 	{
 		path: 'details',
 		component: DetailsComponent
+	},
+	{
+		path: 'watch',
+		component: WatchComponent
 	},
 	{
 		path: '**',

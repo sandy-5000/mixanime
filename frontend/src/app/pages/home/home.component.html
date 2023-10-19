@@ -22,7 +22,7 @@
                                 </p>
                                 <div class="my-3 flex">
                                     <!-- (click)="goToRoute('/watch/' + item.id + '/' + item.title.romaji + '/1')" -->
-                                    <button (click)="goToDetails(item.id)"
+                                    <button (click)="goToWatch(item.id, 1)"
                                         class="btn py-2 pr-3 pl-2 bg-sgreen text-slate-800 flex hover:scale-105">
                                         <div class="a-center">
                                             <ng-icon class="text-lg mr-1" name="heroPlayCircle"></ng-icon>
@@ -118,7 +118,7 @@
                             <span>Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
-                        <h1 (click)="goToDetails(item.media.id)"
+                        <h1 (click)="goToWatch(item.media.id, item.episode)"
                             class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
                             item.media.title.romaji || item.media.title.native}}
                         </h1>

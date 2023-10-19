@@ -139,10 +139,14 @@ export class RecentComponent {
 		this.router.navigateByUrl(path)
 	}
 
-	goToDetails(id: number) {
-		this.sharedView.animeId = id
-		this.sharedView.changeDetails(id)
-		this.router.navigateByUrl('/details')
+	goToWatch(id: number, episode: number) {
+		this.sharedView.episode = episode
+		this.router.navigate(
+			['/watch'],
+			{
+				queryParams: { id }
+			}
+		)
 	}
 
 }

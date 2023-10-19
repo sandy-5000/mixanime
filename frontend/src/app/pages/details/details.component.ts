@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AnilistService } from 'src/app/services/anilist/anilist.service';
-import { SharedviewService } from 'src/app/services/sharedview/sharedview.service';
+import { Component } from '@angular/core'
+import { AnilistService } from 'src/app/services/anilist/anilist.service'
+import { SharedviewService } from 'src/app/services/sharedview/sharedview.service'
 
 @Component({
 	selector: 'app-details',
@@ -38,8 +37,9 @@ export class DetailsComponent {
 
 	setPageData: any = {
 		details: (data: any) => {
+			data.relations.nodes = data.relations.nodes
+				.filter((x: any) => x.type == 'ANIME' || x.type == 'MOVIE')
 			this.item = data
-			console.log(this.item)
 		}
 	}
 
