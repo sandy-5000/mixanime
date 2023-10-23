@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import axios from 'axios'
-import * as cheerio from 'cheerio'
+import { load } from 'cheerio'
 
 @Injectable({
 	providedIn: 'root'
@@ -19,7 +19,7 @@ export class ScraperService {
 			}
 			axios.get(url)
 				.then((response: any) => {
-					const $ = cheerio.load(response.data)
+					const $ = load(response.data)
 					const link = 'https:' + $('iframe:first-child').attr('src') || null
 					if (link) {
 						localStorage.setItem(id, JSON.stringify({ link, status: 200 }))
