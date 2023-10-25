@@ -13,6 +13,7 @@ import { TrendingComponent } from './pages/trending/trending.component'
 import { RecentComponent } from './pages/recent/recent.component'
 import { SearchComponent } from './pages/search/search.component'
 import { ProfileComponent } from './pages/profile/profile.component'
+import { ScheduleComponent } from './pages/schedule/schedule.component'
 import { DetailsComponent } from './pages/details/details.component'
 import { WatchComponent } from './pages/watch/watch.component'
 
@@ -57,7 +58,8 @@ import {
 		FooterComponent,
 		CountdownComponent,
 		DetailsComponent,
-		WatchComponent
+		WatchComponent,
+		ScheduleComponent
 	],
 	imports: [
 		BrowserModule,

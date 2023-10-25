@@ -193,7 +193,7 @@
                                     Airing <span class="lg:inline-flex md:inline-flex hidden">from</span>:
                                 </span>
                                 <span class="text-right">
-                                    {{ item.startDate.day + '/' + item.startDate.month + '/' + item.startDate.year }}
+                                    {{ (item.startDate.day || 1) + '/' + item.startDate.month + '/' + item.startDate.year }}
                                 </span>
                             </p>
                             <h1 (click)="goToDetails(item.id)"

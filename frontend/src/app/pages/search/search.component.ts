@@ -55,7 +55,7 @@ export class SearchComponent {
 	filterForm: any = {
 		animename: '',
 		countryOfOrigin: '',
-		format: '',
+		format: 'TV',
 		season: '',
 		genre: {},
 		year: '',

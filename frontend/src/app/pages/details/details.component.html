@@ -121,6 +121,9 @@
             <div class="vr mx-1 lg:inline-flex hidden"></div>
             <div class="lg:w-9/12 md:w-9/12 w-full mt-2 mx-2">
                 <p class="text-xl text-sgreen mb-3">Recommendations</p>
+                <div *ngIf="item?.recommendations?.nodes?.length === 0" class="a-center h-[120px]">
+                    <h1 class="text-xl text-slate-200">Nothing Avaliable</h1>
+                </div>
                 <div class="grid lg:grid-cols-6 grid-cols-3 justify-center">
                     <div class="m-0 px-1 pt-3" *ngFor="let i of item?.recommendations?.nodes">
                         <div class="w-full h-full recommended">
@@ -137,6 +140,9 @@
                     </div>
                 </div>
                 <p class="text-xl text-sgreen mt-5 mb-3">Relative</p>
+                <div *ngIf="item?.relations?.nodes?.length === 0" class="a-center h-[120px]">
+                    <h1 class="text-xl text-slate-200">Nothing Avaliable</h1>
+                </div>
                 <div class="relative grid lg:grid-cols-6 grid-cols-3 justify-center" style="overflow-y: scroll;">
                     <div class="m-0 px-1 pt-3" *ngFor="let i of item?.relations?.nodes">
                         <div class="w-full h-full relatived">
