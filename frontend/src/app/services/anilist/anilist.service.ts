@@ -220,6 +220,59 @@ export class AnilistService {
 				}
 			}
 		`,
+		search: function(build: any) {
+			let x = []
+			for (const [k, v] of Object.entries(build)) {
+				if (k == 'genre_in' || v == null) {
+					continue
+				}
+				if (k == 'search') {
+					x.push(`${k}: "${v}"`)
+				} else {
+					x.push(`${k}: ${v}`)
+				}
+			}
+			if (build.genre_in.length > 0) {
+				x.push('genre_in: ["' + build.genre_in.join('", "') + '"]')
+			}
+			return `
+			query ($page: Int, $perPage: Int) {
+				Page(page: $page, perPage: $perPage) {
+					pageInfo {
+						total
+						currentPage
+						lastPage
+						hasNextPage
+						perPage
+					}
+					media(type: ANIME, ${x.join(', ')}) {
+						id
+						title {
+							english
+							native
+						}
+						startDate {
+							year
+							month
+						}
+						format
+						status
+						duration
+						episodes
+						nextAiringEpisode {
+							episode
+						}
+						updatedAt
+						description
+						coverImage {
+							extraLarge
+						}
+						averageScore
+					}
+				}
+			}
+			`
+		},
 	}
 
 	public static fetcher() {
@@ -234,6 +287,8 @@ export class AnilistService {
 					return
 				}
 				// temp cache end
+				const build = variables.build
+				delete variables.build
 				const options = {
 					method: 'POST',
 					headers: {
@@ -241,7 +296,7 @@ export class AnilistService {
 						'Accept': 'application/json',
 					},
 					body: JSON.stringify({
-						query: this.queries[query],
+						query: build ? this.queries[query](build) : this.queries[query],
 						variables: variables
 					})
 				}

@@ -33,7 +33,7 @@
         </div>
     </div>
     <div id="filter"
-        class="fixed overflow-y-scroll z-[4] h-full top-0 right-0 lg:w-[400px] md:w-[400px] sm:w-[350px] w-[330px] bg-[#0e1d1d] pt-[60px] hide-filter show-filter">
+        class="fixed overflow-y-scroll z-[4] h-full top-0 right-0 lg:w-[400px] md:w-[350px] sm:w-[350px] w-[330px] bg-[#0e1d1d] pt-[60px] hide-filter show-filter">
         <div class="flex m-3">
             <div (click)="hideFilter()" class="a-center rounded-full bg-sgreen w-12 py-1 cursor-pointer">
                 <ng-icon class="text-xl text-slate-800" name="heroArrowSmallRight"></ng-icon>
@@ -42,7 +42,7 @@
         <div class="px-3 pt-2">
             <div class="w-full">
                 <div class="relative w-full">
-                    <input type="text" placeholder=""
+                    <input type="text" placeholder="" [(ngModel)]="filterForm.animename"
                         class="text-slate-200 pr-9 peer w-full h-full bg-transparent outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-slate-400 placeholder-shown:border-t-slate-400 border focus:border border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[1px] border-blue-gray-200 focus:border-[#9fe6cd] " />
                     <label
                         class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-[#9fe6cd] transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-0 before:border-t peer-focus:before:border-t before:border-l peer-focus:before:border-l before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-0 after:border-t peer-focus:after:border-t after:border-r peer-focus:after:border-r after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-slate-400 peer-focus:text-[#9fe6cd] before:border-blue-gray-200 peer-focus:before:!border-[#9fe6cd] after:border-blue-gray-200 peer-focus:after:!border-[#9fe6cd]">
@@ -56,7 +56,7 @@
             </div>
             <div class="pt-2">
                 <label for="countryOfOrigin" class="py-1 text-sm text-slate-200 block">Country Of Origin</label>
-                <select id="countryOfOrigin" name="countryOfOrigin"
+                <select id="countryOfOrigin" name="countryOfOrigin" [(ngModel)]="filterForm.countryOfOrigin"
                     class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                     <option value="" selected>Any</option>
                     <option value="JP">Japan</option>
@@ -67,7 +67,7 @@
             <div class="pt-2 flex justify-between">
                 <div class="pr-1 w-1/2">
                     <label for="format" class="py-1 text-sm text-slate-200 block">Format</label>
-                    <select id="format" name="format"
+                    <select id="format" name="format" [(ngModel)]="filterForm.format"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="" selected>Any</option>
                         <option value="TV">TV</option>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="w-1/2">
                     <label for="season" class="py-1 text-sm text-slate-200 block">Season</label>
-                    <select id="season" name="season"
+                    <select id="season" name="season" [(ngModel)]="filterForm.season"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="" selected>Any</option>
                         <option value="WINTER">Winter</option>
@@ -96,7 +96,7 @@
                     <span class="w-5/12 py-1" *ngFor="let genre of genres">
                         <label class="checkbox" for="{{genre.name}}">
                             <span style="color: {{genre?.color}};" class="checkbox__label">{{genre.name}}</span>
-                            <input type="checkbox" id="{{genre.name}}" name="genre">
+                            <input type="checkbox" [(ngModel)]="filterForm.genre[genre.name]" id="{{genre.name}}" name="genre">
                             <div class="checkbox__indicator"></div>
                         </label>
                     </span>
@@ -105,7 +105,7 @@
             <div class="flex justify-between pt-3">
                 <div class="w-6/12 mr-1">
                     <label for="year" class="py-1 text-sm text-slate-200 block">Year</label>
-                    <select name="year" id="year"
+                    <select name="year" id="year" [(ngModel)]="filterForm.year"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="" selected>Any</option>
                         <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="w-6/12">
                     <label for="sort" class="py-1 text-sm text-slate-200 block">Sorting</label>
-                    <select name="sort" id="sort"
+                    <select name="sort" id="sort" [(ngModel)]="filterForm.sort"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="TITLE_ENGLISH" selected>Ascending</option>
                         <option value="TITLE_ENGLISH_DESC">Descending</option>
@@ -126,7 +126,7 @@
             <div class="flex justify-between pt-3">
                 <div class="w-6/12 mr-1">
                     <label for="status" class="py-1 text-sm text-slate-200 block">Status</label>
-                    <select name="status" id="status"
+                    <select name="status" id="status" [(ngModel)]="filterForm.status"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="" selected>Any</option>
                         <option value="RELEASING">Airing</option>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="w-6/12">
                     <label for="averageScore" class="py-1 text-sm text-slate-200 block">Average Score</label>
-                    <select name="averageScore" id="averageScore"
+                    <select name="averageScore" id="averageScore" [(ngModel)]="filterForm.averageScore"
                         class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
                         <option value="50" selected>Greater than 50</option>
                         <option value="60">Greater than 60</option>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="pt-5 pb-16 flex justify-end">
-                <button class="rounded-sm mx-4 px-5 py-1 bg-sgreen" type="button"><span class="text-slate-800 font-semibold">Filter</span></button>
+                <button (click)="filter()" class="rounded-sm mx-4 px-5 py-1 bg-sgreen" type="button"><span class="text-slate-800 font-semibold">Filter</span></button>
             </div>
         </div>
     </div>

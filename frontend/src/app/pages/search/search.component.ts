@@ -52,6 +52,17 @@ export class SearchComponent {
 	dataMethods: any = {}
 	date: any = null
 	years: any = []
+	filterForm: any = {
+		animename: '',
+		countryOfOrigin: '',
+		format: '',
+		season: '',
+		genre: {},
+		year: '',
+		sort: 'TITLE_ENGLISH',
+		status: '',
+		averageScore: '50',
+	}
 
 	searchData: any = []
 
@@ -88,6 +99,7 @@ export class SearchComponent {
 			}, 100)
 			this.searchData = data
 			this.loading.search = false
+			this.hideFilter()
 		},
 	}
 
@@ -137,6 +149,10 @@ export class SearchComponent {
 		document.getElementById('filter')?.classList.remove('show-filter')
 	}
 
+	filter() {
+		this.setEvents()
+	}
+
 	submitPage() {
 		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
 			this.inputPageNo = 1
@@ -148,12 +164,63 @@ export class SearchComponent {
 	}
 
 	setEvents() {
-		const data = new Date()
-		const seasons = ['WINTER', 'SPRING', 'SUMMER', 'FALL']
-		this.variables.search.seasonYear = data.getFullYear()
-		this.variables.search.season = seasons[Math.floor(data.getMonth() / 3)]
+		let {
+			animename,
+			countryOfOrigin,
+			format,
+			season,
+			genre,
+			year,
+			sort,
+			status,
+			averageScore
+		} = this.filterForm
+
+		if (!animename || animename.trim() == '') {
+			animename = null
+		}
+		if (!['JP', 'CN', 'KR'].includes(countryOfOrigin)) {
+			countryOfOrigin = null
+		}
+		if (!['WINTER', 'SPRING', 'SUMMER', 'FALL'].includes(season)) {
+			season = null
+		}
+		if (!['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA'].includes(format)) {
+			format = null
+		}
+		genre = []
+		for (let [k, v] of Object.entries(this.filterForm.genre)) {
+			if (v) {
+				genre.push(k)
+			}
+		}
+		year = parseInt(year)
+		if (isNaN(year) || 1940 > year || year > 2024) {
+			year = null
+		}
+		if (!['TITLE_ENGLISH', 'TITLE_ENGLISH_DESC', 'START_DATE_DESC', 'POPULARITY', 'POPULARITY_DESC'].includes(sort)) {
+			sort = null
+		}
+		if (!['RELEASING', 'FINISHED', 'NOT_YET_RELEASED', 'CANCELLED', 'HIATUS'].includes(status)) {
+			status = null
+		}
+		averageScore = parseInt(averageScore)
+		if (isNaN(averageScore)) {
+			averageScore = null
+		}
+		const build = {
+			search: animename,
+			countryOfOrigin,
+			season,
+			format,
+			genre_in: genre,
+			seasonYear: year,
+			sort,
+			status,
+			averageScore_greater: averageScore,
+		}
 		this.loading.search = true
-		this.dataMethods.get('season', this.variables.search, (data: any) => {
+		this.dataMethods.get('search', { ...this.variables.search, build }, (data: any) => {
 			this.setPageData.search(data)
 		})
 	}
