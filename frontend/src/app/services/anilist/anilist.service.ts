@@ -220,7 +220,7 @@ export class AnilistService {
 				}
 			}
 		`,
-		search: function(build: any) {
+		search: function (build: any) {
 			let x = []
 			for (const [k, v] of Object.entries(build)) {
 				if (k == 'genre_in' || v == null) {
@@ -278,15 +278,16 @@ export class AnilistService {
 	public static fetcher() {
 		return {
 			get: (query: string, variables: any, callback: any) => {
-				// temp cache start
 				const key = query + '-' + JSON.stringify(variables)
-				const cacheData = localStorage.getItem(key)
+				let cacheData: any = localStorage.getItem(key)
 				if (cacheData) {
-					console.log('cache data', key)
-					callback(JSON.parse(cacheData))
-					return
+					cacheData = JSON.parse(cacheData)
+					if (cacheData.time && cacheData.time + 900000 /* 15mins in millisecs */ > Date.now()) {
+						console.log('cache data', key)
+						callback(cacheData.result)
+						return
+					}
 				}
-				// temp cache end
 				const build = variables.build
 				delete variables.build
 				const options = {
@@ -312,9 +313,7 @@ export class AnilistService {
 						} else {
 							result = result.data.Page.media
 						}
-						// temp cache start
-						localStorage.setItem(key, JSON.stringify(result))
-						// temp cache end
+						localStorage.setItem(key, JSON.stringify({ time: Date.now(), result }))
 						callback(result)
 					})
 			},
