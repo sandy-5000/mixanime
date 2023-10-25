@@ -22,7 +22,8 @@ import { CountdownComponent } from './components/countdown/countdown.component'
 
 import {
 	heroBolt, heroPlayCircle, heroMagnifyingGlass, heroXMark, heroNewspaper, heroPlus,
-	heroMagnifyingGlassCircle, heroSwatch, heroChevronRight, heroChevronLeft
+	heroMagnifyingGlassCircle, heroSwatch, heroChevronRight, heroChevronLeft, heroFunnel,
+	heroArrowSmallRight
 } from '@ng-icons/heroicons/outline'
 import {
 	heroArrowRightOnRectangleMini,
@@ -67,7 +68,7 @@ import {
 			heroSwatch, matHomeOutline, matChevronRightOutline, heroPlayCircle, tablerSquareRoundedArrowRight,
 			tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft, tablerCircleDashed, heroPlus,
 			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight, heroChevronRight, heroChevronLeft,
-			tablerPointFilled, tablerHeartFilled,
+			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight,
 			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

@@ -10,7 +10,10 @@ import { Router } from '@angular/router'
 })
 export class TrendingComponent {
 
-	constructor(private sharedView: SharedviewService, private router: Router) {
+	constructor(
+		private router: Router,
+		private sharedView: SharedviewService
+	) {
 		this.date = (x: number) => {
 			let p: any = new Date(x * 1000)
 			let dateExtention = 'th', date = p.getDate()
@@ -138,10 +141,6 @@ export class TrendingComponent {
 			params: ['trending']
 		})
 		this.setEvents()
-	}
-
-	goToRoute(path: string): void {
-		this.router.navigateByUrl(path)
 	}
 
 	goToDetails(id: number) {
