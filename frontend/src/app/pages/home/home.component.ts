@@ -217,12 +217,12 @@ export class HomeComponent {
 		this.router.navigateByUrl('/details')
 	}
 
-	goToWatch(id: number, episode: number) {
+	goToWatch(id: number, title: string, episode: number) {
 		this.sharedView.episode = episode
 		this.router.navigate(
 			['/watch'],
 			{
-				queryParams: { id }
+				queryParams: { id, title }
 			}
 		)
 	}

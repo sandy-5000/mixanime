@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
 import { ScraperService } from 'src/app/services/scraper/scraper.service'
@@ -14,15 +15,74 @@ export class WatchComponent {
 	constructor(
 		private sharedView: SharedviewService,
 		private route: ActivatedRoute,
-		private scaper: ScraperService
+		private scaper: ScraperService,
+		private sanitizer: DomSanitizer
 	) {
 		this.dataMethods = AnilistService.fetcher()
+		window.addEventListener("resize", () => {
+			this.setEpisodesHeight()
+		})
+		this.date = (year: number, month: number, day: number) => {
+			let p: any = new Date(year, month - 1, day)
+			let dateExtention = 'th', date = p.getDate()
+			if (date < 11 || 13 < date) {
+				if (date % 10 == 1) {
+					dateExtention = 'st'
+				} else if (date % 10 == 2) {
+					dateExtention = 'nd'
+				} else if (date % 10 == 3) {
+					dateExtention = 'rd'
+				}
+			}
+			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
+		}
 	}
 
 	params: any = null
 	dataMethods: any = {}
 	episode: number = 1
 	item: any = null
+	episodeLink: any = null
+	date: any = null
+
+	airedUpto: number = 0
+	episodeNo: any = ''
+	episodes: any = []
+	episodeOrder: string = 'ASCENDING'
+
+	setEpisodesHeight() {
+		const minHeight = 440
+		let height = document.getElementById('player')?.clientHeight || minHeight
+		height = Math.max(minHeight, height)
+		const episodes = document.getElementById('episodes')
+		if (episodes) {
+			episodes.setAttribute('style', `height: ${height - 80}px`)
+		}
+	}
+
+	debounce: any = null
+	filterEpisodes() {
+		if (this.debounce) {
+			clearInterval(this.debounce)
+		}
+		this.debounce = setTimeout(() => {
+			if (this.episodeNo) {
+				this.episodeNo += ''
+				this.episodes = new Array(this.airedUpto)
+					.fill(0)
+					.map((_: any, i) => (i + 1) + '')
+					.filter((x: String) => x.startsWith(this.episodeNo))
+			} else {
+				this.episodes = new Array(this.airedUpto)
+					.fill(0)
+					.map((_: any, i) => i + 1)
+			}
+			if (this.episodeOrder === 'DESCENDING') {
+				this.episodes.reverse()
+			}
+			this.debounce = null
+		}, 200)
+	}
 
 	prevEpisode() {
 		if (this.episode <= 1) {
@@ -34,12 +94,8 @@ export class WatchComponent {
 	}
 
 	nextEpisode() {
-		if (this.item.episodes && this.item.episodes <= this.episode) {
-			this.episode = this.item.episodes
-			return
-		}
-		if (this.item.nextAiringEpisode && this.item.nextAiringEpisode.episode - 1 <= this.episode) {
-			this.episode = this.item.nextAiringEpisode.episode - 1
+		if (this.airedUpto <= this.episode) {
+			this.episode = this.airedUpto
 			return
 		}
 		this.episode += 1
@@ -64,13 +120,25 @@ export class WatchComponent {
 	setPageData: any = {
 		watch: (data: any) => {
 			this.item = data
+			this.airedUpto = data.nextAiringEpisode?.episode || -1
+			if (this.airedUpto == -1) {
+				this.airedUpto = data.episodes || 0
+			}
+			this.episodes = new Array(this.airedUpto).fill(0).map((x: any, i) => i + 1)
 			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
 			let uuid: string = romaji + '-episode-' + this.episode
-			uuid = 'one-piece-episode-1'
 			console.log(uuid)
-			this.scaper.scrape(uuid, (urlData: any) => {
-				console.log(urlData)
-			})
+			// uuid = 'one-piece-episode-1'
+			// this.scaper.scrape(uuid, (urlData: any) => {
+			// 	console.log(urlData)
+			// })
+
+			this.episodeLink = {
+				"link": this.sanitizer.bypassSecurityTrustResourceUrl("https://goone.pro/streaming.php?id=MzUxOA==&title=One+Piece+Episode+1&typesub=SUB"),
+				"status": 200
+			}
+			console.log(this.episodeLink)
+
 			console.log(this.item)
 		}
 	}
@@ -90,6 +158,7 @@ export class WatchComponent {
 		this.params = this.route.snapshot.queryParams
 		this.episode = this.sharedView.episode
 		this.fetchData()
+		this.setEpisodesHeight()
 	}
 
 }

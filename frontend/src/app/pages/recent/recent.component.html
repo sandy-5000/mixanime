@@ -1,4 +1,4 @@
-<div class="w-full h-screen relative">
+<div class="w-full min-h-full relative">
     <div *ngIf="modal" class="a-center h-full z-[4] bg-gray-900 bg-opacity-25 w-full fixed top-0 left-0">
         <div class="bg-slate-200 rounded-lg w-[350px]">
             <div class="p-5">
@@ -6,8 +6,8 @@
             </div>
             <hr class="border-slate-400" />
             <div class="p-5">
-                <input class="bg-transparent rounded-sm h-8 text-slate-800 px-2" type="number"
-                    placeholder="Page no." (input)="pageNoOnChange($event)" />
+                <input class="bg-transparent rounded-sm h-8 text-slate-800 px-2" type="number" placeholder="Page no."
+                    (input)="pageNoOnChange($event)" />
             </div>
             <hr class="border-slate-400" />
             <div class="p-5 flex justify-end">
@@ -37,10 +37,10 @@
             <div class="flex justify-between mb-2">
                 <div class="flex">
                     <div class="a-center">
-                        <ng-icon class="text-sgreen text-[30px] mr-1" name="heroNewspaper"></ng-icon>
+                        <ng-icon class="text-sgreen text-[25px] mr-1" name="heroNewspaper"></ng-icon>
                     </div>
                     <div class="a-center font-semibold">
-                        <h1 class="text-slate-200 text-lg">Recently Released</h1>
+                        <span class="text-slate-200 text-sm side-heading">Recently <span class="text-sgreen">Released</span></span>
                     </div>
                 </div>
             </div>
@@ -65,21 +65,35 @@
                             <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
-                        <h1 (click)="goToWatch(item.media.id, item.episode)" class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">{{item.media.title.english ||
-                            item.media.title.romaji || item.media.title.native}}
+                        <h1 (click)="goToWatch(
+                            item.media.id, 
+                            item.media.title.romaji || 
+                            item.media.title.english || 
+                            item.media.title.userPreferred || 
+                            item.media.title.native, 
+                            item.episode
+                        )" class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">
+                            {{
+                            item.media.title.userPreferred ||
+                            item.media.title.english ||
+                            item.media.title.romaji ||
+                            item.media.title.native
+                            }}
                         </h1>
                     </div>
                 </div>
             </div>
             <div class="flex justify-center py-16">
-                <div (click)="prevPage()" class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
+                <div (click)="prevPage()"
+                    class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
                     <ng-icon class="text-lg font-normal" name="heroChevronLeft"></ng-icon>
                 </div>
                 <div (click)="showModal()"
                     class="a-center bg-slate-200 rounded-sm h-8 px-3 cursor-pointer hover:scale-110">
                     <span>{{variables.recent.page}}</span>
                 </div>
-                <div (click)="nextPage()" class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
+                <div (click)="nextPage()"
+                    class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
                     <ng-icon class="text-lg font-normal" name="heroChevronRight"></ng-icon>
                 </div>
             </div>

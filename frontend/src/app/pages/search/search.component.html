@@ -1,4 +1,4 @@
-<div class="w-full h-screen relative">
+<div class="w-full min-h-full relative">
     <div *ngIf="modal" class="a-center h-full z-[5] bg-gray-900 bg-opacity-25 w-full fixed top-0 left-0">
         <div class="bg-slate-200 rounded-lg w-[350px]">
             <div class="p-5">
@@ -96,7 +96,8 @@
                     <span class="w-5/12 py-1" *ngFor="let genre of genres">
                         <label class="checkbox" for="{{genre.name}}">
                             <span style="color: {{genre?.color}};" class="checkbox__label">{{genre.name}}</span>
-                            <input type="checkbox" [(ngModel)]="filterForm.genre[genre.name]" id="{{genre.name}}" name="genre">
+                            <input type="checkbox" [(ngModel)]="filterForm.genre[genre.name]" id="{{genre.name}}"
+                                name="genre">
                             <div class="checkbox__indicator"></div>
                         </label>
                     </span>
@@ -149,7 +150,8 @@
                 </div>
             </div>
             <div class="pt-5 pb-16 flex justify-end">
-                <button (click)="filter()" class="rounded-sm mx-4 px-5 py-1 bg-sgreen" type="button"><span class="text-slate-800 font-semibold">Filter</span></button>
+                <button (click)="filter()" class="rounded-sm mx-4 px-5 py-1 bg-sgreen" type="button"><span
+                        class="text-slate-800 font-semibold">Filter</span></button>
             </div>
         </div>
     </div>
@@ -159,10 +161,10 @@
                 <div class="w-full flex justify-between">
                     <div class="flex">
                         <div class="a-center">
-                            <ng-icon class="text-sgreen text-[30px] mr-1" name="simpleOpenstreetmap"></ng-icon>
+                            <ng-icon class="text-sgreen text-[25px] mr-1" name="simpleOpenstreetmap"></ng-icon>
                         </div>
                         <div class="a-center font-semibold">
-                            <h1 class="text-slate-200 text-lg">Search Releases</h1>
+                            <h1 class="text-slate-200 text-sm side-heading">Search <span class="text-sgreen">Releases</span></h1>
                         </div>
                     </div>
                     <div class="flex">
@@ -193,13 +195,18 @@
                                     Airing <span class="lg:inline-flex md:inline-flex hidden">from</span>:
                                 </span>
                                 <span class="text-right">
-                                    {{ (item.startDate.day || 1) + '/' + item.startDate.month + '/' + item.startDate.year }}
+                                    {{ (item.startDate.day || 1) + '/' + item.startDate.month + '/' +
+                                    item.startDate.year }}
                                 </span>
                             </p>
                             <h1 (click)="goToDetails(item.id)"
                                 class="truncate text-sm pt-1 font-normal text-sgreen cursor-pointer">
-                                {{item.title.english ||
-                                item.title.romaji}}
+                                {{
+                                item.title.userPreferred ||
+                                item.title.english ||
+                                item.title.romaji ||
+                                item.title.native
+                                }}
                             </h1>
                         </div>
                     </div>

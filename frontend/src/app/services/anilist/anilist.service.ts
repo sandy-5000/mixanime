@@ -16,6 +16,7 @@ export class AnilistService {
 						title {
 							english
 							romaji
+							userPreferred
 							native
 						}
 						startDate {
@@ -49,6 +50,7 @@ export class AnilistService {
 							title {
 								romaji
 								english
+								userPreferred
 								native
 							}
 							countryOfOrigin
@@ -73,6 +75,7 @@ export class AnilistService {
 						title {
 							english
 							romaji
+							userPreferred
 							native
 						}
 						format
@@ -107,6 +110,7 @@ export class AnilistService {
 						title {
 							english
 							romaji
+							userPreferred
 							native
 						}
 						startDate {
@@ -129,8 +133,8 @@ export class AnilistService {
 					title {
 						english
 						romaji
-						native
 						userPreferred
+						native
 					}
 					startDate {
 						year
@@ -192,8 +196,8 @@ export class AnilistService {
 					title {
 						english
 						romaji
-						native
 						userPreferred
+						native
 					}
 					startDate {
 						year
@@ -248,7 +252,9 @@ export class AnilistService {
 					media(type: ANIME, ${x.join(', ')}) {
 						id
 						title {
+							romaji
 							english
+							userPreferred
 							native
 						}
 						startDate {

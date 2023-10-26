@@ -44,6 +44,12 @@ body {
         color: #9fe6cd;
     }
 
+    .side-heading {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 550;
+    }
+
     .bg-sgreen {
         /* background-color: #5de4b5; */
         background-color: #9fe6cd;
