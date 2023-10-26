@@ -28,23 +28,22 @@
                                 class="cursor-pointer mt-1 lg:w-2/12 md:w-2/12 w-full btn py-2 bg-[#ff3d00] text-slate-200 flex justify-center hover:scale-105">
                                 <ng-icon class="text-lg" name="tablerHeartFilled"></ng-icon>
                             </div>
-                            <div class="text-slate-200"></div>
                         </div>
                         <div class="mt-1">
-                            <button
-                                class="w-full btn py-2 bg-sgreen text-slate-800 flex justify-center hover:scale-105">
-                                <div class="a-center">
-                                    <ng-icon class="text-lg mr-1" name="heroPlayCircle"></ng-icon>
-                                </div>
-                                <div class="a-center">
-                                    <button (click)="goToWatch(
-                                        item.id, 
+                            <button (click)="goToWatch(
+                                        item.id,
                                         item.title.romaji ||
                                         item.title.english ||
                                         item.title.userPreferred ||
                                         item.title.native,
                                         1
-                                    )" class="mt-[1px] text-[14px] font-[500]">Watch Now</button>
+                                    )"
+                                class="w-full btn py-2 bg-sgreen text-slate-800 flex justify-center hover:scale-105">
+                                <div class="a-center">
+                                    <ng-icon class="text-lg mr-1" name="heroPlayCircle"></ng-icon>
+                                </div>
+                                <div class="a-center">
+                                    <span class="mt-[1px] text-[14px] font-[500]">Watch Now</span>
                                 </div>
                             </button>
                         </div>
@@ -52,7 +51,8 @@
                 </div>
             </div>
             <div class="xl:w-10/12 lg:w-9/12 md:w-9/12 w-full p-5">
-                <h1 class="capitalize text-2xl pb-3 text-slate-200">{{(item.title.userPreferred || item.title.english || item.title.romaji ||
+                <h1 class="capitalize text-2xl pb-3 text-slate-200">{{(item.title.userPreferred || item.title.english ||
+                    item.title.romaji ||
                     item.title.native || '').toLowerCase()}}</h1>
                 <div class="flex">
                     <div class="a-center">

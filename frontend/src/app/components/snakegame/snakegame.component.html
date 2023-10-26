@@ -1,0 +1,27 @@
+<div class="relative w-full a-center lg:p-5 p-0 pt-5">
+    <section class="h-full w-full">
+        <div class="wrapper w-full h-full flex flex-col justify-center overflow-hidden rounded-[5px]">
+            <div class="game-details h-[40px] a-center px-5">
+                <div class="w-full flex justify-between">
+                    <span class="flex justify-between">
+                        <span class="start cursor-pointer" (click)="startGame()">Start</span>
+                        <span class="w-5"></span>
+                        <span class="score">Score: 0</span>
+                    </span>
+                    <span class="high-score">High Score: 0</span>
+                </div>
+            </div>
+            <div class="relative" style="height: calc(100% - 40px);">
+                <div class="absolute w-full h-full left-0 top-0 z-[2] flex justify-between">
+                    <div class="w-1/4 controls" key="ArrowLeft"></div>
+                    <div class="w-1/2 flex flex-col justify-between">
+                        <div class="h-1/2 controls" key="ArrowUp"></div>
+                        <div class="h-1/2 controls" key="ArrowDown"></div>
+                    </div>
+                    <div class="w-1/4 controls" key="ArrowRight"></div>
+                </div>
+                <div class="play-board aspect-[5/3]"></div>
+            </div>
+        </div>
+    </section>
+</div>

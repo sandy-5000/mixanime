@@ -8,6 +8,7 @@ import { SearchComponent } from './pages/search/search.component'
 import { DetailsComponent } from './pages/details/details.component'
 import { WatchComponent } from './pages/watch/watch.component'
 import { ScheduleComponent } from './pages/schedule/schedule.component'
+import { SnakegameComponent } from './components/snakegame/snakegame.component'
 
 const routes: Routes = [
 	{
@@ -46,6 +47,10 @@ const routes: Routes = [
 	{
 		path: 'watch',
 		component: WatchComponent
+	},
+	{
+		path: 'snake',
+		component: SnakegameComponent
 	},
 	{
 		path: '**',

@@ -101,9 +101,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="lg:m-10 m-5 lg:flex md:flex block">
-        <div class="lg:w-3/12 md:w-3/12 w-full mt-4">
+
+    <div class="lg:m-10 m-5 lg:flex block">
+        <div class="lg:w-3/12 w-full mt-4">
             <div class="mx-1">
                 <p class="text-slate-200 p-0 mb-3 text-sm"><span class="text-sgreen">Format :</span> <span
                         class="mx-2">{{item?.format}}</span></p>
@@ -113,7 +113,8 @@
                 <p class="text-slate-200 p-0 mb-3 text-sm"><span class="text-sgreen">Romaji Title :</span> <span
                         class="mx-2">{{item?.title?.romaji}}</span></p>
                 <p class="text-slate-200 p-0 mb-3 text-sm"><span class="text-sgreen">User Prefered Title :</span>
-                    <span class="mx-2">{{item?.title?.userPreferred}}</span></p>
+                    <span class="mx-2">{{item?.title?.userPreferred}}</span>
+                </p>
                 <p class="text-slate-200 p-0 mb-3 text-sm"><span class="text-sgreen">Native Title :</span> <span
                         class="mx-2">{{item?.title?.native}}</span></p>
                 <hr class="mb-3 text-slate-200" />
@@ -140,8 +141,8 @@
             </div>
         </div>
         <div class="vr mx-1 lg:inline-flex hidden"></div>
-        <div class="lg:w-9/12 md:w-9/12 w-full mt-4 a-center">
-            <h1 class="text-2xl text-slate-200">Under Construction</h1>
+        <div class="lg:w-9/12 w-full">
+            <app-snakegame class="w-full h-full a-center"></app-snakegame>
         </div>
     </div>
     <app-footer></app-footer>

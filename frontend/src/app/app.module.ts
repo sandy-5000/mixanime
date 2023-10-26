@@ -20,6 +20,7 @@ import { WatchComponent } from './pages/watch/watch.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { FooterComponent } from './components/footer/footer.component'
 import { CountdownComponent } from './components/countdown/countdown.component'
+import { SnakegameComponent } from './components/snakegame/snakegame.component'
 
 import {
 	heroBolt, heroPlayCircle, heroMagnifyingGlass, heroXMark, heroNewspaper, heroPlus,
@@ -59,7 +60,8 @@ import {
 		CountdownComponent,
 		DetailsComponent,
 		WatchComponent,
-		ScheduleComponent
+		ScheduleComponent,
+		SnakegameComponent
 	],
 	imports: [
 		BrowserModule,
