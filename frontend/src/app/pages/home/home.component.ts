@@ -11,7 +11,10 @@ import { Router } from '@angular/router'
 
 export class HomeComponent {
 
-	constructor(private sharedView: SharedviewService, private router: Router) {
+	constructor(
+		private sharedView: SharedviewService,
+		private router: Router
+	) {
 		this.date = (x: number) => {
 			let p: any = new Date(x * 1000)
 			let dateExtention = 'th', date = p.getDate()

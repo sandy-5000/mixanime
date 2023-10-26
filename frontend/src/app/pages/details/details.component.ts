@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service'
 
@@ -12,7 +13,8 @@ export class DetailsComponent {
 	id: number = 21
 
 	constructor(
-		private sharedView: SharedviewService
+		private sharedView: SharedviewService,
+		private router: Router
 	) {
 		this.dataMethods = AnilistService.fetcher()
 		this.date = (year: number, month: number, day: number) => {
@@ -72,6 +74,16 @@ export class DetailsComponent {
 	goToDetails(id: number) {
 		this.sharedView.animeId = id
 		this.sharedView.changeDetails(id)
+	}
+
+	goToWatch(id: number, title: string, episode: number) {
+		this.sharedView.episode = episode
+		this.router.navigate(
+			['/watch'],
+			{
+				queryParams: { id, title }
+			}
+		)
 	}
 
 }
