@@ -120,7 +120,7 @@ export class WatchComponent {
 	setPageData: any = {
 		watch: (data: any) => {
 			this.item = data
-			this.airedUpto = data.nextAiringEpisode?.episode || -1
+			this.airedUpto = (data.nextAiringEpisode?.episode || 0) - 1
 			if (this.airedUpto == -1) {
 				this.airedUpto = data.episodes || 0
 			}
