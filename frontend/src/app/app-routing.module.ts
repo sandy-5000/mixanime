@@ -49,10 +49,6 @@ const routes: Routes = [
 		component: WatchComponent
 	},
 	{
-		path: 'snake',
-		component: SnakegameComponent
-	},
-	{
 		path: '**',
 		redirectTo: 'home'
 	}

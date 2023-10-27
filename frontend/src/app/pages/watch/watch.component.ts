@@ -91,6 +91,7 @@ export class WatchComponent {
 		}
 		this.episode -= 1
 		this.sharedView.episode = this.episode
+		this.fetchData()
 	}
 
 	nextEpisode() {
@@ -100,6 +101,7 @@ export class WatchComponent {
 		}
 		this.episode += 1
 		this.sharedView.episode = this.episode
+		this.fetchData()
 	}
 
 	setEpisode(episode: number) {
@@ -115,6 +117,7 @@ export class WatchComponent {
 			episode = Math.min(episode, this.item.nextAiringEpisode.episode - 1)
 			this.episode = episode
 		}
+		this.fetchData()
 	}
 
 	setPageData: any = {
@@ -124,22 +127,20 @@ export class WatchComponent {
 			if (this.airedUpto == -1) {
 				this.airedUpto = data.episodes || 0
 			}
-			this.episodes = new Array(this.airedUpto).fill(0).map((x: any, i) => i + 1)
+			this.filterEpisodes()
 			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
 			let uuid: string = romaji + '-episode-' + this.episode
 			console.log(uuid)
 			// uuid = 'one-piece-episode-1'
-			// this.scaper.scrape(uuid, (urlData: any) => {
-			// 	console.log(urlData)
-			// })
-
-			this.episodeLink = {
-				"link": this.sanitizer.bypassSecurityTrustResourceUrl("https://goone.pro/streaming.php?id=MzUxOA==&title=One+Piece+Episode+1&typesub=SUB"),
-				"status": 200
-			}
-			console.log(this.episodeLink)
-
-			console.log(this.item)
+			// "link": this.sanitizer.bypassSecurityTrustResourceUrl("https://goone.pro/streaming.php?id=MzUxOA==&title=One+Piece+Episode+1&typesub=SUB"),
+			this.scaper.scrape(uuid, (urlData: any) => {
+				this.episodeLink = {
+					"link": this.sanitizer.bypassSecurityTrustResourceUrl(urlData.link),
+					"status": 200
+				}
+				console.log(this.episodeLink)
+				console.log(urlData)
+			})
 		}
 	}
 

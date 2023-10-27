@@ -3,28 +3,19 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .wrapper {
-  overflow: hidden;
-  background: #29473b;
   box-shadow: 0 20px 40px rgba(52, 220, 200, 0.2);
 }
 
 .game-details {
-  color: #B8C6DC;
-  font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  @apply text-[#B8C6DC] font-[500] h-[40px]
 }
 
 .play-board {
   display: grid;
-  background: #020303;
   grid-template: repeat(30, 1fr) / repeat(50, 1fr);
+  @apply bg-[#020303]
 }
 
 .play-board .food {
@@ -33,18 +24,4 @@ section {
 
 .play-board .head {
   background: #60ffd5;
-}
-
-@media screen and (max-width: 800px) {
-  .game-details {
-    font-size: 1rem;
-    padding: 15px 27px;
-  }
-  .controls {
-    display: flex;
-  }
-  .controls i {
-    padding: 15px 0;
-    font-size: 1rem;
-  }
 }

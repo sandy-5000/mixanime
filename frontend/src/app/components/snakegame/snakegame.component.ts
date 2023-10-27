@@ -18,6 +18,7 @@ export class SnakegameComponent {
 		const scoreElement: any = document.querySelector('.score')
 		const highScoreElement: any = document.querySelector('.high-score')
 		const controls: any = document.querySelectorAll('.controls')
+		const gameMessage: any = document.querySelector('.game-message')
 
 		let gameOver: boolean = false
 		let foodX: any = null
@@ -34,17 +35,22 @@ export class SnakegameComponent {
 
 		let highScore: number = parseInt(localStorage.getItem('high-score') || '0')
 
-		highScoreElement.innerHTML = highScore
+		highScoreElement.innerHTML = `High Score: ${highScore}`
+		gameMessage.innerText = ''
 
 		const handleGameOver = () => {
 			controls.forEach((element: any) => {
 				element.removeEventListener('click', controlEvent)
 			})
 			clearInterval(setIntervalId)
-			console.log('Game Over! Press OK to replay...')
+			gameMessage.innerText = 'Game Over!'
+			console.log('Game Over! Press \'start\' to replay...')
 		}
 
 		const changeDirection = (e: any) => {
+			if (e.preventDefault && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.key) > -1 && !gameOver) {
+				e.preventDefault()
+			}
 			if (e.key === 'ArrowUp' && velocityY != 1) {
 				velocityX = 0
 				velocityY = -1
@@ -62,7 +68,6 @@ export class SnakegameComponent {
 
 		const controlEvent = (e: any) => {
 			const key = e.target.getAttribute('key')
-			console.log(key)
 			changeDirection({ key })
 		}
 
@@ -80,7 +85,7 @@ export class SnakegameComponent {
 			if (gameOver) {
 				return handleGameOver()
 			}
-			let html = `<div class="bg-[#ff4982] rounded-md" style="grid-area: ${foodY} / ${foodX}"></div>`
+			let html = `<div class="bg-[#ff4982] lg:rounded-md md:rounded-md rounded-sm" style="grid-area: ${foodY} / ${foodX}"></div>`
 			if (snakeX === foodX && snakeY === foodY) {
 				updateFoodPosition()
 				snakeBody.push([foodY, foodX])
@@ -102,7 +107,7 @@ export class SnakegameComponent {
 				return gameOver = true
 			}
 			for (let i = 0; i < snakeBody.length; i++) {
-				html += `<div class="bg-[#60ffd5] rounded-md" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`
+				html += `<div class="bg-[#60ffd5] lg:rounded-md md:rounded-md rounded-sm" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`
 				if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
 					gameOver = true
 				}
@@ -114,7 +119,7 @@ export class SnakegameComponent {
 		setIntervalId = setInterval(() => {
 			initGame()
 		}, 120)
-		document.addEventListener('keyup', changeDirection)
+		document.addEventListener('keydown', changeDirection)
 
 	}
 
