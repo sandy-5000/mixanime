@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
@@ -67,6 +68,7 @@ import {
 		BrowserModule,
 		FormsModule,
 		AppRoutingModule,
+		HttpClientModule,
 		NgIconsModule.withIcons({
 			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
 			heroSwatch, matHomeOutline, matChevronRightOutline, heroPlayCircle, tablerSquareRoundedArrowRight,

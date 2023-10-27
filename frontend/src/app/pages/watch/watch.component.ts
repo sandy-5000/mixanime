@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
-import { ActivatedRoute, Router } from '@angular/router'
+import { DomSanitizer } from '@angular/platform-browser'
+import { ActivatedRoute } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
+import { BackendService } from 'src/app/services/backend/backend.service'
 import { ScraperService } from 'src/app/services/scraper/scraper.service'
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service'
 
@@ -16,7 +17,8 @@ export class WatchComponent {
 		private sharedView: SharedviewService,
 		private route: ActivatedRoute,
 		private scaper: ScraperService,
-		private sanitizer: DomSanitizer
+		private sanitizer: DomSanitizer,
+		private server: BackendService
 	) {
 		this.dataMethods = AnilistService.fetcher()
 		window.addEventListener("resize", () => {
@@ -131,16 +133,22 @@ export class WatchComponent {
 			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
 			let uuid: string = romaji + '-episode-' + this.episode
 			console.log(uuid)
+			alert(uuid)
 			// uuid = 'one-piece-episode-1'
 			// "link": this.sanitizer.bypassSecurityTrustResourceUrl("https://goone.pro/streaming.php?id=MzUxOA==&title=One+Piece+Episode+1&typesub=SUB"),
-			this.scaper.scrape(uuid, (urlData: any) => {
-				this.episodeLink = {
-					"link": this.sanitizer.bypassSecurityTrustResourceUrl(urlData.link),
-					"status": 200
-				}
-				console.log(this.episodeLink)
-				console.log(urlData)
+
+			this.server.get('/', {}).subscribe((data: any) => {
+				console.log(data)
+				this.scaper.scrape(uuid, (urlData: any) => {
+					this.episodeLink = {
+						"link": this.sanitizer.bypassSecurityTrustResourceUrl(urlData.link),
+						"status": 200
+					}
+					console.log(this.episodeLink)
+					console.log(urlData)
+				})
 			})
+
 		}
 	}
 
