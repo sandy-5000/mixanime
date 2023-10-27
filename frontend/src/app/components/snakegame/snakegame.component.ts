@@ -12,8 +12,23 @@ export class SnakegameComponent {
 	ngOnInit(): void {
 	}
 
-	startGame() {
+	init() {
+		let gameDetails = {
+			started: false
+		}
+		return () => {
+			if (gameDetails.started) {
+				return
+			}
+			this.startGame(gameDetails)
+		}
+	}
 
+	start = this.init()
+
+	startGame(gameDetails: any) {
+
+		gameDetails.started = true
 		const playBoard: any = document.querySelector('.play-board')
 		const scoreElement: any = document.querySelector('.score')
 		const highScoreElement: any = document.querySelector('.high-score')
@@ -42,6 +57,7 @@ export class SnakegameComponent {
 			controls.forEach((element: any) => {
 				element.removeEventListener('click', controlEvent)
 			})
+			gameDetails.started = false
 			clearInterval(setIntervalId)
 			gameMessage.innerText = 'Game Over!'
 			console.log('Game Over! Press \'start\' to replay...')
