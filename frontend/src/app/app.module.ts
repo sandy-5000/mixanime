@@ -18,9 +18,10 @@ import { ScheduleComponent } from './pages/schedule/schedule.component'
 import { DetailsComponent } from './pages/details/details.component'
 import { WatchComponent } from './pages/watch/watch.component'
 
-import { LoaderComponent } from './components/loader/loader.component'
-import { FooterComponent } from './components/footer/footer.component'
 import { CountdownComponent } from './components/countdown/countdown.component'
+import { DigitalclockComponent } from './components/digitalclock/digitalclock.component'
+import { FooterComponent } from './components/footer/footer.component'
+import { LoaderComponent } from './components/loader/loader.component'
 import { SnakegameComponent } from './components/snakegame/snakegame.component'
 
 import {
@@ -36,7 +37,7 @@ import {
 	matHomeOutline, matChevronRightOutline
 } from '@ng-icons/material-icons/outline'
 import {
-	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord
+	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord, simpleTelegram, simpleIonic, simpleLaunchpad
 } from '@ng-icons/simple-icons'
 import {
 	iconoirHomeSimpleDoor, iconoirHomeSimple
@@ -44,7 +45,9 @@ import {
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
 	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled
-} from '@ng-icons/tabler-icons'
+} from '@ng-icons/tabler-icons';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component'
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import {
 		DetailsComponent,
 		WatchComponent,
 		ScheduleComponent,
-		SnakegameComponent
+		SnakegameComponent,
+		DigitalclockComponent,
+  LoginComponent,
+  SignupComponent
 	],
 	imports: [
 		BrowserModule,
@@ -74,7 +80,8 @@ import {
 			heroSwatch, matHomeOutline, matChevronRightOutline, heroPlayCircle, tablerSquareRoundedArrowRight,
 			tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft, tablerCircleDashed, heroPlus,
 			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight, heroChevronRight, heroChevronLeft,
-			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight,
+			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight, simpleTelegram, simpleIonic,
+			simpleLaunchpad,
 			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

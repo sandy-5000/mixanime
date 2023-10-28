@@ -127,3 +127,12 @@ body {
     opacity: 1;
     animation: popup 0.2s ease-in-out;
 }
+
+.social-media-icon {
+    transform: scale(1);
+    transition: all 0.1s linear;
+}
+
+.social-media-icon:hover {
+    transform: scale(1.25);
+}

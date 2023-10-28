@@ -9,6 +9,9 @@ import { DetailsComponent } from './pages/details/details.component'
 import { WatchComponent } from './pages/watch/watch.component'
 import { ScheduleComponent } from './pages/schedule/schedule.component'
 import { SnakegameComponent } from './components/snakegame/snakegame.component'
+import { LoaderComponent } from './components/loader/loader.component'
+import { LoginComponent } from './pages/login/login.component'
+import { SignupComponent } from './pages/signup/signup.component'
 
 const routes: Routes = [
 	{
@@ -47,6 +50,14 @@ const routes: Routes = [
 	{
 		path: 'watch',
 		component: WatchComponent
+	},
+	{
+		path: 'login',
+		component: LoginComponent
+	},
+	{
+		path: 'signup',
+		component: SignupComponent
 	},
 	{
 		path: '**',

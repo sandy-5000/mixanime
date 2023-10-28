@@ -27,6 +27,9 @@ export class ScraperService {
 					}
 					callback({ link, status: 200 })
 				})
+				.catch((error: any) => {
+					callback({ link: null, status: 404 })
+				})
 		} catch (e) {
 			console.error(e)
 			callback({ link: null, status: 404 })
