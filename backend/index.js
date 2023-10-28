@@ -4,6 +4,7 @@ import path from "path"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import anime from "./routes/anime.js"
+import user from "./routes/user.js"
 dotenv.config()
 
 
@@ -21,6 +22,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/anime', anime)
+app.use('/api/user', user)
 
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, "/frontend/dist/mixanime")))

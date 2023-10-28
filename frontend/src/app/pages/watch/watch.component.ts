@@ -142,6 +142,13 @@ export class WatchComponent {
 					return
 				}
 				this.scaper.scrape(uuid, (urlData: any) => {
+					if (!urlData.link) {
+						this.episodeLink = {
+							"link": null,
+							"status": 200
+						}
+						return
+					}
 					this.episodeLink = {
 						"link": this.sanitizer.bypassSecurityTrustResourceUrl(urlData.link),
 						"status": 200

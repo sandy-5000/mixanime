@@ -40,12 +40,21 @@
                     <ng-icon class="text-2xl mr-1 social-media-icon text-slate-200" name="simpleDiscord"></ng-icon>
                 </div>
                 <button (click)="goToRoute('/login')"
-                    class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
+                    class="login btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
                     <div class="a-center">
                         <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangleMini"></ng-icon>
                     </div>
                     <div class="a-center">
                         <span class="text-[14px] font-semibold">Login</span>
+                    </div>
+                </button>
+                <button (click)="logout()"
+                    class="logout btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] hidden">
+                    <div class="a-center">
+                        <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangleMini"></ng-icon>
+                    </div>
+                    <div class="a-center">
+                        <span class="text-[14px] font-semibold">Logout</span>
                     </div>
                 </button>
             </div>

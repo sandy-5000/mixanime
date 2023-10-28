@@ -12,9 +12,10 @@ iframe::-webkit-scrollbar {
 .episode-container {
     transform: scale(1);
     transition: all 0.2s;
-    @apply bg-gray-800 
+    @apply bg-[#051318]
 }
 
 .episode-container:hover {
     transform: scale(1.02);
+    @apply bg-[#082327]
 }

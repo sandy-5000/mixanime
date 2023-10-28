@@ -21,7 +21,10 @@
             <div *ngIf="episodeLink === null" class="relative h-full">
                 <app-loader class="left-0 top-0"></app-loader>
             </div>
-            <iframe *ngIf="episodeLink !== null" allowfullscreen="true" id="playerframe" class="w-full h-full rounded-sm"
+            <div class="h-full a-center" *ngIf="episodeLink !== null && episodeLink.link === null">
+                <h1 class="text-xl text-slate-200">Video Not found yet, try after 30 min!</h1>
+            </div>
+            <iframe *ngIf="episodeLink !== null && episodeLink.link !== null" allowfullscreen="true" id="playerframe" class="w-full h-full rounded-sm"
                 [src]="episodeLink.link"></iframe>
             <div class="flex pt-2 justify-between">
                 <div class="w-1/2 a-center">

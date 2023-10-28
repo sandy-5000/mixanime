@@ -21,6 +21,7 @@ export class LayoutComponent {
 	}
 	searchBG: Boolean = false
 	searchData: any = []
+	loggedIn: Boolean = false
 
 	constructor(
 		private router: Router,
@@ -98,8 +99,10 @@ export class LayoutComponent {
 	ngOnInit(): void {
 		const methods: { [key: string]: (...args: any[]) => void } = {
 			setNavButton: this.setNavButton,
-			clearSearch: this.clearSearch
+			clearSearch: this.clearSearch,
+			checkLogin: this.checkLogin,
 		}
+		this.checkLogin()
 		try {
 			this.sharedView.current.subscribe((data: any) => {
 				methods[data.method](...data.params)
@@ -125,6 +128,26 @@ export class LayoutComponent {
 		this.previousSearchBar = ''
 		this.searchBG = false
 		this.searchData = []
+	}
+
+	checkLogin(): void {
+		const userData = JSON.parse(localStorage.getItem('user-data') || '{}')
+		if (!userData.email || !userData.jwt || !userData.name) {
+			return
+		}
+		this.loggedIn = true
+		document.querySelector('.login')?.classList.add('hidden')
+		document.querySelector('.logout')?.classList.add('flex')
+		document.querySelector('.logout')?.classList.remove('hidden')
+	}
+
+	logout() {
+		document.querySelector('.login')?.classList.remove('hidden')
+		document.querySelector('.logout')?.classList.remove('flex')
+		document.querySelector('.logout')?.classList.add('hidden')
+		localStorage.removeItem('user-data')
+		localStorage.removeItem('token')
+		this.router.navigateByUrl('/login')
 	}
 
 }
