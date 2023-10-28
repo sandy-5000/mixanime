@@ -1,5 +1,7 @@
 <div class="w-full relative">
-    <app-loader class="h-[800px]" *ngIf="!item"></app-loader>
+    <div class="h-[600px] a-center" *ngIf="!item">
+        <app-loader></app-loader>
+    </div>
     <section *ngIf="item">
         <div class="banner-image"
             style="background: linear-gradient(to right, rgba(1, 1, 1, 0.3) 90%, rgba(1, 1, 1, 0.3) 90%, rgba(1, 1, 1, 0.3) 90%), url({{item.bannerImage || '/assets/images/stars.jpg'}});"

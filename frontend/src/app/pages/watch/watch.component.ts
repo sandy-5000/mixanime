@@ -130,22 +130,22 @@ export class WatchComponent {
 				this.airedUpto = data.episodes || 0
 			}
 			this.filterEpisodes()
-			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
-			let uuid: string = romaji + '-episode-' + this.episode
-			console.log(uuid)
-			alert(uuid)
-			// uuid = 'one-piece-episode-1'
-			// "link": this.sanitizer.bypassSecurityTrustResourceUrl("https://goone.pro/streaming.php?id=MzUxOA==&title=One+Piece+Episode+1&typesub=SUB"),
-
-			this.server.get('/', {}).subscribe((data: any) => {
-				console.log(data)
+			this.episodeLink = null
+			this.server.get(`/api/anime/${this.params?.id}/${this.episode}`, {}).subscribe((data: any) => {
+				let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
+				let uuid: string = (data.uuid || romaji) + '-episode-' + this.episode
+				if (data?.linkURL?.link) {
+					this.episodeLink = {
+						link: this.sanitizer.bypassSecurityTrustResourceUrl(data.linkURL.link),
+						status: data.linkURL.status || 200
+					}
+					return
+				}
 				this.scaper.scrape(uuid, (urlData: any) => {
 					this.episodeLink = {
 						"link": this.sanitizer.bypassSecurityTrustResourceUrl(urlData.link),
 						"status": 200
 					}
-					console.log(this.episodeLink)
-					console.log(urlData)
 				})
 			})
 

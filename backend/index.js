@@ -3,6 +3,7 @@ import cors from "cors"
 import path from "path"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+import anime from "./routes/anime.js"
 dotenv.config()
 
 
@@ -13,12 +14,13 @@ const PORT = process.env.PORT || 5000
 const HOST = process.env.HOST || 'localhost'
 const MONGO_DB_URL = process.env.MONGO_DB_URL
 
-app.get('/api', async (req, res) => {
+app.get('/api', (req, res) => {
     res.status(200).json({
         message: 'server works'
     })
 })
 
+app.use('/api/anime', anime)
 
 const __dirname = path.resolve()
 app.use(express.static(path.join(__dirname, "/frontend/dist/mixanime")))

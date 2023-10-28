@@ -17,6 +17,7 @@ export class ScraperService {
 				callback(JSON.parse(linkURL))
 				return
 			}
+			console.log(url)
 			axios.get(url)
 				.then((response: any) => {
 					const $ = load(response.data)

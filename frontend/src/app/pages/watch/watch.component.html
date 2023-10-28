@@ -18,10 +18,10 @@
     </div>
     <div class="pt-1 lg:flex md:flex">
         <div class="lg:w-8/12 md:w-8/12 w-full aspect-[16/9] p-2 relative" id="player">
-            <!-- <div class="w-full h-full relative border border-slate-200">
-                <app-loader></app-loader>
-            </div> -->
-            <iframe allowfullscreen="true" id="playerframe" class="w-full h-full rounded-sm"
+            <div *ngIf="episodeLink === null" class="relative h-full">
+                <app-loader class="left-0 top-0"></app-loader>
+            </div>
+            <iframe *ngIf="episodeLink !== null" allowfullscreen="true" id="playerframe" class="w-full h-full rounded-sm"
                 [src]="episodeLink.link"></iframe>
             <div class="flex pt-2 justify-between">
                 <div class="w-1/2 a-center">
@@ -51,7 +51,7 @@
                                 name="heroMagnifyingGlass"></ng-icon>
                         </div>
                     </div>
-                    <div class="lg:w-3/12 md:w-3/12 w-5/12">
+                    <div class="w-5/12">
                         <div class="mx-2">
                             <select id="sort" name="sort" [(ngModel)]="episodeOrder" (change)="filterEpisodes()"
                                 class="block w-full p-2 text-sm border rounded-md bg-gray-700 border-gray-800 placeholder-gray-400 text-slate-200">
