@@ -23,17 +23,28 @@ export class ProfileComponent {
 			method: 'setNavButton',
 			params: ['profile']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.loading = true
+		const userData: any = JSON.parse(localStorage.getItem('user-data') || '{}')
+		if (!userData || !userData.email) {
+			this.router.navigateByUrl('/login')
+		}
 		this.server.post('/api/user/profile', {}).subscribe((userData: any) => {
 			this.loading = false
 			if (userData.error) {
 				this.router.navigateByUrl('/login')
 			}
+			this.name = userData.name
 			this.username = userData.name
 			this.usermail = userData.email
-			console.log(userData)
+			localStorage.setItem('user-data', JSON.stringify(userData))
 		})
 	}
+
+	name: string = ''
 
 	username: string = ''
 	usermail: string = ''
@@ -44,13 +55,12 @@ export class ProfileComponent {
 		npasswd: '',
 		message: '',
 	}
+	success: string = ''
 
 	validate(param: string) {
 		let flag = true
 		if (param === 'username' || param === 'all') {
-			if (this.username === '') {
-				this.errors.username = ''
-			} else if (3 > this.username.length || this.username.length > 30) {
+			if (3 > this.username.length || this.username.length > 30) {
 				this.errors.username = 'Name must be of size 3 to 30 characters'
 				flag = false
 			} else {
@@ -67,6 +77,11 @@ export class ProfileComponent {
 				this.errors.npasswd = ''
 			}
 		}
+		if (param === 'all') {
+			if (this.passwd === '') {
+				flag = false
+			}
+		}
 		return flag
 	}
 
@@ -74,7 +89,34 @@ export class ProfileComponent {
 		if (!this.validate('all')) {
 			return
 		}
-		console.log(formData)
+		this.server.post('/api/user/update-profile', formData).subscribe((userData: any) => {
+			if (userData.error) {
+				this.errors.message = userData.error
+				this.npasswd = ''
+				this.errors.npasswd = ''
+				this.passwd = ''
+				setTimeout(() => {
+					this.errors.message = ''
+				}, 5000)
+				return
+			}
+			this.name = userData.name
+			this.username = userData.name
+			this.npasswd = ''
+			this.errors.npasswd = ''
+			this.passwd = ''
+			this.success = 'Profile updated Successfully'
+			setTimeout(() => {
+				this.success = ''
+			}, 5000)
+			localStorage.setItem('token', userData.jwt)
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	reset() {
+		this.username = this.name
+		this.errors.username = ''
 	}
 
 }

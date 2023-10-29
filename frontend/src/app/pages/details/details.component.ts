@@ -57,6 +57,10 @@ export class DetailsComponent {
 			method: 'setNavButton',
 			params: ['details']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		try {
 			this.id = parseInt(localStorage.getItem('animeId') || '21')
 			setTimeout(() => {

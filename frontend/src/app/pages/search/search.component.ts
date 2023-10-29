@@ -230,6 +230,10 @@ export class SearchComponent {
 			method: 'setNavButton',
 			params: ['search']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.setEvents()
 	}
 

@@ -140,6 +140,10 @@ export class TrendingComponent {
 			method: 'setNavButton',
 			params: ['trending']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.setEvents()
 	}
 

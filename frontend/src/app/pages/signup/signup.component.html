@@ -3,6 +3,9 @@
     <div class="z-[2] lg:w-4/12 md:w-6/12 w-10/12 lg:mb-0 md:mb-0 mb-24">
         <form #signUpForm="ngForm" (ngSubmit)="submitForm(signUpForm.value)">
             <div class="signup-container w-full rounded-lg bg-[#06151a] lg:p-10 md:p-10 p-5">
+                <div class="mt-2 flex justify-end">
+                    <p class="text-sgreen text-[1.5rem] font-sans font-bold">SignUp</p>
+                </div>
                 <div class="mt-2">
                     <label for="username" class="block mb-2 text-md font-medium text-slate-200">Username</label>
                     <input type="text" name="username" [(ngModel)]="username" (input)="validate('username')"

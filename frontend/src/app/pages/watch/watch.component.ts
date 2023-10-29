@@ -171,6 +171,10 @@ export class WatchComponent {
 			method: 'setNavButton',
 			params: ['watch']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.params = this.route.snapshot.queryParams
 		this.episode = this.sharedView.episode
 		this.fetchData()

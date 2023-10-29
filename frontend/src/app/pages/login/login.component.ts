@@ -25,6 +25,12 @@ export class LoginComponent {
 			method: 'setNavButton',
 			params: ['login']
 		})
+		localStorage.removeItem('token')
+		localStorage.removeItem('user-data')
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 	}
 
 	validate(): boolean {

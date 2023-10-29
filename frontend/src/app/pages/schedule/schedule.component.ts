@@ -15,6 +15,10 @@ export class ScheduleComponent {
 			method: 'setNavButton',
 			params: ['schedule']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 	}
 
 }

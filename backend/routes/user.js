@@ -58,11 +58,14 @@ app.route('/profile')
 app.route('/update-profile')
     .post(async (req, res) => {
         const user = verify(req.headers)
+        const { username, passwd, npasswd } = req.body
         if (!user) {
             return res.status(200).json({ error: "not authorized" })
         }
+        if (user.passwd !== passwd) {
+            return res.status(200).json({ error: "Password Incorrect" })
+        }
         const email = user.email
-        const { username, passwd, npasswd } = req.body
         const data = await userCtrl.updateUser({ email, username, passwd, npasswd })
         const tokenData = {
             _id: data.result._id,

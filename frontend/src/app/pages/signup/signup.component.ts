@@ -21,6 +21,10 @@ export class SignupComponent {
 			method: 'setNavButton',
 			params: ['signup']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 	}
 
 	loading: Boolean = false
@@ -42,6 +46,7 @@ export class SignupComponent {
 		if (param === 'username' || param === 'all') {
 			if (this.username === '') {
 				this.errors.username = ''
+				flag = false
 			} else if (3 > this.username.length || this.username.length > 30) {
 				this.errors.username = 'Name must be of size 3 to 30 characters'
 				flag = false
@@ -52,6 +57,7 @@ export class SignupComponent {
 		if (param === 'usermail' || param === 'all') {
 			if (this.usermail === '') {
 				this.errors.usermail = ''
+				flag = false
 			} else if (!/^[a-zA-Z0-9\.]{1,64}@[a-zA-Z0-9]{3,10}.com$/.test(this.usermail)) {
 				this.errors.usermail = 'Unknown Email Format'
 				flag = false
@@ -62,6 +68,7 @@ export class SignupComponent {
 		if (param === 'passwd' || param === 'all') {
 			if (this.passwd === '') {
 				this.errors.passwd = ''
+				flag = false
 			} else if (this.passwd.length < 8) {
 				this.errors.passwd = 'Contains atleast 8 chars'
 				flag = false
@@ -72,6 +79,7 @@ export class SignupComponent {
 		if (param === 'cpasswd' || param === 'all') {
 			if (this.cpasswd === '') {
 				this.errors.cpasswd = ''
+				flag = false
 			} else if (this.passwd !== this.cpasswd) {
 				this.errors.cpasswd = 'Password didn\'t match'
 				flag = false

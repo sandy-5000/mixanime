@@ -132,6 +132,10 @@ export class RecentComponent {
 			method: 'setNavButton',
 			params: ['recent']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.setEvents()
 	}
 

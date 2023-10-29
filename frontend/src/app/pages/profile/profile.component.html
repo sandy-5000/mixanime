@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="lg:w-9/12 md:w-8/12 w-full a-center">
-                <form class="w-full px-5">
+                <form class="w-full px-5" #profileForm="ngForm" (ngSubmit)="submitForm(profileForm.value)">
                     <div class="profile-container w-full lg:p-10 md:p-10 p-5">
                         <div class="mt-2">
                             <label for="usermail" class="block mb-2 text-md font-medium text-slate-200">Usermail</label>
@@ -41,8 +41,21 @@
                                     class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
                             </div>
                         </div>
-                        <span *ngIf="errors.message !== ''" class="text-red-300">{{errors.message}}</span>
+                        <span *ngIf="errors.message !== ''" class="mt-2 text-red-300">{{errors.message}}</span>
+                        <span *ngIf="success !== ''" class="mt-2 text-[#9fe6cd]">{{success}}</span>
                         <div class="mt-8 flex justify-end">
+                            <div>
+                                <div (click)="reset()"
+                                    class="btn py-2 pr-3 pl-2 text-red-300 hover:bg-red-300 hover:text-slate-800 border rounded-lg border-red-300 flex">
+                                    <div class="a-center">
+                                        <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangleMini"></ng-icon>
+                                    </div>
+                                    <div class="a-center">
+                                        <span class="text-[14px] font-semibold">Reset</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-1"></div>
                             <div>
                                 <button type="submit"
                                     class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
@@ -59,6 +72,7 @@
                 </form>
             </div>
         </div>
+        <div class="w-full"></div>
     </div>
     <app-footer></app-footer>
 </div>

@@ -207,6 +207,10 @@ export class HomeComponent {
 			method: 'setNavButton',
 			params: ['home']
 		})
+		this.sharedView.changeState({
+			method: 'checkLogin',
+			params: []
+		})
 		this.setEvents()
 	}
 
