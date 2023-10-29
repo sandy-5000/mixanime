@@ -17,6 +17,8 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { ScheduleComponent } from './pages/schedule/schedule.component'
 import { DetailsComponent } from './pages/details/details.component'
 import { WatchComponent } from './pages/watch/watch.component'
+import { LoginComponent } from './pages/login/login.component'
+import { SignupComponent } from './pages/signup/signup.component'
 
 import { CountdownComponent } from './components/countdown/countdown.component'
 import { DigitalclockComponent } from './components/digitalclock/digitalclock.component'
@@ -30,11 +32,10 @@ import {
 	heroArrowSmallRight
 } from '@ng-icons/heroicons/outline'
 import {
-	heroArrowRightOnRectangleMini,
 	heroIdentificationMini
 } from '@ng-icons/heroicons/mini'
 import {
-	matHomeOutline, matChevronRightOutline
+	matHomeOutline, matChevronRightOutline, matRestartAltOutline, matLogInOutline, matLogoutOutline
 } from '@ng-icons/material-icons/outline'
 import {
 	simpleOpenstreetmap, simpleSoundcharts, simpleDiscord, simpleTelegram, simpleIonic, simpleLaunchpad
@@ -44,10 +45,8 @@ import {
 } from '@ng-icons/iconoir'
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
-	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled
-} from '@ng-icons/tabler-icons';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component'
+	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled, tablerArrowBigUpLine
+} from '@ng-icons/tabler-icons'
 
 
 @NgModule({
@@ -67,8 +66,8 @@ import { SignupComponent } from './pages/signup/signup.component'
 		ScheduleComponent,
 		SnakegameComponent,
 		DigitalclockComponent,
-  LoginComponent,
-  SignupComponent
+		LoginComponent,
+		SignupComponent
 	],
 	imports: [
 		BrowserModule,
@@ -76,13 +75,13 @@ import { SignupComponent } from './pages/signup/signup.component'
 		AppRoutingModule,
 		HttpClientModule,
 		NgIconsModule.withIcons({
-			heroBolt, iconoirHomeSimple, heroArrowRightOnRectangleMini, simpleDiscord, heroMagnifyingGlass,
+			heroBolt, iconoirHomeSimple, matLogInOutline, simpleDiscord, heroMagnifyingGlass,
 			heroSwatch, matHomeOutline, matChevronRightOutline, heroPlayCircle, tablerSquareRoundedArrowRight,
 			tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft, tablerCircleDashed, heroPlus,
 			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight, heroChevronRight, heroChevronLeft,
 			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight, simpleTelegram, simpleIonic,
-			simpleLaunchpad,
-			iconoirHomeSimpleDoor, simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
+			simpleLaunchpad, matRestartAltOutline, tablerArrowBigUpLine, matLogoutOutline, iconoirHomeSimpleDoor,
+			simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],
 	providers: [],

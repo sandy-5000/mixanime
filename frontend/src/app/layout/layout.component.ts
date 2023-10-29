@@ -131,8 +131,9 @@ export class LayoutComponent {
 	}
 
 	checkLogin(): void {
+		const token = localStorage.getItem('token') || null
 		const userData = JSON.parse(localStorage.getItem('user-data') || '{}')
-		if (!userData.email || !userData.jwt || !userData.name) {
+		if (!userData.email || (!userData.jwt && !token) || !userData.name) {
 			return
 		}
 		this.loggedIn = true

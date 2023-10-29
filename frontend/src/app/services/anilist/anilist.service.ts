@@ -279,6 +279,35 @@ export class AnilistService {
 			}
 			`
 		},
+		schedule: `
+			query ($page: Int, $perPage: Int, $airingAtGreater: Int, $airingAtLesser: Int) {
+				Page(page: $page, perPage: $perPage) {
+					airingSchedules(airingAt_greater: $airingAtGreater, airingAt_lesser: $airingAtLesser,  sort: TIME) {
+						id
+						airingAt
+						episode
+						media {
+							id
+							title {
+								romaji
+								english
+								userPreferred
+								native
+							}
+							countryOfOrigin
+							format
+							duration
+							description
+							bannerImage
+							coverImage {
+								extraLarge
+								large
+							}
+						}
+					}
+				}
+			}
+		`
 	}
 
 	public static fetcher() {
@@ -310,7 +339,7 @@ export class AnilistService {
 				fetch(this.url, options)
 					.then(response => response.json())
 					.then(result => {
-						if (query == 'recent') {
+						if (query == 'recent' || query == 'schedule') {
 							result = result.data.Page.airingSchedules
 						} else if (query == 'details') {
 							result = result.data.Media
