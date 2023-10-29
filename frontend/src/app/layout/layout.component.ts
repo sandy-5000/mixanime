@@ -137,12 +137,14 @@ export class LayoutComponent {
 		}
 		this.loggedIn = true
 		document.querySelector('.login')?.classList.add('hidden')
+		document.querySelector('.login')?.classList.remove('flex')
 		document.querySelector('.logout')?.classList.add('flex')
 		document.querySelector('.logout')?.classList.remove('hidden')
 	}
 
 	logout() {
 		document.querySelector('.login')?.classList.remove('hidden')
+		document.querySelector('.login')?.classList.add('flex')
 		document.querySelector('.logout')?.classList.remove('flex')
 		document.querySelector('.logout')?.classList.add('hidden')
 		localStorage.removeItem('user-data')

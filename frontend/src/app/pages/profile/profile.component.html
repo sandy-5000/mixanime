@@ -1,10 +1,64 @@
-<div class="w-full min-h-full a-center">
-    <h1 class="text-2xl flex font-semibold text-slate-200">
-        <div class="a-center mr-1">
-            <ng-icon name="heroBolt"></ng-icon>
+<div class="w-full min-h-full relative flex flex-col justify-between">
+    <app-loader *ngIf="loading"></app-loader>
+    <div class="w-full">
+        <div class="lg:flex md:flex justify-between block">
+            <div class="lg:w-3/12 md:w-4/12 w-full p-6">
+                <div class="h-full flex flex-col justify-center">
+                    <img src="assets/images/profile.jpg" alt="profile"
+                        class="w-full glowing-border rounded-full">
+                </div>
+            </div>
+            <div class="lg:w-9/12 md:w-8/12 w-full a-center">
+                <form class="w-full px-5">
+                    <div class="profile-container w-full lg:p-10 md:p-10 p-5">
+                        <div class="mt-2">
+                            <label for="usermail" class="block mb-2 text-md font-medium text-slate-200">Usermail</label>
+                            <input type="email" [value]="usermail" [disabled]="true" id="usermail" placeholder="Enter your mail address"
+                                class="opacity-80 font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                            <span *ngIf="errors.usermail !== ''" class="text-red-300">{{errors.usermail}}</span>
+                        </div>
+                        <div class="mt-4">
+                            <label for="username" class="block mb-2 text-md font-medium text-slate-200">Username</label>
+                            <input type="text" name="username" [(ngModel)]="username" (input)="validate('username')" id="username"
+                                placeholder="Enter your Name"
+                                class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                            <span *ngIf="errors.username !== ''" class="text-red-300">{{errors.username}}</span>
+                        </div>
+                        <div class="lg:flex md:flex block justify-between">
+                            <div class="mt-2 lg:w-1/2 md:w-1/2 w-full">
+                                <label for="cpasswd" class="block mb-2 text-md font-medium text-slate-200">New
+                                    Password</label>
+                                <input type="password" name="npasswd" [(ngModel)]="npasswd" (input)="validate('npasswd')" id="npasswd"
+                                    placeholder="Enter your new password"
+                                    class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                                <span *ngIf="errors.npasswd !== ''" class="text-red-300">{{errors.npasswd}}</span>
+                            </div>
+                            <div class="px-1"></div>
+                            <div class="mt-2 lg:w-1/2 md:w-1/2 w-full">
+                                <label for="passwd" class="block mb-2 text-md font-medium text-slate-200">Old Password</label>
+                                <input type="password" name="passwd" [(ngModel)]="passwd" (input)="validate('passwd')" id="passwd"
+                                    placeholder="Enter your password"
+                                    class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                            </div>
+                        </div>
+                        <span *ngIf="errors.message !== ''" class="text-red-300">{{errors.message}}</span>
+                        <div class="mt-8 flex justify-end">
+                            <div>
+                                <button type="submit"
+                                    class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
+                                    <div class="a-center">
+                                        <ng-icon class="text-lg mr-1" name="heroArrowRightOnRectangleMini"></ng-icon>
+                                    </div>
+                                    <div class="a-center">
+                                        <span class="text-[14px] font-semibold">Update</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="a-center">
-            <span>MixAnime Profile!</span>
-        </div>
-    </h1>
+    </div>
+    <app-footer></app-footer>
 </div>

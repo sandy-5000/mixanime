@@ -26,7 +26,6 @@ app.route('/login')
         let token = jwt.sign(tokenData, process.env.JWT_SECRET, {
             expiresIn: "1d",
         })
-        delete data.result.passwd
         return res.status(200).json({ jwt: token, ...data.result._doc, passwd: null })
     })
 
@@ -34,36 +33,47 @@ app.route('/register')
     .post(async (req, res) => {
         const { username, usermail, passwd, cpasswd } = req.body
         if (cpasswd != passwd) {
-            return res.status(400, { message: 'Password does\'t match!' })
+            return res.status(200).json({ error: 'Password does\'t match!' })
         }
         if (passwd.length < 8) {
-            return res.status(400, { message: 'Password too short!' })
+            return res.status(200).json({ error: 'Password too short!' })
         }
         const data = await userCtrl.createUser({ username, usermail, passwd })
         if (data.status == 400) {
-            return res.status(400).json({ message: data.result })
+            return res.status(200).json({ error: data.result })
         }
-        return res.status(data.status).json({ ...data.result, passwd: null })
+        return res.status(200).json({ ...data.result._doc, passwd: null })
     })
 
 app.route('/profile')
-    .get(async (req, res) => {
-        if (!req.session.user) {
-            return res.render('login.html', { type: 'login' })
-        }
-        return res.render('profile.html', { logged: 'logout', user: req.session.user.result })
-    })
     .post(async (req, res) => {
-        if (!req.session.user) {
-            return res.send('User not logged in')
+        const user = verify(req.headers)
+        if (!user) {
+            return res.status(200).json({ error: "not authorized" })
         }
-        const email = req.session.user.result.email
+        const data = await userCtrl.authenticate({ usermail: user.email, passwd: user.passwd })
+        return res.status(200).json({ ...data.result._doc, passwd: null })
+    })
+
+app.route('/update-profile')
+    .post(async (req, res) => {
+        const user = verify(req.headers)
+        if (!user) {
+            return res.status(200).json({ error: "not authorized" })
+        }
+        const email = user.email
         const { username, passwd, npasswd } = req.body
         const data = await userCtrl.updateUser({ email, username, passwd, npasswd })
-        if (data.result != null) {
-            req.session.user = data
+        const tokenData = {
+            _id: data.result._id,
+            name: data.result.name,
+            email: data.result.email,
+            passwd: data.result.passwd
         }
-        return res.render('login.html', { type: 'other', route: '/user/profile' })
+        let token = jwt.sign(tokenData, process.env.JWT_SECRET, {
+            expiresIn: "1d",
+        })
+        return res.status(200).json({ jwt: token, ...data.result._doc, passwd: null })
     })
 
 app.route('/add-to-list')

@@ -22,6 +22,7 @@ export default function UserController() {
                 var result = await user.save()
                 return { status: 201, result }
             } catch (e) {
+                console.log(e)
                 return { status: 400, result: (errors[e.code] || 'User Creation failed!') }
             }
         },

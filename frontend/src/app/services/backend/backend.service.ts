@@ -22,6 +22,7 @@ export class BackendService {
 				.set('Content-Type', 'application/json')
 				.set('Access-Control-Allow-Origin', '*')
 				.set('Access-Control-Allow-Methods', 'POST')
+				.set('token', localStorage.getItem('token') || '')
 		}
 		return this.httpClient.post<any>(this._baseURL + url, data, config)
 	}

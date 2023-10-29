@@ -4,6 +4,11 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        validate: {
+            validator: function (v) {
+                return 3 <= v.length && v.length <= 30
+            }
+        }
     },
     email: {
         type: String,
