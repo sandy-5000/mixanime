@@ -49,7 +49,7 @@ import {
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
 	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled, tablerArrowBigUpLine, tablerCalendarDown,
-	tablerCalendarUp
+	tablerCalendarUp, tablerSettings
 } from '@ng-icons/tabler-icons'
 
 
@@ -85,7 +85,7 @@ import {
 			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight, heroChevronRight, heroChevronLeft,
 			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight, simpleTelegram, simpleIonic,
 			simpleLaunchpad, matRestartAltOutline, tablerArrowBigUpLine, matLogoutOutline, iconoirHomeSimpleDoor,
-			tablerCalendarDown, tablerCalendarUp, heroCalendarDaysSolid,
+			tablerCalendarDown, tablerCalendarUp, heroCalendarDaysSolid, tablerSettings,
 			simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

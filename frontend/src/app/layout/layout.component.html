@@ -48,15 +48,33 @@
                         <span class="text-[14px] font-semibold">Login</span>
                     </div>
                 </button>
-                <button (click)="logout()"
-                    class="logout btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] hidden">
-                    <div class="a-center">
-                        <ng-icon class="text-lg mr-1" name="matLogoutOutline"></ng-icon>
+                <div class="logout z-[11]">
+                    <div class="dropdown inline-block relative">
+                        <div class="cursor-pointer a-center mr-3">
+                            <ng-icon class="text-2xl text-slate-200" name="tablerSettings"></ng-icon>
+                        </div>
+                        <ul class="dropdown-menu absolute top-full right-0 side-bar hidden bg-[#011116] text-slate-200 pt-1">
+                            <li class="a-center">
+                                <span class="text-md py-1">Hello User!</span>
+                            </li>
+                            <li class="a-center mb-2 mx-1 rounded-md hover:bg-gray-700">
+                                <span (click)="goToRoute('/profile')" class="cursor-pointer text-md py-2">Profile</span>
+                            </li>
+                            <hr />
+                            <li class="a-center p-3">
+                                <button (click)="logout()"
+                                    class="btn py-2 pr-3 pl-2 text-sgreen bg-slate-800 hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
+                                    <div class="a-center">
+                                        <ng-icon class="text-lg mr-1" name="matLogoutOutline"></ng-icon>
+                                    </div>
+                                    <div class="a-center">
+                                        <span class="text-[14px] font-semibold">Logout</span>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="a-center">
-                        <span class="text-[14px] font-semibold">Logout</span>
-                    </div>
-                </button>
+                </div>
             </div>
         </div>
         <div class="w-full lg:hidden md:hidden small-search-hide pt-1 pb-2 px-3">
@@ -86,7 +104,8 @@
                 <div class='progress w-full h-full bg-sgreen left-right'></div>
             </div>
         </div>
-        <div *ngIf="searchBG" class="w-full z-10 absolute top-full flex justify-center pt-2" style="height: calc(100vh - 65px);">
+        <div *ngIf="searchBG" class="w-full z-10 absolute top-full flex justify-center pt-2"
+            style="height: calc(100vh - 65px);">
             <div
                 class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#011116] p-2 rounded-md max-h-[400px] overflow-y-scroll">
                 <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#082327]">
@@ -98,13 +117,15 @@
                             <div class="w-full">
                                 <p class="text-slate-200 text-sm">Title: {{item.title.english || item.title.romaji}}</p>
                                 <p class="text-slate-200 text-sm">Year: {{item.startDate.year}}</p>
-                                <p class="text-slate-200 text-sm">Status: {{(item.status).replaceAll('_', ' ').toLowerCase()}}</p>
+                                <p class="text-slate-200 text-sm">Status: {{(item.status).replaceAll('_', '
+                                    ').toLowerCase()}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-end my-2">
-                    <button (click)="goToRoute('/search')" class="bg-sgreen hover:scale-110 flex text-sm rounded-sm py-1 px-3 mx-2">
+                    <button (click)="goToRoute('/search')"
+                        class="bg-sgreen hover:scale-110 flex text-sm rounded-sm py-1 px-3 mx-2">
                         <div class="a-center">
                             <span class="text-sm">Show More</span>
                             <ng-icon class="text-md mx-1" name="tablerTransitionRight"></ng-icon>
