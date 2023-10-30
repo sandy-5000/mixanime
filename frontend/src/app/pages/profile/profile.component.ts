@@ -17,6 +17,36 @@ export class ProfileComponent {
 	) { }
 
 	loading: Boolean = false
+	userList: any = null
+	favourites: any = null
+
+	removeFromList(id: any) {
+		if (!id) {
+			return
+		}
+		this.server.post('/api/user/remove-from-list', { id }).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.userList = userData.userList
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	removeFromFavourite(id: any) {
+		if (!id) {
+			return
+		}
+		this.server.post('/api/user/remove-from-favourites', { id }).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.favourites = userData.favourites
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
 
 	ngOnInit(): void {
 		this.sharedView.changeState({
@@ -40,6 +70,8 @@ export class ProfileComponent {
 			this.name = userData.name
 			this.username = userData.name
 			this.usermail = userData.email
+			this.userList = userData.userList
+			this.favourites = userData.favourites
 			localStorage.setItem('user-data', JSON.stringify(userData))
 		})
 	}
@@ -124,6 +156,12 @@ export class ProfileComponent {
 			localStorage.setItem('token', userData.jwt)
 			localStorage.setItem('user-data', JSON.stringify(userData))
 		})
+	}
+
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
+		this.router.navigateByUrl('/details')
 	}
 
 	reset() {

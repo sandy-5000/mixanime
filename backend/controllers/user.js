@@ -46,33 +46,54 @@ export default function UserController() {
                 const item = {
                     id, title, coverImage
                 }
-                let result = await MAUser.findOneAndUpdate({ email }, {
-                    $push: {
-                        userList: item
+                let user = await MAUser.findOne({ email }, { passwd: 0 })
+                if (!user) {
+                    return {
+                        status: 400,
+                        result: { error: 'User not found' }
                     }
-                }, { new: true })
-                if (!result) {
-                    return { status: 400, result: 'Not Added to list' }
                 }
-                return { status: 201, result }
+                if (user.userList.length >= 50) {
+                    return {
+                        status: 400,
+                        result: { error: 'Can\'t add more than 50 items' }
+                    }
+                }
+                for (let item of user.userList) {
+                    if (item.id === id) {
+                        return {
+                            status: 200,
+                            result: { error: 'Already Added' }
+                        }
+                    }
+                }
+                user.userList.push(item)
+                user.save()
+                return { status: 201, result: user }
             } catch (e) {
-                return { status: 400, result: 'Add to List failed!' }
+                return {
+                    status: 400,
+                    result: { error: 'Add to List failed!' }
+                }
             }
         },
         removeFromList: async function ({ email, id }) {
             try {
-                let result = await MAUser.findOneAndUpdate({ email }, {
-                    $pull: {
-                        userList: { id: id }
+                let user = await MAUser.findOne({ email }, { passwd: 0 })
+                if (!user) {
+                    return {
+                        status: 400,
+                        result: { error: 'User not found' }
                     }
-                }, { new: true })
-                if (!result) {
-                    return { status: 400, result: 'Not Removed to list' }
                 }
-                return { status: 201, result }
+                user.userList = user.userList.filter(item => item.id != id)
+                user.save()
+                return { status: 201, result: user }
             } catch (e) {
-                console.error(e)
-                return { status: 400, result: 'Remove from List failed!' }
+                return {
+                    status: 400,
+                    result: { error: 'Remove from List failed!' }
+                }
             }
         },
         addToFavourites: async function ({ email, id, title, coverImage }) {
@@ -80,30 +101,54 @@ export default function UserController() {
                 const item = {
                     id, title, coverImage
                 }
-                let result = await MAUser.findOneAndUpdate({ email }, {
-                    $push: {
-                        favourites: item
+                let user = await MAUser.findOne({ email }, { passwd: 0 })
+                if (!user) {
+                    return {
+                        status: 400,
+                        result: { error: 'User not found' }
                     }
-                }, { new: true })
-                return { status: 201, result }
+                }
+                if (user.favourites.length >= 50) {
+                    return {
+                        status: 400,
+                        result: { error: 'Can\'t add more than 50 items' }
+                    }
+                }
+                for (let item of user.favourites) {
+                    if (item.id === id) {
+                        return {
+                            status: 200,
+                            result: { error: 'Already Added' }
+                        }
+                    }
+                }
+                user.favourites.push(item)
+                user.save()
+                return { status: 201, result: user }
             } catch (e) {
-                return { status: 400, result: 'Add to Favourites failed!' }
+                return {
+                    status: 400,
+                    result: { error: 'Add to List failed!' }
+                }
             }
         },
         removeFromFavourites: async function ({ email, id }) {
             try {
-                let result = await MAUser.findOneAndUpdate({ email }, {
-                    $pull: {
-                        favourites: { id: id }
+                let user = await MAUser.findOne({ email }, { passwd: 0 })
+                if (!user) {
+                    return {
+                        status: 400,
+                        result: { error: 'User not found' }
                     }
-                }, { new: true })
-                if (!result) {
-                    return { status: 400, result: 'Not Removed to list' }
                 }
-                return { status: 201, result }
+                user.favourites = user.favourites.filter(item => item.id != id)
+                user.save()
+                return { status: 201, result: user }
             } catch (e) {
-                console.error(e)
-                return { status: 400, result: 'Remove from List failed!' }
+                return {
+                    status: 400,
+                    result: { error: 'Remove from Favourites Failed!' }
+                }
             }
         },
     }

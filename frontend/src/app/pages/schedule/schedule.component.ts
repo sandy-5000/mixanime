@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnilistService } from 'src/app/services/anilist/anilist.service';
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service';
 
@@ -9,7 +10,10 @@ import { SharedviewService } from 'src/app/services/sharedview/sharedview.servic
 })
 export class ScheduleComponent {
 
-	constructor(private sharedView: SharedviewService) {
+	constructor(
+		private router: Router,
+		private sharedView: SharedviewService
+	) {
 		this.dataMethods = AnilistService.fetcher()
 		this.date = (x: number) => {
 			let p: any = new Date(x * 1000)
@@ -111,11 +115,17 @@ export class ScheduleComponent {
 			this.setEvents(i, true)
 		}
 		setTimeout(() => {
-			this.loading.schedule = false	
+			this.loading.schedule = false
 		}, 300)
 		setTimeout(() => {
 			this.showEvent(1)
 		}, 500)
+	}
+
+	goToDetails(id: number) {
+		this.sharedView.animeId = id
+		this.sharedView.changeDetails(id)
+		this.router.navigateByUrl('/details')
 	}
 
 }

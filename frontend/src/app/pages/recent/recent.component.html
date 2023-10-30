@@ -33,7 +33,7 @@
         </div>
     </div>
     <section class="container mx-auto">
-        <div class="lg:m-10 m-5">
+        <div class="lg:m-10 lg:mt-10 mt-5 m-3">
             <div class="flex justify-between mb-2">
                 <div class="flex">
                     <div class="a-center">
@@ -47,7 +47,14 @@
             <div class="recent-container w-full overflow-x-scroll relative min-h-[600px]">
                 <app-loader *ngIf="loading.recent"></app-loader>
                 <div class="recent grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 relative">
-                    <div *ngFor="let item of recentData; index as i" class="hidden-recent-card w-full p-2">
+                    <div (click)="goToWatch(
+                            item.media.id,
+                            item.media.title.romaji ||
+                            item.media.title.english ||
+                            item.media.title.userPreferred ||
+                            item.media.title.native,
+                            item.episode
+                        )" *ngFor="let item of recentData; index as i" class="cursor-pointer hidden-recent-card w-full p-2">
                         <div class="recent-card relative p-2 rounded-lg"
                             style="background-image: url({{item.media.coverImage.extraLarge}});">
                             <div
@@ -65,14 +72,7 @@
                             <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
-                        <h1 (click)="goToWatch(
-                            item.media.id,
-                            item.media.title.romaji ||
-                            item.media.title.english ||
-                            item.media.title.userPreferred ||
-                            item.media.title.native,
-                            item.episode
-                        )" class="text-sm pt-1 font-semibold text-sgreen cursor-pointer">
+                        <h1 class="text-sm pt-1 font-semibold text-sgreen">
                             {{
                             item.media.title.userPreferred ||
                             item.media.title.english ||

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
+import { BackendService } from 'src/app/services/backend/backend.service'
 import { SharedviewService } from 'src/app/services/sharedview/sharedview.service'
 
 @Component({
@@ -13,6 +14,7 @@ export class DetailsComponent {
 	id: number = 21
 
 	constructor(
+		private server: BackendService,
 		private sharedView: SharedviewService,
 		private router: Router
 	) {
@@ -36,12 +38,15 @@ export class DetailsComponent {
 	item: any = null
 	dataMethods: any = {}
 	date: any = null
+	addedToList: boolean = false
+	addedToFavourite: boolean = false
 
 	setPageData: any = {
 		details: (data: any) => {
 			data.relations.nodes = data.relations.nodes
 				.filter((x: any) => x.type == 'ANIME' || x.type == 'MOVIE')
 			this.item = data
+			this.cheakAnime()
 		}
 	}
 
@@ -50,6 +55,100 @@ export class DetailsComponent {
 		this.dataMethods.get('details', { id: this.id }, (data: any) => {
 			this.setPageData.details(data)
 		})
+	}
+
+	addToList() {
+		if (!this.item?.id) {
+			return
+		}
+		const animeData = {
+			id: this.item.id,
+			title: (
+				this.item.title.romaji ||
+				this.item.title.english ||
+				this.item.title.userPreferred ||
+				this.item.title.native || ''),
+			coverImage: this.item.coverImage.extraLarge
+		}
+		this.server.post('/api/user/add-to-list', animeData).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.addedToList = true
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	removeFromList() {
+		if (!this.item?.id) {
+			return
+		}
+		this.server.post('/api/user/remove-from-list', { id: this.item.id }).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.addedToList = false
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	addToFavourite() {
+		if (!this.item?.id) {
+			return
+		}
+		const animeData = {
+			id: this.item.id,
+			title: (
+				this.item.title.romaji ||
+				this.item.title.english ||
+				this.item.title.userPreferred ||
+				this.item.title.native || ''),
+			coverImage: this.item.coverImage.extraLarge
+		}
+		this.server.post('/api/user/add-to-favourites', animeData).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.addedToFavourite = true
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	removeFromFavourite() {
+		if (!this.item?.id) {
+			return
+		}
+		this.server.post('/api/user/remove-from-favourites', { id: this.item.id }).subscribe((userData: any) => {
+			if (userData.error) {
+				console.log(userData)
+				return
+			}
+			this.addedToFavourite = false
+			localStorage.setItem('user-data', JSON.stringify(userData))
+		})
+	}
+
+	cheakAnime() {
+		const userData = JSON.parse(localStorage.getItem('user-data') || '{}')
+		if (userData.userList) {
+			for (let anime of userData.userList) {
+				if (anime.id === this.item.id) {
+					this.addedToList = true
+					break
+				}
+			}
+		}
+		if (userData.favourites) {
+			for (let anime of userData.favourites) {
+				if (anime.id === this.item.id) {
+					this.addedToFavourite = true
+					break
+				}
+			}
+		}
 	}
 
 	ngOnInit() {

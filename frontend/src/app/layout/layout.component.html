@@ -1,6 +1,6 @@
 <div class="w-screen h-screen">
     <!-- <div *ngIf="searchBG"  class="fixed top-0 left-0 z-[9] w-screen h-screen search-bg bg-gray-900 bg-opacity-60"></div> -->
-    <header class="z-10 bg-[#011116] relative">
+    <header class="z-10 side-bar bg-[#011116] relative">
         <div class="h-[60px] flex relative justify-between">
             <div class="a-center px-5 py-2">
                 <div (click)="goToRoute('/home')"
@@ -90,8 +90,8 @@
             <div
                 class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#011116] p-2 rounded-md max-h-[400px] overflow-y-scroll">
                 <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#082327]">
-                    <div class="flex">
-                        <div (click)="goToDetails(item.id)" class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
+                    <div (click)="goToDetails(item.id)" class="flex cursor-pointer">
+                        <div class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center">
                             <img src="{{item.coverImage.large}}" class="w-full aspect-[3/4]" alt="anime-img">
                         </div>
                         <div class="lg:w-10/12 md:w-10/12 w-9/12 p-2 a-center">
