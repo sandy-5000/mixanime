@@ -38,3 +38,7 @@
         display: none !important;
     }
 }
+
+.side-bar {
+    box-shadow: 0 0 5px rgba(52, 220, 200, 0.3);
+}

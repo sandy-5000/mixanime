@@ -50,9 +50,11 @@ export class ProfileComponent {
 	usermail: string = ''
 	passwd: string = ''
 	npasswd: string = ''
+	cpasswd: string = ''
 	errors: any = {
 		username: '',
 		npasswd: '',
+		cpasswd: '',
 		message: '',
 	}
 	success: string = ''
@@ -77,6 +79,17 @@ export class ProfileComponent {
 				this.errors.npasswd = ''
 			}
 		}
+		if (param === 'cpasswd' || param === 'all') {
+			if (this.cpasswd === '') {
+				this.errors.cpasswd = ''
+				flag = flag && this.npasswd === this.cpasswd
+			} else if (this.npasswd !== this.cpasswd) {
+				this.errors.cpasswd = 'Password didn\'t match'
+				flag = false
+			} else {
+				this.errors.cpasswd = ''
+			}
+		}
 		if (param === 'all') {
 			if (this.passwd === '') {
 				flag = false
@@ -90,11 +103,13 @@ export class ProfileComponent {
 			return
 		}
 		this.server.post('/api/user/update-profile', formData).subscribe((userData: any) => {
+			this.npasswd = ''
+			this.errors.npasswd = ''
+			this.cpasswd = ''
+			this.errors.cpasswd = ''
+			this.passwd = ''
 			if (userData.error) {
 				this.errors.message = userData.error
-				this.npasswd = ''
-				this.errors.npasswd = ''
-				this.passwd = ''
 				setTimeout(() => {
 					this.errors.message = ''
 				}, 5000)
@@ -102,9 +117,6 @@ export class ProfileComponent {
 			}
 			this.name = userData.name
 			this.username = userData.name
-			this.npasswd = ''
-			this.errors.npasswd = ''
-			this.passwd = ''
 			this.success = 'Profile updated Successfully'
 			setTimeout(() => {
 				this.success = ''

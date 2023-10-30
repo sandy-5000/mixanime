@@ -32,6 +32,9 @@ import {
 	heroArrowSmallRight
 } from '@ng-icons/heroicons/outline'
 import {
+	heroCalendarDaysSolid
+} from '@ng-icons/heroicons/solid'
+import {
 	heroIdentificationMini
 } from '@ng-icons/heroicons/mini'
 import {
@@ -45,7 +48,8 @@ import {
 } from '@ng-icons/iconoir'
 import {
 	tablerCalendarTime, tablerSquareRoundedArrowRight, tablerSquareRoundedChevronsRight, tablerSquareRoundedChevronsLeft,
-	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled, tablerArrowBigUpLine
+	tablerCircleDashed, tablerTransitionRight, tablerPointFilled, tablerHeartFilled, tablerArrowBigUpLine, tablerCalendarDown,
+	tablerCalendarUp
 } from '@ng-icons/tabler-icons'
 
 
@@ -81,6 +85,7 @@ import {
 			heroMagnifyingGlassCircle, heroXMark, tablerTransitionRight, heroChevronRight, heroChevronLeft,
 			tablerPointFilled, tablerHeartFilled, heroFunnel, heroArrowSmallRight, simpleTelegram, simpleIonic,
 			simpleLaunchpad, matRestartAltOutline, tablerArrowBigUpLine, matLogoutOutline, iconoirHomeSimpleDoor,
+			tablerCalendarDown, tablerCalendarUp, heroCalendarDaysSolid,
 			simpleSoundcharts, heroNewspaper, heroIdentificationMini, simpleOpenstreetmap, tablerCalendarTime
 		})
 	],

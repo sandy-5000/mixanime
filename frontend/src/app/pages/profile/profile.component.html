@@ -35,11 +35,19 @@
                             </div>
                             <div class="px-1"></div>
                             <div class="mt-2 lg:w-1/2 md:w-1/2 w-full">
-                                <label for="passwd" class="block mb-2 text-md font-medium text-slate-200">Old Password</label>
-                                <input type="password" name="passwd" [(ngModel)]="passwd" (input)="validate('passwd')" id="passwd"
-                                    placeholder="Enter your password"
+                                <label for="cpasswd" class="block mb-2 text-md font-medium text-slate-200">Confirm
+                                    Password</label>
+                                <input type="password" name="cpasswd" [(ngModel)]="cpasswd" (input)="validate('cpasswd')" id="cpasswd"
+                                    placeholder="Confirm your new password"
                                     class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                                <span *ngIf="errors.cpasswd !== ''" class="text-red-300">{{errors.cpasswd}}</span>
                             </div>
+                        </div>
+                        <div class="mt-2">
+                            <label for="passwd" class="block mb-2 text-md font-medium text-slate-200">Password</label>
+                            <input type="password" name="passwd" [(ngModel)]="passwd" (input)="validate('passwd')" id="passwd"
+                                placeholder="Enter your password"
+                                class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
                         </div>
                         <span *ngIf="errors.message !== ''" class="mt-2 text-red-300">{{errors.message}}</span>
                         <span *ngIf="success !== ''" class="mt-2 text-[#9fe6cd]">{{success}}</span>

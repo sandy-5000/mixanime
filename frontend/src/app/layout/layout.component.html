@@ -1,6 +1,6 @@
 <div class="w-screen h-screen">
     <!-- <div *ngIf="searchBG"  class="fixed top-0 left-0 z-[9] w-screen h-screen search-bg bg-gray-900 bg-opacity-60"></div> -->
-    <header class="z-10 bg-[#0e1a1a] relative">
+    <header class="z-10 bg-[#011116] relative">
         <div class="h-[60px] flex relative justify-between">
             <div class="a-center px-5 py-2">
                 <div (click)="goToRoute('/home')"
@@ -88,8 +88,8 @@
         </div>
         <div *ngIf="searchBG" class="w-full z-10 absolute top-full flex justify-center pt-2" style="height: calc(100vh - 65px);">
             <div
-                class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#0e1a1a] p-2 rounded-md max-h-[400px] overflow-y-scroll">
-                <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#132323]">
+                class="lg:w-[550px] md:w-[400px] sm:w-[350px] w-11/12 lg:ml-[60px] md:ml-[60px] sm:ml-[60px] bg-[#011116] p-2 rounded-md max-h-[400px] overflow-y-scroll">
+                <div *ngFor="let item of searchData" class="p-1 m-1 rounded-md hover:bg-[#082327]">
                     <div class="flex">
                         <div (click)="goToDetails(item.id)" class="lg:w-2/12 md:w-2/12 w-3/12 lg:p-2 p-1 a-center cursor-pointer">
                             <img src="{{item.coverImage.large}}" class="w-full aspect-[3/4]" alt="anime-img">
@@ -115,9 +115,10 @@
         </div>
     </header>
     <!-- <hr class="border-gray-700" /> -->
+    <!-- #0e1a1a -->
     <section style="height: calc(100% - 61px);">
-        <div class="bg-[#0e1a1a] flex h-full">
-            <nav class="flex-none w-[80px] z-[1] lg:inline md:inline hidden">
+        <div class="bg-[#011116] flex h-full">
+            <nav class="flex-none w-[80px] side-bar z-[1] lg:inline md:inline hidden">
                 <div class="py-5">
                     <div (click)="goToRoute('/home')" class="nav home-nav a-center py-3">
                         <button (click)="goToRoute('/home')">
@@ -185,7 +186,7 @@
                 </div>
             </nav>
             <!-- bg-[#040e11] -->
-            <nav class="fixed w-screen bg-[#0e1a1a] lg:hidden md:hidden left-0 bottom-0 z-[3]">
+            <nav class="fixed w-screen side-bar bg-[#011116] lg:hidden md:hidden left-0 bottom-0 z-[3]">
                 <!-- <hr class="border-gray-700" /> -->
                 <div class="w-full flex justify-between">
                     <div (click)="goToRoute('/trending')" class="nav trending-nav w-1/5 a-center p-3">
