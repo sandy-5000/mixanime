@@ -3,10 +3,15 @@
         <app-loader></app-loader>
     </div>
     <div *ngIf="!loading.schedule" class="py-5 flex flex-col space-y-3 w-full">
+        <div class="heading pb-5">
+            <span class="side-heading text-slate-200">
+                Weekly <span class="text-sgreen">Schedule</span>
+            </span>
+        </div>
         <div class="w-full" *ngFor="let day of range">
             <div class="flex justify-between p-2">
                 <div class="a-center">
-                    <span class="text-xl font-semibold text-slate-200">{{scheduleHead[day]}}</span>
+                    <span class="text-lg font-semibold text-slate-200">{{scheduleHead[day]}}</span>
                 </div>
                 <div class="a-center">
                     <button *ngIf="scheduleData[day] === null" (click)="showEvent(day)"
