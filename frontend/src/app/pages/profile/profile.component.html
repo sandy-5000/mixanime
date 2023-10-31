@@ -84,7 +84,7 @@
             <h1 class="text-lg text-slate-200 px-10 side-heading">Your <span class="text-sgreen">List</span></h1>
             <div *ngIf="userList !== null && userList.length !== 0" class="px-10 pt-2 w-full flex overflow-y-scroll">
                 <div *ngFor="let item of userList" class="rounded-md">
-                    <div (click)="goToDetails(item.id)" class="cursor-pointer w-[150px] p-2">
+                    <div (click)="goToDetails(item.id)" class="list-card cursor-pointer w-[150px] p-2">
                         <img class="w-full rounded-md aspect-[3/4]" src="{{item.coverImage}}" alt="cover_image" />
                         <h1 class="text-sm mt-1 text-sgreen">{{item.title}}</h1>
                     </div>
@@ -98,7 +98,7 @@
             <h1 class="text-lg text-slate-200 px-10 pt-2 side-heading">Your <span class="text-sgreen">Favourites</span></h1>
             <div *ngIf="userList !== null && favourites.length !== 0" class="p-10 pt-2 w-full flex overflow-y-scroll">
                 <div *ngFor="let item of favourites" class="rounded-md">
-                    <div (click)="goToDetails(item.id)" class="cursor-pointer w-[150px] p-2">
+                    <div (click)="goToDetails(item.id)" class="list-card cursor-pointer w-[150px] p-2">
                         <img class="w-full rounded-md aspect-[3/4]" src="{{item.coverImage}}" alt="cover_image" />
                         <h1 class="text-sm mt-1 text-sgreen">{{item.title}}</h1>
                     </div>

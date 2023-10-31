@@ -168,6 +168,9 @@ export class DetailsComponent {
 			this.sharedView.currentDetails.subscribe((data: any) => {
 				this.id = parseInt(data) || 21
 				this.fetchData()
+				this.addedToList = false
+				this.addedToFavourite = false
+				this.cheakAnime()
 			})
 		} catch (e) {
 			console.error(e)

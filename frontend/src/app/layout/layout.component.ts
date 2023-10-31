@@ -22,6 +22,7 @@ export class LayoutComponent {
 	searchBG: Boolean = false
 	searchData: any = []
 	loggedIn: Boolean = false
+	userName: string = ''
 
 	constructor(
 		private router: Router,
@@ -137,16 +138,19 @@ export class LayoutComponent {
 			return
 		}
 		this.loggedIn = true
+		this.userName = userData.name
 		document.querySelector('.login')?.classList.add('hidden')
 		document.querySelector('.login')?.classList.remove('flex')
-		document.querySelector('.logout')?.classList.add('flex')
 		document.querySelector('.logout')?.classList.remove('hidden')
+		const userName = document.querySelector('.user-name')
+		if (userName) {
+			userName.innerHTML = userData.name
+		}
 	}
 
 	logout() {
 		document.querySelector('.login')?.classList.remove('hidden')
 		document.querySelector('.login')?.classList.add('flex')
-		document.querySelector('.logout')?.classList.remove('flex')
 		document.querySelector('.logout')?.classList.add('hidden')
 		localStorage.removeItem('user-data')
 		localStorage.removeItem('token')
