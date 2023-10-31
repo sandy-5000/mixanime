@@ -135,6 +135,9 @@ export class LayoutComponent {
 		const token = localStorage.getItem('token') || null
 		const userData = JSON.parse(localStorage.getItem('user-data') || '{}')
 		if (!userData.email || (!userData.jwt && !token) || !userData.name) {
+			document.querySelector('.login')?.classList.remove('hidden')
+			document.querySelector('.login')?.classList.add('flex')
+			document.querySelector('.logout')?.classList.add('hidden')
 			return
 		}
 		this.loggedIn = true
