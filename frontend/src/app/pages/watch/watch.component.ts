@@ -109,15 +109,12 @@ export class WatchComponent {
 	setEpisode(episode: number) {
 		if (episode < 1) {
 			this.episode = 1
-			return
-		}
-		if (this.item.episodes && this.item.episodes <= episode) {
-			this.episode = this.item.episodes
-			return
-		}
-		if (this.item.nextAiringEpisode) {
-			episode = Math.min(episode, this.item.nextAiringEpisode.episode - 1)
-			this.episode = episode
+		} else if (this.item.nextAiringEpisode) {
+			this.episode = Math.min(episode, this.item.nextAiringEpisode.episode - 1)
+		} else if (this.item.episodes) {
+			this.episode = Math.min(episode, this.item.episodes)
+		} else {
+			this.episode = 1
 		}
 		this.fetchData()
 	}
