@@ -10,7 +10,7 @@ dotenv.config()
 const app = express.Router()
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const SALT = process.env.SALT || ''
+const SALT = '$2b$12$IFMhCvLBD/p1SGMAPvFBre'
 const userCtrl = UserController()
 
 app.route('/login')
