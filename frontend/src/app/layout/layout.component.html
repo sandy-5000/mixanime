@@ -48,41 +48,15 @@
                         <span class="text-[14px] font-semibold">Login</span>
                     </div>
                 </button>
-                <div class="logout a-center hidden z-[11]">
-                    <div class="dropdown inline-block relative">
-                        <div class="cursor-pointer a-center mr-3">
-                            <ng-icon class="text-2xl text-slate-200" name="tablerSettings"></ng-icon>
-                        </div>
-                        <ul class="dropdown-menu absolute w-max top-full right-0 side-bar hidden bg-[#011116] text-slate-200 pt-1">
-                            <li class="a-center">
-                                <span class="user-name text-md p-2"></span>
-                            </li>
-                            <li class="a-center mb-2 mx-1">
-                                <button (click)="goToRoute('/profile')"
-                                    class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 rounded-lg flex">
-                                    <div class="a-center">
-                                        <ng-icon class="text-lg mr-1" name="heroIdentificationMini"></ng-icon>
-                                    </div>
-                                    <div class="a-center">
-                                        <span class="text-[14px] font-semibold">Profile</span>
-                                    </div>
-                                </button>
-                            </li>
-                            <hr class="border-slate-700" />
-                            <li class="a-center px-3 py-2">
-                                <button (click)="logout()"
-                                    class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 rounded-lg flex">
-                                    <div class="a-center">
-                                        <ng-icon class="text-lg mr-1" name="matLogoutOutline"></ng-icon>
-                                    </div>
-                                    <div class="a-center">
-                                        <span class="text-[14px] font-semibold">Logout</span>
-                                    </div>
-                                </button>
-                            </li>
-                        </ul>
+                <button (click)="logout()"
+                    class="logout btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
+                    <div class="a-center">
+                        <ng-icon class="text-lg mr-1" name="matLogInOutline"></ng-icon>
                     </div>
-                </div>
+                    <div class="a-center">
+                        <span class="text-[14px] font-semibold">Logout</span>
+                    </div>
+                </button>
             </div>
         </div>
         <div class="w-full lg:hidden md:hidden small-search-hide pt-1 pb-2 px-3">
