@@ -160,6 +160,7 @@ export class SearchComponent {
 		this.hideModal()
 		this.searchData = []
 		this.variables.search.page = this.inputPageNo
+		sessionStorage.setItem('search-page-no', this.inputPageNo + '')
 		this.setEvents()
 	}
 
@@ -234,6 +235,7 @@ export class SearchComponent {
 			method: 'checkLogin',
 			params: []
 		})
+		this.variables.search.page = parseInt(sessionStorage.getItem('search-page-no') || '1') || 1
 		this.setEvents()
 	}
 

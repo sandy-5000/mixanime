@@ -117,6 +117,7 @@ export class RecentComponent {
 		this.hideModal()
 		this.recentData = []
 		this.variables.recent.page = this.inputPageNo
+		sessionStorage.setItem('recent-page-no', this.inputPageNo + '')
 		this.setEvents()
 	}
 
@@ -136,6 +137,7 @@ export class RecentComponent {
 			method: 'checkLogin',
 			params: []
 		})
+		this.variables.recent.page = parseInt(sessionStorage.getItem('recent-page-no') || '1') || 1
 		this.setEvents()
 	}
 

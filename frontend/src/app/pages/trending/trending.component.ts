@@ -120,6 +120,7 @@ export class TrendingComponent {
 		this.hideModal()
 		this.seasonData = []
 		this.variables.season.page = this.inputPageNo
+		sessionStorage.setItem('trending-page-no', this.inputPageNo + '')
 		this.setEvents()
 	}
 
@@ -144,6 +145,7 @@ export class TrendingComponent {
 			method: 'checkLogin',
 			params: []
 		})
+		this.variables.season.page = parseInt(sessionStorage.getItem('trending-page-no') || '1') || 1
 		this.setEvents()
 	}
 
