@@ -1,10 +1,11 @@
 import MAAnime from '../models/anime.js'
 import MAEpisode from '../models/episode.js'
+import MAQueue from '../models/queue.js'
 
 
 export default function AnimeController() {
     return {
-        getEpisode: async function ({ anilist_id, episode_no }, callback) {
+        getEpisode: async function ({ anilist_id, episode_no, romaji }, callback) {
             let defaultRes = {
                 uuid: null,
                 id: anilist_id,
@@ -40,11 +41,22 @@ export default function AnimeController() {
                 }
                 const anime = await MAAnime.findOne({ anilist_id })
                 defaultRes.uuid = anime?.romaji || null
+                await MAQueue.findOneAndUpdate({
+                    anilist_id, episode_no
+                }, {
+                    $inc: {
+                        frequency: 1
+                    },
+                    $set: {
+                        romaji: defaultRes.uuid || romaji
+                    }
+                }, { upsert: true, returnNewDocument: true })
                 return callback({
                     result: defaultRes,
                     status: 200
                 })
             } catch (e) {
+                console.log(e)
                 return callback({
                     result: defaultRes,
                     status: 200

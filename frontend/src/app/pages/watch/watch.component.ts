@@ -128,8 +128,8 @@ export class WatchComponent {
 			}
 			this.filterEpisodes()
 			this.episodeLink = null
-			this.server.get(`/api/anime/${this.params?.id}/${this.episode}`, {}).subscribe((data: any) => {
-				let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
+			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
+			this.server.get(`/api/anime/${this.params?.id}/${this.episode}/${romaji}`, {}).subscribe((data: any) => {
 				let uuid: string = (data.uuid || romaji) + '-episode-' + this.episode
 				if (data?.linkURL?.link) {
 					this.episodeLink = {
