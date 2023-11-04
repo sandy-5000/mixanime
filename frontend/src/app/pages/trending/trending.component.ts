@@ -146,6 +146,7 @@ export class TrendingComponent {
 			params: []
 		})
 		this.variables.season.page = parseInt(sessionStorage.getItem('trending-page-no') || '1') || 1
+		this.inputPageNo = this.variables.season.page
 		this.setEvents()
 	}
 

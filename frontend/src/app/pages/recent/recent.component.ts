@@ -138,6 +138,7 @@ export class RecentComponent {
 			params: []
 		})
 		this.variables.recent.page = parseInt(sessionStorage.getItem('recent-page-no') || '1') || 1
+		this.inputPageNo = this.variables.recent.page
 		this.setEvents()
 	}
 

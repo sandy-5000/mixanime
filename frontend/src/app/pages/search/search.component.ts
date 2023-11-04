@@ -236,6 +236,7 @@ export class SearchComponent {
 			params: []
 		})
 		this.variables.search.page = parseInt(sessionStorage.getItem('search-page-no') || '1') || 1
+		this.inputPageNo = this.variables.search.page
 		this.setEvents()
 	}
 
