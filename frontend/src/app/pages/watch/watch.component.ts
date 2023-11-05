@@ -130,7 +130,11 @@ export class WatchComponent {
 			this.episodeLink = null
 			let romaji: string = this.item.title.romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
 			this.server.get(`/api/anime/${this.params?.id}/${this.episode}/${romaji}`, {}).subscribe((data: any) => {
-				let uuid: string = (data.uuid || romaji) + '-episode-' + this.episode
+				let shift = 0
+				if (data?.meta_data?.shift) {
+					shift = data.meta_data?.shift
+				}
+				let uuid: string = (data.uuid || romaji) + '-episode-' + (shift + this.episode)
 				if (data?.linkURL?.link) {
 					this.episodeLink = {
 						link: this.sanitizer.bypassSecurityTrustResourceUrl(data.linkURL.link),

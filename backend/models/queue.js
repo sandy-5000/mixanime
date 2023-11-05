@@ -26,7 +26,13 @@ const queueSchema = new mongoose.Schema({
     frequency: {
         type: Number,
         default: 0,
-    }
+    },
+    meta_data: {
+        type: Object,
+        default: {
+            shift: 0,
+        },
+    },
 })
 
 queueSchema.index({ timestamp: 1 })

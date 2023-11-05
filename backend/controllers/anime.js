@@ -13,7 +13,10 @@ export default function AnimeController() {
                 linkURL: {
                     link: null,
                     status: 200
-                }
+                },
+                meta_data: {
+                    shift: 0,
+                },
             }
             try {
                 anilist_id = parseInt(anilist_id)
@@ -41,6 +44,9 @@ export default function AnimeController() {
                 }
                 const anime = await MAAnime.findOne({ anilist_id })
                 defaultRes.uuid = anime?.romaji || null
+                if (anime.meta_data) {
+                    defaultRes.meta_data = { shift: 0, ...anime.meta_data }
+                }
                 await MAQueue.findOneAndUpdate({
                     anilist_id, episode_no
                 }, {
@@ -48,6 +54,8 @@ export default function AnimeController() {
                         frequency: 1
                     },
                     $set: {
+                        event_type: 'episode',
+                        meta_data: defaultRes.meta_data,
                         romaji: defaultRes.uuid || romaji
                     }
                 }, { upsert: true, returnNewDocument: true })
