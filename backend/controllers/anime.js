@@ -44,7 +44,7 @@ export default function AnimeController() {
                 }
                 const anime = await MAAnime.findOne({ anilist_id })
                 defaultRes.uuid = anime?.romaji || null
-                if (anime.meta_data) {
+                if (anime?.meta_data) {
                     defaultRes.meta_data = { shift: 0, ...anime.meta_data }
                 }
                 await MAQueue.findOneAndUpdate({
