@@ -59,7 +59,7 @@ export class SnakegameComponent {
 			})
 			gameDetails.started = false
 			clearInterval(setIntervalId)
-			gameMessage.innerText = 'Game Over!'
+			gameMessage.innerText = 'KO!'
 			console.log('Game Over! Press \'start\' to replay...')
 		}
 
