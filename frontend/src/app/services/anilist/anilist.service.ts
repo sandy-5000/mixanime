@@ -318,7 +318,6 @@ export class AnilistService {
 				if (cacheData) {
 					cacheData = JSON.parse(cacheData)
 					if (cacheData.time && cacheData.time + 900000 /* 15mins in millisecs */ > Date.now()) {
-						console.log('cache data', key)
 						callback(cacheData.result)
 						return
 					}

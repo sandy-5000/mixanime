@@ -40,6 +40,7 @@ export class SearchComponent {
 			this.years.push(i)
 		}
 		this.dataMethods = AnilistService.fetcher()
+		localStorage.setItem('prev-page', router.url)
 	}
 
 	loading: any = {

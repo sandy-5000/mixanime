@@ -28,7 +28,7 @@ app.route('/login')
             passwd: data.result.passwd
         }
         let token = jwt.sign(tokenData, process.env.JWT_SECRET, {
-            expiresIn: "1d",
+            expiresIn: "7d",
         })
         return res.status(200).json({ jwt: token, ...data.result._doc, passwd: null })
     })
@@ -95,7 +95,7 @@ app.route('/add-to-list')
     .post(async (req, res) => {
         const user = verify(req.headers)
         if (!user) {
-            return res.status(200).json({ error: "not authorized" })
+            return res.status(200).json({ error: "not authorized", errorCode: 401 })
         }
         const email = user.email
         const { id, title, coverImage } = req.body
@@ -110,7 +110,7 @@ app.route('/remove-from-list')
     .post(async (req, res) => {
         const user = verify(req.headers)
         if (!user) {
-            return res.status(200).json({ error: "not authorized" })
+            return res.status(200).json({ error: "not authorized", errorCode: 401 })
         }
         const email = user.email
         const { id } = req.body
@@ -125,7 +125,7 @@ app.route('/add-to-favourites')
     .post(async (req, res) => {
         const user = verify(req.headers)
         if (!user) {
-            return res.status(200).json({ error: "not authorized" })
+            return res.status(200).json({ error: "not authorized", errorCode: 401 })
         }
         const email = user.email
         const { id, title, coverImage } = req.body
@@ -140,7 +140,7 @@ app.route('/remove-from-favourites')
     .post(async (req, res) => {
         const user = verify(req.headers)
         if (!user) {
-            return res.status(200).json({ error: "not authorized" })
+            return res.status(200).json({ error: "not authorized", errorCode: 401 })
         }
         const email = user.email
         const { id } = req.body

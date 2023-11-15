@@ -13,8 +13,10 @@ export class ProfileComponent {
 	constructor(
 		private server: BackendService,
 		private sharedView: SharedviewService,
-		private router: Router
-	) { }
+		private router: Router,
+	) {
+		localStorage.setItem('prev-page', router.url)
+	 }
 
 	loading: Boolean = false
 	userList: any = null
@@ -26,7 +28,7 @@ export class ProfileComponent {
 		}
 		this.server.post('/api/user/remove-from-list', { id }).subscribe((userData: any) => {
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.userList = userData.userList
@@ -40,7 +42,7 @@ export class ProfileComponent {
 		}
 		this.server.post('/api/user/remove-from-favourites', { id }).subscribe((userData: any) => {
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.favourites = userData.favourites

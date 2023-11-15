@@ -63,7 +63,12 @@ export class LoginComponent {
 				method: 'checkLogin',
 				params: []
 			})
-			this.router.navigateByUrl('/home')
+			const previousPage = localStorage.getItem('prev-page')
+			if (previousPage) {
+				this.goToRoute(previousPage)
+			} else {
+				this.goToRoute('/home')
+			}
 		})
 	}
 

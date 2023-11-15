@@ -29,6 +29,7 @@ export class TrendingComponent {
 			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
 		}
 		this.dataMethods = AnilistService.fetcher()
+		localStorage.setItem('prev-page', router.url)
 	}
 
 	loading: any = {

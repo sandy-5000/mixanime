@@ -33,6 +33,7 @@ export class DetailsComponent {
 			}
 			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
 		}
+		localStorage.setItem('prev-page', router.url)
 	}
 
 	item: any = null
@@ -71,8 +72,12 @@ export class DetailsComponent {
 			coverImage: this.item.coverImage.extraLarge
 		}
 		this.server.post('/api/user/add-to-list', animeData).subscribe((userData: any) => {
+			if (userData.error && userData.errorCode === 401) {
+				this.router.navigateByUrl('/login')
+				return
+			}
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.addedToList = true
@@ -85,8 +90,12 @@ export class DetailsComponent {
 			return
 		}
 		this.server.post('/api/user/remove-from-list', { id: this.item.id }).subscribe((userData: any) => {
+			if (userData.error && userData.errorCode === 401) {
+				this.router.navigateByUrl('/login')
+				return
+			}
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.addedToList = false
@@ -108,8 +117,12 @@ export class DetailsComponent {
 			coverImage: this.item.coverImage.extraLarge
 		}
 		this.server.post('/api/user/add-to-favourites', animeData).subscribe((userData: any) => {
+			if (userData.error && userData.errorCode === 401) {
+				this.router.navigateByUrl('/login')
+				return
+			}
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.addedToFavourite = true
@@ -122,8 +135,12 @@ export class DetailsComponent {
 			return
 		}
 		this.server.post('/api/user/remove-from-favourites', { id: this.item.id }).subscribe((userData: any) => {
+			if (userData.error && userData.errorCode === 401) {
+				this.router.navigateByUrl('/login')
+				return
+			}
 			if (userData.error) {
-				console.log(userData)
+				console.error(userData)
 				return
 			}
 			this.addedToFavourite = false

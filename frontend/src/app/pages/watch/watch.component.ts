@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { AnilistService } from 'src/app/services/anilist/anilist.service'
 import { BackendService } from 'src/app/services/backend/backend.service'
 import { ScraperService } from 'src/app/services/scraper/scraper.service'
@@ -18,7 +18,8 @@ export class WatchComponent {
 		private route: ActivatedRoute,
 		private scaper: ScraperService,
 		private sanitizer: DomSanitizer,
-		private server: BackendService
+		private server: BackendService,
+		private router: Router,
 	) {
 		this.dataMethods = AnilistService.fetcher()
 		window.addEventListener("resize", () => {
@@ -38,6 +39,7 @@ export class WatchComponent {
 			}
 			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
 		}
+		localStorage.setItem('prev-page', this.router.url)
 	}
 
 	params: any = null

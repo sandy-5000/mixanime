@@ -38,6 +38,7 @@ export class ScheduleComponent {
 			}
 			return longString
 		}
+		localStorage.setItem('prev-page', router.url)
 	}
 
 	range: any = new Array(7).fill(null).map((_, index: number) => index)

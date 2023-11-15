@@ -26,6 +26,7 @@ export class RecentComponent {
 			return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
 		}
 		this.dataMethods = AnilistService.fetcher()
+		localStorage.setItem('prev-page', router.url)
 	}
 
 	loading: any = {
@@ -113,7 +114,6 @@ export class RecentComponent {
 		if (isNaN(this.inputPageNo) || this.inputPageNo < 1) {
 			this.inputPageNo = 1
 		}
-		console.log(this.inputPageNo, 'Submit')
 		this.hideModal()
 		this.recentData = []
 		this.variables.recent.page = this.inputPageNo
