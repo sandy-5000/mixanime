@@ -86,7 +86,7 @@
                 <div *ngFor="let item of userList" class="rounded-md">
                     <div (click)="goToDetails(item.id)" class="list-card cursor-pointer w-[150px] p-2">
                         <img class="w-full rounded-md aspect-[3/4]" src="{{item.coverImage}}" alt="cover_image" />
-                        <h1 class="text-sm mt-1 text-sgreen">{{item.title}}</h1>
+                        <h1 class="text-xs mt-1 text-slate-200">{{item.title}}</h1>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                 <div *ngFor="let item of favourites" class="rounded-md">
                     <div (click)="goToDetails(item.id)" class="list-card cursor-pointer w-[150px] p-2">
                         <img class="w-full rounded-md aspect-[3/4]" src="{{item.coverImage}}" alt="cover_image" />
-                        <h1 class="text-sm mt-1 text-sgreen">{{item.title}}</h1>
+                        <h1 class="text-xs mt-1 text-slate-200">{{item.title}}</h1>
                     </div>
                 </div>
             </div>

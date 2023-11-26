@@ -22,7 +22,7 @@
                                     item.title.native
                                     }}
                                 </h3>
-                                <p class="a-xslide-hidden lg:block md:block hidden text-[14px] text-slate-200 overflow-scroll"
+                                <p class="a-xslide-hidden lg:block md:block hidden text-[13px] text-slate-200 overflow-scroll"
                                     style="max-height: 30% !important; width: 120%;" [innerHTML]="item.description">
                                 </p>
                                 <div class="my-3 flex">
@@ -128,15 +128,15 @@
                                 class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
                                 {{item.media.duration || 23}}:00</div>
                         </div>
-                        <h1 class="text-sm pt-2 flex justify-between text-slate-200">
+                        <h1 class="text-xs pt-2 flex justify-between text-slate-200">
                             <span>Episode:</span>
                             <span>{{item.episode}}</span>
                         </h1>
-                        <h1 class="text-sm pt-0 flex justify-between text-slate-200">
+                        <h1 class="text-xs pt-0 flex justify-between text-slate-200">
                             <span>Aired on:</span>
                             <span>{{date(item.airingAt)}}</span>
                         </h1>
-                        <h1 class="text-sm pt-1 font-semibold text-sgreen">
+                        <h1 class="lg:text-sm md:text-sm text-xs pt-1 font-semibold text-sgreen">
                             {{
                             item.media.title.userPreferred ||
                             item.media.title.english ||
