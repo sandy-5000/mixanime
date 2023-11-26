@@ -151,6 +151,7 @@ export class SearchComponent {
 	}
 
 	filter() {
+		this.inputPageNo = 1
 		this.setEvents()
 	}
 
