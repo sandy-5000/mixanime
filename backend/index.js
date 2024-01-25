@@ -17,7 +17,7 @@ const MONGO_DB_URL = process.env.MONGO_DB_URL
 
 app.get('/api', (req, res) => {
     res.status(200).json({
-        message: 'server works'
+        message: 'Api [mixanime]'
     })
 })
 
