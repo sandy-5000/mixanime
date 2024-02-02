@@ -142,7 +142,7 @@ export class HomeComponent {
 			setTimeout(() => {
 				addAnimation()
 			}, 100)
-			this.recentData = data.filter((x: any) => x.media.countryOfOrigin === 'JP').slice(0, 24)
+			this.recentData = data.filter((x: any) => x.media.countryOfOrigin === 'JP' && !x.media.genres?.includes('Hentai')).slice(0, 24)
 			this.loading.recent = false
 		},
 		season: (data: any) => {

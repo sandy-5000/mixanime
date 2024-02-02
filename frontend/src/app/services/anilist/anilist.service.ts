@@ -56,6 +56,7 @@ export class AnilistService {
 							countryOfOrigin
 							format
 							duration
+							genres
 							description
 							bannerImage
 							coverImage {
@@ -297,6 +298,7 @@ export class AnilistService {
 							countryOfOrigin
 							format
 							duration
+							genres
 							description
 							bannerImage
 							coverImage {

@@ -62,7 +62,7 @@ export class ScheduleComponent {
 	setPageData: any = {
 		schedule: (data: any, current: Date, index: number) => {
 			this.scheduleHead[index] = current.toString().slice(0, 15)
-			this.scheduleData[index] = data.filter((x: any) => x.media.countryOfOrigin != 'CN')
+			this.scheduleData[index] = data.filter((x: any) => x.media.countryOfOrigin != 'CN' && !x.media.genres?.includes('Hentai'))
 		}
 	}
 
