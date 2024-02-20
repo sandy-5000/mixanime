@@ -7,7 +7,7 @@
                     class="cursor-pointer bg-gray-800 hover:bg-[#9fe6cd] text-slate-200 hover:text-slate-800 shadow-inner a-center p-1 mr-3 rounded-xl">
                     <ng-icon class=" text-2xl" name="iconoirHomeSimple"></ng-icon>
                 </div>
-                <img class="w-[120px]" src="/assets/images/graph-pixel.png" alt="logo">
+                <img (click)="goToRoute('/home')" class="w-[120px]" src="/assets/images/graph-pixel.png" alt="logo">
             </div>
             <div class="a-center py-3 lg:w-[550px] md:w-[400px] sm:w-[350px] w-auto">
                 <div class="relative w-full lg:block md:block sm:block hidden">
