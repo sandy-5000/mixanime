@@ -62,7 +62,7 @@ export class SearchComponent {
 		year: '',
 		sort: 'TITLE_ENGLISH',
 		status: '',
-		averageScore: '50',
+		averageScore: '-1',
 	}
 
 	searchData: any = []
