@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: #040e11 !important;
+}
+
+#root {
+  /* background-color: #011116 !important; */
+  @apply h-screen;
+}
+
+.a-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@layer utilities {
+  .text-sgreen {
+    /* color: #5de4b5; */
+    color: #9fe6cd;
+  }
+
+  .bg-sgreen {
+    /* background-color: #5de4b5; */
+    background-color: #9fe6cd;
+  }
+}
+
+.bg-ratio {
+  @apply w-screen aspect-[3/5] md:aspect-[4/2] lg:aspect-[5/2];
+  transition: transform 0.1s linear;
+}
+
+.background {
+  background-size: cover;
+  background-position: center;
+}
+
+.background-blur {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 14, 17, 1) 0%,
+    rgba(4, 14, 17, 0.6) 50%,
+    rgba(4, 14, 17, 1) 100%
+  );
+}
+
+/* findbar style */
+
+.findbar-hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+.findbar-show {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+
+input:focus {
+    outline: none;
+}
