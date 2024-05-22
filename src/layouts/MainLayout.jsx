@@ -31,11 +31,11 @@ const MainLayout = ({ children }) => {
     }
   }, [])
 
-  const handleLogin = () => {
+  const handleAuth = () => {
     setLogin(prev => !prev)
   }
 
-  const handleFind = () => {
+  const toggleFind = () => {
     setBlur(prev => !prev)
   }
 
@@ -43,7 +43,7 @@ const MainLayout = ({ children }) => {
     <div className="relative">
       {
         blur && <div className="z-[4] fixed h-screen w-screen">
-          <Find handleFind={handleFind} />
+          <Find toggleFind={toggleFind} />
         </div>
       }
       <header className={"z-[3] fixed w-screen" + (blur ? " blur-md" : "")}>
@@ -53,14 +53,18 @@ const MainLayout = ({ children }) => {
               <Logo />
             </div>
             <div className="ml-3 h-full a-center">
-              <Button btnType="find" onClick={handleFind} />
+              <Button btnType="find" onClick={toggleFind} />
             </div>
           </div>
           <div className="a-center">
             {
               isLoggedIn
-                ? <Button onClick={handleLogin}><VscSignOut className="mr-2 text-xl" /> Logout</Button>
-                : <Button onClick={handleLogin}><VscSignIn className="mr-2 text-xl" /> Login</Button>
+                ? <Button onClick={handleAuth}><VscSignOut className="mr-2 text-xl" />
+                  <span className="w-12">Logout</span>
+                </Button>
+                : <Button onClick={handleAuth}><VscSignIn className="mr-2 text-xl" />
+                  <span className="w-12">Login</span>
+                </Button>
             }
           </div>
         </div>

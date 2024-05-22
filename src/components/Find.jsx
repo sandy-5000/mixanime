@@ -5,6 +5,8 @@ import { LuSearch } from "react-icons/lu"
 import { useEffect, useState } from "react"
 import Anilist from "../services/anilist.js"
 import { debounce } from "lodash"
+import { motion } from "framer-motion"
+
 
 const findAnime = debounce((value, previous, callback) => {
   value = value.trim()
@@ -21,27 +23,75 @@ const findAnime = debounce((value, previous, callback) => {
   })
 }, 500)
 
-const createCard = (data) => {
+const Card = ({ data, rotate, width }) => {
   const title =
     data.title.romaji ||
     data.title.userPreferred ||
     data.title.english ||
     data.title.native
   return (
-    <div>
-      <p className="text-gray-200">{title}</p>
+    <motion.div
+      style={{
+        transformOrigin: 'bottom center',
+        rotate: `${rotate}deg`,
+        left: `calc(50% - ${width / 2}px)`,
+      }}
+      className={`h-1/2 w-[${width}px] absolute top-0 inline-block`}
+    >
+      <div
+        className="rounded-full p-2 w-full flex justify-end"
+      >
+        <img
+          style={{ rotate: `-${rotate}deg` }}
+          className="object-cover rounded-full aspect-square w-full" src={data.coverImage.large}
+        />
+      </div>
+    </motion.div >
+  )
+}
+
+const AnimeList = ({ list }) => {
+  if (!list || list.length === 0) {
+    return (
+      <div>
+        <p>Nothing found</p>
+      </div>
+    )
+  }
+  const [shift, setShift] = useState(0)
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setShift(prev => (prev + 60) % 360)
+    }, 2000)
+    return () => {
+      clearInterval(timeInterval)
+    }
+  }, [])
+  let cards = Array(6).fill(0)
+  let side = 600, cardWidth = 200
+  return (
+    <div
+      style={{
+        width: side,
+        height: side
+      }}
+      className="relative aspect-square"
+    >
+      {
+        cards.map((_, index) =>
+          <Card
+            data={list[index % list.length]}
+            rotate={index * 60 + shift}
+            width={cardWidth}
+          />)
+      }
     </div>
   )
 }
 
-const Find = ({ handleFind }) => {
-  const [showFindBar, setShowFindBar] = useState(false)
+const Find = ({ toggleFind: closeButton }) => {
   const [query, setQuery] = useState('')
   const [list, setList] = useState(null)
-
-  useEffect(() => {
-    setShowFindBar(true)
-  }, [])
 
   useEffect(() => {
     console.log(list)
@@ -57,13 +107,23 @@ const Find = ({ handleFind }) => {
   }
 
   return (
-    <div className="relative w-screen h-screen">
-      <div className="absolute left-0 top-0 w-screen h-screen z-[5] p-5 overflow-y-scroll">
-        <div className="flex justify-end">
-          <Button btnType="icon" onClick={handleFind}><VscClose className="text-xl" /></Button>
+    <motion.div
+      className="relative w-screen h-screen"
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="absolute left-0 top-0 w-screen h-screen z-[5] overflow-y-scroll">
+        <div className="flex justify-end px-5 pt-5">
+          <Button btnType="icon" onClick={closeButton}><VscClose className="text-xl" /></Button>
         </div>
-        <div className="flex mt-3">
-          <div className={"ml-3 relative " + (showFindBar ? "findbar-show" : "findbar-hidden")}>
+        <div className="flex mt-3 px-5">
+          <motion.div
+            className="ml-3 relative"
+            initial={{ opacity: 0, x: 300 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
             <div className="absolute h-8 left-0 px-3 a-center">
               <LuSearch className="text-gray-400" />
             </div>
@@ -80,20 +140,18 @@ const Find = ({ handleFind }) => {
               uppercase tracking-wide text-xs"
               placeholder="Search..."
             />
-          </div>
+          </motion.div>
         </div>
-        <div className="flex flex-wrap">
-          {
-            list && list.map(x => createCard(x))
-          }
+        <div className="w-full mt-[100px] a-center overflow-hidden">
+          <AnimeList list={list} />
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 Find.propTypes = {
-  handleFind: PropTypes.any
+  toggleFind: PropTypes.any
 }
 
 
