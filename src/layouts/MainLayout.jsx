@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { PropTypes } from "prop-types"
 import { VscSignIn, VscSignOut } from "react-icons/vsc"
-import Logo from "../components/Logo"
-import Button from "../components/Button"
-import wall from "../assets/images/wallp0.jpg"
-import Find from "../components/Find"
+import Logo from "/src/components/Logo"
+import Button from "/src/components/Button"
+import wall from "/src/assets/images/wallp0.jpg"
+import Find from "/src/components/Find"
 
 
 const MainLayout = ({ children }) => {

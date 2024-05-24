@@ -1,8 +1,10 @@
 import { PropTypes } from "prop-types"
 import { LuSearch } from "react-icons/lu"
 import { motion } from "framer-motion"
+import { useState } from "react"
 
-const Button = ({ btnType = 'default', children, ...props }) => {
+const Button = ({ btnType = 'default', children, style = {}, hoverStyle = {}, ...props }) => {
+  const [hover, setHover] = useState(false)
   const buttons = {
     'find': (
       <motion.div
@@ -35,10 +37,18 @@ const Button = ({ btnType = 'default', children, ...props }) => {
     ),
     'default': (
       <motion.div
-        whileHover={{ scale: 1.1 }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onTapStart={() => setHover(true)}
+        onTapEnd={() => setHover(false)}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <button type="button" {...props}
+          style={{
+            ...style,
+            ...(hover ? hoverStyle : {})
+          }}
           className="inline-flex items-center px-4 py-2 bg-transparent ring-2 ring-gray-800
           rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm
           transition ease-in-out duration-150
@@ -56,7 +66,9 @@ const Button = ({ btnType = 'default', children, ...props }) => {
 
 Button.propTypes = {
   children: PropTypes.node,
-  btnType: PropTypes.string
+  btnType: PropTypes.string,
+  style: PropTypes.any,
+  hoverStyle: PropTypes.any,
 }
 
 export default Button

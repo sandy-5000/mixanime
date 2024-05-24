@@ -34,6 +34,14 @@ body {
     /* background-color: #5de4b5; */
     background-color: #9fe6cd;
   }
+
+  .text-gap-2 {
+    @apply font-semibold text-xs uppercase tracking-widest;
+  }
+  
+  .text-gap-1 {
+    @apply font-bold text-xs tracking-wider;
+  }
 }
 
 .bg-ratio {
@@ -64,6 +72,6 @@ input:focus {
   padding: 0.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
