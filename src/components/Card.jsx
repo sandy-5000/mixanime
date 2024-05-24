@@ -14,25 +14,29 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
 
   const [hover, setHover] = useState(false)
 
-  const imgVariants = {
-    open: { scale: 1.1, x: -10, y: -5, rotate: -10 },
-    closed: { scale: 1, x: 0, y: 5, rotate: 0 },
-  }
-  const titleVariants = {
-    open: { x: -10 },
-    closed: { x: 0 },
-  }
-  const bottomVariants = {
-    open: { x: 10 },
-    closed: { x: 0 },
-  }
-  const detailsButtonVariants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: 50 },
-  }
-  const addButtonVariants = {
-    open: { x: 5 },
-    closed: { x: 0 },
+  const variants = {
+    img: {
+      open: { scale: 1.1, x: -10, y: -5, rotate: -10 },
+      closed: { scale: 1, x: 0, y: 5, rotate: 0 },
+    },
+    title: {
+      open: { x: -10 },
+      closed: { x: 0 },
+    },
+    bottom: {
+      open: { x: 10 },
+      closed: { x: 0 },
+    },
+    button: {
+      details: {
+        open: { opacity: 1, x: 0 },
+        closed: { opacity: 0, x: 50 },
+      },
+      add: {
+        open: { x: 5 },
+        closed: { x: 0 },
+      },
+    },
   }
 
   const cards = {
@@ -53,7 +57,7 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
             <div className="h-full aspect-[2/3]">
               <motion.div
                 animate={hover ? 'open' : 'closed'}
-                variants={imgVariants}
+                variants={variants.img}
               >
                 <img
                   className="object-cover rounded-md h-full w-full" src={data.coverImage.large}
@@ -66,7 +70,7 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
             >
               <motion.div
                 animate={hover ? 'open' : 'closed'}
-                variants={titleVariants}
+                variants={variants.title}
                 className="flex justify-end"
               >
                 <div className="w-[55px] flex justify-end items-center pr-1">
@@ -80,12 +84,12 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
               </motion.div>
               <motion.div
                 animate={hover ? 'open' : 'closed'}
-                variants={bottomVariants}
+                variants={variants.bottom}
               >
                 <div className="flex justify-end mb-2">
                   <motion.div
                     animate={hover ? 'open' : 'closed'}
-                    variants={detailsButtonVariants}
+                    variants={variants.button.details}
                     className="pr-5"
                   >
                     <Button
@@ -105,7 +109,7 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
                   </motion.div>
                   <motion.div
                     animate={hover ? 'open' : 'closed'}
-                    variants={addButtonVariants}
+                    variants={variants.button.add}
                     className="pr-5"
                   >
                     <Button
