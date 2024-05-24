@@ -8,13 +8,14 @@ import { debounce } from "lodash"
 import { motion } from "framer-motion"
 import Card from "/src/components/Card.jsx"
 
-const findAnime = debounce((value, previous, callback) => {
+const findAnime = debounce((value, previous, setLoading, callback) => {
   value = value.trim()
+  setLoading(true)
+  callback(null)
   if (value === '' || value === previous) {
-    callback(null)
+    setLoading(false)
     return
   }
-  callback(null)
   Anilist('find', {
     page: 1,
     perPage: 6,
@@ -22,31 +23,33 @@ const findAnime = debounce((value, previous, callback) => {
   }, (data) => {
     setTimeout(() => {
       callback(data)
+      setLoading(false)
     }, 500)
   })
 }, 500)
 
-const AnimeList = ({ list }) => {
-  if (!list || list.length === 0) {
-    return (
-      <div>
-        <p>Nothing found</p>
-      </div>
-    )
-  }
+const AnimeList = ({ list, loading }) => {
   return (
     <div className="lg:flex justify-between">
       <div className="w-full lg:w-1/3"></div>
       <div className="w-full lg:w-2/3 flex flex-wrap">
         {
-          list.map((data, index) =>
-            <Card
-              key={'find-card-' + index}
-              type="findAnime"
-              data={data}
-              index={index + 1}
-            />
-          )
+          loading
+            ? <div>
+              <p className="text-gray-200">Loading</p>
+            </div>
+            : (list && list.length !== 0
+              ? list.map((data, index) =>
+                <Card
+                  key={'find-card-' + index}
+                  type="findAnime"
+                  data={data}
+                  index={index + 1}
+                />
+              )
+              : <div>
+                <p className="text-gray-200">Nothing found</p>
+              </div>)
         }
       </div>
     </div>
@@ -54,18 +57,22 @@ const AnimeList = ({ list }) => {
 }
 
 AnimeList.propTypes = {
-  list: PropTypes.array
+  list: PropTypes.array,
+  loading: PropTypes.bool,
 }
 
 
 const Find = ({ toggleFind: closeButton }) => {
   const [query, setQuery] = useState('')
+  const [loading, setLoading] = useState(false)
   const [list, setList] = useState(null)
 
   const handleQueryChange = (e) => {
     const value = e.target.value || ''
     setQuery(value)
-    findAnime(value, query, setList)
+    findAnime(value, query, setLoading, (data) => {
+      setList(data)
+    })
   }
   const handleClose = () => {
     setQuery('')
@@ -108,7 +115,7 @@ const Find = ({ toggleFind: closeButton }) => {
           </motion.div>
         </div>
         <div className="w-full mt-8">
-          {query?.length > 0 && <AnimeList list={list} />}
+          {query?.length > 0 && <AnimeList list={list} loading={loading} />}
         </div>
       </div>
     </motion.div>
