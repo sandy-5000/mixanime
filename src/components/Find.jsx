@@ -63,6 +63,7 @@ const AnimeList = ({ list, loading }) => {
       <div className="w-full lg:w-1/3 a-center">
         <div className="hidden lg:block w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
           <Lottie
+            style={{ cursor: 'default' }}
             options={bookFindOptions}
           />
         </div>
@@ -72,7 +73,10 @@ const AnimeList = ({ list, loading }) => {
           loading
             ? <div className="w-full a-center">
               <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
-                <Lottie options={loadingOptions} />
+                <Lottie
+                  style={{ cursor: 'default' }}
+                  options={loadingOptions}
+                />
               </div>
             </div>
             : (
@@ -88,7 +92,11 @@ const AnimeList = ({ list, loading }) => {
                 : <div className="w-full a-center">
                   <div>
                     <div className="mt-[150px] w-[200px] md:mt-0 md:w-[250px] lg:w-[300px] aspect-square">
-                      <Lottie speed={0.5} options={notFoundOptions} />
+                      <Lottie
+                        speed={0.5}
+                        style={{ cursor: 'default' }}
+                        options={notFoundOptions}
+                      />
                     </div>
                     <div className="a-center text-gray-200">
                       <p className="text-gap-1">
