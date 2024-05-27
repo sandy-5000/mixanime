@@ -7,6 +7,11 @@ import Anilist from "/src/services/anilist.js"
 import { debounce } from "lodash"
 import { motion } from "framer-motion"
 import Card from "/src/components/Card.jsx"
+import Lottie from 'react-lottie'
+import NotFoundAnimation from "/src/assets/animations/not_found.json"
+import LoadingAnimation from "/src/assets/animations/loading.json"
+import GirlFlyingAnimation from "/src/assets/animations/girl_flying.json"
+import BookFindAnimation from "/src/assets/animations/book_find.json"
 
 const findAnime = debounce((value, previous, setLoading, callback) => {
   value = value.trim()
@@ -29,27 +34,70 @@ const findAnime = debounce((value, previous, setLoading, callback) => {
 }, 500)
 
 const AnimeList = ({ list, loading }) => {
+  const loadingOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LoadingAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
+  const notFoundOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: NotFoundAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
+  const bookFindOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: BookFindAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
   return (
     <div className="lg:flex justify-between">
-      <div className="w-full lg:w-1/3"></div>
+      <div className="w-full lg:w-1/3 a-center">
+        <div className="hidden lg:block w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
+          <Lottie
+            options={bookFindOptions}
+          />
+        </div>
+      </div>
       <div className="w-full lg:w-2/3 flex flex-wrap">
         {
           loading
-            ? <div>
-              <p className="text-gray-200">Loading</p>
+            ? <div className="w-full a-center">
+              <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
+                <Lottie options={loadingOptions} />
+              </div>
             </div>
-            : (list && list.length !== 0
-              ? list.map((data, index) =>
-                <Card
-                  key={'find-card-' + index}
-                  type="findAnime"
-                  data={data}
-                  index={index + 1}
-                />
-              )
-              : <div>
-                <p className="text-gray-200">Nothing found</p>
-              </div>)
+            : (
+              list && list.length !== 0
+                ? list.map((data, index) =>
+                  <Card
+                    key={'find-card-' + index}
+                    type="findAnime"
+                    data={data}
+                    index={index + 1}
+                  />
+                )
+                : <div className="w-full a-center">
+                  <div>
+                    <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
+                      <Lottie speed={0.5} options={notFoundOptions} />
+                    </div>
+                    <div className="a-center text-gray-200">
+                      <p className="text-gap-1">
+                        Didn&#39;t found <span className="text-sgreen">Any related</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            )
         }
       </div>
     </div>
@@ -59,6 +107,32 @@ const AnimeList = ({ list, loading }) => {
 AnimeList.propTypes = {
   list: PropTypes.array,
   loading: PropTypes.bool,
+}
+
+
+const EmptyQuery = () => {
+  const options = {
+    loop: true,
+    autoplay: true,
+    animationData: GirlFlyingAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
+  return (
+    <div className="a-center">
+      <div>
+        <div className="w-[300px] md:w-[350px] lg:w-[400px] aspect-square">
+          <Lottie options={options} />
+        </div>
+        <div className="a-center text-gray-200">
+          <p className="text-gap-1">
+            Search <span className="text-sgreen">Any Anime</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 
@@ -92,8 +166,8 @@ const Find = ({ toggleFind: closeButton }) => {
         <div className="flex mt-3 px-5">
           <motion.div
             className="ml-3 relative"
-            initial={{ opacity: 0, x: 300 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
             <div className="absolute h-8 left-0 px-3 a-center">
@@ -115,7 +189,7 @@ const Find = ({ toggleFind: closeButton }) => {
           </motion.div>
         </div>
         <div className="w-full mt-8">
-          {query?.length > 0 && <AnimeList list={list} loading={loading} />}
+          {query?.length > 0 ? <AnimeList list={list} loading={loading} /> : <EmptyQuery />}
         </div>
       </div>
     </motion.div>
