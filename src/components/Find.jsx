@@ -87,7 +87,7 @@ const AnimeList = ({ list, loading }) => {
                 )
                 : <div className="w-full a-center">
                   <div>
-                    <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
+                    <div className="mt-[150px] w-[200px] md:mt-0 md:w-[250px] lg:w-[300px] aspect-square">
                       <Lottie speed={0.5} options={notFoundOptions} />
                     </div>
                     <div className="a-center text-gray-200">
