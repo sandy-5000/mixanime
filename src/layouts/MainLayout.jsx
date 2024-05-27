@@ -59,10 +59,10 @@ const MainLayout = ({ children }) => {
           <div className="a-center">
             {
               isLoggedIn
-                ? <Button onClick={handleAuth}><VscSignOut className="mr-2 text-xl" />
+                ? <Button btnType="auth" onClick={handleAuth}><VscSignOut className="mr-2 text-xl" />
                   <span className="w-12">Logout</span>
                 </Button>
-                : <Button onClick={handleAuth}><VscSignIn className="mr-2 text-xl" />
+                : <Button btnType="auth" onClick={handleAuth}><VscSignIn className="mr-2 text-xl" />
                   <span className="w-12">Login</span>
                 </Button>
             }

@@ -35,6 +35,24 @@ const Button = ({ btnType = 'default', children, style = {}, hoverStyle = {}, ..
         </button>
       </motion.div>
     ),
+    'auth': (
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <button type="button" {...props}
+          style={style}
+          className="inline-flex items-center px-4 py-2 bg-transparent ring-2 ring-gray-800
+          rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm
+          transition ease-in-out duration-150
+          hover:bg-sgreen hover:text-slate-800
+          focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-gray-800
+          disabled:opacity-25"
+        >
+          {children}
+        </button >
+      </motion.div>
+    ),
     'default': (
       <motion.div
         onMouseEnter={() => setHover(true)}
@@ -49,11 +67,10 @@ const Button = ({ btnType = 'default', children, style = {}, hoverStyle = {}, ..
             ...style,
             ...(hover ? hoverStyle : {})
           }}
-          className="inline-flex items-center px-4 py-2 bg-transparent ring-2 ring-gray-800
+          className="inline-flex items-center px-4 py-2 bg-transparent ring-2 ring-[#11182733]
           rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm
           transition ease-in-out duration-150
           hover:bg-sgreen hover:text-slate-800
-          focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-gray-800
           disabled:opacity-25"
         >
           {children}

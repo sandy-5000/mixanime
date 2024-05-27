@@ -116,7 +116,7 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
                       style={{
                         height: 30,
                         color: hover ? '#111827' : '#cbd5e1',
-                        backgroundColor: hover ? '#e5e7ebcc' : '#11182755',
+                        backgroundColor: hover ? '#e5e7ebee' : '#11182799',
                       }}
                       hoverStyle={{
                         color: '#111827',
