@@ -71,12 +71,19 @@ const AnimeList = ({ list, loading }) => {
       <div className="w-full lg:w-2/3 flex flex-wrap">
         {
           loading
-            ? <div className="w-full a-center">
-              <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
-                <Lottie
-                  style={{ cursor: 'default' }}
-                  options={loadingOptions}
-                />
+            ? <div style={{ height: 'calc(100vh - 150px)' }} className="w-full a-center">
+              <div>
+                <div className="w-[250px] md:w-[300px] lg:w-[350px] aspect-square">
+                  <Lottie
+                    style={{ cursor: 'default' }}
+                    options={loadingOptions}
+                  />
+                </div>
+                <div className="a-center text-gray-200">
+                  <p className="text-gap-1">
+                    Finding <span className="text-sgreen">Anime</span>
+                  </p>
+                </div>
               </div>
             </div>
             : (
@@ -89,9 +96,9 @@ const AnimeList = ({ list, loading }) => {
                     index={index + 1}
                   />
                 )
-                : <div className="w-full a-center">
+                : <div style={{ height: 'calc(100vh - 150px)' }} className="w-full a-center">
                   <div>
-                    <div className="mt-[150px] w-[200px] md:mt-0 md:w-[250px] lg:w-[300px] aspect-square">
+                    <div className="w-[200px] md:w-[250px] lg:w-[300px] aspect-square">
                       <Lottie
                         speed={0.5}
                         style={{ cursor: 'default' }}
@@ -128,7 +135,7 @@ const EmptyQuery = () => {
     }
   }
   return (
-    <div className="a-center">
+    <div style={{ height: 'calc(100vh - 150px)' }} className="a-center">
       <div>
         <div className="w-[300px] md:w-[350px] lg:w-[400px] aspect-square">
           <Lottie options={options} />
