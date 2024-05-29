@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types"
 import { Link } from "react-router-dom"
-import logo from "../assets/images/logo.png"
+import logo from "/src/assets/images/logo.png"
 
 const Logo = ({ size = 120 }) => {
   return (
