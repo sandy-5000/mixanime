@@ -11,7 +11,7 @@ const Button = ({ btnType = 'default', children, style = {}, hoverStyle = {}, ..
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <button {...props} className="flex ring-2 ring-teal-900 p-1 px-2 rounded-lg cursor-pointer">
+        <button {...props} className="flex ring-2 bg-gray-900 ring-teal-900 p-1 px-2 rounded-lg cursor-pointer">
           <div className="a-center animate-pulse">
             <LuSearch className="text-slate-200" />
           </div>

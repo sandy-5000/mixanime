@@ -42,11 +42,16 @@ const MainLayout = ({ children }) => {
   return (
     <div className="relative">
       {
-        blur && <div className="z-[4] fixed h-screen w-screen">
+        blur && <div className="z-[5] fixed h-screen w-screen">
           <Find toggleFind={toggleFind} />
         </div>
       }
-      <header className={"z-[3] fixed w-screen" + (blur ? " blur-md" : "")}>
+      <header
+        className="bg-gradient-to-b from-gray-900 z-[4] fixed w-screen"
+        style={{
+          filter: blur ? 'blur(12px)' : 'blur(0px)',
+        }}
+      >
         <div className="h-[60px] flex justify-between px-4">
           <div className="flex">
             <div className="h-full a-center">
@@ -69,7 +74,12 @@ const MainLayout = ({ children }) => {
           </div>
         </div>
       </header>
-      <main className={"relative h-screen" + (blur ? " blur-md" : "")}>
+      <main
+        className="relative h-screen"
+        style={{
+          filter: blur ? 'blur(12px)' : 'blur(0px)',
+        }}
+      >
         <div className="fixed w-screen h-screen flex flex-col justify-end">
           <div className="bg-ratio" style={{ paddingBottom: moveAmount || 0 }}>
             <div className="relative bg-ratio">

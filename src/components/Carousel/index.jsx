@@ -18,7 +18,7 @@ const Carousel = ({ list }) => {
     return <></>
   }
   return (
-    <div className="container mx-auto">
+    <div className="xl:container mx-auto">
       <div className="lg:m-10 m-3 carousel relative aspect-[9/5] md:aspect-[5/2] xl:aspect-[3/1]">
         {
           list.map((data, index) => {
