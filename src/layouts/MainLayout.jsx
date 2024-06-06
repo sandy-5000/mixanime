@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { PropTypes } from "prop-types"
 import { VscSignIn, VscSignOut } from "react-icons/vsc"
 import Logo from "/src/components/Logo"
@@ -9,27 +9,7 @@ import Find from "/src/components/Find"
 
 const MainLayout = ({ children }) => {
   const [isLoggedIn, setLogin] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-  const [maxScrollY, setMaxScrollY] = useState(0)
-  const moveAmount = 0.2 * (scrollY / maxScrollY) * window.innerHeight
   const [blur, setBlur] = useState(false)
-
-  const handleScroll = () => {
-    setScrollY(window.scrollY)
-  }
-  const updateMaxScrollY = () => {
-    setMaxScrollY(document.documentElement.scrollHeight - window.innerHeight)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', updateMaxScrollY)
-    updateMaxScrollY()
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', updateMaxScrollY)
-    }
-  }, [])
 
   const handleAuth = () => {
     setLogin(prev => !prev)
@@ -74,20 +54,25 @@ const MainLayout = ({ children }) => {
           </div>
         </div>
       </header>
+      <div
+        style={{
+          filter: blur ? 'blur(12px)' : 'blur(0px)',
+        }}
+        className="fixed left-0 top-0 w-screen h-screen flex flex-col justify-center"
+      >
+        <div className="bg-ratio">
+          <div className="relative bg-ratio">
+            <div className="absolute bg-ratio background" style={{ backgroundImage: `url(${wall})` }}></div>
+            <div className="absolute z-[2] bg-ratio background-blur"></div>
+          </div>
+        </div>
+      </div>
       <main
         className="relative h-screen"
         style={{
           filter: blur ? 'blur(12px)' : 'blur(0px)',
         }}
       >
-        <div className="fixed w-screen h-screen flex flex-col justify-end">
-          <div className="bg-ratio" style={{ paddingBottom: moveAmount || 0 }}>
-            <div className="relative bg-ratio">
-              <div className="absolute bg-ratio background" style={{ backgroundImage: `url(${wall})` }}></div>
-              <div className="absolute z-[2] bg-ratio background-blur"></div>
-            </div>
-          </div>
-        </div>
         <div className="left-0 top-0 absolute w-full pt-[70px]">
           {children}
         </div>
