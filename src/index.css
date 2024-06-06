@@ -42,6 +42,10 @@ body {
   .text-gap-1 {
     @apply font-bold text-xs tracking-wider;
   }
+  
+  .vr {
+    border-left: 3px solid #9fe6cd;
+}
 }
 
 .bg-ratio {

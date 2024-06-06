@@ -5,6 +5,7 @@ import Logo from "/src/components/Logo"
 import Button from "/src/components/Button"
 import wall from "/src/assets/images/wallp0.jpg"
 import Find from "/src/components/Find"
+import Footer from "/src/components/Footer"
 
 
 const MainLayout = ({ children }) => {
@@ -68,14 +69,16 @@ const MainLayout = ({ children }) => {
         </div>
       </div>
       <main
-        className="relative h-screen"
+        className="relative"
         style={{
+          minHeight: '100vh',
           filter: blur ? 'blur(12px)' : 'blur(0px)',
         }}
       >
-        <div className="left-0 top-0 absolute w-full pt-[70px]">
+        <div className="w-full pt-[70px]">
           {children}
         </div>
+        <Footer />
       </main>
     </div >
   )
