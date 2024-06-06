@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types"
 import Button from "/src/components/Button"
-import DefaultImage from "/src/assets/images/wallp2.jpg"
+import DefaultImage from "/src/assets/images/pic_2.jpg"
 import { VscPlayCircle, VscChevronRight } from "react-icons/vsc"
 import { motion } from "framer-motion"
 

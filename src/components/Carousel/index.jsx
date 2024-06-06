@@ -8,7 +8,7 @@ const Carousel = ({ list }) => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setActiveCard((activeCard + 1) % list.length)
-    }, 10000)
+    }, 2000)
     return () => {
       clearTimeout(timeOut)
     }
@@ -31,7 +31,7 @@ const Carousel = ({ list }) => {
           })
         }
         <div
-          className="z-[4] absolute left-0 bottom-0 bg-sgreen rounded-sm h-[2px]"
+          className="z-[4] absolute left-0 bottom-0 bg-sgreen rounded-full h-[2px] mx-1"
           style={{ width: `${(activeCard + 1) * 10}%` }}
         ></div>
       </div>

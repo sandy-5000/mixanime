@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types"
 import { VscSignIn, VscSignOut } from "react-icons/vsc"
 import Logo from "/src/components/Logo"
 import Button from "/src/components/Button"
-import wall from "/src/assets/images/wallp0.jpg"
+import wall from "/src/assets/images/pic_1.jpg"
 import Find from "/src/components/Find"
 import Footer from "/src/components/Footer"
 
