@@ -50,7 +50,8 @@ const Card = ({ type = 'default', data = {}, index = 0 }) => {
         <motion.div
           onHoverStart={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          onTouchStart={() => setHover(!hover)}
+          onTouchStart={() => setHover(true)}
+          onTouchEnd={() => setTimeout(() => setHover(false), 2000)}
           className="glass h-[200px] cursor-pointer"
         >
           <div className="flex h-full">
