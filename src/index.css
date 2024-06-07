@@ -30,6 +30,12 @@ body {
     color: #9fe6cd;
   }
 
+  .side-heading {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 550;
+  }
+
   .bg-sgreen {
     /* background-color: #5de4b5; */
     background-color: #9fe6cd;
@@ -55,6 +61,7 @@ body {
 
 .background {
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
@@ -78,4 +85,8 @@ input:focus {
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-hard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
 }

@@ -8,7 +8,7 @@ const Carousel = ({ list }) => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setActiveCard((activeCard + 1) % list.length)
-    }, 2000)
+    }, 5000)
     return () => {
       clearTimeout(timeOut)
     }

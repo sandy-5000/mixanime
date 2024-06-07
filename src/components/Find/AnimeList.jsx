@@ -64,7 +64,7 @@ const AnimeList = ({ list, loading }) => {
                 ? list.map((data, index) =>
                   <Card
                     key={'find-card-' + index}
-                    type="findAnime"
+                    type="find"
                     data={data}
                     index={index + 1}
                   />
