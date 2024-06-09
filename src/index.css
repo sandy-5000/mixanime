@@ -48,10 +48,10 @@ body {
   .text-gap-1 {
     @apply font-bold text-xs tracking-wider;
   }
-  
+
   .vr {
     border-left: 3px solid #9fe6cd;
-}
+  }
 }
 
 .bg-ratio {
@@ -75,11 +75,15 @@ body {
 }
 
 input:focus {
-    outline: none;
+  outline: none;
 }
 
 .glass {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
   padding: 0.5rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -88,5 +92,47 @@ input:focus {
 }
 
 .glass-hard {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.scroller {
+  @apply flex flex-nowrap relative w-[2400%] md:w-[1600%] lg:w-[1200%];
+}
+
+.scroller-left-0 {
+  animation: scroll-left 20s linear infinite;
+}
+.scroller-left-1 {
+  animation: scroll-left 10s linear infinite;
+}
+.scroller-left-2 {
+  animation: scroll-left 5s linear infinite;
+}
+@keyframes scroll-left {
+  from {
+    transform: translate(-50%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+
+
+.scroller-right-0 {
+  animation: scroll-right 20s linear infinite;
+}
+.scroller-right-1 {
+  animation: scroll-right 10s linear infinite;
+}
+.scroller-right-2 {
+  animation: scroll-right 5s linear infinite;
+}
+@keyframes scroll-right {
+  to {
+    transform: translate(-50%);
+  }
 }

@@ -2,18 +2,23 @@ import { PropTypes } from "prop-types"
 import { LuNewspaper } from "react-icons/lu"
 import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Recent from "/src/components/Card/Recent"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 
+
 const scrollState = {
-  MID: 0,
   LEFT: -1,
+  MID: 0,
   RIGHT: 1,
+}
+const scrollClass = {
+  [scrollState.LEFT]: 'scroller-left-1',
+  [scrollState.MID]: '',
+  [scrollState.RIGHT]: 'scroller-right-1',
 }
 
 const Recents = ({ list = [] }) => {
-  const scrollRef = useRef(null)
   const [scroll, setScroll] = useState(scrollState.MID)
   const [btnHover, setButtonHover] = useState(false)
   const x = useMotionValue(0)
@@ -23,36 +28,20 @@ const Recents = ({ list = [] }) => {
     ["#ffe4e622", "#ffe4e628", "#ffe4e622"]
   )
 
-  const scrollComponent = (direction) => {
-    const SCROLL_OFFSET = 300
-    const container = document.querySelector('.recent-container')
-    console.log(container.scrollLeft)
-    if (container) {
-      container.scrollLeft += direction * SCROLL_OFFSET
-    }
-  }
-
   const handleDrag = (_, info) => {
     let offset = info.offset.x
     if (offset > 10) {
-      if (true || scroll != scrollState.RIGHT) {
+      if (scroll !== scrollState.RIGHT) {
         setScroll(scrollState.RIGHT)
       }
     } else if (offset < -10) {
-      if (true || scroll != scrollState.LEFT) {
+      if (scroll !== scrollState.LEFT) {
         setScroll(scrollState.LEFT)
       }
     } else {
-      if (true || scroll != scrollState.MID) {
+      if (scroll !== scrollState.MID) {
         setScroll(scrollState.MID)
       }
-    }
-    scrollComponent(scroll)
-  }
-
-  const handleDragEnd = () => {
-    if (true || scroll != scrollState.MID) {
-      setScroll(scrollState.MID)
     }
   }
 
@@ -100,11 +89,15 @@ const Recents = ({ list = [] }) => {
             </Button>
           </motion.div>
         </div>
-        <div className="recent-container w-full overflow-x-scroll pt-2">
+        <div className="recent-container w-full overflow-x-scroll pt-2"
+          style={{
+            mask: 'linear-gradient(90deg, transparent, white 10%, white 90%, transparent)'
+          }}
+        >
           <div
-            ref={scrollRef}
-            className="recent flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%]"
+            className={'scroller ' + scrollClass[scroll]}
           >
+            <div className="w-8"></div>
             {
               list.map((data, index) => {
                 return <Recent
@@ -113,17 +106,31 @@ const Recents = ({ list = [] }) => {
                 />
               })
             }
+            {
+              list.map((data, index) => {
+                return <Recent
+                  key={'rcard-' + index}
+                  data={data}
+                />
+              })
+            }
+            <div className="w-8"></div>
           </div>
         </div>
         <div className="w-full a-center">
-          <motion.div className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center" style={{ background }}>
+          <motion.div className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center"
+            style={{
+              background,
+              scrollBehavior: 'revert'
+            }}
+          >
             <motion.div
               drag="x"
               dragMomentum={false}
               dragConstraints={{ left: 0, right: 0 }}
               style={{ x }}
               onDrag={handleDrag}
-              onDragEnd={handleDragEnd}
+              onDragEnd={() => setScroll(scrollState.MID)}
             >
               <div className="w-8 h-8 rounded-full bg-[#cbd5e166]"></div>
             </motion.div>
