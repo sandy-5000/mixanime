@@ -18,7 +18,6 @@ const getDate = (x) => {
 const MAX_TITLE_SIZE = 25
 
 const Recent = ({ data = {} }) => {
-  console.log(data)
   const id = data.media.id
   const navTitle =
     data.media.title.romaji ||
@@ -32,7 +31,7 @@ const Recent = ({ data = {} }) => {
     data.media.title.native
   if (title.length > MAX_TITLE_SIZE) {
     title = title.slice(0, MAX_TITLE_SIZE - 3) + '...'
-  } 
+  }
   const episode = data.episode
   const backgound = data.media.coverImage.extraLarge
   const format = data.media.format.replaceAll('_', ' ')
