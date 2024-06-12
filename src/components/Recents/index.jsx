@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types"
 import { LuNewspaper } from "react-icons/lu"
 import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Recent from "/src/components/Card/Recent"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 
@@ -11,11 +11,6 @@ const scrollState = {
   LEFT: -1,
   MID: 0,
   RIGHT: 1,
-}
-const scrollClass = {
-  [scrollState.LEFT]: 'scroller-left-1',
-  [scrollState.MID]: '',
-  [scrollState.RIGHT]: 'scroller-right-1',
 }
 
 const Recents = ({ list = [] }) => {
@@ -28,15 +23,36 @@ const Recents = ({ list = [] }) => {
     ["#ffe4e622", "#ffe4e628", "#ffe4e622"]
   )
 
+  useEffect(() => {
+    let interval = null
+    let container = document.querySelector('.recent-container')
+    if (container && scroll !== scrollState.MID) {
+      interval = setInterval(() => {
+        container.scrollLeft += 20 * scroll
+      }, 10)
+    }
+    return () => {
+      clearInterval(interval)
+    }
+  }, [scroll])
+
   const handleDrag = (_, info) => {
     let offset = info.offset.x
-    if (offset > 10) {
+    if (offset > 100) {
       if (scroll !== scrollState.RIGHT) {
         setScroll(scrollState.RIGHT)
       }
-    } else if (offset < -10) {
+    } else if (offset > 10) {
+      if (scroll !== scrollState.RIGHT / 2) {
+        setScroll(scrollState.RIGHT / 2)
+      }
+    } else if (offset < -100) {
       if (scroll !== scrollState.LEFT) {
         setScroll(scrollState.LEFT)
+      }
+    } else if (offset < -10) {
+      if (scroll !== scrollState.LEFT / 2) {
+        setScroll(scrollState.LEFT / 2)
       }
     } else {
       if (scroll !== scrollState.MID) {
@@ -94,18 +110,8 @@ const Recents = ({ list = [] }) => {
             mask: 'linear-gradient(90deg, transparent, white 10%, white 90%, transparent)'
           }}
         >
-          <div
-            className={'scroller ' + scrollClass[scroll]}
-          >
+          <div className="scroller">
             <div className="w-8"></div>
-            {
-              list.map((data, index) => {
-                return <Recent
-                  key={'rcard-' + index}
-                  data={data}
-                />
-              })
-            }
             {
               list.map((data, index) => {
                 return <Recent

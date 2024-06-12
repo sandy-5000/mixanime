@@ -110,9 +110,10 @@ const CardElement = ({ data, index, active }) => {
                   variants={variants.description}
                   transition={{ delay: 0.3, duration: 0.3 }}
                 >
-                  <p className="max-h-16 xl:max-h-32 md:block hidden text-[12px] text-slate-200 overflow-scroll"
+                  <p className="max-h-16 xl:max-h-32 py-1 md:block hidden text-[12px] text-slate-200 overflow-scroll"
                     style={{
                       width: '120%',
+                      mask: 'linear-gradient(transparent, white 10%, white 90%, transparent)'
                     }}
                     dangerouslySetInnerHTML={{ __html: data.description }}
                   >

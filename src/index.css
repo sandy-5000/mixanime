@@ -100,7 +100,11 @@ input:focus {
 }
 
 .scroller {
-  @apply flex flex-nowrap relative w-[2400%] md:w-[1600%] lg:w-[1200%];
+  @apply flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%];
+}
+
+.recent-container {
+  scroll-behavior: auto !important;
 }
 
 .scroller-left-0 {

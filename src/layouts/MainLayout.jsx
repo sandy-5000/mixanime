@@ -28,7 +28,7 @@ const MainLayout = ({ children }) => {
         </div>
       }
       <header
-        className="bg-gradient-to-b from-gray-900 z-[4] fixed w-screen"
+        className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"
         style={{
           filter: blur ? 'blur(12px)' : 'blur(0px)',
         }}
