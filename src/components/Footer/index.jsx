@@ -50,11 +50,6 @@ const Footer = () => {
             linked to the media which is hosted on 3rd party services.</small></p>
         </div>
       </div>
-      <div className="flex flex-col">
-        <p className="px-2 text-transparent md:hidden inline-flex">This is a secret Message</p>
-        <p className="px-2 text-transparent md:hidden inline-flex">We Like Anime</p>
-        <p className="px-2 text-transparent md:hidden inline-flex">And Hentai too...</p>
-      </div>
     </footer >
   )
 }

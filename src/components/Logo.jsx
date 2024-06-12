@@ -10,7 +10,7 @@ const Logo = ({ size = 120 }) => {
         <img style={{ width: size }} className="animate-pulse z-[2] absolute left-0 right-0" src={logo} />
       </div>
     </Link>
-  );
+  )
 }
 
 Logo.propTypes = {

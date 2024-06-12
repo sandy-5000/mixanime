@@ -1,4 +1,5 @@
 import { PropTypes } from "prop-types"
+import { motion } from "framer-motion"
 
 const getDate = (x) => {
   let p = new Date(x * 1000)
@@ -39,7 +40,11 @@ const Recent = ({ data = {} }) => {
   const date = getDate(data.airingAt)
 
   return (
-    <div className="cursor-pointer hidden-recent-card h-full lg:w-1/4 md:w-1/3 sm:w-1/3 w-1/2 p-2">
+    <motion.div
+      className="cursor-pointer hidden-recent-card h-full lg:w-1/4 md:w-1/3 sm:w-1/3 w-1/2 p-2"
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+    >
       <div className="p-1 glass glass-hard w-full h-full">
         <div
           className="background aspect-[7/5] md:aspect-[8/5] lg:aspect-[9/5] relative p-2 rounded-lg"
@@ -66,7 +71,7 @@ const Recent = ({ data = {} }) => {
           {title}
         </h1>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

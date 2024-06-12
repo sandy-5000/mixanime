@@ -15,7 +15,6 @@ const scrollState = {
 
 const Recents = ({ list = [] }) => {
   const [scroll, setScroll] = useState(scrollState.MID)
-  const [btnHover, setButtonHover] = useState(false)
   const x = useMotionValue(0)
   const background = useTransform(
     x,
@@ -79,31 +78,26 @@ const Recents = ({ list = [] }) => {
               <h1 className="text-slate-200 text-sm side-heading">Recently <span className="text-sgreen">Released</span></h1>
             </div>
           </div>
-          <motion.div
-            onHoverStart={() => setButtonHover(true)}
-            onHoverEnd={() => setButtonHover(false)}
+          <Button
+            style={{
+              height: 30,
+              color: '#cbd5e1',
+              backgroundColor: '#11182799',
+            }}
+            hoverStyle={{
+              color: '#111827',
+              backgroundColor: '#e5e7ebee',
+            }}
           >
-            <Button
-              style={{
-                height: 30,
-                color: btnHover ? '#111827' : '#cbd5e1',
-                backgroundColor: btnHover ? '#e5e7ebee' : '#11182799',
-              }}
-              hoverStyle={{
-                color: '#111827',
-                backgroundColor: '#e5e7eb',
-              }}
-            >
-              <div className="flex justify-center">
-                <div className="a-center">
-                  <span className="mr-1 text-xs inline-flex">More</span>
-                </div>
-                <div className="a-center">
-                  <VscDebugLineByLine className="text-[17px]" />
-                </div>
+            <div className="flex justify-center">
+              <div className="a-center">
+                <span className="mr-1 text-xs inline-flex">More</span>
               </div>
-            </Button>
-          </motion.div>
+              <div className="a-center">
+                <VscDebugLineByLine className="text-[17px]" />
+              </div>
+            </div>
+          </Button>
         </div>
         <div className="recent-container w-full overflow-x-scroll pt-2"
           style={{
