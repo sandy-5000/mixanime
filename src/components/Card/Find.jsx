@@ -3,6 +3,8 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { VscPlay, VscAdd } from "react-icons/vsc"
 import Button from "/src/components/Button"
+import { Link } from "react-router-dom"
+import { getQueryParams } from "/src/services/untils"
 
 
 const Find = ({ data = {}, index = 0 }) => {
@@ -92,20 +94,27 @@ const Find = ({ data = {}, index = 0 }) => {
                   variants={variants.button.details}
                   className="pr-5"
                 >
-                  <Button
-                    style={{
-                      height: 30,
-                      color: hover ? '#111827' : '#cbd5e1',
-                      backgroundColor: hover ? '#5eead4ee' : '#000000',
-                    }}
-                    hoverStyle={{
-                      color: '#111827',
-                      backgroundColor: '#5eead4',
+                  <Link
+                    to={{
+                      pathname: '/details',
+                      search: getQueryParams({ id: data.id })
                     }}
                   >
-                    <VscPlay className="mr-2 text-md" />
-                    <span>Details</span>
-                  </Button>
+                    <Button
+                      style={{
+                        height: 30,
+                        color: hover ? '#111827' : '#cbd5e1',
+                        backgroundColor: hover ? '#5eead4ee' : '#000000',
+                      }}
+                      hoverStyle={{
+                        color: '#111827',
+                        backgroundColor: '#5eead4',
+                      }}
+                    >
+                      <VscPlay className="mr-2 text-md" />
+                      <span>Details</span>
+                    </Button>
+                  </Link>
                 </motion.div>
                 <motion.div
                   animate={hover ? 'open' : 'closed'}
