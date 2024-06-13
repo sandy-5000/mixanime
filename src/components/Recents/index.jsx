@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import Recent from "/src/components/Card/Recent"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import Spinner from "/src/components/Spinner"
+import { VscArrowSwap } from "react-icons/vsc"
 
 
 const scrollState = {
@@ -139,7 +140,9 @@ const Recents = ({ list = [] }) => {
               onDrag={handleDrag}
               onDragEnd={() => setScroll(scrollState.MID)}
             >
-              <div className="w-8 h-8 rounded-full bg-[#cbd5e166]"></div>
+              <div className="w-8 h-8 a-center rounded-xl bg-[#cbd5e166]">
+                <VscArrowSwap className="text-gray-100" />
+              </div>
             </motion.div>
           </motion.div>
         </div>
