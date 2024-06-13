@@ -3,6 +3,8 @@ import Button from "/src/components/Button"
 import DefaultImage from "/src/assets/images/pic_2.jpg"
 import { VscPlayCircle, VscChevronRight } from "react-icons/vsc"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
+import { getQueryParams } from "/src/services/untils"
 
 
 const CardElement = ({ data, index, active }) => {
@@ -13,6 +15,12 @@ const CardElement = ({ data, index, active }) => {
     data.title.native
   const backgroundImage = data.bannerImage || DefaultImage
   const coverImage = data.coverImage.extraLarge
+  const name =
+    data.title.romaji ||
+    data.title.english ||
+    data.title.userPreferred ||
+    data.title.native
+  const id = data.id
 
   const variants = {
     card: {
@@ -125,37 +133,51 @@ const CardElement = ({ data, index, active }) => {
                     variants={variants.button.watch}
                     transition={{ delay: 0.5 }}
                   >
-                    <Button
-                      style={{
-                        background: '#9fe6cd',
-                        color: '#111827',
-                        marginRight: '8px',
+                    <Link
+                      to={{
+                        pathname: '/watch',
+                        search: getQueryParams({ id, name, episode: 1 })
                       }}
                     >
-                      <VscPlayCircle className="mr-1 text-lg" />
-                      <span className="normal-case tracking-wide">Watch</span>
-                    </Button>
+                      <Button
+                        style={{
+                          background: '#9fe6cd',
+                          color: '#111827',
+                          marginRight: '8px',
+                        }}
+                      >
+                        <VscPlayCircle className="mr-1 text-lg" />
+                        <span className="normal-case tracking-wide">Watch</span>
+                      </Button>
+                    </Link>
                   </motion.div>
                   <motion.div
                     animate={active ? 'open' : 'closed'}
                     variants={variants.button.details}
                     transition={{ delay: 0.5 }}
                   >
-                    <Button
-                      style={{
-                        color: '#111827',
-                        backgroundColor: '#e5e7ebee',
-                        paddingLeft: '0.5rem',
-                        paddingRight: '0.75rem',
-                      }}
-                      hoverStyle={{
-                        color: '#111827',
-                        backgroundColor: '#e5e7eb',
+                    <Link
+                      to={{
+                        pathname: '/details',
+                        search: getQueryParams({ id })
                       }}
                     >
-                      <VscChevronRight className="text-lg mr-1" />
-                      <span className="normal-case tracking-wide">Details</span>
-                    </Button>
+                      <Button
+                        style={{
+                          color: '#111827',
+                          backgroundColor: '#e5e7ebee',
+                          paddingLeft: '0.5rem',
+                          paddingRight: '0.75rem',
+                        }}
+                        hoverStyle={{
+                          color: '#111827',
+                          backgroundColor: '#e5e7eb',
+                        }}
+                      >
+                        <VscChevronRight className="text-lg mr-1" />
+                        <span className="normal-case tracking-wide">Details</span>
+                      </Button>
+                    </Link>
                   </motion.div>
                 </div>
               </div>

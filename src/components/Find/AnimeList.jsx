@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types"
 import NotFoundAnimation from "/src/assets/animations/not_found.json"
-import LoadingAnimation from "/src/assets/animations/loading.json"
+import LoadingAnimation from "/src/assets/animations/spinner.json"
 import BookFindAnimation from "/src/assets/animations/book_find.json"
 import Card from "/src/components/Card"
 import Lottie from "react-lottie"

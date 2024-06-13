@@ -5,6 +5,7 @@ import Button from "/src/components/Button"
 import { useEffect, useState } from "react"
 import Recent from "/src/components/Card/Recent"
 import { motion, useMotionValue, useTransform } from "framer-motion"
+import Spinner from "/src/components/Spinner"
 
 
 const scrollState = {
@@ -61,7 +62,13 @@ const Recents = ({ list = [] }) => {
   }
 
   if (!list || list.length === 0) {
-    return <></>
+    return (
+      <div className="xl:container mx-auto">
+        <div className="lg:m-10 m-3 h-[300px]">
+          <Spinner />
+        </div>
+      </div>
+    )
   }
   list = list
     .filter(x => x.media.countryOfOrigin === 'JP' && !x.media.genres?.includes('Hentai'))

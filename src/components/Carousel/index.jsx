@@ -1,6 +1,7 @@
 import { PropTypes } from "prop-types"
 import CardElement from "./CardElement"
 import { useEffect, useState } from "react"
+import Spinner from "/src/components/Spinner"
 
 const Carousel = ({ list }) => {
   const [activeCard, setActiveCard] = useState(0)
@@ -15,7 +16,13 @@ const Carousel = ({ list }) => {
   }, [activeCard, list])
 
   if (!list || list.length === 0) {
-    return <></>
+    return (
+      <div className="xl:container mx-auto">
+        <div className="lg:m-10 m-3 carousel relative aspect-[9/5] md:aspect-[5/2] xl:aspect-[3/1]">
+          <Spinner />
+        </div>
+      </div>
+    )
   }
   return (
     <div className="xl:container mx-auto">

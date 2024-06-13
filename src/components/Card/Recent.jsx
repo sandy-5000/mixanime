@@ -1,26 +1,13 @@
 import { PropTypes } from "prop-types"
 import { motion } from "framer-motion"
-
-const getDate = (x) => {
-  let p = new Date(x * 1000)
-  let dateExtention = 'th', date = p.getDate()
-  if (date < 11 || 13 < date) {
-    if (date % 10 == 1) {
-      dateExtention = 'st'
-    } else if (date % 10 == 2) {
-      dateExtention = 'nd'
-    } else if (date % 10 == 3) {
-      dateExtention = 'rd'
-    }
-  }
-  return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
-}
+import { Link } from "react-router-dom"
+import { getQueryParams, getDate } from "/src/services/untils"
 
 const MAX_TITLE_SIZE = 25
 
 const Recent = ({ data = {} }) => {
   const id = data.media.id
-  const navTitle =
+  const name =
     data.media.title.romaji ||
     data.media.title.english ||
     data.media.title.userPreferred ||
@@ -45,32 +32,39 @@ const Recent = ({ data = {} }) => {
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
     >
-      <div className="p-1 glass glass-hard w-full h-full">
-        <div
-          className="background aspect-[7/5] md:aspect-[8/5] lg:aspect-[9/5] relative p-2 rounded-lg"
-          style={{
-            backgroundImage: `url(${backgound})`,
-          }}
-        >
+      <Link
+        to={{
+          pathname: '/watch',
+          search: getQueryParams({ id, name, episode })
+        }}
+      >
+        <div className="p-1 glass glass-hard w-full h-full">
           <div
-            className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
-            {format}</div>
-          <div
-            className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
-            {duration}</div>
+            className="background aspect-[7/5] md:aspect-[8/5] lg:aspect-[9/5] relative p-2 rounded-lg"
+            style={{
+              backgroundImage: `url(${backgound})`,
+            }}
+          >
+            <div
+              className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
+              {format}</div>
+            <div
+              className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
+              {duration}</div>
+          </div>
+          <h1 className="text-xs pt-2 flex justify-between text-gray-100">
+            <span>Episode:</span>
+            <span>{episode}</span>
+          </h1>
+          <h1 className="text-xs pt-0 flex justify-between text-gray-100">
+            <span>Aired on:</span>
+            <span>{date}</span>
+          </h1>
+          <h1 className="lg:text-sm md:text-sm text-xs pt-1 font-normal text-sgreen">
+            {title}
+          </h1>
         </div>
-        <h1 className="text-xs pt-2 flex justify-between text-gray-100">
-          <span>Episode:</span>
-          <span>{episode}</span>
-        </h1>
-        <h1 className="text-xs pt-0 flex justify-between text-gray-100">
-          <span>Aired on:</span>
-          <span>{date}</span>
-        </h1>
-        <h1 className="lg:text-sm md:text-sm text-xs pt-1 font-normal text-sgreen">
-          {title}
-        </h1>
-      </div>
+      </Link>
     </motion.div>
   )
 }

@@ -3,11 +3,18 @@ import { HiColorSwatch } from "react-icons/hi"
 import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
 import Season from "../Card/Season"
+import Spinner from "/src/components/Spinner"
 
 
 const Trending = ({ list = [], season }) => {
   if (!list || list.length === 0) {
-    return <></>
+    return (
+      <div className="xl:container mx-auto">
+        <div className="lg:m-10 m-3 h-[500px]">
+          <Spinner />
+        </div>
+      </div>
+    )
   }
   return (
     <div className="xl:container mx-auto">
