@@ -7,6 +7,8 @@ import Recent from "/src/components/Card/Recent"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import Spinner from "/src/components/Spinner"
 import { VscArrowSwap } from "react-icons/vsc"
+import { Link } from "react-router-dom"
+import { getQueryParams } from "/src/services/untils"
 
 
 const scrollState = {
@@ -86,26 +88,31 @@ const Recents = ({ list = [] }) => {
               <h1 className="text-slate-200 text-sm side-heading">Recently <span className="text-sgreen">Released</span></h1>
             </div>
           </div>
-          <Button
-            style={{
-              height: 30,
-              color: '#cbd5e1',
-              backgroundColor: '#11182799',
-            }}
-            hoverStyle={{
-              color: '#111827',
-              backgroundColor: '#e5e7ebee',
-            }}
-          >
-            <div className="flex justify-center">
-              <div className="a-center">
-                <span className="mr-1 text-xs inline-flex">More</span>
+          <Link to={{
+            pathname: '/recent',
+            search: getQueryParams({ page: 1 })
+          }}>
+            <Button
+              style={{
+                height: 30,
+                color: '#cbd5e1',
+                backgroundColor: '#11182799',
+              }}
+              hoverStyle={{
+                color: '#111827',
+                backgroundColor: '#e5e7ebee',
+              }}
+            >
+              <div className="flex justify-center">
+                <div className="a-center">
+                  <span className="mr-1 text-xs inline-flex">More</span>
+                </div>
+                <div className="a-center">
+                  <VscDebugLineByLine className="text-[17px]" />
+                </div>
               </div>
-              <div className="a-center">
-                <VscDebugLineByLine className="text-[17px]" />
-              </div>
-            </div>
-          </Button>
+            </Button>
+          </Link>
         </div>
         <div className="recent-container w-full overflow-x-scroll pt-2"
           style={{

@@ -4,6 +4,8 @@ import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
 import Season from "../Card/Season"
 import Spinner from "/src/components/Spinner"
+import { Link } from "react-router-dom"
+import { getQueryParams } from "/src/services/untils"
 
 
 const Trending = ({ list = [], season }) => {
@@ -28,26 +30,31 @@ const Trending = ({ list = [], season }) => {
               <h1 className="text-slate-200 text-sm side-heading">This year <span className="text-sgreen">{season} RELEASES</span></h1>
             </div>
           </div>
-          <Button
-            style={{
-              height: 30,
-              color: '#cbd5e1',
-              backgroundColor: '#11182799',
-            }}
-            hoverStyle={{
-              color: '#111827',
-              backgroundColor: '#e5e7ebee',
-            }}
-          >
-            <div className="flex justify-center">
-              <div className="a-center">
-                <span className="mr-1 text-xs inline-flex">More</span>
+          <Link to={{
+            pathname: '/trending',
+            search: getQueryParams({ page: 1 })
+          }}>
+            <Button
+              style={{
+                height: 30,
+                color: '#cbd5e1',
+                backgroundColor: '#11182799',
+              }}
+              hoverStyle={{
+                color: '#111827',
+                backgroundColor: '#e5e7ebee',
+              }}
+            >
+              <div className="flex justify-center">
+                <div className="a-center">
+                  <span className="mr-1 text-xs inline-flex">More</span>
+                </div>
+                <div className="a-center">
+                  <VscDebugLineByLine className="text-[17px]" />
+                </div>
               </div>
-              <div className="a-center">
-                <VscDebugLineByLine className="text-[17px]" />
-              </div>
-            </div>
-          </Button>
+            </Button>
+          </Link>
         </div>
         <div className="season-container mt-3 w-full flex flex-wrap relative">
           {
