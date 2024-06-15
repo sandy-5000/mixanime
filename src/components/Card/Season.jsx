@@ -1,9 +1,10 @@
 import { PropTypes } from "prop-types"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { Link } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
+import { useRef } from "react"
 
-const Season = ({ data }) => {
+const Season = ({ data, index }) => {
   const startDate = data.startDate.day + '/' + data.startDate.month + '/' + data.startDate.year
   const background = data.coverImage.extraLarge
   const format = data.format.replaceAll('_', ' ')
@@ -12,11 +13,37 @@ const Season = ({ data }) => {
     data.title.english ||
     data.title.romaji ||
     data.title.native
+
+  const ref = useRef(null)
+  const isInView = useInView(ref)
+  const animate = {
+    inView: {
+      opacity: 1,
+      x: 0,
+    },
+    notInView: {
+      opacity: 0,
+      x: '-90%',
+    }
+  }
+  const transition = {
+    inView: {
+      delay: 0.5 + (index % 6) * 0.1,
+      duration: 0.5
+    },
+    notInView: {
+      duration: 0.2,
+    }
+  }
+
   return (
     <motion.div
+      ref={ref}
       className="hidden-season-card lg:w-1/6 md:w-1/4 sm:w-1/4 w-1/3 p-1"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.97 }}
+      animate={isInView ? animate.inView : animate.notInView}
+      transition={isInView ? transition.inView : transition.notInView}
     >
       <Link
         to={{
@@ -66,6 +93,7 @@ const Season = ({ data }) => {
 
 Season.propTypes = {
   data: PropTypes.any,
+  index: PropTypes.number,
 }
 
 export default Season

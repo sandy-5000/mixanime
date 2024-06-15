@@ -59,7 +59,7 @@ const Trending = ({ list = [], season }) => {
         <div className="season-container mt-3 w-full flex flex-wrap relative">
           {
             list.map((data, index) => {
-              return <Season key={'scard-' + index} data={data} />
+              return <Season key={'scard-' + index} index={index} data={data} />
             })
           }
         </div>
