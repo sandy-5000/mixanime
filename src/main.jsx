@@ -1,17 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react"
+import ReactDOM from "react-dom/client"
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import App from './App.jsx'
-import './index.css'
-import Home from '/src/Pages/Home.jsx'
-import Recent from '/src/Pages/Recent.jsx'
-import Trending from '/src/Pages/Trending.jsx'
-import Details from '/src/Pages/Details.jsx'
-import Explore from '/src/Pages/Explore.jsx'
-import Watch from '/src/Pages/Watch.jsx'
+import App from "./App.jsx"
+import "./index.css"
+import Home from "/src/Pages/Home"
+import Recent from "/src/Pages/Recent"
+import Trending from "/src/Pages/Trending"
+import Details from "/src/Pages/Details"
+import Explore from "/src/Pages/Explore"
+import Watch from "/src/Pages/Watch"
 
 const router = createBrowserRouter([
   {
