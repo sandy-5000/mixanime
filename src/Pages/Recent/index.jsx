@@ -18,21 +18,29 @@ const Recent = () => {
     perPage: 24,
   })
 
-  const setPage = (value) => {
+  const setPage = (value, flag = true) => {
     if (value < 1) {
       return
     }
-    query.set('page', value)
-    setVariables({ ...variables, page: value })
     setList(null)
+    if (flag) {
+      navigate('/recent' + getQueryParams({ page: value }))
+      query.set('page', value)
+    }
+    setVariables({ ...variables, page: value })
   }
 
   useEffect(() => {
-    navigate('/recent' + getQueryParams({ page: variables.page }), { replace: true })
     Anilist('recent', variables, (data) => {
       setList(data)
     })
   }, [variables, navigate])
+
+  useEffect(() => {
+    const page = Math.max(query.get('page'), 1) || 1
+    setPage(page, false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location])
 
   if (!list || list.length === 0) {
     return (

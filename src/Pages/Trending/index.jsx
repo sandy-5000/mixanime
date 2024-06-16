@@ -25,21 +25,29 @@ const Trending = () => {
     year,
   })
 
-  const setPage = (value) => {
+  const setPage = (value, flag = true) => {
     if (value < 1) {
       return
     }
     setList(null)
-    query.set('page', value)
+    if (flag) {
+      navigate('/trending' + getQueryParams({ page: value }))
+      query.set('page', value)
+    }
     setVariables({ ...variables, page: value })
   }
 
   useEffect(() => {
-    navigate('/trending' + getQueryParams({ page: variables.page }), { replace: true })
     Anilist('season', variables, (data) => {
       setList(data)
     })
-  }, [variables, navigate])
+  }, [variables])
+
+  useEffect(() => {
+    const page = Math.max(query.get('page'), 1) || 1
+    setPage(page, false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location])
 
   if (!list || list.length === 0) {
     return (
