@@ -272,7 +272,7 @@ const Container = ({
           </div>
           <div className="vr mx-1 hidden md:inline-flex"></div>
           <div className="lg:w-9/12 md:w-9/12 w-full mt-2 mx-2">
-            <p className="text-xl text-sgreen mb-3">Recommendations</p>
+            <p className="text-gap-2 text-sgreen pl-2">Recommendations</p>
             {
               !recommendations || recommendations.length === 0
                 ? <div className="a-center h-[120px]">
@@ -282,9 +282,9 @@ const Container = ({
                   <div className="grid lg:grid-cols-6 grid-cols-3 justify-center">
                     {
                       recommendations.map((node, index) => (
-                        <div key={`rec-${index}`} className="m-0 px-2 pt-3">
+                        <div key={`rec-${index}`} className="m-0 px-1 pt-3">
                           <motion.div
-                            className="w-full h-full"
+                            className="w-full h-full glass glass-hard"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
@@ -317,7 +317,7 @@ const Container = ({
                   </div>
                 )
             }
-            <p className="text-xl text-sgreen mt-5 mb-3">Relative</p>
+            <p className="text-gap-2 text-sgreen mt-8 pl-2">Relative</p>
             {
               !relations || relations.length === 0
                 ? <div className="a-center h-[120px]">
@@ -333,7 +333,7 @@ const Container = ({
                     relations.map((node, index) => (
                       <div key={`rel-${index}`} className="m-0 px-1 pt-3">
                         <motion.div
-                          className="w-full h-full"
+                          className="w-full h-full glass glass-hard"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
