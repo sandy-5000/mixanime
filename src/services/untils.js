@@ -26,4 +26,19 @@ const getDate = (x) => {
   return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
 }
 
-export { getQueryParams, getDate }
+const dateToString = (year, month, day) => {
+  let p = new Date(year, month - 1, day)
+  let dateExtention = 'th', date = p.getDate()
+  if (date < 11 || 13 < date) {
+    if (date % 10 == 1) {
+      dateExtention = 'st'
+    } else if (date % 10 == 2) {
+      dateExtention = 'nd'
+    } else if (date % 10 == 3) {
+      dateExtention = 'rd'
+    }
+  }
+  return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
+}
+
+export { getQueryParams, getDate, dateToString }

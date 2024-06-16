@@ -1,0 +1,385 @@
+import { PropTypes } from "prop-types"
+import MainLayout from "/src/layouts/MainLayout"
+import { VscAdd, VscClose, VscPlayCircle } from "react-icons/vsc"
+import { GoHeart, GoHeartFill } from "react-icons/go"
+import { LuDot } from "react-icons/lu"
+import DefaultImage from "/src/assets/images/pic_2.jpg"
+import Button from "/src/components/Button"
+import { Link } from "react-router-dom"
+import { getQueryParams, dateToString } from "/src/services/untils"
+import { motion } from "framer-motion"
+
+
+const Container = ({
+  data,
+  inList: isInList,
+  favourite: isInFavourite,
+  onMedia: goToMedia,
+}) => {
+  const id = data.id
+  const name =
+    data.title.romaji ||
+    data.title.english ||
+    data.title.userPreferred ||
+    data.title.native
+
+  const title =
+    data.title.userPreferred ||
+    data.title.english ||
+    data.title.romaji ||
+    data.title.native
+  const coverImage = data.coverImage.extraLarge
+  const currentEpisode = data.nextAiringEpisode?.episode
+    ? (data.nextAiringEpisode?.episode - 1)
+    : (data?.episodes || '?')
+  const totalEpisodes = data?.episodes || '?'
+
+  const recommendations = data.recommendations.nodes
+  const relations = data.relations.nodes
+    .filter((x) => x.type == 'ANIME' || x.type == 'MOVIE')
+
+  return (
+    <MainLayout>
+      <div>
+        <div
+          className="banner-image"
+          style={{
+            background: `linear-gradient(to right, rgba(1, 1, 1, 0.3) 90%, rgba(1, 1, 1, 0.3) 90%, rgba(1, 1, 1, 0.3) 90%), url(${data.bannerImage || DefaultImage})`
+          }}
+        ></div>
+        <div className="lg:m-20 m-5 lg:mt-5 lg:flex md:flex justify-between">
+          <div className="xl:w-2/12 lg:w-3/12 md:w-3/12 w-full py-3">
+            <div className="lg:block md:block flex justify-between">
+              <div className="lg:w-full md:w-full w-6/12 a-center">
+                <div className="cover-image rounded-md"
+                  style={{
+                    backgroundImage: `url(${coverImage})`
+                  }}
+                >
+                </div>
+              </div>
+              <div className="w-6/12 md:w-full py-3 px-3 md:px-0 flex flex-col">
+                <div className="md:flex justify-between">
+                  {isInList
+                    ? <div className="w-full md:w-10/12 md:pr-1">
+                      <Button
+                        style={{
+                          width: '100%',
+                          color: '#0f172a',
+                          backgroundColor: '#d1d5db',
+                          paddingLeft: 'auto',
+                          paddingRight: 'auto',
+                        }}
+                        hoverStyle={{
+                          color: '#111827',
+                          backgroundColor: '#e5e7eb',
+                        }}
+                      >
+                        <div className="flex justify-center w-full">
+                          <VscClose className="text-lg mr-1" />
+                          <span className="normal-case mt-[1px] tracking-wide">Remove in List</span>
+                        </div>
+                      </Button>
+                    </div>
+                    : <div className="w-full md:w-10/12 md:pr-1">
+                      <Button
+                        style={{
+                          width: '100%',
+                          color: '#111827',
+                          backgroundColor: '#e5e7ebee',
+                          paddingLeft: 'auto',
+                          paddingRight: 'auto',
+                        }}
+                        hoverStyle={{
+                          color: '#111827',
+                          backgroundColor: '#e5e7eb',
+                        }}
+                      >
+                        <div className="flex justify-center w-full">
+                          <VscAdd className="text-lg mr-1" />
+                          <span className="normal-case mt-[1px] tracking-wide">Add to List</span>
+                        </div>
+                      </Button>
+                    </div>}
+                  {isInFavourite
+                    ? <div className="w-full mt-1 md:w-2/12 md:mt-0">
+                      <Button
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          color: '#111827',
+                          backgroundColor: '#fca5a5',
+                          paddingLeft: 0,
+                          paddingRight: 0,
+                        }}
+                      >
+                        <GoHeart className="w-full text-lg p-auto" />
+                      </Button>
+                    </div>
+                    : <div className="w-full mt-1 md:w-2/12 md:mt-0">
+                      <Button
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          color: '#1f2937',
+                          backgroundColor: '#ff3d00',
+                          paddingLeft: 0,
+                          paddingRight: 0,
+                        }}
+                      >
+                        <GoHeartFill className="w-full text-lg p-auto" />
+                      </Button>
+                    </div>}
+                </div>
+                <div className="mt-1">
+                  <div className="w-full">
+                    <Link
+                      className="w-full"
+                      to={{
+                        pathname: '/watch',
+                        search: getQueryParams({ id, name, episode: 1 })
+                      }}
+                    >
+                      <Button
+                        style={{
+                          width: '100%',
+                          color: '#0f172a',
+                          backgroundColor: '#9fe6cd',
+                          paddingLeft: 'auto',
+                          paddingRight: 'auto',
+                        }}
+                      >
+                        <div className="flex justify-center w-full">
+                          <VscPlayCircle className="text-lg mr-1" />
+                          <span className="normal-case mt-[1px] tracking-wide">Watch Now</span>
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="xl:w-10/12 lg:w-9/12 md:w-9/12 w-full p-5">
+            <h1 className="capitalize text-2xl pb-3 text-slate-200">{title.toLowerCase()}</h1>
+            <div className="flex">
+              <div className="a-center">
+                <span
+                  className="border rounded-md bg-slate-200 ring-2 ring-gray-200 text-slate-800 px-3 text-gap-2"
+                >{data.format}</span>
+              </div>
+              <span className="a-center">
+                <LuDot className="text-2xl text-slate-200" />
+              </span>
+              <div className="a-center">
+                <span className="rounded-md ring-2 ring-gray-200 text-slate-200 pl-[6px] pr-1 text-gap-2">HD</span>
+              </div>
+              <span className="a-center">
+                <LuDot className="text-2xl text-slate-200" />
+              </span>
+              <div className="a-center">
+                <span
+                  className="text-slate-200 text-gap-2"
+                  style={{
+                    fontSize: 13
+                  }}
+                >EP {currentEpisode}/{totalEpisodes}</span>
+              </div>
+              <span className="a-center">
+                <LuDot className="text-2xl text-slate-200" />
+              </span>
+              <div className="a-center">
+                <span className="text-slate-200 text-sm">{data.duration} min</span>
+              </div>
+            </div>
+            <div className="mt-5">
+              <p className="text-[13px] text-slate-200"
+                dangerouslySetInnerHTML={{ __html: data.description }}></p>
+            </div>
+          </div>
+        </div>
+        <div className="m-5 lg:m-20 block md:flex">
+          <div className="w-full md:w-3/12 mt-4">
+            <div className="mx-1">
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Format :</span>
+                <span className="mx-2">{data.format}</span>
+              </p>
+              <hr className="text-slate-200 mb-3" />
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">English Title :</span>
+                <span className="mx-2">{data.title?.english}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Romaji Title :</span>
+                <span className="mx-2">{data.title?.romaji}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">User Prefered Title :</span>
+                <span className="mx-2">{data.title?.userPreferred}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Native Title :</span>
+                <span className="mx-2">{data.title?.native}</span>
+              </p>
+              <hr className="mb-3 text-slate-200" />
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Started On :</span>
+                <span className="mx-2">{dateToString(
+                  data.startDate?.year,
+                  data.startDate?.month,
+                  data.startDate?.day
+                )}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Season :</span>
+                <span className="mx-2">{data.season}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Type :</span>
+                <span className="mx-2">{data.type}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Status :</span>
+                <span className="mx-2">{data.status}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Total Episodes :</span>
+                <span className="mx-2">{totalEpisodes || '?'}</span>
+              </p>
+              <hr className="text-slate-200 mb-3" />
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Genres :</span>
+                <span className="mx-2">{'genere'}</span>
+              </p>
+              <hr className="text-slate-200 mb-3" />
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Average Score :</span>
+                <span className="mx-2">{data.averageScore}</span>
+              </p>
+              <p className="text-slate-200 p-0 mb-3 text-xs">
+                <span className="text-sgreen">Favourites :</span>
+                <span className="mx-2">{data.favourites}</span>
+              </p>
+              <hr className="text-slate-200 mb-3" />
+              <p className="text-slate-200 p-0 mb-3 text-xs text-sgreen">Synonyms :</p>
+              {
+                data.synonyms.map(
+                  (x, index) => <p key={`syn-${index}`} className="text-slate-200 p-0 mb-3 text-xs">{x}</p>
+                )
+              }
+            </div>
+          </div>
+          <div className="vr mx-1 hidden md:inline-flex"></div>
+          <div className="lg:w-9/12 md:w-9/12 w-full mt-2 mx-2">
+            <p className="text-xl text-sgreen mb-3">Recommendations</p>
+            {
+              !recommendations || recommendations.length === 0
+                ? <div className="a-center h-[120px]">
+                  <h1 className="text-xl text-slate-200">Nothing Avaliable</h1>
+                </div>
+                : (
+                  <div className="grid lg:grid-cols-6 grid-cols-3 justify-center">
+                    {
+                      recommendations.map((node, index) => (
+                        <div key={`rec-${index}`} className="m-0 px-2 pt-3">
+                          <motion.div
+                            className="w-full h-full"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <div className="w-full h-full">
+                              <div onClick={() => goToMedia({ id: node.mediaRecommendation.id })}>
+                                <img loading="lazy"
+                                  className="rounded aspect-[2/3]"
+                                  style={{
+                                    height: '100%',
+                                    width: '100%',
+                                  }}
+                                  src={node.mediaRecommendation?.coverImage?.large} alt="" />
+                              </div>
+                              <p
+                                className="truncate text-xs text-gray-200 mt-1"
+                                style={{
+                                  fontWeight: '400'
+                                }}
+                              >
+                                {
+                                  node.mediaRecommendation?.title?.english ||
+                                  node.mediaRecommendation?.title?.romaji
+                                }
+                              </p>
+                            </div>
+                          </motion.div>
+                        </div>
+                      ))
+                    }
+                  </div>
+                )
+            }
+            <p className="text-xl text-sgreen mt-5 mb-3">Relative</p>
+            {
+              !relations || relations.length === 0
+                ? <div className="a-center h-[120px]">
+                  <h1 className="text-xl text-slate-200">Nothing Avaliable</h1>
+                </div>
+                : <div
+                  className="relative grid lg:grid-cols-6 grid-cols-3 justify-center pb-3"
+                  style={{
+                    overflowY: 'scroll',
+                  }}
+                >
+                  {
+                    relations.map((node, index) => (
+                      <div key={`rel-${index}`} className="m-0 px-1 pt-3">
+                        <motion.div
+                          className="w-full h-full"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div onClick={() => goToMedia({ id: node.id })}>
+                            <div className="recommend">
+                              <img
+                                loading="lazy"
+                                style={{
+                                  height: '100%',
+                                  width: '100%',
+
+                                }}
+                                className="rounded aspect-[2/3]"
+                                src={node.coverImage.large} alt="" />
+                            </div>
+                            <p
+                              className="truncate text-xs text-slate-200 mt-1"
+                              style={{
+                                fontWeight: '400',
+                              }}
+                            >
+                              {
+                                node.title?.english ||
+                                node.title?.romaji
+                              }
+                            </p>
+                          </div>
+                        </motion.div>
+                      </div>
+                    ))
+                  }
+                </div>
+            }
+          </div>
+        </div>
+      </div><div className="h-[150px]"></div>
+    </MainLayout >
+  )
+
+}
+
+Container.propTypes = {
+  data: PropTypes.any,
+  inList: PropTypes.bool,
+  favourite: PropTypes.bool,
+  onMedia: PropTypes.any.isRequired,
+}
+
+export default Container
