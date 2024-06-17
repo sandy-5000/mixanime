@@ -103,7 +103,7 @@ input:focus {
   @apply flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%];
 }
 
-.recent-container {
+.recent-container, .schedule-container {
   scroll-behavior: auto !important;
 }
 

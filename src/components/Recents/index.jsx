@@ -63,7 +63,7 @@ const Recents = ({ list = [] }) => {
     }
   }
 
-  if (!list || list.length === 0) {
+  if (!list) {
     return (
       <div className="xl:container mx-auto">
         <div className="lg:m-10 m-3 h-[300px]">
@@ -113,7 +113,8 @@ const Recents = ({ list = [] }) => {
             </Button>
           </Link>
         </div>
-        <div className="recent-container w-full overflow-x-scroll pt-2"
+        <div
+          className="recent-container w-full overflow-x-scroll pt-2"
           style={{
             mask: 'linear-gradient(90deg, transparent, white 10%, white 90%, transparent)'
           }}

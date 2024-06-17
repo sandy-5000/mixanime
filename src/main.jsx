@@ -10,7 +10,6 @@ import Home from "/src/Pages/Home"
 import Recent from "/src/Pages/Recent"
 import Trending from "/src/Pages/Trending"
 import Details from "/src/Pages/Details"
-import Schedule from "/src/Pages/Schedule"
 import Explore from "/src/Pages/Explore"
 import Watch from "/src/Pages/Watch"
 
@@ -38,10 +37,6 @@ const router = createBrowserRouter([
   {
     path: '/explore',
     element: <Explore />
-  },
-  {
-    path: '/schedule',
-    element: <Schedule />
   },
   {
     path: '/watch',

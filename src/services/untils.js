@@ -41,4 +41,14 @@ const dateToString = (year, month, day) => {
   return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
 }
 
-export { getQueryParams, getDate, dateToString }
+const truncate = (longString, length) => {
+  if (!longString) {
+    return 'No synopsis Avaliable.'
+  }
+  if (longString.length > length - 3) {
+    return longString.slice(0, length - 3) + '...'
+  }
+  return longString
+}
+
+export { getQueryParams, getDate, dateToString, truncate }

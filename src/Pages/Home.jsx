@@ -4,6 +4,7 @@ import Anilist from "/src/services/anilist"
 import Carousel from "/src/components/Carousel"
 import Recents from "/src/components/Recents"
 import Trending from "/src/components/Trending"
+import Schedules from "../components/Schedules"
 
 const variables = {
   carousel: {
@@ -52,6 +53,8 @@ const Home = () => {
       <Recents list={recents} />
       <div className="h-8"></div>
       <Trending list={trending} season={season} />
+      <div className="h-8"></div>
+      <Schedules />
       <div className="h-[150px]"></div>
     </MainLayout>
   )

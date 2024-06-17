@@ -32,9 +32,6 @@ const App = () => {
         <Link to="/explore">Explore</Link>
       </h1>
       <h1 className="text-md text-slate-200">
-        <Link to="/schedule">Schedule</Link>
-      </h1>
-      <h1 className="text-md text-slate-200">
         <Link to="/watch">Watch</Link>
       </h1>
     </div>
