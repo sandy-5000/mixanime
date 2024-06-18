@@ -4,7 +4,7 @@ import { AiOutlineSchedule } from "react-icons/ai"
 import { HiCalendarDays } from "react-icons/hi2"
 import { useEffect, useState } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
-
+import Options from "./Options"
 
 const scrollState = {
   LEFT: -1,
@@ -13,7 +13,7 @@ const scrollState = {
 }
 
 
-const Container = ({ list, head }) => {
+const Container = ({ list, head, index, setIndex }) => {
   const [scroll, setScroll] = useState(scrollState.MID)
   const x = useMotionValue(0)
   const background = useTransform(
@@ -66,7 +66,7 @@ const Container = ({ list, head }) => {
 
   return (
     <>
-      <div className="flex justify-start lg:mx-10 mx-3 mt-5">
+      <div className="flex justify-between lg:mx-10 mx-3 mt-5">
         <div className="flex">
           <div className="a-center">
             <AiOutlineSchedule className="text-sgreen text-[22px] mr-2" />
@@ -75,6 +75,7 @@ const Container = ({ list, head }) => {
             <h1 className="text-slate-200 text-sm side-heading">{head} <span className="text-sgreen">schedule</span></h1>
           </div>
         </div>
+        <Options index={index} setIndex={setIndex} />
       </div>
       <div className="mt-4 mx-3 lg:mx-10">
         <div className="glass rounded-2xl">
@@ -129,6 +130,8 @@ const Container = ({ list, head }) => {
 Container.propTypes = {
   list: PropTypes.any,
   head: PropTypes.string,
+  index: PropTypes.number,
+  setIndex: PropTypes.any,
 }
 
 export default Container

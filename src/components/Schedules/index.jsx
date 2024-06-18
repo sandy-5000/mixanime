@@ -8,13 +8,14 @@ const Schedules = () => {
   const shift = -1
   const [list, setList] = useState(null)
   const [head, setHead] = useState(null)
+  const [index, setIndex] = useState(1)
 
   const variables = {
     page: 1,
     perPage: 50,
   }
 
-  const getSchedule = (index) => {
+  const getSchedule = () => {
     setList(null)
     const current = new Date()
     current.setDate(current.getDate() + index + shift)
@@ -38,9 +39,9 @@ const Schedules = () => {
   }
 
   useEffect(() => {
-    getSchedule(1)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    getSchedule()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index])
 
   if (list === null) {
     return (
@@ -54,7 +55,7 @@ const Schedules = () => {
 
   return (
     <div className="xl:container mx-auto">
-      <Container head={head} list={list} />
+      <Container head={head} list={list} index={index} setIndex={setIndex} />
     </div>
   )
 }
