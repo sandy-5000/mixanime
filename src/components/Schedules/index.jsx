@@ -34,13 +34,14 @@ const Schedules = () => {
       airingAtGreater,
       airingAtLesser
     }, (data) => {
+      data = data.filter((x) => x.media.countryOfOrigin != 'CN' && !x.media.genres?.includes('Hentai'))
       setList(data)
     })
   }
 
   useEffect(() => {
     getSchedule()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index])
 
   if (list === null) {
