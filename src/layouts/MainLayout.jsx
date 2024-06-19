@@ -6,6 +6,7 @@ import Button from "/src/components/Button"
 import wall from "/src/assets/images/pic_1.jpg"
 import Find from "/src/components/Find"
 import Footer from "/src/components/Footer"
+import NavBar from "/src/components/NavBar"
 
 
 const MainLayout = ({ children }) => {
@@ -80,7 +81,8 @@ const MainLayout = ({ children }) => {
         </div>
         <Footer />
       </main>
-    </div >
+      <NavBar />
+    </div>
   )
 }
 
