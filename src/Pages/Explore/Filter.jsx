@@ -168,7 +168,7 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
                   id="season"
                   label="Season"
                   options={[
-                    { name: 'any', value: '' },
+                    { name: 'Any', value: '' },
                     { name: 'Winter', value: 'WINTER' },
                     { name: 'Spring', value: 'SPRING' },
                     { name: 'Summer', value: 'SUMMER' },
@@ -212,6 +212,7 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
                   id="sorting"
                   label="Sorting"
                   options={[
+                    { name: 'Any', value: '' },
                     { name: 'Ascending', value: 'TITLE_ENGLISH' },
                     { name: 'Descending', value: 'TITLE_ENGLISH_DESC' },
                     { name: 'Newly Added', value: 'START_DATE_DESC' },

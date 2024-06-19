@@ -14,7 +14,7 @@ const defaultFilter = () => {
     format: '',
     season: '',
     year: '',
-    sort: 'TITLE_ENGLISH',
+    sort: '',
     status: '',
     averageScore: -1,
     genres: {}

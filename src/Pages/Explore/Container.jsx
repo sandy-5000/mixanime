@@ -1,8 +1,8 @@
 import { PropTypes } from "prop-types"
 import PageButtons from "/src/components/PageButtons"
-import { HiColorSwatch } from "react-icons/hi"
 import Card from "/src/components/Card/Season"
-import { RiFilter2Fill } from "react-icons/ri"
+import { VscFilter } from "react-icons/vsc"
+import { TbMapSearch } from "react-icons/tb"
 
 
 const Container = ({ page, setPage, list, setShow }) => {
@@ -12,13 +12,13 @@ const Container = ({ page, setPage, list, setShow }) => {
       <div className="md:flex justify-between px-4 mb-4">
         <div className="flex">
           <div className="a-center">
-            <HiColorSwatch className="text-sgreen text-[22px] mr-2" />
+            <TbMapSearch className="text-sgreen text-[22px] mr-2" />
           </div>
           <div className="a-center font-semibold">
             <h1 className="text-slate-200 text-sm side-heading">Search <span className="text-sgreen">Results</span></h1>
           </div>
-          <div className="a-center">
-            <RiFilter2Fill className="text-sgreen text-[22px] ml-2" onClick={() => setShow(true)} />
+          <div className="a-center cursor-pointer">
+            <VscFilter className="text-sgreen text-[22px] ml-4" onClick={() => setShow(true)} />
           </div>
         </div>
         <div className="mt-8 md:mt-0">

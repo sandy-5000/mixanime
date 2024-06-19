@@ -29,7 +29,10 @@ const App = () => {
         <Link to="/details">Details</Link>
       </h1>
       <h1 className="text-md text-slate-200">
-        <Link to="/explore">Explore</Link>
+        <Link to={{
+          pathname: "/explore",
+          search: getQueryParams({ page: 1 }),
+        }}>Explore</Link>
       </h1>
       <h1 className="text-md text-slate-200">
         <Link to="/watch">Watch</Link>
