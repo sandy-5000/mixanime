@@ -5,7 +5,7 @@ const Select = ({ id, label, options, item, setItem }) => {
   return (
     <div>
       <div className="flex justify-center">
-        <label className="w-full text-center text-white glass glass-hard text-sm cursor-pointer" for={id}>{label}</label>
+        <label className="w-full text-center text-white glass glass-hard text-sm cursor-pointer" htmlFor={id}>{label}</label>
       </div>
       <div className="select relative mt-2"
         style={{

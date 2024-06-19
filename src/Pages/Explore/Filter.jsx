@@ -3,24 +3,11 @@ import Button from "/src/components/Button"
 import { motion } from "framer-motion"
 import { VscClose } from "react-icons/vsc"
 import { LuSearch } from "react-icons/lu"
-import { useEffect, useState } from "react"
 import Select from "./Select"
+import { useState } from "react"
 
-const getDefaultFilter = () => {
-  return {
-    name: '',
-    country: '',
-    format: '',
-    season: '',
-    year: '',
-    sort: '',
-    status: '',
-    averageScore: -1,
-    genres: {}
-  }
-}
 
-const Filter = ({ close }) => {
+const Filter = ({ filter, setFilter, defaultFilter, close }) => {
   const year = new Date().getFullYear()
   const years = []
   for (let i = 1938; i < year + 2; ++i) {
@@ -34,7 +21,8 @@ const Filter = ({ close }) => {
     'Action', 'Adventure', 'Comedy', 'Drama', 'Ecchi', 'Fantasy', 'Horror', 'Mahou Shoujo', 'Mecha', 'Music',
     'Mystery', 'Psychological', 'Romance', 'Sci-Fi', 'Slice Of Life', 'Sports', 'Supernatural', 'Thriller'
   ]
-  const [state, setState] = useState(getDefaultFilter())
+
+  const [state, setState] = useState(filter)
 
   const getColor = () => {
     const randomInt = (min, max) => {
@@ -46,19 +34,21 @@ const Filter = ({ close }) => {
     return `hsl(${h},${s}%,${l}%)`
   }
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   const clearText = () => {
-    setState({ ...state, name: '' })
+    setState({ ...state, animename: '' })
   }
   const clearFilter = () => {
-    setState(getDefaultFilter())
+    setState(defaultFilter())
+    setFilter(defaultFilter())
+    close()
+  }
+  const handleSubmit = () => {
+    setFilter(state)
+    close()
   }
 
   const handleName = (event) => {
-    setState({ ...state, name: event.target.value })
+    setState({ ...state, animename: event.target.value })
   }
   const handleCountry = (country) => {
     setState({ ...state, country })
@@ -222,7 +212,6 @@ const Filter = ({ close }) => {
                   id="sorting"
                   label="Sorting"
                   options={[
-                    { name: 'Any', value: '' },
                     { name: 'Ascending', value: 'TITLE_ENGLISH' },
                     { name: 'Descending', value: 'TITLE_ENGLISH_DESC' },
                     { name: 'Newly Added', value: 'START_DATE_DESC' },
@@ -283,6 +272,7 @@ const Filter = ({ close }) => {
                   color: '#1f2937',
                   backgroundColor: '#e5e7eb',
                 }}
+                onClick={handleSubmit}
               >
                 <span>Filter</span>
               </Button>
@@ -295,7 +285,10 @@ const Filter = ({ close }) => {
 }
 
 Filter.propTypes = {
-  close: PropTypes.any
+  filter: PropTypes.any,
+  setFilter: PropTypes.any,
+  close: PropTypes.any,
+  defaultFilter: PropTypes.any,
 }
 
 export default Filter

@@ -7,7 +7,7 @@ import { useRef } from "react"
 const Season = ({ data, index }) => {
   const startDate = data.startDate.day + '/' + data.startDate.month + '/' + data.startDate.year
   const background = data.coverImage.extraLarge
-  const format = data.format.replaceAll('_', ' ')
+  const format = data.format?.replaceAll('_', ' ') || 'TV'
   const title =
     data.title.userPreferred ||
     data.title.english ||
