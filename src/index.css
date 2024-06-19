@@ -142,17 +142,74 @@ input:focus {
 }
 
 .banner-image {
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    @apply w-full lg:aspect-[4/1] md:aspect-[5/2] aspect-[5/2] overflow-x-hidden
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  @apply w-full lg:aspect-[4/1] md:aspect-[5/2] aspect-[5/2] overflow-x-hidden
 }
 
 .cover-image {
-    z-index: 2 !important;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    width: 100% !important;
-    @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl
+  z-index: 2 !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 100% !important;
+  @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl
+}
+
+.filter-width {
+  @apply w-[90vw] md:w-[400px];
+}
+
+.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.checkbox__label {
+  line-height: 1.414;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkbox__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 5px;
+  transition: 125ms ease-out;
+  @apply border-slate-200
+}
+
+.checkbox__indicator:after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 9px;
+  width: 7px;
+  height: 13px;
+  transform: scaleX(-1) rotate(135deg);
+  transform-origin: left top;
+  border-right: 3px solid white;
+  border-top: 3px solid white;
+  display: none;
+}
+
+.checkbox input:checked ~ .checkbox__indicator {
+  @apply bg-[#9fe6cd] border-slate-500
+}
+.checkbox input:checked ~ .checkbox__indicator:after {
+  animation: check 125ms;
+  border-top: 3px solid;
+  border-right: 3px solid;
+  display: block;
+  @apply border-r-slate-800 border-t-slate-800
 }
