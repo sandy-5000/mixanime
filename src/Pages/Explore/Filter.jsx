@@ -16,9 +16,9 @@ const getDefaultFilter = () => {
     sort: '',
     status: '',
     averageScore: -1,
+    genres: {}
   }
 }
-const selectedGenres = new Set()
 
 const Filter = ({ close }) => {
   const year = new Date().getFullYear()
@@ -35,7 +35,6 @@ const Filter = ({ close }) => {
     'Mystery', 'Psychological', 'Romance', 'Sci-Fi', 'Slice Of Life', 'Sports', 'Supernatural', 'Thriller'
   ]
   const [state, setState] = useState(getDefaultFilter())
-  selectedGenres.clear()
 
   const getColor = () => {
     const randomInt = (min, max) => {
@@ -51,11 +50,15 @@ const Filter = ({ close }) => {
     console.log(state)
   }, [state])
 
-  const handleName = (event) => {
-    setState({ ...state, name: event.target.value })
-  }
   const clearText = () => {
     setState({ ...state, name: '' })
+  }
+  const clearFilter = () => {
+    setState(getDefaultFilter())
+  }
+
+  const handleName = (event) => {
+    setState({ ...state, name: event.target.value })
   }
   const handleCountry = (country) => {
     setState({ ...state, country })
@@ -82,11 +85,12 @@ const Filter = ({ close }) => {
     const value = event.target.value
     const checked = event.target.checked
     if (checked) {
-      selectedGenres.add(value)
+      setState({ ...state, genres: { ...state.genres, [value]: true } })
     } else {
-      selectedGenres.delete(value)
+      const genres = state.genres
+      delete genres[value]
+      setState({ ...state, genres })
     }
-    console.log(selectedGenres)
   }
 
   return (
@@ -131,7 +135,7 @@ const Filter = ({ close }) => {
                   value={state.name}
                   onChange={handleName}
                   className="h-8 w-[300px] bg-transparent py-2 px-8 text-gray-200
-                  rounded-3xl ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   uppercase tracking-wide text-xs"
                   placeholder="Search..."
                 />
@@ -196,7 +200,7 @@ const Filter = ({ close }) => {
                           color: getColor(),
                         }}
                       >{genre}</span>
-                      <input type="checkbox" value={genre} onChange={handleCheck} name="genre" />
+                      <input type="checkbox" checked={state.genres[genre]} value={genre} onChange={handleCheck} name="genre" />
                       <div className="checkbox__indicator"></div>
                     </label>
                   </span>
@@ -264,7 +268,16 @@ const Filter = ({ close }) => {
                 />
               </div>
             </div>
-            <div className="flex justify-end my-5 px-5">
+            <div className="flex justify-between my-5 px-2">
+              <Button
+                style={{
+                  color: '#e5e7eb',
+                  backgroundColor: '#1e293b55',
+                }}
+                onClick={clearFilter}
+              >
+                <span>Clear</span>
+              </Button>
               <Button
                 style={{
                   color: '#1f2937',
