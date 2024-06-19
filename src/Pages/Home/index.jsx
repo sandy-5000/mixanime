@@ -4,7 +4,7 @@ import Anilist from "/src/services/anilist"
 import Carousel from "/src/components/Carousel"
 import Recents from "/src/components/Recents"
 import Trending from "/src/components/Trending"
-import Schedules from "../components/Schedules"
+import Schedules from "../../components/Schedules"
 
 const variables = {
   carousel: {
