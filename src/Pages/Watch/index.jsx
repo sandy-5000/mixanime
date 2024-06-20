@@ -1,5 +1,11 @@
+import Video from "./Video"
 import MainLayout from "/src/layouts/MainLayout"
 import { useLocation } from "react-router-dom"
+
+const testLink = {
+  "link": 'https://goone.pro/streaming.php?id=NzEzMDA=&title=Boku+no+Hero+Academia+Episode+1&typesub=SUB',
+  "status": 200
+}
 
 const Watch = () => {
   const location = useLocation()
@@ -11,8 +17,8 @@ const Watch = () => {
 
   return (
     <MainLayout>
-      <div className="h-screen a-center">
-        <h3 className="text-slate-200">Watch Page!</h3>
+      <div className="">
+        <Video data={testLink} />
       </div>
     </MainLayout>
   )
