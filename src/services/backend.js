@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class BackendService {
     constructor() {
-        this.URL = 'http://127.0.0.1:5000'
+        this.URL = 'https://mixanime.onrender.com'
     }
 
     get(url, params) {

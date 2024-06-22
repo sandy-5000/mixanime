@@ -250,7 +250,7 @@ const Container = ({
               <hr className="text-slate-200 mb-3" />
               <p className="text-slate-200 p-0 mb-3 text-xs">
                 <span className="text-sgreen">Genres :</span>
-                <span className="mx-2">{'genere'}</span>
+                <span className="mx-2">{data.genres?.join(', ')}</span>
               </p>
               <hr className="text-slate-200 mb-3" />
               <p className="text-slate-200 p-0 mb-3 text-xs">
