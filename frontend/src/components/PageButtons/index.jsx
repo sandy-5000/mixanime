@@ -27,8 +27,8 @@ const PageButtons = ({ current, prev, next }) => {
           </div>
         </div>
       </Button>
-      <div className="w-16 a-center px-1">
-        <div className="w-8 a-center h-full rounded-md"
+      <div className="a-center px-2">
+        <div className="min-w-8 max-w-fit px-1 a-center h-full rounded-md"
           style={{
             backgroundColor: '#f3f4f6ff'
           }}
