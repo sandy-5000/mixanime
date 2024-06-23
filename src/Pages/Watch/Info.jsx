@@ -2,14 +2,19 @@ import { PropTypes } from "prop-types"
 import { getQueryParams, dateToString } from "/src/services/untils"
 import Button from "/src/components/Button"
 import { Link } from "react-router-dom"
-import { VscChevronRight } from "react-icons/vsc"
+import { TbListDetails } from "react-icons/tb"
+import Episodes from "./Episodes"
 
-const Info = ({ data }) => {
+
+const Info = ({ data, setEpisode }) => {
   const totalEpisodes = data?.episodes || '?'
+  const currentEpisode = data.nextAiringEpisode?.episode
+    ? (data.nextAiringEpisode?.episode - 1)
+    : (data?.episodes || '?')
 
   return (
-    <div className="m-5 lg:m-20 block md:flex">
-      <div className="w-full md:w-3/12 mt-4">
+    <div className="m-5 lg:m-8 block md:flex">
+      <div className="w-full md:w-4/12 lg:w-3/12 mt-4">
         <div className="mx-1">
           <p className="text-slate-200 p-0 mb-3 text-xs">
             <span className="text-sgreen">Format :</span>
@@ -89,7 +94,7 @@ const Info = ({ data }) => {
               >
                 <div className="flex justify-center">
                   <div className="mr-1 -ml-1 a-center">
-                    <VscChevronRight className="text-lg" />
+                    <TbListDetails className="text-lg" />
                   </div>
                   <div className="a-center">
                     <span className="text-xs inline-flex">Details</span>
@@ -101,14 +106,16 @@ const Info = ({ data }) => {
         </div>
       </div>
       <div className="vr mx-1 hidden md:inline-flex"></div>
-      <div className="lg:w-9/12 md:w-9/12 w-full mt-2 mx-2">
+      <div className="w-full md:w-8/12 lg:w-9/12 mt-2 mx-2">
+        <Episodes setEpisode={setEpisode} released={currentEpisode} />
       </div>
     </div>
   )
 }
 
 Info.propTypes = {
-  data: PropTypes.any
+  data: PropTypes.any,
+  setEpisode: PropTypes.any
 }
 
 export default Info
