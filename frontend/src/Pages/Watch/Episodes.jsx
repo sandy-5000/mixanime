@@ -1,4 +1,3 @@
-import { motion } from "framer-motion"
 import { PropTypes } from "prop-types"
 import { memo } from "react"
 
@@ -17,23 +16,20 @@ const Episodes = ({ released, setEpisode }) => {
         >
           {
             Array(released).fill(0).map((_, index) => (
-              <motion.div
+              <div
                 key={`episode-${index + 1}`}
                 className="aspect-square w-12 p-1"
-                whileHover={{
-                  scale: 1.05
-                }}
-                whileTap={{
-                  scale: 0.9
-                }}
                 onClick={() => setEpisode(index + 1)}
               >
                 <div
-                  className="w-full h-full bg-[#1f2937bb] glass glass-hard cursor-pointer a-center"
+                  className="
+                  w-full h-full text-gray-200 bg-[#1f2937bb]
+                  hover:bg-sgreen hover:text-gray-800 hover:scale-110 glass glass-hard
+                  cursor-pointer a-center"
                 >
-                  <span className="text-xs text-gray-200 font-semibold">{index + 1}</span>
+                  <span className="text-xs font-semibold">{index + 1}</span>
                 </div>
-              </motion.div>
+              </div>
             ))
           }
         </div>

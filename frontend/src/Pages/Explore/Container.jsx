@@ -23,9 +23,9 @@ const Container = ({ page, setPage, list, setShow }) => {
         </div>
         <div className="mt-8 md:mt-0">
           <PageButtons
-            page={page}
-            prevPage={() => setPage(page - 1)}
-            nextPage={() => setPage(page + 1)}
+            current={page}
+            prev={() => setPage(page - 1)}
+            next={() => setPage(page + 1)}
           />
         </div>
       </div>
@@ -42,9 +42,9 @@ const Container = ({ page, setPage, list, setShow }) => {
       </div>
       <div className="mt-8">
         <PageButtons
-          page={page}
-          prevPage={() => setPage(page - 1)}
-          nextPage={() => setPage(page + 1)}
+          current={page}
+          prev={() => setPage(page - 1)}
+          next={() => setPage(page + 1)}
         />
       </div>
       <div className="h-[150px]"></div>

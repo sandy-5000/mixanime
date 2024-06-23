@@ -69,9 +69,9 @@ const Recent = () => {
           </div>
           <div className="mt-8 md:mt-0">
             <PageButtons
-              page={variables.page}
-              prevPage={() => setPage(variables.page - 1)}
-              nextPage={() => setPage(variables.page + 1)}
+              current={variables.page}
+              prev={() => setPage(variables.page - 1)}
+              next={() => setPage(variables.page + 1)}
             />
           </div>
         </div>
@@ -87,9 +87,9 @@ const Recent = () => {
         </div>
         <div className="mt-8">
           <PageButtons
-            page={variables.page}
-            prevPage={() => setPage(variables.page - 1)}
-            nextPage={() => setPage(variables.page + 1)}
+            current={variables.page}
+            prev={() => setPage(variables.page - 1)}
+            next={() => setPage(variables.page + 1)}
           />
         </div>
         <div className="h-[150px]"></div>

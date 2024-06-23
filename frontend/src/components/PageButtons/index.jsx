@@ -3,7 +3,7 @@ import Button from "/src/components/Button"
 import { GrFormPrevious, GrFormNext } from "react-icons/gr"
 
 
-const PageButtons = ({ page, prevPage, nextPage }) => {
+const PageButtons = ({ current, prev, next }) => {
   return (
     <div className="flex justify-center">
       <Button
@@ -16,7 +16,7 @@ const PageButtons = ({ page, prevPage, nextPage }) => {
           color: '#111827',
           backgroundColor: '#e5e7ebee',
         }}
-        onClick={() => prevPage()}
+        onClick={() => prev()}
       >
         <div className="flex justify-center">
           <div className="a-center">
@@ -38,7 +38,7 @@ const PageButtons = ({ page, prevPage, nextPage }) => {
             style={{
               fontSize: 14
             }}
-          >{page}</p>
+          >{current}</p>
         </div>
       </div>
       <Button
@@ -51,7 +51,7 @@ const PageButtons = ({ page, prevPage, nextPage }) => {
           color: '#111827',
           backgroundColor: '#e5e7ebee',
         }}
-        onClick={() => nextPage()}
+        onClick={() => next()}
       >
         <div className="flex justify-center">
           <div className="a-center">
@@ -67,9 +67,9 @@ const PageButtons = ({ page, prevPage, nextPage }) => {
 }
 
 PageButtons.propTypes = {
-  page: PropTypes.number,
-  prevPage: PropTypes.any,
-  nextPage: PropTypes.any,
+  current: PropTypes.number,
+  prev: PropTypes.any,
+  next: PropTypes.any,
 }
 
 export default PageButtons

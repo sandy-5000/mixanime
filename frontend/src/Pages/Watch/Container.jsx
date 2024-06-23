@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getQueryParams } from "/src/services/untils"
 import backend from "/src/services/backend"
-import { scrape } from "/src/services/scraper"
+import scrapper from "/src/services/scraper"
 
 
 const getEpisode = ({ id, episode, romaji, callback }) => {
@@ -32,7 +32,7 @@ const getEpisode = ({ id, episode, romaji, callback }) => {
         shift = data.meta_data?.shift
       }
       const uuid = (data.uuid || romaji) + '-episode-' + (shift + episode)
-      scrape(uuid, (urlData) => {
+      scrapper.scrape(uuid, (urlData) => {
         if (!urlData.link) {
           callback({
             "link": null,
@@ -117,7 +117,12 @@ const Container = ({ data }) => {
         </div>
       </div>
       <div>
-        <Video data={watchLink} />
+        <Video
+          data={watchLink}
+          episode={episode}
+          prevEpisode={() => setCurrentEpisode(episode - 1)}
+          nextEpisode={() => setCurrentEpisode(episode + 1)}
+        />
         <Info setEpisode={setCurrentEpisode} data={data} />
       </div>
     </>
