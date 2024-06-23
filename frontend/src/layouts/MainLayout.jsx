@@ -7,14 +7,19 @@ import wall from "/src/assets/images/pic_1.jpg"
 import Find from "/src/components/Find"
 import Footer from "/src/components/Footer"
 import NavBar from "/src/components/NavBar"
-
+import { useNavigate } from "react-router-dom"
 
 const MainLayout = ({ children }) => {
+  const navigate = useNavigate()
   const [isLoggedIn, setLogin] = useState(false)
   const [blur, setBlur] = useState(false)
 
   const handleAuth = () => {
-    setLogin(prev => !prev)
+    if (isLoggedIn) {
+      setLogin(false)
+    } else {
+      navigate('/login')
+    }
   }
 
   const toggleFind = () => {

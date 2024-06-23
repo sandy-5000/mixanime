@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client"
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom"
-import App from "./App.jsx"
 import "./index.css"
 import Home from "/src/Pages/Home"
 import Recent from "/src/Pages/Recent"
@@ -12,11 +12,13 @@ import Trending from "/src/Pages/Trending"
 import Details from "/src/Pages/Details"
 import Explore from "/src/Pages/Explore"
 import Watch from "/src/Pages/Watch"
+import Error from "/src/Pages/Error"
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Navigate to="/home" />,
+    errorElement: <Error />,
   },
   {
     path: '/home',
