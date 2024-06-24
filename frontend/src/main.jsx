@@ -13,6 +13,9 @@ import Details from "/src/Pages/Details"
 import Explore from "/src/Pages/Explore"
 import Watch from "/src/Pages/Watch"
 import Error from "/src/Pages/Error"
+import Login from "/src/Pages/Auth/Login"
+import SignUp from "/src/Pages/Auth/SignUp"
+import Profile from "/src/Pages/Auth/Profile"
 
 const router = createBrowserRouter([
   {
@@ -26,23 +29,35 @@ const router = createBrowserRouter([
   },
   {
     path: '/recent',
-    element: <Recent />
+    element: <Recent />,
   },
   {
     path: '/trending',
-    element: <Trending />
+    element: <Trending />,
   },
   {
     path: '/details',
-    element: <Details />
+    element: <Details />,
   },
   {
     path: '/explore',
-    element: <Explore />
+    element: <Explore />,
   },
   {
     path: '/watch',
-    element: <Watch />
+    element: <Watch />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
   },
 ])
 

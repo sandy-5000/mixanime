@@ -6,7 +6,6 @@ import { getQueryParams } from "/src/services/untils"
 import MainLayout from "/src/layouts/MainLayout"
 import Spinner from "/src/components/Spinner"
 
-
 const Details = () => {
   const navigate = useNavigate()
   const location = useLocation()

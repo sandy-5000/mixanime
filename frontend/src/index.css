@@ -24,6 +24,12 @@ body {
   align-items: center;
 }
 
+.v-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @layer utilities {
   .text-sgreen {
     /* color: #5de4b5; */
