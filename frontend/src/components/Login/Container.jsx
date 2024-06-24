@@ -9,9 +9,11 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import backend from "/src/services/backend"
 import Loading from "/src/components/Button/Loading"
+import { useNavigate } from "react-router-dom"
 import { Context } from "/src/context"
 
 const Container = ({ modal, close }) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [passwd, setPasswd] = useState('')
   const [showPasswd, setShowPasswd] = useState(false)
@@ -56,7 +58,11 @@ const Container = ({ modal, close }) => {
             loggedIn: true,
             data,
           })
-          close()
+          if (modal) {
+            close()
+          } else {
+            navigate('/home')
+          }
         })
         .catch(error => {
           setError('An Error occured')

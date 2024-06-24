@@ -11,30 +11,78 @@ import { PiUserCircleDuotone } from "react-icons/pi"
 import { FaRegUser } from "react-icons/fa"
 
 const SignUp = () => {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [passwd, setPasswd] = useState('')
-  const [cpasswd, setCPasswd] = useState('')
   const [showPasswd, setShowPasswd] = useState(false)
+  const [form, setForm] = useState({
+    username: '',
+    usermail: '',
+    passwd: '',
+    cpasswd: '',
+  })
+  const [error, setError] = useState({})
 
-  const handleUsername = (event) => {
-    setUsername(event.target.value)
-  }
-  const handleEmail = (event) => {
-    setEmail(event.target.value)
-  }
-  const handlePasswd = (event) => {
-    setPasswd(event.target.value)
-  }
-  const handleCPasswd = (event) => {
-    setCPasswd(event.target.value)
+  const handleChange = (event) => {
+    const data = { ...form, [event.target.name]: event.target.value }
+    setForm(data)
+    validate(event.target.name, data)
   }
   const handleShowPasswd = () => {
     setShowPasswd(!showPasswd)
   }
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, { username, usermail, passwd, cpasswd }) => {
     event.preventDefault()
-    console.log({ username, email, passwd, cpasswd })
+    console.log({ username, usermail, passwd, cpasswd })
+    if (!validate('all')) {
+      return
+    }
+  }
+
+  const validate = (param, { username, usermail, passwd, cpasswd }) => {
+    let flag = true
+    if (param === 'username' || param === 'all') {
+      if (username.trim() === '') {
+        setError({ ...error, username: undefined })
+        flag = false
+      } else if (3 > username.length || username.length > 30) {
+        setError({ ...error, username: 'Name must be of size 3 to 30 characters' })
+        flag = false
+      } else {
+        setError({ ...error, username: undefined })
+      }
+    }
+    if (param === 'usermail' || param === 'all') {
+      if (usermail === '') {
+        setError({ ...error, usermail: undefined })
+        flag = false
+      } else if (!/^[a-zA-Z0-9.]{1,64}@[a-zA-Z0-9]{3,10}.com$/.test(usermail)) {
+        setError({ ...error, usermail: 'Unknown Email Format' })
+        flag = false
+      } else {
+        setError({ ...error, usermail: undefined })
+      }
+    }
+    if (param === 'passwd' || param === 'all') {
+      if (passwd === '') {
+        setError({ ...error, passwd: undefined })
+        flag = false
+      } else if (passwd.length < 8) {
+        setError({ ...error, passwd: 'Contains atleast 8 chars' })
+        flag = false
+      } else {
+        setError({ ...error, passwd: undefined })
+      }
+    }
+    if (param === 'cpasswd' || param === 'all') {
+      if (cpasswd === '') {
+        setError({ ...error, cpasswd: undefined })
+        flag = false
+      } else if (passwd !== cpasswd) {
+        setError({ ...error, cpasswd: 'Password didn\'t match' })
+        flag = false
+      } else {
+        setError({ ...error, cpasswd: undefined })
+      }
+    }
+    return flag
   }
 
   return (
@@ -43,55 +91,61 @@ const SignUp = () => {
         <div className="w-full md:w-[360px] glass glass hard v-center">
           <form
             className="w-full h-full"
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e, form)}
           >
             <div className="h-[60px] flex justify-start p-5 pt-8">
               <Logo />
             </div>
-            <div className="flex float-start p-5 pt-3 w-full">
+            <div className="p-5 pt-3 w-full">
               <div className="relative w-full">
                 <div className="absolute h-8 left-0 px-3 a-center">
                   <FaRegUser className="text-gray-400" />
                 </div>
                 <input
                   type="text"
-                  value={username}
+                  value={form.username}
                   name="username"
-                  onChange={handleUsername}
+                  onChange={handleChange}
                   className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                   placeholder="Enter Username"
                 />
               </div>
+              {
+                error.username && <span className="-mb-5 text-red-300 text-xs">{error.username}</span>
+              }
             </div>
-            <div className="flex float-start p-5 pt-0 w-full">
+            <div className="p-5 pt-0 w-full">
               <div className="relative w-full">
                 <div className="absolute h-8 left-0 px-3 a-center">
                   <MdAlternateEmail className="text-gray-400" />
                 </div>
                 <input
                   type="email"
-                  value={email}
-                  name="email"
-                  onChange={handleEmail}
+                  value={form.usermail}
+                  name="usermail"
+                  onChange={handleChange}
                   className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                   placeholder="Enter Email"
                 />
               </div>
+              {
+                error.usermail && <span className="-mb-5 text-red-300 text-xs">{error.usermail}</span>
+              }
             </div>
-            <div className="flex float-start p-5 pt-0 w-full">
+            <div className="p-5 pt-0 w-full">
               <div className="relative w-full">
                 <div className="absolute h-8 left-0 px-3 a-center">
                   <FaShieldAlt className="text-gray-400" />
                 </div>
                 <input
                   type={showPasswd ? "text" : "password"}
-                  value={passwd}
+                  value={form.passwd}
                   name="passwd"
-                  onChange={handlePasswd}
+                  onChange={handleChange}
                   className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
@@ -107,23 +161,29 @@ const SignUp = () => {
                   </button>
                 </div>
               </div>
+              {
+                error.passwd && <span className="-mb-5 text-red-300 text-xs">{error.passwd}</span>
+              }
             </div>
-            <div className="flex float-start p-5 pt-0 w-full">
+            <div className="p-5 pt-0 w-full">
               <div className="relative w-full">
                 <div className="absolute h-8 left-0 px-3 a-center">
                   <LuShieldCheck className="text-gray-400" />
                 </div>
                 <input
                   type="password"
-                  value={cpasswd}
+                  value={form.cpasswd}
                   name="cpasswd"
-                  onChange={handleCPasswd}
+                  onChange={handleChange}
                   className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                   placeholder="Confirm Password"
                 />
               </div>
+              {
+                error.cpasswd && <span className="-mb-5 text-red-300 text-xs">{error.cpasswd}</span>
+              }
             </div>
             <div className="p-5 pt-0 pb-3 flex justify-between">
               <div className="pr-3 flex v-center">

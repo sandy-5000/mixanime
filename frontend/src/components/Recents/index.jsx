@@ -116,7 +116,7 @@ const Recents = ({ list = [] }) => {
         <div
           className="recent-container w-full overflow-x-scroll pt-2"
           style={{
-            mask: 'linear-gradient(90deg, transparent, white 10%, white 90%, transparent)'
+            mask: 'linear-gradient(90deg, transparent, white 5%, white 95%, transparent)'
           }}
         >
           <div className="scroller">
