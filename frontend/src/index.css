@@ -105,6 +105,14 @@ input:focus {
   );
 }
 
+.glass-hard-2 {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.2)
+  );
+}
+
 .scroller {
   @apply flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%];
 }

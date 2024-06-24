@@ -23,13 +23,13 @@ const Button = ({ btnType = 'default', children, style = {}, hoverStyle = {}, ..
     ),
     'icon': (
       <motion.div
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.8 }}
       >
         <button type="button" {...props}
-          className="inline-flex items-center p-1 bg-transparent ring-2 ring-gray-800
-        rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm
-        hover:bg-gray-950 hover:text-slate-200"
+          className="inline-flex items-center p-1 bg-transparent ring-2 ring-gray-400
+          rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm
+          hover:text-slate-200"
         >
           {children}
         </button>

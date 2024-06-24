@@ -7,36 +7,53 @@ import wall from "/src/assets/images/pic_1.jpg"
 import Find from "/src/components/Find"
 import Footer from "/src/components/Footer"
 import NavBar from "/src/components/NavBar"
-import { useNavigate } from "react-router-dom"
+import Login from "/src/components/Login/Modal"
 
 const MainLayout = ({ children }) => {
-  const navigate = useNavigate()
   const [isLoggedIn, setLogin] = useState(false)
-  const [blur, setBlur] = useState(false)
+  const [find, setFind] = useState(false)
+  const [modal, setModal] = useState(false)
 
   const handleAuth = () => {
     if (isLoggedIn) {
       setLogin(false)
     } else {
-      navigate('/login')
+      openModal()
     }
   }
 
+  const getBlur = () => {
+    return find
+  }
+  const getOpacity = () => {
+    return modal
+  }
   const toggleFind = () => {
-    setBlur(prev => !prev)
+    setFind(!find)
+  }
+  const openModal = () => {
+    setModal(true)
+  }
+  const closeModal = () => {
+    setModal(false)
   }
 
   return (
     <div className="relative">
       {
-        blur && <div className="z-[5] fixed h-screen w-screen">
+        find && <div className="z-[5] fixed h-screen w-screen">
           <Find toggleFind={toggleFind} />
+        </div>
+      }
+      {
+        modal && <div className="z-[5] fixed h-screen w-screen">
+          <Login close={closeModal} />
         </div>
       }
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"
         style={{
-          filter: blur ? 'blur(12px)' : 'blur(0px)',
+          filter: getBlur() ? 'blur(12px)' : 'blur(0px)',
         }}
       >
         <div className="h-[60px] flex justify-between px-4">
@@ -63,7 +80,7 @@ const MainLayout = ({ children }) => {
       </header>
       <div
         style={{
-          filter: blur ? 'blur(12px)' : 'blur(0px)',
+          filter: getBlur() ? 'blur(12px)' : 'blur(0px)',
         }}
         className="fixed left-0 top-0 w-screen h-screen flex flex-col justify-center"
       >
@@ -78,7 +95,8 @@ const MainLayout = ({ children }) => {
         className="relative"
         style={{
           minHeight: '100vh',
-          filter: blur ? 'blur(12px)' : 'blur(0px)',
+          filter: getBlur() ? 'blur(12px)' : 'blur(0px)',
+          opacity: getOpacity() ? 0.2 : 1,
         }}
       >
         <div className="w-full pt-[70px]">

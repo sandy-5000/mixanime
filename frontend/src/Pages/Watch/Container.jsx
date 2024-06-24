@@ -7,7 +7,6 @@ import { getQueryParams } from "/src/services/untils"
 import backend from "/src/services/backend"
 import scrapper from "/src/services/scraper"
 
-
 const getEpisode = ({ id, episode, romaji, callback }) => {
   romaji = romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
   backend
