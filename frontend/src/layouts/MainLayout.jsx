@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { PropTypes } from "prop-types"
 import { VscSignIn, VscSignOut } from "react-icons/vsc"
+import Auth from "/src/components/Auth"
 import Logo from "/src/components/Logo"
 import Button from "/src/components/Button"
 import wall from "/src/assets/images/pic_1.jpg"
@@ -8,15 +9,20 @@ import Find from "/src/components/Find"
 import Footer from "/src/components/Footer"
 import NavBar from "/src/components/NavBar"
 import Login from "/src/components/Login/Modal"
+import { Context } from "/src/context"
 
 const MainLayout = ({ children }) => {
-  const [isLoggedIn, setLogin] = useState(false)
+  const [user, setUser] = useContext(Context)
   const [find, setFind] = useState(false)
   const [modal, setModal] = useState(false)
 
   const handleAuth = () => {
-    if (isLoggedIn) {
-      setLogin(false)
+    if (user.loggedIn) {
+      setUser({
+        loggedIn: false,
+        data: undefined,
+      })
+      localStorage.removeItem('token')
     } else {
       openModal()
     }
@@ -50,6 +56,7 @@ const MainLayout = ({ children }) => {
           <Login close={closeModal} />
         </div>
       }
+      <Auth />
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"
         style={{
@@ -67,7 +74,7 @@ const MainLayout = ({ children }) => {
           </div>
           <div className="a-center">
             {
-              isLoggedIn
+              user.loggedIn
                 ? <Button btnType="auth" onClick={handleAuth}><VscSignOut className="mr-2 text-xl" />
                   <span className="w-12">Logout</span>
                 </Button>
@@ -110,7 +117,7 @@ const MainLayout = ({ children }) => {
 }
 
 MainLayout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 export default MainLayout

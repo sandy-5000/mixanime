@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types"
 import { VscEye, VscEyeClosed, VscSignIn, VscClose } from "react-icons/vsc"
 import Button from "/src/components/Button"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { MdAlternateEmail } from "react-icons/md"
 import { FaShieldAlt } from "react-icons/fa"
 import Logo from "/src/components/Logo"
@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import backend from "/src/services/backend"
 import Loading from "/src/components/Button/Loading"
+import { Context } from "/src/context"
 
 const Container = ({ modal, close }) => {
   const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ const Container = ({ modal, close }) => {
   const [showPasswd, setShowPasswd] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const setUser = useContext(Context)[1]
 
   useEffect(() => {
     let interval = null
@@ -45,11 +47,16 @@ const Container = ({ modal, close }) => {
       const body = { usermail: email, passwd }
       backend.post('/api/user/login', body)
         .then(({ data }) => {
-          console.log(data)
           if (data.error) {
             setError(data.error)
             return
           }
+          localStorage.setItem('token', data.jwt)
+          setUser({
+            loggedIn: true,
+            data,
+          })
+          close()
         })
         .catch(error => {
           setError('An Error occured')
@@ -75,18 +82,18 @@ const Container = ({ modal, close }) => {
 
   return (
     <div className="w-[330px] glass v-center">
-      {
-        modal &&
-        <div className="flex justify-end px-5 pt-5">
-          <Button btnType="icon" onClick={close}><VscClose className="text-xl" /></Button>
-        </div>
-      }
       <form
         className="w-full h-full"
         onSubmit={handleSubmit}
       >
-        <div className="h-[60px] flex justify-start p-5 pt-8">
+        <div className="h-[60px] flex justify-between p-5 pt-8">
           <Logo />
+          <div className="a-center -mt-1">
+            {
+              modal &&
+              <Button btnType="icon" onClick={close}><VscClose className="text-xl" /></Button>
+            }
+          </div>
         </div>
         <div className="flex float-start p-5 pt-3 w-full">
           <div className="relative w-full">
@@ -143,7 +150,7 @@ const Container = ({ modal, close }) => {
         <div className="p-5 pt-0 pb-3 flex justify-between">
           <div className="pr-3 flex v-center">
             <Link to="/signup">
-              <p className="text-sgreen text-xs cursor-pointer">Don't have an account?</p>
+              <p className="text-sgreen text-xs cursor-pointer">Don&#39;t have an account?</p>
             </Link>
           </div>
           {

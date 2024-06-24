@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import ReactDOM from "react-dom/client"
 import {
   createBrowserRouter,
@@ -16,6 +16,8 @@ import Error from "/src/Pages/Error"
 import Login from "/src/Pages/Auth/Login"
 import SignUp from "/src/Pages/Auth/SignUp"
 import Profile from "/src/Pages/Auth/Profile"
+import { Context } from "/src/context"
+import { PropTypes } from "prop-types"
 
 const router = createBrowserRouter([
   {
@@ -61,8 +63,28 @@ const router = createBrowserRouter([
   },
 ])
 
+
+// eslint-disable-next-line react-refresh/only-export-components
+const StateProvider = ({ children }) => {
+  const [user, setUser] = useState({
+    loggedIn: false,
+    data: undefined,
+  })
+  return (
+    <Context.Provider value={[user, setUser]}>
+      {children}
+    </Context.Provider>
+  )
+}
+
+StateProvider.propTypes = {
+  children: PropTypes.node,
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <StateProvider>
+      <RouterProvider router={router} />
+    </StateProvider>
   </React.StrictMode>,
 )
