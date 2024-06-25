@@ -5,7 +5,7 @@ const Loading = ({ children }) => {
     <div className="flex justify-center my-2">
       <button
         type="button"
-        className="inline-flex items-center px-4 py-2 bg-[#e5e7eb55] border-1 border-gray-500 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ease-in-out duration-150 cursor-progress"
+        className="inline-flex items-center px-4 py-2 bg-[#e5e7eb22] border-1 border-gray-800 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm focus:outline-none disabled:opacity-25 transition ease-in-out duration-150 cursor-progress"
       >
         <svg
           className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"

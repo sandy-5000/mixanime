@@ -162,11 +162,7 @@ const Container = ({ modal, close }) => {
           {
             loading
               ? <Loading>
-                <span
-                  style={{
-                    fontSize: 10,
-                  }}
-                >Submitting...</span>
+                <span>Loging...</span>
               </Loading>
               : <motion.div
                 whileHover={{ scale: 1.05 }}

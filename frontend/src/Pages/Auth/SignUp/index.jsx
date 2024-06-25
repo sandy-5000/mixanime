@@ -1,6 +1,6 @@
 import AuthLayout from "/src/layouts/AuthLayout"
 import { VscEye, VscEyeClosed } from "react-icons/vsc"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { MdAlternateEmail } from "react-icons/md"
 import { FaShieldAlt } from "react-icons/fa"
 import Logo from "/src/components/Logo"
@@ -9,8 +9,12 @@ import { Link } from "react-router-dom"
 import { LuShieldCheck } from "react-icons/lu"
 import { PiUserCircleDuotone } from "react-icons/pi"
 import { FaRegUser } from "react-icons/fa"
+import Loading from "/src/components/Button/Loading"
+import backend from "/src/services/backend"
+import { useNavigate } from "react-router-dom"
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const [showPasswd, setShowPasswd] = useState(false)
   const [form, setForm] = useState({
     username: '',
@@ -19,6 +23,20 @@ const SignUp = () => {
     cpasswd: '',
   })
   const [error, setError] = useState({})
+  const [signUpError, setSignUpError] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    let interval = null
+    if (signUpError) {
+      interval = setTimeout(() => {
+        setSignUpError(null)
+      }, 5000)
+    }
+    return () => {
+      clearTimeout(interval)
+    }
+  }, [signUpError])
 
   const handleChange = (event) => {
     const data = { ...form, [event.target.name]: event.target.value }
@@ -30,16 +48,32 @@ const SignUp = () => {
   }
   const handleSubmit = (event, { username, usermail, passwd, cpasswd }) => {
     event.preventDefault()
-    console.log({ username, usermail, passwd, cpasswd })
-    if (!validate('all')) {
+    if (!validate('all', { username, usermail, passwd, cpasswd })) {
       return
     }
+    const body = { username, usermail, passwd, cpasswd }
+    setLoading(true)
+    backend.post('/api/user/register', body)
+      .then(({ data }) => {
+        if (data.error) {
+          setSignUpError(data.error)
+          return
+        }
+        navigate('/login')
+      })
+      .catch(error => {
+        setSignUpError('Something went wrong')
+        console.log(error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   const validate = (param, { username, usermail, passwd, cpasswd }) => {
     let flag = true
     if (param === 'username' || param === 'all') {
-      if (username.trim() === '') {
+      if (username === '') {
         setError({ ...error, username: undefined })
         flag = false
       } else if (3 > username.length || username.length > 30) {
@@ -53,7 +87,7 @@ const SignUp = () => {
       if (usermail === '') {
         setError({ ...error, usermail: undefined })
         flag = false
-      } else if (!/^[a-zA-Z0-9.]{1,64}@[a-zA-Z0-9]{3,10}.com$/.test(usermail)) {
+      } else if (!/^[a-zA-Z0-9_.]{1,64}@[a-zA-Z0-9]{3,10}.com$/.test(usermail)) {
         setError({ ...error, usermail: 'Unknown Email Format' })
         flag = false
       } else {
@@ -184,6 +218,9 @@ const SignUp = () => {
               {
                 error.cpasswd && <span className="-mb-5 text-red-300 text-xs">{error.cpasswd}</span>
               }
+              {
+                signUpError && <span className="-mb-5 text-red-300 text-xs">{signUpError}</span>
+              }
             </div>
             <div className="p-5 pt-0 pb-3 flex justify-between">
               <div className="pr-3 flex v-center">
@@ -191,29 +228,35 @@ const SignUp = () => {
                   <p className="text-sgreen text-xs cursor-pointer">Already have an account?</p>
                 </Link>
               </div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <button
-                  type="submit"
-                  className="inline-flex items-center px-4 py-2
+              {
+                loading
+                  ? <Loading>
+                    <span>Registering...</span>
+                  </Loading>
+                  : <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <button
+                      type="submit"
+                      className="inline-flex items-center px-4 py-2
                   rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm
                   transition ease-in-out duration-150
                   text-[#111827] bg-[#cbd5e1cc]
                   hover:bg-[#e5e7ebee]
                   disabled:opacity-25"
-                >
-                  <div className="flex justify-center">
-                    <div className="a-center mr-1">
-                      <span className="text-xs inline-flex">SignUp</span>
-                    </div>
-                    <div className="a-center">
-                      <PiUserCircleDuotone className="text-lg" />
-                    </div>
-                  </div>
-                </button >
-              </motion.div>
+                    >
+                      <div className="flex justify-center">
+                        <div className="a-center mr-1">
+                          <span className="text-xs inline-flex">SignUp</span>
+                        </div>
+                        <div className="a-center">
+                          <PiUserCircleDuotone className="text-lg" />
+                        </div>
+                      </div>
+                    </button >
+                  </motion.div>
+              }
             </div>
           </form>
         </div>
