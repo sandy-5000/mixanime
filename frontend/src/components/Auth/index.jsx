@@ -8,7 +8,6 @@ const Auth = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token || user.loggedIn) {
-      console.log('context', user)
       return
     }
     backend.post('/api/user/profile', {})
@@ -18,10 +17,6 @@ const Auth = () => {
           return
         }
         setUser({
-          loggedIn: true,
-          data,
-        })
-        console.log('api', {
           loggedIn: true,
           data,
         })
