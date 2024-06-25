@@ -1,10 +1,12 @@
 import { PropTypes } from "prop-types"
 import wall from "/src/assets/images/pic_1.jpg"
 import Logo from "/src/components/Logo"
+import Auth from "/src/components/Auth"
 
 const AuthLayout = ({ children }) => {
   return (
     <div className="relative">
+      <Auth />
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"
       >

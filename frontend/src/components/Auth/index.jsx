@@ -8,8 +8,18 @@ const Auth = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token || user.loggedIn) {
+      setUser({
+        loggedIn: false,
+        loading: false,
+        data: undefined,
+      })
       return
     }
+    setUser({
+      loggedIn: false,
+      loading: true,
+      data: undefined,
+    })
     backend.post('/api/user/profile', {})
       .then(({ data }) => {
         if (data.error) {
@@ -18,11 +28,17 @@ const Auth = () => {
         }
         setUser({
           loggedIn: true,
+          loading: false,
           data,
         })
       })
       .catch(error => {
         localStorage.removeItem('token')
+        setUser({
+          loggedIn: false,
+          loading: false,
+          data: undefined,
+        })
         console.log(error)
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps

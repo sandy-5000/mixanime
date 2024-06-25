@@ -181,7 +181,7 @@ const UpdateForm = () => {
                 value={form.username}
                 name="username"
                 onChange={handleChange}
-                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
+                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                 placeholder="Enter Username"
@@ -201,7 +201,7 @@ const UpdateForm = () => {
                 value={form.npasswd}
                 name="npasswd"
                 onChange={handleChange}
-                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
+                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                 placeholder="Enter New Password"
@@ -230,7 +230,7 @@ const UpdateForm = () => {
                 value={form.cpasswd}
                 name="cpasswd"
                 onChange={handleChange}
-                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
+                className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
                   tracking-wide text-sm"
                 placeholder="Confirm Password"

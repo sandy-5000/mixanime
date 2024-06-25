@@ -68,6 +68,7 @@ const router = createBrowserRouter([
 const StateProvider = ({ children }) => {
   const [user, setUser] = useState({
     loggedIn: false,
+    loading: true,
     data: undefined,
   })
   return (

@@ -19,7 +19,19 @@ const Container = ({ modal, close }) => {
   const [showPasswd, setShowPasswd] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const setUser = useContext(Context)[1]
+  const [user, setUser] = useContext(Context)
+
+  useEffect(() => {
+    console.log(user)
+    if (user.loggedIn) {
+      if (modal) {
+        close()
+      } else {
+        navigate('/home', { replace: true })
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   useEffect(() => {
     let interval = null
@@ -58,11 +70,6 @@ const Container = ({ modal, close }) => {
             loggedIn: true,
             data,
           })
-          if (modal) {
-            close()
-          } else {
-            navigate('/home')
-          }
         })
         .catch(error => {
           setError('An Error occured')
