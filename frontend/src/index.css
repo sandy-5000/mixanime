@@ -117,7 +117,7 @@ input:focus {
   @apply flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%];
 }
 
-.recent-container, .schedule-container {
+.recent-container, .schedule-container, .slider-container {
   scroll-behavior: auto !important;
 }
 
@@ -169,6 +169,10 @@ input:focus {
   background-position: center !important;
   width: 100% !important;
   @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl
+}
+
+.slider {
+  @apply w-full overflow-x-scroll rounded-2xl flex flex-row;
 }
 
 .filter-width {

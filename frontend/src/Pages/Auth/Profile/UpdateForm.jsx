@@ -37,6 +37,7 @@ const UpdateForm = () => {
 
   useEffect(() => {
     resetForm()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   useEffect(() => {
@@ -151,7 +152,7 @@ const UpdateForm = () => {
           onSubmit={(e) => handleSubmit(e, form)}
         >
           <div className="p-5 pt-3 pb-4">
-            <p className="text-gray-200 text-gap-2">Update Form</p>
+            <p className="text-gray-200 text-gap-2">Update Profile</p>
           </div>
           <div className="p-5 pt-0 w-full">
             <div className="relative w-full">

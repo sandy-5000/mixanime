@@ -16,6 +16,7 @@ const Profile = () => {
       navigate('/login')
       return
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   return (
@@ -29,8 +30,15 @@ const Profile = () => {
         </div>
       </div>
       <div className="mt-5">
-        <Slider list={user.data.userList} />
-        <Slider list={user.data.favourites} />
+        <div className="px-5 md:px-8">
+          <p className="text-gap-2 text-gray-200">Your <span className="text-sgreen">List</span></p>
+        </div>
+        <Slider list={user.data.userList} name="userlist" />
+        <div className="px-5 md:px-8">
+          <p className="text-gap-2 text-gray-200">Your <span className="text-sgreen">Favourites</span></p>
+        </div>
+        <Slider list={user.data.favourites} name="favourites" />
+        <div className="h-[200px]"></div>
       </div>
     </MainLayout>
   )
