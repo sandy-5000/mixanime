@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Context } from "/src/context"
 import Slider from "./Slider"
+import Spinner from "/src/components/Spinner"
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -12,12 +13,23 @@ const Profile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (!token || !user.loggedIn) {
+    if (!user.loading && (!token || !user.loggedIn)) {
+      console.log('passed')
       navigate('/login')
       return
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
+
+  if (user.loading) {
+    return (
+      <MainLayout>
+        <div className="h-screen">
+          <Spinner />
+        </div>
+      </MainLayout>
+    )
+  }
 
   return (
     <MainLayout>

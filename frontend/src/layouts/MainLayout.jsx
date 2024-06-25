@@ -20,6 +20,7 @@ const MainLayout = ({ children }) => {
     if (user.loggedIn) {
       setUser({
         loggedIn: false,
+        loading: false,
         data: undefined,
       })
       localStorage.removeItem('token')

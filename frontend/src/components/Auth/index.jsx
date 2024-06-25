@@ -8,11 +8,6 @@ const Auth = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token || user.loggedIn) {
-      setUser({
-        loggedIn: false,
-        loading: false,
-        data: undefined,
-      })
       return
     }
     setUser({
