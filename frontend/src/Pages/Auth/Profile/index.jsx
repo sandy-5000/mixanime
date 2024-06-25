@@ -33,11 +33,11 @@ const Profile = () => {
         <div className="px-5 md:px-8">
           <p className="text-gap-2 text-gray-200">Your <span className="text-sgreen">List</span></p>
         </div>
-        <Slider list={user.data.userList} name="userlist" />
+        <Slider list={user.data?.userList} name="userlist" />
         <div className="px-5 md:px-8">
           <p className="text-gap-2 text-gray-200">Your <span className="text-sgreen">Favourites</span></p>
         </div>
-        <Slider list={user.data.favourites} name="favourites" />
+        <Slider list={user.data?.favourites} name="favourites" />
         <div className="h-[200px]"></div>
       </div>
     </MainLayout>
