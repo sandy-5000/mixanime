@@ -1,11 +1,11 @@
 import { PropTypes } from "prop-types"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { motion } from "framer-motion"
-import { VscPlay, VscAdd } from "react-icons/vsc"
+import { VscPlay, VscAdd, VscClose } from "react-icons/vsc"
 import Button from "/src/components/Button"
 import { Link } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
-
+import { Context } from "/src/context"
 
 const Find = ({ data = {}, index = 0 }) => {
   const title =
@@ -15,6 +15,10 @@ const Find = ({ data = {}, index = 0 }) => {
     data.title.native
 
   const [hover, setHover] = useState(false)
+  const [user] = useContext(Context)
+  const added = user.loggedIn
+    ? user.data?.userList?.filter((x) => x.id === data.id)?.length > 0
+    : false
 
   const variants = {
     img: {
@@ -132,8 +136,17 @@ const Find = ({ data = {}, index = 0 }) => {
                       backgroundColor: '#e5e7eb',
                     }}
                   >
-                    <VscAdd className="mr-2 text-md" />
-                    <span>Add</span>
+                    {
+                      added
+                        ? <>
+                          <VscClose className="mr-1 text-lg" />
+                          <span>Remove</span>
+                        </>
+                        : <>
+                          <VscAdd className="mr-2 text-md" />
+                          <span>Add</span>
+                        </>
+                    }
                   </Button>
                 </motion.div>
               </div>

@@ -9,7 +9,6 @@ import { motion } from "framer-motion"
 import EmptyQuery from "./EmptyQuery"
 import AnimeList from "./AnimeList"
 
-
 const findAnime = debounce((value, previous, setLoading, callback) => {
   value = value.trim()
   setLoading(true)
@@ -29,7 +28,6 @@ const findAnime = debounce((value, previous, setLoading, callback) => {
     }, 500)
   })
 }, 500)
-
 
 const Find = ({ toggleFind: closeButton }) => {
   const [query, setQuery] = useState('')
