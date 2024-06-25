@@ -53,8 +53,6 @@ const Details = () => {
   }
 
   return <Container
-    inList={false}
-    favourite={false}
     data={data}
     onMedia={onMedia}
   />

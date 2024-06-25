@@ -117,7 +117,9 @@ input:focus {
   @apply flex flex-nowrap relative w-[1200%] md:w-[800%] lg:w-[600%];
 }
 
-.recent-container, .schedule-container, .slider-container {
+.recent-container,
+.schedule-container,
+.slider-container {
   scroll-behavior: auto !important;
 }
 
@@ -139,7 +141,6 @@ input:focus {
   }
 }
 
-
 .scroller-right-0 {
   animation: scroll-right 20s linear infinite;
 }
@@ -159,7 +160,7 @@ input:focus {
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  @apply w-full lg:aspect-[4/1] md:aspect-[5/2] aspect-[5/2] overflow-x-hidden
+  @apply w-full lg:aspect-[4/1] md:aspect-[5/2] aspect-[5/2] overflow-x-hidden;
 }
 
 .cover-image {
@@ -168,7 +169,7 @@ input:focus {
   background-repeat: no-repeat !important;
   background-position: center !important;
   width: 100% !important;
-  @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl
+  @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[3/4] xl:-mt-[250px] lg:-mt-[150px] md:-mt-[150px] -mt-[100px] shadow-2xl;
 }
 
 .slider {
@@ -204,7 +205,7 @@ input:focus {
   border: 2px solid;
   border-radius: 5px;
   transition: 125ms ease-out;
-  @apply border-slate-200
+  @apply border-slate-200;
 }
 
 .checkbox__indicator:after {
@@ -222,12 +223,12 @@ input:focus {
 }
 
 .checkbox input:checked ~ .checkbox__indicator {
-  @apply bg-[#9fe6cd] border-slate-500
+  @apply bg-[#9fe6cd] border-slate-500;
 }
 .checkbox input:checked ~ .checkbox__indicator:after {
   animation: check 125ms;
   border-top: 3px solid;
   border-right: 3px solid;
   display: block;
-  @apply border-r-slate-800 border-t-slate-800
+  @apply border-r-slate-800 border-t-slate-800;
 }

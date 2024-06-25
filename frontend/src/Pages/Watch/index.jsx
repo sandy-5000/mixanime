@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import Spinner from "/src/components/Spinner"
 import Container from "./Container"
 
-
 const Watch = () => {
   const [data, setData] = useState(null)
   const location = useLocation()

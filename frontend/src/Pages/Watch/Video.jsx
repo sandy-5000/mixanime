@@ -4,7 +4,6 @@ import { memo } from "react"
 import girl from "/src/assets/images/girl.png"
 import PageButtons from "/src/components/PageButtons"
 
-
 const Video = ({ data, episode, prevEpisode, nextEpisode }) => {
   if (!data) {
     return (

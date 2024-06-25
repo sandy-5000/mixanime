@@ -157,7 +157,7 @@ const UpdateForm = () => {
           <div className="p-5 pt-0 w-full">
             <div className="relative w-full">
               <div className="absolute h-8 left-0 px-3 a-center">
-                <MdAlternateEmail className="text-gray-400" />
+                <MdAlternateEmail className="text-gray-100" />
               </div>
               <input
                 type="email"
@@ -165,7 +165,7 @@ const UpdateForm = () => {
                 name="usermail"
                 disabled={true}
                 className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
-                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-700 focus:ring-2 focus:ring-teal-200
                   tracking-wide text-sm opacity-75"
                 placeholder="Enter Email"
               />
@@ -174,7 +174,7 @@ const UpdateForm = () => {
           <div className="p-5 pt-3 w-full">
             <div className="relative w-full">
               <div className="absolute h-8 left-0 px-3 a-center">
-                <FaRegUser className="text-gray-400" />
+                <FaRegUser className="text-gray-100" />
               </div>
               <input
                 type="text"
@@ -182,7 +182,7 @@ const UpdateForm = () => {
                 name="username"
                 onChange={handleChange}
                 className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
-                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-700 focus:ring-2 focus:ring-teal-200
                   tracking-wide text-sm"
                 placeholder="Enter Username"
               />
@@ -194,7 +194,7 @@ const UpdateForm = () => {
           <div className="p-5 pt-0 w-full">
             <div className="relative w-full">
               <div className="absolute h-8 left-0 px-3 a-center">
-                <GoShieldLock className="text-gray-400" />
+                <GoShieldLock className="text-gray-100" />
               </div>
               <input
                 type={showNPasswd ? "text" : "password"}
@@ -202,7 +202,7 @@ const UpdateForm = () => {
                 name="npasswd"
                 onChange={handleChange}
                 className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
-                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-700 focus:ring-2 focus:ring-teal-200
                   tracking-wide text-sm"
                 placeholder="Enter New Password"
               />
@@ -223,7 +223,7 @@ const UpdateForm = () => {
           <div className="p-5 pt-0 w-full">
             <div className="relative w-full">
               <div className="absolute h-8 left-0 px-3 a-center">
-                <LuShieldCheck className="text-gray-400" />
+                <LuShieldCheck className="text-gray-100" />
               </div>
               <input
                 type="password"
@@ -231,7 +231,7 @@ const UpdateForm = () => {
                 name="cpasswd"
                 onChange={handleChange}
                 className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-white
-                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-700 focus:ring-2 focus:ring-teal-200
                   tracking-wide text-sm"
                 placeholder="Confirm Password"
               />
@@ -243,7 +243,7 @@ const UpdateForm = () => {
           <div className="p-5 pt-3 w-full">
             <div className="relative w-full">
               <div className="absolute h-8 left-0 px-3 a-center">
-                <FaShieldAlt className="text-gray-400" />
+                <FaShieldAlt className="text-gray-100" />
               </div>
               <input
                 type={showPasswd ? "text" : "password"}
@@ -251,7 +251,7 @@ const UpdateForm = () => {
                 name="passwd"
                 onChange={handleChange}
                 className="h-8 w-full md:w-[300px] bg-transparent py-2 px-10 text-gray-200
-                  rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300
+                  rounded-lg ring-2 ring-teal-700 focus:ring-2 focus:ring-teal-200
                   tracking-wide text-sm"
                 placeholder="Enter Password"
               />
@@ -293,7 +293,7 @@ const UpdateForm = () => {
                         rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm
                         transition ease-in-out duration-150
                         text-[#111827] bg-[#fca5a5cc]
-                        hover:bg-[#fca5a5ee]
+                        hover:bg-[#ea5f5fee]
                         disabled:opacity-25 mr-2"
                     >
                       <div className="flex justify-center">
@@ -316,7 +316,7 @@ const UpdateForm = () => {
                         rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm
                         transition ease-in-out duration-150
                         text-[#111827] bg-[#cbd5e1cc]
-                        hover:bg-[#e5e7ebee]
+                        hover:bg-teal-300
                         disabled:opacity-25"
                     >
                       <div className="flex justify-center">

@@ -8,14 +8,61 @@ import Button from "/src/components/Button"
 import { Link } from "react-router-dom"
 import { getQueryParams, dateToString } from "/src/services/untils"
 import { motion } from "framer-motion"
+import backend from "/src/services/backend"
+import { Context } from "/src/context"
+import { useContext, useEffect, useState } from "react"
+import Error from "./Error"
 
+const callType = {
+  ATL: 'add-to-list',
+  RFL: 'remove-from-list',
+  ATF: 'add-to-favourites',
+  RFF: 'remove-from-favourites',
+}
+
+const updateList = (type, { id, title, coverImage }, setUser, setError) => {
+  const body = { id, title, coverImage }
+  backend.post(`/api/user/${type}`, body)
+    .then(({ data }) => {
+      if (data.errorCode === 401) {
+        setError('Login to Perform this action')
+        return
+      }
+      if (data.error) {
+        setError(data.error)
+        return
+      }
+      setUser({
+        loggedIn: true,
+        loading: false,
+        data
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+      setError('Something went wrong')
+    })
+}
 
 const Container = ({
   data,
-  inList: isInList,
-  favourite: isInFavourite,
   onMedia: goToMedia,
 }) => {
+  const [user, setUser] = useContext(Context)
+  const [error, setError] = useState(undefined)
+
+  useEffect(() => {
+    let interval = null
+    if (error) {
+      interval = setTimeout(() => {
+        setError(undefined)
+      }, 2000)
+    }
+    return () => {
+      clearTimeout(interval)
+    }
+  }, [error])
+
   const id = data.id
   const name =
     data.title.romaji ||
@@ -34,12 +81,34 @@ const Container = ({
     : (data?.episodes || '?')
   const totalEpisodes = data?.episodes || '?'
 
+  const [propState, setPropState] = useState({
+    inList: user.loggedIn
+      ? user.data?.userList?.filter((x) => x.id === data.id)?.length > 0
+      : false,
+    favourite: user.loggedIn
+      ? user.data?.favourites?.filter((x) => x.id === data.id)?.length > 0
+      : false,
+  })
+
+  useEffect(() => {
+    setPropState({
+      inList: user.loggedIn
+        ? user.data?.userList?.filter((x) => x.id === data.id)?.length > 0
+        : false,
+      favourite: user.loggedIn
+        ? user.data?.favourites?.filter((x) => x.id === data.id)?.length > 0
+        : false,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
   const recommendations = data.recommendations.nodes
   const relations = data.relations.nodes
     .filter((x) => x.type == 'ANIME' || x.type == 'MOVIE')
 
   return (
     <MainLayout>
+      <Error error={error} />
       <div>
         <div
           className="banner-image"
@@ -60,7 +129,7 @@ const Container = ({
               </div>
               <div className="w-6/12 md:w-full py-3 px-3 md:px-0 flex flex-col">
                 <div className="md:flex justify-between">
-                  {isInList
+                  {propState.inList
                     ? <div className="w-full md:w-10/12 md:pr-1">
                       <Button
                         style={{
@@ -74,6 +143,7 @@ const Container = ({
                           color: '#111827',
                           backgroundColor: '#e5e7eb',
                         }}
+                        onClick={() => updateList(callType.RFL, { id }, setUser, setError)}
                       >
                         <div className="flex justify-center w-full">
                           <VscClose className="text-lg mr-1" />
@@ -94,6 +164,7 @@ const Container = ({
                           color: '#111827',
                           backgroundColor: '#e5e7eb',
                         }}
+                        onClick={() => updateList(callType.ATL, { id, title, coverImage }, setUser, setError)}
                       >
                         <div className="flex justify-center w-full">
                           <VscAdd className="text-lg mr-1" />
@@ -101,7 +172,7 @@ const Container = ({
                         </div>
                       </Button>
                     </div>}
-                  {isInFavourite
+                  {propState.favourite
                     ? <div className="w-full mt-1 md:w-2/12 md:mt-0">
                       <Button
                         style={{
@@ -112,6 +183,7 @@ const Container = ({
                           paddingLeft: 0,
                           paddingRight: 0,
                         }}
+                        onClick={() => updateList(callType.RFF, { id }, setUser, setError)}
                       >
                         <GoHeart className="w-full text-lg p-auto" />
                       </Button>
@@ -126,6 +198,7 @@ const Container = ({
                           paddingLeft: 0,
                           paddingRight: 0,
                         }}
+                        onClick={() => updateList(callType.ATF, { id, title, coverImage }, setUser, setError)}
                       >
                         <GoHeartFill className="w-full text-lg p-auto" />
                       </Button>
@@ -377,8 +450,6 @@ const Container = ({
 
 Container.propTypes = {
   data: PropTypes.any,
-  inList: PropTypes.bool,
-  favourite: PropTypes.bool,
   onMedia: PropTypes.any.isRequired,
 }
 
