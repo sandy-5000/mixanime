@@ -97,19 +97,38 @@ const Container = ({ data }) => {
     <>
       <div className="xl:container">
         <div className="mx-3 pt-2 flex">
-          <div className="w-[100px]">
-            <p className="pl-3 text-xs text-gray-200 text-gap-1 uppercase">
+          <div className="w-[120px]">
+            <p
+              className="pl-3 text-gray-200 text-gap-2 uppercase"
+              style={{
+                fontSize: 10,
+              }}
+            >
               Anime <span className="text-sgreen">Name</span>
             </p>
-            <p className="pl-3 text-xs text-gray-200 text-gap-1 uppercase">
+            <p
+              className="pl-3 text-gray-200 text-gap-2 uppercase"
+              style={{
+                fontSize: 10,
+              }}
+            >
               EPISODE <span className="text-sgreen">No.</span>
             </p>
           </div>
           <div className="truncate">
-            <p className="pr-3 text-xs text-gray-200 text-gap-1 uppercase">
+            <p
+              className="pr-3 text-gray-200 text-gap-2 uppercase truncate"
+              style={{
+                fontSize: 10,
+              }}
+            >
               <span className="px-1">:</span> {romaji}
             </p>
-            <p className="pr-3 text-xs text-gray-200 text-gap-1 uppercase">
+            <p className="pr-3 text-gray-200 text-gap-2 uppercase"
+              style={{
+                fontSize: 10,
+              }}
+            >
               <span className="px-1">:</span> {episode}
             </p>
           </div>

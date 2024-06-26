@@ -25,7 +25,7 @@ const Video = ({ data, episode, prevEpisode, nextEpisode }) => {
                 src={data.link}>
               </iframe>
               : <div className="w-full h-full a-center">
-                <p className="text-xl text-gray-200">Video Not found yet, try after 30 min!</p>
+                <p className="text-gap-2 text-center text-gray-200">Video Not found yet, try after 30 min!</p>
               </div>
           }
         </div>
