@@ -342,12 +342,12 @@ const Container = ({ data, onMedia: goToMedia, }) => {
             </div>
           </div>
           <div className="vr mx-1 hidden md:inline-flex"></div>
-          <div className="lg:w-9/12 md:w-9/12 w-full mt-2 mx-2">
-            <p className="text-gap-2 text-sgreen pl-2">Recommendations</p>
+          <div className="w-full md:w-9/12 mt-8 md:mt-2 md:mx-2">
+            <p className="text-gap-2 text-sgreen md:pl-2">Recommendations</p>
             {
               !recommendations || recommendations.length === 0
                 ? <div className="a-center h-[120px]">
-                  <h1 className="text-xl text-slate-200">Nothing Avaliable</h1>
+                  <h1 className="text-gap-2 text-slate-200">Nothing Avaliable</h1>
                 </div>
                 : (
                   <div className="grid lg:grid-cols-6 grid-cols-3 justify-center">
@@ -388,11 +388,11 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                   </div>
                 )
             }
-            <p className="text-gap-2 text-sgreen mt-8 pl-2">Relative</p>
+            <p className="text-gap-2 text-sgreen mt-8 md:pl-2">Relative</p>
             {
               !relations || relations.length === 0
                 ? <div className="a-center h-[120px]">
-                  <h1 className="text-xl text-slate-200">Nothing Avaliable</h1>
+                  <h1 className="text-gap-2 text-slate-200">Nothing Avaliable</h1>
                 </div>
                 : <div
                   className="relative grid lg:grid-cols-6 grid-cols-3 justify-center pb-3"
