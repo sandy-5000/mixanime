@@ -44,10 +44,7 @@ const updateList = (type, { id, title, coverImage }, setUser, setError) => {
     })
 }
 
-const Container = ({
-  data,
-  onMedia: goToMedia,
-}) => {
+const Container = ({ data, onMedia: goToMedia, }) => {
   const [user, setUser] = useContext(Context)
   const [error, setError] = useState(undefined)
 
@@ -63,6 +60,7 @@ const Container = ({
     }
   }, [error])
 
+  // console.log('cont', id, data.id)
   const id = data.id
   const name =
     data.title.romaji ||
@@ -83,24 +81,24 @@ const Container = ({
 
   const [propState, setPropState] = useState({
     inList: user.loggedIn
-      ? user.data?.userList?.filter((x) => x.id === data.id)?.length > 0
+      ? user.data?.userList?.filter((x) => x.id === id)?.length > 0
       : false,
     favourite: user.loggedIn
-      ? user.data?.favourites?.filter((x) => x.id === data.id)?.length > 0
+      ? user.data?.favourites?.filter((x) => x.id === id)?.length > 0
       : false,
   })
 
   useEffect(() => {
     setPropState({
       inList: user.loggedIn
-        ? user.data?.userList?.filter((x) => x.id === data.id)?.length > 0
+        ? user.data?.userList?.filter((x) => x.id === id)?.length > 0
         : false,
       favourite: user.loggedIn
-        ? user.data?.favourites?.filter((x) => x.id === data.id)?.length > 0
+        ? user.data?.favourites?.filter((x) => x.id === id)?.length > 0
         : false,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [user, data])
 
   const recommendations = data.recommendations.nodes
   const relations = data.relations.nodes
@@ -147,7 +145,7 @@ const Container = ({
                       >
                         <div className="flex justify-center w-full">
                           <VscClose className="text-lg mr-1" />
-                          <span className="normal-case mt-[1px] tracking-wide">Remove in List</span>
+                          <span className="normal-case mt-[1px] tracking-wide">Remove</span>
                         </div>
                       </Button>
                     </div>

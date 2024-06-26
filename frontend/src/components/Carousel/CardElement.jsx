@@ -4,7 +4,7 @@ import DefaultImage from "/src/assets/images/pic_2.jpg"
 import { VscPlayCircle, VscChevronRight } from "react-icons/vsc"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
+import { getQueryParams, truncate } from "/src/services/untils"
 
 
 const CardElement = ({ data, index, active }) => {
@@ -109,7 +109,7 @@ const CardElement = ({ data, index, active }) => {
                   <h3
                     style={{ fontWeight: 'bolder', fontSize: 'min(25px, 3vw)' }}
                     className="text-[#9fe6cd] pb-5"
-                  >{title}</h3>
+                  >{truncate(title, 42)}</h3>
                 </motion.div>
               </div>
               <div>
@@ -155,6 +155,9 @@ const CardElement = ({ data, index, active }) => {
                     animate={active ? 'open' : 'closed'}
                     variants={variants.button.details}
                     transition={{ delay: 0.5 }}
+                    style={{
+                      zIndex: 4,
+                    }}
                   >
                     <Link
                       to={{

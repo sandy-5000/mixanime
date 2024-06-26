@@ -31,11 +31,11 @@ const Season = ({ data, index }) => {
   }
   const transition = {
     inView: {
-      delay: 0.5 + (index % 6) * 0.1,
-      duration: 0.5
+      delay: (index % 6) * 0.1,
+      duration: 0.3
     },
     notInView: {
-      duration: 0.2,
+      duration: 0.1,
     }
   }
 

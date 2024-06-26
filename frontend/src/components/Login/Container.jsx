@@ -22,7 +22,6 @@ const Container = ({ modal, close }) => {
   const [user, setUser] = useContext(Context)
 
   useEffect(() => {
-    console.log(user)
     if (user.loggedIn) {
       if (modal) {
         close()
