@@ -58,6 +58,7 @@ const Container = ({ data }) => {
   const location = useLocation()
   const query = new URLSearchParams(location.search)
 
+  const name = parseInt(query.get('name'))
   const [episode, setEpisode] = useState(parseInt(query.get('episode')))
   const [watchLink, setLink] = useState(null)
   const id = data.id
@@ -91,7 +92,26 @@ const Container = ({ data }) => {
     const episode = Math.max(query.get('episode'), 1) || 1
     setCurrentEpisode(episode, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [episode])
+
+  useEffect(() => {
+    const handleKeyBinding = (event) => {
+      if (event.ctrlKey) {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault()
+          setCurrentEpisode(episode - 1)
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault()
+          setCurrentEpisode(episode + 1)
+        }
+      }
+    }
+    addEventListener('keydown', handleKeyBinding)
+    return () => {
+      removeEventListener('keydown', handleKeyBinding)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [episode])
 
   return (
     <>
