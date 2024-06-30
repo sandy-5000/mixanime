@@ -1,0 +1,21 @@
+iframe::-webkit-scrollbar {
+    display: none;
+}
+
+.episode-card {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    @apply lg:aspect-[9/5] md:aspect-[8/5] aspect-[7/5]
+}
+
+.episode-container {
+    transform: scale(1);
+    transition: all 0.2s;
+    @apply bg-[#051318]
+}
+
+.episode-container:hover {
+    transform: scale(1.02);
+    @apply bg-[#082327]
+}

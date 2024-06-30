@@ -1,0 +1,10 @@
+.hide-day-schedule {
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: all 0.2s ease-in-out;
+}
+
+.show-day-schedule {
+    opacity: 1;
+    transform: translateY(0);
+}

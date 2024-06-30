@@ -1,0 +1,30 @@
+.season-container {
+    min-height: 500px;
+}
+
+.season-card {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    @apply lg:aspect-[2/3] md:aspect-[2/3] aspect-[2/3]
+}
+
+.hidden-season-card {
+    opacity: 0;
+    transform: translateX(-60%);
+    transition: all 0.3s;
+}
+
+.season-scard:hover {
+    transform: scale(1.05);
+}
+
+.show-season-card {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.season-scard {
+    transform: scale(1);
+    transition: all 0.2s;
+}

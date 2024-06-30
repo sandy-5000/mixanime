@@ -1,0 +1,103 @@
+<div class="w-full min-h-full relative">
+    <div *ngIf="modal" class="a-center h-full z-[4] bg-gray-900 bg-opacity-25 w-full fixed top-0 left-0">
+        <div class="bg-slate-200 rounded-lg w-[350px]">
+            <div class="p-5">
+                <h1 class="text-2xl">Enter Page No.</h1>
+            </div>
+            <hr class="border-slate-400" />
+            <div class="p-5">
+                <input class="bg-transparent rounded-sm h-8 text-slate-800 px-2" type="number" placeholder="Page no."
+                    (input)="pageNoOnChange($event)" />
+            </div>
+            <hr class="border-slate-400" />
+            <div class="p-5 flex justify-end">
+                <button (click)="hideModal()"
+                    class="btn mr-2 py-2 pr-3 pl-2 text-[#dc3545] hover:bg-[#dc3545] hover:text-slate-200 border rounded-lg border-[#dc3545] flex">
+                    <div class="a-center">
+                        <ng-icon class="rotate-45 text-lg mr-1" name="heroPlus"></ng-icon>
+                    </div>
+                    <div class="a-center">
+                        <span class="text-[14px] mt-[0.5px] font-semibold">Close</span>
+                    </div>
+                </button>
+                <button (click)="submitPage()"
+                    class="btn py-2 pr-3 pl-2 text-[#28a745] hover:bg-[#28a745] hover:text-slate-200 border rounded-lg border-[#28a745] flex">
+                    <div class="a-center">
+                        <ng-icon class="text-lg mr-1" name="matLogInOutline"></ng-icon>
+                    </div>
+                    <div class="a-center">
+                        <span class="text-[14px] mt-[0.5px] font-semibold">Submit</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <section class="container mx-auto">
+        <div class="lg:m-10 lg:mt-10 mt-5 m-3">
+            <div class="flex justify-between mb-2">
+                <div class="flex">
+                    <div class="a-center">
+                        <ng-icon class="text-sgreen text-[25px] mr-1" name="heroNewspaper"></ng-icon>
+                    </div>
+                    <div class="a-center font-semibold">
+                        <span class="text-slate-200 text-sm side-heading">Recently <span class="text-sgreen">Released</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-container w-full overflow-x-scroll relative min-h-[600px]">
+                <app-loader *ngIf="loading.recent"></app-loader>
+                <div class="recent grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 relative">
+                    <div (click)="goToWatch(
+                            item.media.id,
+                            item.media.title.romaji ||
+                            item.media.title.english ||
+                            item.media.title.userPreferred ||
+                            item.media.title.native,
+                            item.episode
+                        )" *ngFor="let item of recentData; index as i" class="cursor-pointer hidden-recent-card w-full p-2">
+                        <div class="recent-card relative p-2 rounded-lg"
+                            style="background-image: url({{item.media.coverImage.extraLarge}});">
+                            <div
+                                class="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
+                                {{item.media.format.replaceAll('_', ' ')}}</div>
+                            <div
+                                class="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
+                                {{item.media.duration || 23}}:00</div>
+                        </div>
+                        <h1 class="text-sm pt-2 flex justify-between text-slate-200">
+                            <span>Episode:</span>
+                            <span>{{item.episode}}</span>
+                        </h1>
+                        <h1 class="text-sm pt-0 flex justify-between text-slate-200">
+                            <span><span class="lg:inline-flex md:inline-flex hidden">Episode</span> Aired on:</span>
+                            <span>{{date(item.airingAt)}}</span>
+                        </h1>
+                        <h1 class="text-sm pt-1 font-semibold text-sgreen">
+                            {{
+                            item.media.title.userPreferred ||
+                            item.media.title.english ||
+                            item.media.title.romaji ||
+                            item.media.title.native
+                            }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center py-16">
+                <div (click)="prevPage()"
+                    class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
+                    <ng-icon class="text-lg font-normal" name="heroChevronLeft"></ng-icon>
+                </div>
+                <div (click)="showModal()"
+                    class="a-center bg-slate-200 rounded-sm h-8 px-3 cursor-pointer hover:scale-110">
+                    <span>{{variables.recent.page}}</span>
+                </div>
+                <div (click)="nextPage()"
+                    class="a-center px-2 shadow-xl cursor-pointer hover:scale-110 rounded-sm mx-1 bg-sgreen">
+                    <ng-icon class="text-lg font-normal" name="heroChevronRight"></ng-icon>
+                </div>
+            </div>
+        </div>
+    </section>
+    <app-footer></app-footer>
+</div>

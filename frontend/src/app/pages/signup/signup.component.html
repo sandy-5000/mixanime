@@ -1,0 +1,74 @@
+<div class="w-full h-full overflow-y-hidden a-center relative">
+    <app-loader *ngIf="loading"></app-loader>
+    <div class="z-[2] lg:w-4/12 md:w-6/12 w-10/12 lg:mb-0 md:mb-0 mb-24">
+        <form #signUpForm="ngForm" (ngSubmit)="submitForm(signUpForm.value)">
+            <div class="signup-container w-full rounded-lg bg-[#06151a] lg:p-10 md:p-10 p-5">
+                <div class="mt-2 flex justify-end">
+                    <p class="text-sgreen text-[1.5rem] font-sans font-bold">SignUp</p>
+                </div>
+                <div class="mt-2">
+                    <label for="username" class="block mb-2 text-md font-medium text-slate-200">Username</label>
+                    <input type="text" name="username" [(ngModel)]="username" (input)="validate('username')"
+                        id="username" placeholder="Enter your Name"
+                        class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                    <span *ngIf="errors.username !== ''" class="text-red-300">{{errors.username}}</span>
+                </div>
+                <div class="mt-2">
+                    <label for="usermail" class="block mb-2 text-md font-medium text-slate-200">User Mail</label>
+                    <input type="email" name="usermail" [(ngModel)]="usermail" (input)="validate('usermail')"
+                        id="usermail" placeholder="Enter your mail address"
+                        class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                    <span *ngIf="errors.usermail !== ''" class="text-red-300">{{errors.usermail}}</span>
+                </div>
+                <div class="lg:flex md:flex block justify-between">
+                    <div class="mt-2 lg:w-1/2 md:w-1/2 w-full">
+                        <label for="passwd" class="block mb-2 text-md font-medium text-slate-200">Password</label>
+                        <input type="password" name="passwd" [(ngModel)]="passwd" (input)="validate('passwd')"
+                            id="passwd" placeholder="Enter your password"
+                            class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                        <span *ngIf="errors.passwd !== ''" class="text-red-300">{{errors.passwd}}</span>
+                    </div>
+                    <div class="px-1"></div>
+                    <div class="mt-2 lg:w-1/2 md:w-1/2 w-full">
+                        <label for="cpasswd" class="block mb-2 text-md font-medium text-slate-200">Confirm
+                            Password</label>
+                        <input type="password" name="cpasswd" [(ngModel)]="cpasswd" (input)="validate('cpasswd')"
+                            id="cpasswd" placeholder="Confirm your password"
+                            class="font-normal block w-full p-2 py-1 border rounded-sm text-md focus:ring-teal-500 focus:border-teal-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-slate-200">
+                        <span *ngIf="errors.cpasswd !== ''" class="text-red-300">{{errors.cpasswd}}</span>
+                    </div>
+                </div>
+                <span *ngIf="errors.message !== ''" class="text-red-300">{{errors.message}}</span>
+                <div class="mt-8 flex justify-between">
+                    <div class="a-center">
+                        <span (click)="goToRoute('/login')" class="cursor-pointer text-sm text-sgreen">Already have an
+                            account?</span>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="btn py-2 pr-3 pl-2 text-sgreen hover:bg-sgreen hover:text-slate-800 border rounded-lg border-[#9fe6cd] flex">
+                            <div class="a-center">
+                                <ng-icon class="text-lg mr-1" name="matLogInOutline"></ng-icon>
+                            </div>
+                            <div class="a-center">
+                                <span class="text-[14px] font-semibold">SignUp</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>

@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #040e11;
+}
+::-webkit-scrollbar-thumb {
+    @apply bg-[#213f3f] rounded-sm
+}
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-300
+}
+::-webkit-scrollbar-corner {
+    background-color: #040e11;
+} */
+* {
+    scroll-behavior: smooth;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
+
+
+.a-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    /* background-color: #011116 !important; */
+    background-color: #040e11 !important;
+}
+
+@layer utilities {
+    .text-sgreen {
+        /* color: #5de4b5; */
+        color: #9fe6cd;
+    }
+
+    .side-heading {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 550;
+    }
+
+    .bg-sgreen {
+        /* background-color: #5de4b5; */
+        background-color: #9fe6cd;
+    }
+
+    .btn {
+        @apply align-middle select-none normal-case font-[400] rounded-sm text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs shadow-md shadow-cyan-900/10 hover:shadow-lg hover:shadow-cyan-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none
+    }
+
+    .vr {
+        border-left: 3px solid #9fe6cd;
+    }
+}
+
+@layer components {
+    .nav {
+        @apply py-3 text-slate-200 hover:bg-[#8dcbb5] hover:text-slate-800 cursor-pointer
+    }
+}
+
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+}
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+@keyframes popup {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes popdown {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.mini-tippy {
+    position: relative;
+    bottom: ref(top);
+}
+
+.a-hidden {
+    opacity: 0;
+    animation: popdown 0.2s ease-in-out;
+}
+
+.a-show {
+    opacity: 1;
+    animation: popup 0.2s ease-in-out;
+}
+
+.social-media-icon {
+    transform: scale(1);
+    transition: all 0.1s linear;
+}
+
+.social-media-icon:hover {
+    transform: scale(1.25);
+}

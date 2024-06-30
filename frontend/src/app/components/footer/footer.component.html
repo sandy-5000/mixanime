@@ -1,0 +1,47 @@
+<footer class="lg:px-5 md:px-5 px-2">
+    <div class="flex mb-1 min-h-[120px]">
+        <div class="flex flex-col justify-center">
+            <div class="lg:inline-flex md:inline-flex hidden cursor-pointer" (click)="goToRoute('/home')">
+                <img loading="lazy" alt="logo" class="mx-3 h-[60px]" src="assets/images/graph-pixel.png" />
+            </div>
+            <div class="lg:hidden md:hidden inline-flex cursor-pointer" (click)="goToRoute('/home')">
+                <img loading="lazy" alt="logo" class="mx-3 h-[40px]" src="assets/images/graph-pixel.png" />
+            </div>
+        </div>
+        <div class="vr"></div>
+        <div class="p-3 flex flex-col justify-between">
+            <div class="flex pt-2 pb-1">
+                <div>
+                    <span class="text-sm text-slate-200">Join Us Now</span>
+                    <br />
+                    <span class="text-lg text-slate-200 font-semibold"><span
+                            style="font-weight: bolder; color: #5de4b5;">Mix</span>Anime</span>
+                </div>
+                <div class="a-center ml-3 social-media-icon cursor-pointer">
+                    <ng-icon class="text-2xl mr-1 text-slate-200" name="simpleTelegram"></ng-icon>
+                </div>
+                <div class="a-center ml-2 social-media-icon cursor-pointer">
+                    <ng-icon class="text-2xl mr-1 text-slate-200" name="simpleDiscord"></ng-icon>
+                </div>
+            </div>
+            <hr class="border-slate-200 border-opacity-40" />
+            <div class="flex a-center">
+                <div class="w-full pt-1 text-sm">
+                    <app-digitalclock></app-digitalclock>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mx-5 py-3">
+        <hr class="border-slate-200 border-opacity-30" />
+        <div class="mt-4">
+            <p class="text-slate-200 mb-5 px-1"><small>Mix Anime does not store any files on our server, we only
+                    linked to the media which is hosted on 3rd party services.</small></p>
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <p class="px-2 text-transparent lg:hidden md:hidden inline-flex">This is a secret Message</p>
+        <p class="px-2 text-transparent lg:hidden md:hidden inline-flex">We Like Anime</p>
+        <p class="px-2 text-transparent lg:hidden md:hidden inline-flex">And Hentai too...</p>
+    </div>
+</footer>

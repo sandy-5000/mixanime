@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+  box-shadow: 0 20px 40px rgba(52, 220, 200, 0.2);
+}
+
+.game-details {
+  font-size: 1rem;
+  @apply text-[#B8C6DC] font-[500] h-[40px]
+}
+
+.play-board {
+  display: grid;
+  grid-template: repeat(30, 1fr) / repeat(50, 1fr);
+  @apply bg-[#020303]
+}
+
+.play-board .food {
+  background: #ff4982;
+}
+
+.play-board .head {
+  background: #60ffd5;
+}
