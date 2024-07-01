@@ -14,14 +14,13 @@ const Profile = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!user.loading && (!token || !user.loggedIn)) {
-      console.log('passed')
       navigate('/login')
       return
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
-  if (user.loading) {
+  if (user.loading || !user.loggedIn) {
     return (
       <MainLayout>
         <div className="h-screen">
