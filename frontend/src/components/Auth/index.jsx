@@ -11,7 +11,7 @@ const Auth = () => {
       setUser({
         loggedIn: !!user.loggedIn,
         loading: false,
-        data: undefined,
+        data: user.data || undefined,
       })
       return
     }
