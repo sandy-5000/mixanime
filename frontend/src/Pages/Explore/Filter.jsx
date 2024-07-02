@@ -24,16 +24,6 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
 
   const [state, setState] = useState(filter)
 
-  const getColor = () => {
-    const randomInt = (min, max) => {
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-    var h = randomInt(0, 360)
-    var s = randomInt(75, 100)
-    var l = randomInt(70, 90)
-    return `hsl(${h},${s}%,${l}%)`
-  }
-
   const clearText = () => {
     setState({ ...state, animename: '' })
   }
@@ -185,10 +175,7 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
                   <span className="w-5/12 py-1" key={`genre-${index}`}>
                     <label className="checkbox">
                       <span
-                        className="checkbox__label text-xs font-normal tracking-wider"
-                        style={{
-                          color: getColor(),
-                        }}
+                        className="checkbox__label text-gray-200 text-xs font-normal tracking-wider"
                       >{genre}</span>
                       <input type="checkbox" checked={state.genres[genre]} value={genre} onChange={handleCheck} name="genre" />
                       <div className="checkbox__indicator"></div>

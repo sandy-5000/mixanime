@@ -150,7 +150,8 @@ const Explore = () => {
       }
       <div
         style={{
-          filter: show ? 'blur(20px)' : 'blur(0)',
+          filter: show ? 'blur(10px)' : 'blur(0)',
+          opacity: show ? 0.15 : 1,
         }}
       >
         <Container

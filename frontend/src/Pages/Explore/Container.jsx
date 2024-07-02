@@ -31,13 +31,22 @@ const Container = ({ page, setPage, list, setShow }) => {
       </div>
       <div className="flex flex-wrap">
         {
-          list.map((data, index) => {
+          list.length && list.map((data, index) => {
             return <Card
               index={index}
               key={'rcard-' + index}
               data={data}
             />
           })
+        }
+        {
+          list.length === 0 && (
+            <div className="xl:container mx-auto">
+              <div className="lg:m-10 m-3 h-[70vh] a-center">
+                <p className="text-gray-200">Nothing Avaliable!</p>
+              </div>
+            </div>
+          )
         }
       </div>
       <div className="mt-8">
