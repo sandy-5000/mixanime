@@ -58,7 +58,7 @@ const Container = ({ data }) => {
   const location = useLocation()
   const query = new URLSearchParams(location.search)
 
-  const name = parseInt(query.get('name'))
+  const name = query.get('name')
   const [episode, setEpisode] = useState(parseInt(query.get('episode')))
   const [watchLink, setLink] = useState(null)
   const id = data.id
@@ -77,7 +77,6 @@ const Container = ({ data }) => {
   }
 
   useEffect(() => {
-    console.log({ id, romaji, episode })
     setLink(null)
     getEpisode({
       id, episode, romaji,
@@ -92,7 +91,7 @@ const Container = ({ data }) => {
     const episode = Math.max(query.get('episode'), 1) || 1
     setCurrentEpisode(episode, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [episode])
+  }, [location])
 
   useEffect(() => {
     const handleKeyBinding = (event) => {

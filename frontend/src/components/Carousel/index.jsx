@@ -37,10 +37,12 @@ const Carousel = ({ list }) => {
             />
           })
         }
-        <div
-          className="z-[4] absolute left-0 bottom-0 bg-sgreen rounded-full h-[2px] mx-1"
-          style={{ width: `${(activeCard + 1) * 10}%` }}
-        ></div>
+        <div className="z-[4] px-1 w-full absolute left-0 h-[2px] bottom-0">
+          <div
+            className="bg-sgreen rounded-full h-full"
+            style={{ width: `${(activeCard + 1) * 10}%` }}
+          ></div>
+        </div>
       </div>
     </div>
   )

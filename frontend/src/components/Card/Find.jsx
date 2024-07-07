@@ -125,29 +125,36 @@ const Find = ({ data = {}, index = 0 }) => {
                   variants={variants.button.add}
                   className="pr-5"
                 >
-                  <Button
-                    style={{
-                      height: 30,
-                      color: hover ? '#111827' : '#cbd5e1',
-                      backgroundColor: hover ? '#e5e7ebee' : '#11182799',
-                    }}
-                    hoverStyle={{
-                      color: '#111827',
-                      backgroundColor: '#e5e7eb',
+                  <Link
+                    to={{
+                      pathname: '/details',
+                      search: getQueryParams({ id: data.id })
                     }}
                   >
-                    {
-                      added
-                        ? <>
-                          <VscClose className="mr-1 text-lg" />
-                          <span>Remove</span>
-                        </>
-                        : <>
-                          <VscAdd className="mr-2 text-md" />
-                          <span>Add</span>
-                        </>
-                    }
-                  </Button>
+                    <Button
+                      style={{
+                        height: 30,
+                        color: hover ? '#111827' : '#cbd5e1',
+                        backgroundColor: hover ? '#e5e7ebee' : '#11182799',
+                      }}
+                      hoverStyle={{
+                        color: '#111827',
+                        backgroundColor: '#e5e7eb',
+                      }}
+                    >
+                      {
+                        added
+                          ? <>
+                            <VscClose className="mr-1 text-lg" />
+                            <span>Remove</span>
+                          </>
+                          : <>
+                            <VscAdd className="mr-2 text-md" />
+                            <span>Add</span>
+                          </>
+                      }
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
               <div className="flex justify-start">

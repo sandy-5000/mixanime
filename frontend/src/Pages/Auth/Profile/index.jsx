@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!user.loading && (!token || !user.loggedIn)) {
-      navigate('/login')
+      navigate('/login', { replace: true })
       return
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
