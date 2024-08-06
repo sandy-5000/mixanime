@@ -10,7 +10,7 @@ const Schedule = ({ data }) => {
   const date = getDate(data.airingAt)
   const title = data.media.title.english || data.media.title.romaji
   const image = data.media.coverImage.extraLarge
-  const format = data.media.format.split('_').join(' ')
+  const format = data.media.format?.split('_')?.join(' ') || 'NA'
   const duration = data.media.duration || 23
   const country = data.media.countryOfOrigin
   const episode = data.episode
