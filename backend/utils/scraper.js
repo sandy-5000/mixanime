@@ -3,7 +3,7 @@ import { load } from 'cheerio'
 
 const scrape = (id, callback) => {
     try {
-        const url = 'https://goone.pro/videos/' + id
+        const url = 'https://s3taku.com/videos/' + id
         axios.get(url)
             .then((response) => {
                 const $ = load(response.data)

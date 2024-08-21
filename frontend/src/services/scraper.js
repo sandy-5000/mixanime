@@ -6,7 +6,7 @@ class Scrapper {
 
     scrape(id, callback) {
         try {
-            const url = 'https://goone.pro/videos/' + id
+            const url = 'https://s3taku.com/videos/' + id
             const linkURL = localStorage.getItem(id)
             if (linkURL) {
                 callback(JSON.parse(linkURL))
