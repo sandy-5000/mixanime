@@ -53,15 +53,15 @@ const Recent = ({ data = {} }) => {
               className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
               {duration}</div>
           </div>
-          <h1 className="text-xs pt-2 flex justify-between text-gray-100">
+          <h1 className="text-[11px] md:text-[12px] pt-2 flex justify-between text-gray-100">
             <span>Episode:</span>
             <span>{episode}</span>
           </h1>
-          <h1 className="text-xs pt-0 flex justify-between text-gray-100">
+          <h1 className="text-[11px] md:text-[12px] pt-0 flex justify-between text-gray-100">
             <span>Aired on:</span>
             <span>{date}</span>
           </h1>
-          <h1 className="lg:text-sm md:text-sm text-xs pt-1 font-normal text-sgreen">
+          <h1 className="text-[11px] md:text-sm pt-1 font-normal text-sgreen">
             {title}
           </h1>
         </div>

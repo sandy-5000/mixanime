@@ -88,7 +88,7 @@ const Season = ({ data, index }) => {
             </div>
           </div>
           <div className="p-[1px] md:p-1">
-            <p className="pt-2 text-[11px] text-slate-200 flex justify-between">
+            <p className="pt-2 text-[10px] md:text-[11px] text-slate-200 flex justify-between">
               <span>
                 Airing <span className="lg:inline-flex md:inline-flex hidden">from</span>:
               </span>
@@ -96,8 +96,7 @@ const Season = ({ data, index }) => {
                 {startDate}
               </span>
             </p>
-
-            <h1 className="truncate text-sm pt-1 font-normal text-sgreen">
+            <h1 className="truncate text-[11px] md:text-[13px] pt-1 font-normal text-sgreen">
               {title}
             </h1>
           </div>
