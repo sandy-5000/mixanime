@@ -1,22 +1,23 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { VscMenu, VscAccount } from "react-icons/vsc"
+import { VscMenu } from "react-icons/vsc"
 import { LuNewspaper } from "react-icons/lu"
-import { HiColorSwatch } from "react-icons/hi"
-import { TbMapSearch } from "react-icons/tb"
+import { TbBrandGoogleAnalytics } from "react-icons/tb"
+import { TbDatabaseSearch } from "react-icons/tb"
+import { PiUserCircleDuotone } from "react-icons/pi"
 import { Link } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
 
 
 const NavBar = () => {
+  const scale = {
+    hover: 1.1,
+    tap: 0.95,
+  }
   const [yShift, setYShift] = useState(0)
 
   const toggleYShift = () => {
-    if (yShift === 0) {
-      setYShift(60)
-    } else {
-      setYShift(0)
-    }
+    setYShift(yShift === 0 ? 60 : 0)
   }
 
   useEffect(() => {
@@ -49,10 +50,10 @@ const NavBar = () => {
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: 1.2
+              scale: scale.hover
             }}
             whileTap={{
-              scale: 0.95
+              scale: scale.tap
             }}
           >
             <Link
@@ -67,10 +68,10 @@ const NavBar = () => {
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: 1.2
+              scale: scale.hover
             }}
             whileTap={{
-              scale: 0.95
+              scale: scale.tap
             }}
           >
             <Link
@@ -79,16 +80,16 @@ const NavBar = () => {
                 search: getQueryParams({ page: 1 }),
               }}
             >
-              <HiColorSwatch className="text-2xl text-gray-950" />
+              <TbBrandGoogleAnalytics className="text-2xl text-gray-950" />
             </Link>
           </motion.div>
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: 1.2
+              scale: scale.hover
             }}
             whileTap={{
-              scale: 0.95
+              scale: scale.tap
             }}
           >
             <Link
@@ -96,24 +97,23 @@ const NavBar = () => {
                 pathname: "/explore",
                 search: getQueryParams({ page: 1 }),
               }}>
-              <TbMapSearch className="text-2xl text-gray-950" />
+              <TbDatabaseSearch className="text-2xl text-gray-950" />
             </Link>
           </motion.div>
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: 1.2
+              scale: scale.hover
             }}
             whileTap={{
-              scale: 0.95
+              scale: scale.tap
             }}
           >
-
             <Link
               to={{
                 pathname: "/profile",
               }}>
-              <VscAccount className="text-2xl text-gray-950" />
+              <PiUserCircleDuotone className="text-2xl text-gray-950" />
             </Link>
           </motion.div>
         </div>

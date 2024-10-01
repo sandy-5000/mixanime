@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { PropTypes } from "prop-types"
-import { HiColorSwatch } from "react-icons/hi"
 import { VscDebugLineByLine } from "react-icons/vsc"
+import { TbBrandGoogleAnalytics } from "react-icons/tb"
 import Button from "/src/components/Button"
 import Card from "/src/components/Card"
 import Spinner from "/src/components/Spinner"
@@ -25,7 +25,7 @@ const Trending = ({ list = [], season }) => {
         <div className="flex justify-between">
           <div className="flex">
             <div className="a-center">
-              <HiColorSwatch className="text-sgreen text-[22px] mr-2" />
+              <TbBrandGoogleAnalytics className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
               <h1 className="text-slate-200 text-sm side-heading">This year <span className="text-sgreen">{season} RELEASES</span></h1>
