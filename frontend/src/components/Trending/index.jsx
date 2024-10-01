@@ -1,8 +1,9 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { HiColorSwatch } from "react-icons/hi"
 import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
-import Season from "../Card/Season"
+import Card from "/src/components/Card"
 import Spinner from "/src/components/Spinner"
 import { Link } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
@@ -59,7 +60,7 @@ const Trending = ({ list = [], season }) => {
         <div className="season-container mt-3 w-full flex flex-wrap relative">
           {
             list.map((data, index) => {
-              return <Season key={'scard-' + index} index={index} data={data} />
+              return <Card type="season" key={'scard-' + index} index={index} data={data} />
             })
           }
         </div>
@@ -73,4 +74,6 @@ Trending.propTypes = {
   season: PropTypes.string,
 }
 
-export default Trending
+const MemoTrending = memo(Trending)
+
+export default MemoTrending

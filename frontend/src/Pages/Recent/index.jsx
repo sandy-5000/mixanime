@@ -3,7 +3,7 @@ import MainLayout from "/src/layouts/MainLayout"
 import Anilist from "/src/services/anilist"
 import Spinner from "/src/components/Spinner"
 import { LuNewspaper } from "react-icons/lu"
-import Card from "/src/components/Card/Recent"
+import Card from "/src/components/Card"
 import { useNavigate, useLocation } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
 import PageButtons from "/src/components/PageButtons"
@@ -79,6 +79,7 @@ const Recent = () => {
           {
             list.map((data, index) => {
               return <Card
+                type="recent"
                 key={'rcard-' + index}
                 data={data}
               />

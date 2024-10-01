@@ -1,7 +1,8 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { useEffect, useState } from "react"
 import { motion, useMotionValue, useTransform } from "framer-motion"
-import Item from "/src/components/Card/Item"
+import Card from "/src/components/Card"
 
 const scrollState = {
   LEFT: -1,
@@ -76,7 +77,7 @@ const Slider = ({ list, name }) => {
           >
             <div className="px-2"></div>
             {
-              list.map((data, index) => <Item key={`item-${index}`} data={data} />)
+              list.map((data, index) => <Card type="item" key={`item-${index}`} data={data} />)
             }
             <div className="px-2"></div>
           </div>
@@ -113,4 +114,6 @@ Slider.propTypes = {
   name: PropTypes.string,
 }
 
-export default Slider
+const MemoSlider = memo(Slider)
+
+export default MemoSlider

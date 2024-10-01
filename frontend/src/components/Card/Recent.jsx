@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
@@ -73,4 +74,6 @@ Recent.propTypes = {
   data: PropTypes.any,
 }
 
-export default Recent
+const MemoRecent = memo(Recent)
+
+export default MemoRecent

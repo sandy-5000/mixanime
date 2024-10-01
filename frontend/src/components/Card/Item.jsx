@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
@@ -67,4 +68,6 @@ Item.propTypes = {
   data: PropTypes.any,
 }
 
-export default Item
+const MemoItem = memo(Item)
+
+export default MemoItem

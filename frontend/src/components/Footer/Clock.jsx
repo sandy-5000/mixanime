@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, memo } from "react"
 import { IoLogoIonic } from "react-icons/io"
 
 const Clock = () => {
@@ -33,4 +33,6 @@ const Clock = () => {
   )
 }
 
-export default Clock
+const MemoClock = memo(Clock)
+
+export default MemoClock

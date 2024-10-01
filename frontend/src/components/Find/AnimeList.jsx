@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import NotFoundAnimation from "/src/assets/animations/not_found.json"
 import LoadingAnimation from "/src/assets/animations/spinner.json"
@@ -63,8 +64,8 @@ const AnimeList = ({ list, loading }) => {
               list && list.length !== 0
                 ? list.map((data, index) =>
                   <Card
-                    key={'find-card-' + index}
                     type="find"
+                    key={'find-card-' + index}
                     data={data}
                     index={index + 1}
                   />
@@ -97,4 +98,6 @@ AnimeList.propTypes = {
   loading: PropTypes.bool,
 }
 
-export default AnimeList
+const MemoAnimeList = memo(AnimeList)
+
+export default MemoAnimeList

@@ -1,5 +1,6 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
-import Schedule from "../Card/Schedule"
+import Card from "/src/components/Card"
 import { AiOutlineSchedule } from "react-icons/ai"
 import { HiCalendarDays } from "react-icons/hi2"
 import { useEffect, useState } from "react"
@@ -87,7 +88,7 @@ const Container = ({ list, head, index, setIndex }) => {
           >
             <div className="mb-6 sm:mb-0 px-4"></div>
             {
-              list.map((data, index) => <Schedule key={`sch-${index}`} data={data} />)
+              list.map((data, index) => <Card type="schedule" key={`sch-${index}`} data={data} />)
             }
             <div className="relative mb-6 sm:mb-0 py-5">
               <div>
@@ -134,4 +135,6 @@ Container.propTypes = {
   setIndex: PropTypes.any,
 }
 
-export default Container
+const MemoContainer = memo(Container)
+
+export default MemoContainer

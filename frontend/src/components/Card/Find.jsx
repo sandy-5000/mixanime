@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { useState, useContext } from "react"
 import { motion } from "framer-motion"
@@ -192,4 +193,6 @@ Find.propTypes = {
   index: PropTypes.number,
 }
 
-export default Find
+const MemoFind = memo(Find)
+
+export default MemoFind

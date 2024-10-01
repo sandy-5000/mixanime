@@ -1,3 +1,4 @@
+import { memo } from "react"
 import Lottie from "react-lottie"
 import GirlFlyingAnimation from "/src/assets/animations/girl_flying.json"
 
@@ -26,4 +27,6 @@ const EmptyQuery = () => {
   )
 }
 
-export default EmptyQuery
+const MemoEmptyQuery = memo(EmptyQuery)
+
+export default MemoEmptyQuery

@@ -1,9 +1,10 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { LuNewspaper } from "react-icons/lu"
 import { VscDebugLineByLine } from "react-icons/vsc"
 import Button from "/src/components/Button"
 import { useEffect, useState } from "react"
-import Recent from "/src/components/Card/Recent"
+import Card from "/src/components/Card"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import Spinner from "/src/components/Spinner"
 import { Link } from "react-router-dom"
@@ -123,7 +124,8 @@ const Recents = ({ list = [] }) => {
             <div className="w-8"></div>
             {
               list.map((data, index) => {
-                return <Recent
+                return <Card
+                  type="recent"
                   key={'rcard-' + index}
                   data={data}
                 />
@@ -163,4 +165,6 @@ Recents.propTypes = {
   list: PropTypes.array,
 }
 
-export default Recents
+const MemoRecents = memo(Recents)
+
+export default MemoRecents

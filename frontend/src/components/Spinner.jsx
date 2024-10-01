@@ -25,7 +25,7 @@ const Spinner = ({ height = 300 }) => {
 }
 
 Spinner.propTypes = {
-  size: PropTypes.number
+  height: PropTypes.number
 }
 
 export default Spinner

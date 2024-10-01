@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { getDate, truncate, getQueryParams } from "/src/services/untils"
 import { HiCalendarDays } from "react-icons/hi2"
@@ -77,4 +78,6 @@ Schedule.propTypes = {
   data: PropTypes.any
 }
 
-export default Schedule
+const MemoSchedule = memo(Schedule)
+
+export default MemoSchedule

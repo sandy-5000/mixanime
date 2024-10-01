@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import Button from "/src/components/Button"
 import DefaultImage from "/src/assets/images/pic_2.jpg"
@@ -198,4 +199,6 @@ CardElement.propTypes = {
   active: PropTypes.bool,
 }
 
-export default CardElement
+const MemoCardElement = memo(CardElement)
+
+export default MemoCardElement

@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import { motion, useInView } from "framer-motion"
 import { Link } from "react-router-dom"
@@ -111,4 +112,6 @@ Season.propTypes = {
   index: PropTypes.number,
 }
 
-export default Season
+const MemoSeason = memo(Season)
+
+export default MemoSeason

@@ -3,7 +3,7 @@ import MainLayout from "/src/layouts/MainLayout"
 import Anilist from "/src/services/anilist"
 import Spinner from "/src/components/Spinner"
 import { HiColorSwatch } from "react-icons/hi"
-import Card from "/src/components/Card/Season"
+import Card from "/src/components/Card"
 import { useNavigate, useLocation } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
 import PageButtons from "/src/components/PageButtons"
@@ -86,6 +86,7 @@ const Trending = () => {
           {
             list.map((data, index) => {
               return <Card
+                type="season"
                 index={index}
                 key={'rcard-' + index}
                 data={data}

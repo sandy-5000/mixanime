@@ -1,6 +1,7 @@
+import { memo } from "react"
 import { PropTypes } from "prop-types"
 import PageButtons from "/src/components/PageButtons"
-import Card from "/src/components/Card/Season"
+import Card from "/src/components/Card"
 import { VscFilter } from "react-icons/vsc"
 import { TbMapSearch } from "react-icons/tb"
 
@@ -33,6 +34,7 @@ const Container = ({ page, setPage, list, setShow }) => {
         {
           list.length && list.map((data, index) => {
             return <Card
+              type="season"
               index={index}
               key={'rcard-' + index}
               data={data}
@@ -68,4 +70,6 @@ Container.propTypes = {
   setShow: PropTypes.any,
 }
 
-export default Container
+const MemoContainer = memo(Container)
+
+export default MemoContainer
