@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types"
 import PageButtons from "/src/components/PageButtons"
 import Card from "/src/components/Card"
 import { VscFilter } from "react-icons/vsc"
-import { TbMapSearch } from "react-icons/tb"
+import { TbDatabaseSearch } from "react-icons/tb"
 
 
 const Container = ({ page, setPage, list, setShow }) => {
@@ -13,7 +13,7 @@ const Container = ({ page, setPage, list, setShow }) => {
       <div className="md:flex justify-between px-4 mb-4">
         <div className="flex">
           <div className="a-center">
-            <TbMapSearch className="text-sgreen text-[22px] mr-2" />
+            <TbDatabaseSearch className="text-sgreen text-[22px] mr-2" />
           </div>
           <div className="a-center font-semibold">
             <h1 className="text-slate-200 text-sm side-heading">Search <span className="text-sgreen">Results</span></h1>

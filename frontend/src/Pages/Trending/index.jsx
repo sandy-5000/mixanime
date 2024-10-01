@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import MainLayout from "/src/layouts/MainLayout"
 import Anilist from "/src/services/anilist"
 import Spinner from "/src/components/Spinner"
-import { HiColorSwatch } from "react-icons/hi"
+import { TbBrandGoogleAnalytics } from "react-icons/tb"
 import Card from "/src/components/Card"
 import { useNavigate, useLocation } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
@@ -68,7 +68,7 @@ const Trending = () => {
         <div className="md:flex justify-between px-4 mb-4">
           <div className="flex">
             <div className="a-center">
-              <HiColorSwatch className="text-sgreen text-[22px] mr-2" />
+              <TbBrandGoogleAnalytics className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
               <h1 className="text-slate-200 text-sm side-heading">This year <span className="text-sgreen">{season} RELEASES</span></h1>
