@@ -10,14 +10,15 @@ const Error = ({ error }) => {
     <motion.div
       animate={error ? 'open' : 'closed'}
       variants={variants}
-      className="fixed w-[240px] px-4 h-12 py-2 bg-[#e5e7ebee] rounded-lg"
+      className="w-[240px] px-4 h-12 py-2 bg-[#e5e7ebee] rounded-lg"
       style={{
+        position: 'fixed',
         zIndex: 15,
-        top: 100,
+        top: 'calc(50vh - 24px)',
         left: 'calc(50vw - 120px)',
       }}
     >
-      <p className="text-red-600 text-center text-gap-2 text-xs h-4">{error}</p>
+      <p className="text-red-800 text-center text-gap-2 text-xs h-4">{error}</p>
     </motion.div>
   )
 }

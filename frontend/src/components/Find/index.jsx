@@ -82,7 +82,7 @@ const Find = ({ toggleFind: closeButton }) => {
           </motion.div>
         </div>
         <div className="w-full mt-8">
-          {query?.length > 0 ? <AnimeList list={list} loading={loading} /> : <EmptyQuery />}
+          {query?.length > 0 ? <AnimeList closeButton={closeButton} list={list} loading={loading} /> : <EmptyQuery />}
         </div>
       </div>
     </motion.div>

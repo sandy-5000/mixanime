@@ -13,14 +13,18 @@ import { Context } from "/src/context"
 import { useContext, useEffect, useState } from "react"
 import Error from "./Error"
 
-const callType = {
+const API_ROUTES = {
   ATL: 'add-to-list',
   RFL: 'remove-from-list',
   ATF: 'add-to-favourites',
   RFF: 'remove-from-favourites',
 }
 
-const updateList = (type, { id, title, coverImage }, setUser, setError) => {
+const updateList = (type, { id, title, coverImage }, user, setUser, setError) => {
+  if (!user.loggedIn) {
+    setError('Login to Perform this action')
+    return
+  }
   const body = { id, title, coverImage }
   backend.post(`/api/user/${type}`, body)
     .then(({ data }) => {
@@ -141,7 +145,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                           color: '#111827',
                           backgroundColor: '#e5e7eb',
                         }}
-                        onClick={() => updateList(callType.RFL, { id }, setUser, setError)}
+                        onClick={() => updateList(API_ROUTES.RFL, { id }, user, setUser, setError)}
                       >
                         <div className="flex justify-center w-full">
                           <VscClose className="text-lg mr-1" />
@@ -162,7 +166,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                           color: '#111827',
                           backgroundColor: '#e5e7eb',
                         }}
-                        onClick={() => updateList(callType.ATL, { id, title, coverImage }, setUser, setError)}
+                        onClick={() => updateList(API_ROUTES.ATL, { id, title, coverImage }, user, setUser, setError)}
                       >
                         <div className="flex justify-center w-full">
                           <VscAdd className="text-lg mr-1" />
@@ -181,7 +185,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                           paddingLeft: 0,
                           paddingRight: 0,
                         }}
-                        onClick={() => updateList(callType.RFF, { id }, setUser, setError)}
+                        onClick={() => updateList(API_ROUTES.RFF, { id }, user, setUser, setError)}
                       >
                         <GoHeart className="w-full text-lg p-auto" />
                       </Button>
@@ -196,7 +200,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                           paddingLeft: 0,
                           paddingRight: 0,
                         }}
-                        onClick={() => updateList(callType.ATF, { id, title, coverImage }, setUser, setError)}
+                        onClick={() => updateList(API_ROUTES.ATF, { id, title, coverImage }, user, setUser, setError)}
                       >
                         <GoHeartFill className="w-full text-lg p-auto" />
                       </Button>
@@ -260,7 +264,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
                 <LuDot className="text-2xl text-slate-200" />
               </span>
               <div className="a-center">
-                <span className="text-slate-200 text-sm">{data.duration} min</span>
+                <span className="text-slate-200 text-sm">{data.duration || 23} min</span>
               </div>
             </div>
             <div className="mt-5">
@@ -312,7 +316,7 @@ const Container = ({ data, onMedia: goToMedia, }) => {
               </p>
               <p className="text-slate-200 p-0 mb-3 text-xs">
                 <span className="text-sgreen">Status :</span>
-                <span className="mx-2">{data.status}</span>
+                <span className="mx-2">{data.status.split('_').join(' ')}</span>
               </p>
               <p className="text-slate-200 p-0 mb-3 text-xs">
                 <span className="text-sgreen">Total Episodes :</span>

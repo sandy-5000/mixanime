@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import { getQueryParams } from "/src/services/untils"
 import { Context } from "/src/context"
 
-const Find = ({ data = {}, index = 0 }) => {
+const Find = ({ data = {}, index = 0, closeButton }) => {
   const title =
     data.title.romaji ||
     data.title.userPreferred ||
@@ -104,6 +104,7 @@ const Find = ({ data = {}, index = 0 }) => {
                       pathname: '/details',
                       search: getQueryParams({ id: data.id })
                     }}
+                    onClick={closeButton}
                   >
                     <Button
                       style={{
@@ -131,6 +132,7 @@ const Find = ({ data = {}, index = 0 }) => {
                       pathname: '/details',
                       search: getQueryParams({ id: data.id })
                     }}
+                    onClick={closeButton}
                   >
                     <Button
                       style={{
@@ -191,6 +193,7 @@ const Find = ({ data = {}, index = 0 }) => {
 Find.propTypes = {
   data: PropTypes.any,
   index: PropTypes.number,
+  closeButton: PropTypes.any,
 }
 
 const MemoFind = memo(Find)

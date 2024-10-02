@@ -80,10 +80,10 @@ const Season = ({ data, index }) => {
               }}
             >
               <div
-                className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[15px] font-[550]">
+                className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[12px] md:text-[15px] font-[550]">
                 {format}</div>
               <div
-                className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 text-[15px] font-[550]">
+                className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 py-[2px] text-[12px] md:text-[15px] font-[550]">
                 {data.duration || 23}:00</div>
             </div>
           </div>

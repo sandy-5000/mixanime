@@ -5,10 +5,10 @@ import Season from "./Season"
 import Schedule from "./Schedule"
 import Item from "./Item"
 
-const Card = ({ type, data = {}, index = 0 }) => {
+const Card = ({ type, data = {}, index = 0, closeButton }) => {
   switch (type) {
     case 'find':
-      return <Find data={data} index={index} />
+      return <Find data={data} index={index} closeButton={closeButton} />
     case 'recent':
       return <Recent data={data} />
     case 'season':
@@ -26,6 +26,7 @@ Card.propTypes = {
   type: PropTypes.string,
   data: PropTypes.any,
   index: PropTypes.number,
+  closeButton: PropTypes.any,
 }
 
 export default Card

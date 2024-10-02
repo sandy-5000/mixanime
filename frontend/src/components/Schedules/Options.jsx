@@ -3,13 +3,22 @@ import Button from "/src/components/Button"
 import { HiOutlineChevronUpDown } from "react-icons/hi2"
 import { useState } from "react"
 
+const weekday = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+]
 
 const Options = ({ index, setIndex }) => {
   const options = ['Yesterday', 'Today', 'Tomorrow', 2, 3, 4, 5].map((x) => {
     if (typeof (x) === 'number') {
       const current = new Date()
       current.setDate(current.getDate() + x)
-      return current.toString().slice(0, 15)
+      return weekday[current.getDay()]
     }
     return x
   })

@@ -7,7 +7,7 @@ import Card from "/src/components/Card"
 import Lottie from "react-lottie"
 
 
-const AnimeList = ({ list, loading }) => {
+const AnimeList = ({ list, loading, closeButton }) => {
   const loadingOptions = {
     loop: true,
     autoplay: true,
@@ -68,6 +68,7 @@ const AnimeList = ({ list, loading }) => {
                     key={'find-card-' + index}
                     data={data}
                     index={index + 1}
+                    closeButton={closeButton}
                   />
                 )
                 : <div style={{ height: 'calc(100vh - 150px)' }} className="w-full a-center">
@@ -96,6 +97,7 @@ const AnimeList = ({ list, loading }) => {
 AnimeList.propTypes = {
   list: PropTypes.array,
   loading: PropTypes.bool,
+  closeButton: PropTypes.any,
 }
 
 const MemoAnimeList = memo(AnimeList)
