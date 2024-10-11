@@ -12,6 +12,7 @@ import Error from '/src/Pages/Error'
 import Login from '/src/Pages/Auth/Login'
 import SignUp from '/src/Pages/Auth/SignUp'
 import Profile from '/src/Pages/Auth/Profile'
+import Dev from '/src/Pages/_Dev'
 import { Context } from '/src/context'
 import { PropTypes } from 'prop-types'
 import { ROUTES } from '/src/services/untils'
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.PROFILE,
     element: <Profile />,
+  },
+  {
+    path: ROUTES.DEVELOPER,
+    element: <Dev />,
   },
 ])
 

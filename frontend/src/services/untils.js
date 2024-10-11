@@ -8,6 +8,7 @@ const ROUTES = {
   LOGIN: '/user/login',
   SIGNUP: '/user/signup',
   PROFILE: '/user/profile',
+  DEVELOPER: '/_dev',
 }
 
 const getQueryParams = (object) => {

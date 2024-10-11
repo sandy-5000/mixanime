@@ -57,11 +57,29 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <div className="hidden md:flex flex-col justify-end ml-auto pr-6">
+          <p className="text-gray-100 mb-5 px-1 text-right">
+            <small className="uppercase font-semibold">
+              <a target="_blank" href="https://github.com/sandy-5000">
+                Developed by
+              </a>
+            </small>
+          </p>
+        </div>
+      </div>
+      <div className="md:hidden flex flex-col justify-end ml-auto pr-6">
+        <p className="text-gray-100 mb-5 px-1 text-right">
+          <small className="uppercase font-semibold">
+            <a target="_blank" href="https://github.com/sandy-5000">
+              Developed by
+            </a>
+          </small>
+        </p>
       </div>
       <div className="mx-5 py-3">
         <hr className="border-gray-100 border-opacity-30" />
         <div className="mt-4">
-          <p className="text-gray-100 mb-5 px-1">
+          <p className="text-gray-100 mb-2 px-1">
             <small>
               Mix Anime does not store any files on our server, we only linked
               to the media which is hosted on 3rd party services.
