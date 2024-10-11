@@ -1,4 +1,4 @@
-import { PropTypes } from "prop-types"
+import { PropTypes } from 'prop-types'
 
 const Loading = ({ children }) => {
   return (
@@ -34,7 +34,7 @@ const Loading = ({ children }) => {
 }
 
 Loading.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 export default Loading

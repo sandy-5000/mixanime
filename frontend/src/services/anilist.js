@@ -302,7 +302,7 @@ const queries = {
 					}
 				}
 			}
-		`
+		`,
 }
 
 const Anilist = (query, variables, callback) => {
@@ -310,7 +310,10 @@ const Anilist = (query, variables, callback) => {
   let cacheData = localStorage.getItem(key)
   if (cacheData) {
     cacheData = JSON.parse(cacheData)
-    if (cacheData.time && cacheData.time + 900000 /* 15mins in millisecs */ > Date.now()) {
+    if (
+      cacheData.time &&
+      cacheData.time + 900000 /* 15mins in millisecs */ > Date.now()
+    ) {
       callback(cacheData.result)
       return
     }
@@ -321,16 +324,16 @@ const Anilist = (query, variables, callback) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify({
       query: build ? queries[query](build) : queries[query],
-      variables: variables
-    })
+      variables: variables,
+    }),
   }
   fetch(URL, options)
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       if (query == 'recent' || query == 'schedule') {
         result = result.data.Page.airingSchedules
       } else if (query == 'details') {

@@ -1,12 +1,11 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import Button from "/src/components/Button"
-import DefaultImage from "/src/assets/images/pic_2.jpg"
-import { VscPlayCircle, VscChevronRight } from "react-icons/vsc"
-import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
-import { getQueryParams, truncate } from "/src/services/untils"
-
+import { PropTypes } from 'prop-types'
+import Button from '/src/components/Button'
+import DefaultImage from '/src/assets/images/pic_2.jpg'
+import { VscPlayCircle, VscChevronRight } from 'react-icons/vsc'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { getQueryParams, truncate } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const CardElement = ({ data, index, active }) => {
   const title =
@@ -76,18 +75,17 @@ const CardElement = ({ data, index, active }) => {
           transition={{ delay: 0.5, duration: 0.3 }}
           className="absolute overflow-hidden right-0 top-0 h-full w-8/12"
         >
-          <div className="w-full md:w-6/12 absolute md:translate-x-0 flex justify-center"
+          <div
+            className="w-full md:w-6/12 absolute md:translate-x-0 flex justify-center"
             style={{ height: '100%', marginLeft: '40%' }}
           >
-            <div
-              className="-mt-[25%] md:-mt-[33%] bg-[#e0f2f1] h-[150%] rotate-[15deg] w-full flex justify-center"
-            >
-              <div className="top-[15%] bg-cover bg-center bg-no-repeat relative w-11/12 -mt-[10%] h-full"
+            <div className="-mt-[25%] md:-mt-[33%] bg-[#e0f2f1] h-[150%] rotate-[15deg] w-full flex justify-center">
+              <div
+                className="top-[15%] bg-cover bg-center bg-no-repeat relative w-11/12 -mt-[10%] h-full"
                 style={{
-                  backgroundImage: `url(${coverImage})`
+                  backgroundImage: `url(${coverImage})`,
                 }}
-              >
-              </div>
+              ></div>
             </div>
           </div>
         </motion.div>
@@ -100,7 +98,9 @@ const CardElement = ({ data, index, active }) => {
                   variants={variants.spotlight}
                   transition={{ delay: 0.7, duration: 0.2 }}
                 >
-                  <p className="font-bold text-sgreen text-sm my-2 p-0"># {index + 1} SPOTLIGHT</p>
+                  <p className="font-bold text-sgreen text-sm my-2 p-0">
+                    # {index + 1} SPOTLIGHT
+                  </p>
                 </motion.div>
                 <motion.div
                   animate={active ? 'open' : 'closed'}
@@ -110,7 +110,9 @@ const CardElement = ({ data, index, active }) => {
                   <h3
                     style={{ fontWeight: 'bolder', fontSize: 'min(25px, 3vw)' }}
                     className="text-[#9fe6cd] pb-5"
-                  >{truncate(title, 42)}</h3>
+                  >
+                    {truncate(title, 42)}
+                  </h3>
                 </motion.div>
               </div>
               <div>
@@ -119,14 +121,14 @@ const CardElement = ({ data, index, active }) => {
                   variants={variants.description}
                   transition={{ delay: 0.3, duration: 0.3 }}
                 >
-                  <p className="max-h-16 xl:max-h-32 py-1 md:block hidden text-[12px] text-slate-200 overflow-scroll"
+                  <p
+                    className="max-h-16 xl:max-h-32 py-1 md:block hidden text-[12px] text-slate-200 overflow-scroll"
                     style={{
                       width: '120%',
-                      mask: 'linear-gradient(transparent, white 10%, white 90%, transparent)'
+                      mask: 'linear-gradient(transparent, white 10%, white 90%, transparent)',
                     }}
                     dangerouslySetInnerHTML={{ __html: data.description }}
-                  >
-                  </p>
+                  ></p>
                 </motion.div>
                 <div className="flex mt-5 mb-2 lg:mb-8 z-[2]">
                   <motion.div
@@ -136,8 +138,8 @@ const CardElement = ({ data, index, active }) => {
                   >
                     <Link
                       to={{
-                        pathname: '/watch',
-                        search: getQueryParams({ id, name, episode: 1 })
+                        pathname: ROUTES.WATCH,
+                        search: getQueryParams({ id, name, episode: 1 }),
                       }}
                     >
                       <Button
@@ -162,8 +164,8 @@ const CardElement = ({ data, index, active }) => {
                   >
                     <Link
                       to={{
-                        pathname: '/details',
-                        search: getQueryParams({ id })
+                        pathname: ROUTES.DETAILS,
+                        search: getQueryParams({ id }),
                       }}
                     >
                       <Button
@@ -179,7 +181,9 @@ const CardElement = ({ data, index, active }) => {
                         }}
                       >
                         <VscChevronRight className="text-lg mr-1" />
-                        <span className="normal-case tracking-wide">Details</span>
+                        <span className="normal-case tracking-wide">
+                          Details
+                        </span>
                       </Button>
                     </Link>
                   </motion.div>
@@ -199,6 +203,4 @@ CardElement.propTypes = {
   active: PropTypes.bool,
 }
 
-const MemoCardElement = memo(CardElement)
-
-export default MemoCardElement
+export default CardElement

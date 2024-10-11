@@ -1,13 +1,13 @@
-import { PropTypes } from "prop-types"
-import Button from "/src/components/Button"
-import { VscClose } from "react-icons/vsc"
-import { LuSearch } from "react-icons/lu"
-import { useState } from "react"
-import Anilist from "/src/services/anilist.js"
-import { debounce } from "lodash"
-import { motion } from "framer-motion"
-import EmptyQuery from "./EmptyQuery"
-import AnimeList from "./AnimeList"
+import { PropTypes } from 'prop-types'
+import Button from '/src/components/Button'
+import { VscClose } from 'react-icons/vsc'
+import { LuSearch } from 'react-icons/lu'
+import { useState } from 'react'
+import Anilist from '/src/services/anilist.js'
+import { debounce } from 'lodash'
+import { motion } from 'framer-motion'
+import EmptyQuery from './EmptyQuery'
+import AnimeList from './AnimeList'
 
 const findAnime = debounce((value, previous, setLoading, callback) => {
   value = value.trim()
@@ -17,16 +17,20 @@ const findAnime = debounce((value, previous, setLoading, callback) => {
     setLoading(false)
     return
   }
-  Anilist('find', {
-    page: 1,
-    perPage: 6,
-    search: value,
-  }, (data) => {
-    setTimeout(() => {
-      callback(data)
-      setLoading(false)
-    }, 500)
-  })
+  Anilist(
+    'find',
+    {
+      page: 1,
+      perPage: 6,
+      search: value,
+    },
+    (data) => {
+      setTimeout(() => {
+        callback(data)
+        setLoading(false)
+      }, 500)
+    }
+  )
 }, 500)
 
 const Find = ({ toggleFind: closeButton }) => {
@@ -54,7 +58,9 @@ const Find = ({ toggleFind: closeButton }) => {
     >
       <div className="absolute left-0 top-0 w-screen h-screen z-[5] overflow-y-scroll">
         <div className="flex justify-end px-5 pt-5">
-          <Button btnType="icon" onClick={closeButton}><VscClose className="text-xl" /></Button>
+          <Button btnType="icon" onClick={closeButton}>
+            <VscClose className="text-xl" />
+          </Button>
         </div>
         <div className="flex mt-3 px-5">
           <motion.div
@@ -67,13 +73,16 @@ const Find = ({ toggleFind: closeButton }) => {
               <LuSearch className="text-gray-400" />
             </div>
             <div className="absolute h-8 right-0 px-3 a-center">
-              {
-                query?.length > 0 && <button onClick={handleClose}>
+              {query?.length > 0 && (
+                <button onClick={handleClose}>
                   <VscClose className="text-gray-200" />
                 </button>
-              }
+              )}
             </div>
-            <input type="text" value={query} onChange={handleQueryChange}
+            <input
+              type="text"
+              value={query}
+              onChange={handleQueryChange}
               className="h-8 w-[250px] md:w-[300px] bg-transparent py-2 px-8 text-gray-200
               rounded-3xl ring-2 ring-teal-900 focus:ring-2 focus:ring-teal-600
               uppercase tracking-wide text-xs"
@@ -82,7 +91,15 @@ const Find = ({ toggleFind: closeButton }) => {
           </motion.div>
         </div>
         <div className="w-full mt-8">
-          {query?.length > 0 ? <AnimeList closeButton={closeButton} list={list} loading={loading} /> : <EmptyQuery />}
+          {query?.length > 0 ? (
+            <AnimeList
+              closeButton={closeButton}
+              list={list}
+              loading={loading}
+            />
+          ) : (
+            <EmptyQuery />
+          )}
         </div>
       </div>
     </motion.div>
@@ -90,8 +107,7 @@ const Find = ({ toggleFind: closeButton }) => {
 }
 
 Find.propTypes = {
-  toggleFind: PropTypes.any
+  toggleFind: PropTypes.any,
 }
-
 
 export default Find

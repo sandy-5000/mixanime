@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
-import Anilist from "/src/services/anilist"
-import Container from "./Container"
-import { useNavigate, useLocation } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-import MainLayout from "/src/layouts/MainLayout"
-import Spinner from "/src/components/Spinner"
+import { useEffect, useState } from 'react'
+import Anilist from '/src/services/anilist'
+import Container from './Container'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import MainLayout from '/src/layouts/MainLayout'
+import Spinner from '/src/components/Spinner'
+import { ROUTES } from '/src/services/untils'
 
 const Details = () => {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ const Details = () => {
   }, [id, navigate, location])
 
   const onMedia = ({ id }) => {
-    navigate('/details' + getQueryParams({ id }))
+    navigate(ROUTES.DETAILS + getQueryParams({ id }))
     query.set('id', id)
     setData(null)
     setId(id)
@@ -52,10 +53,7 @@ const Details = () => {
     )
   }
 
-  return <Container
-    data={data}
-    onMedia={onMedia}
-  />
+  return <Container data={data} onMedia={onMedia} />
 }
 
 export default Details

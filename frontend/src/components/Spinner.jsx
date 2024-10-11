@@ -1,6 +1,6 @@
-import { PropTypes } from "prop-types"
-import Lottie from "react-lottie"
-import SpinnerAnimation from "/src/assets/animations/spinner.json"
+import { PropTypes } from 'prop-types'
+import Lottie from 'react-lottie'
+import SpinnerAnimation from '/src/assets/animations/spinner.json'
 
 const Spinner = ({ height = 300 }) => {
   const options = {
@@ -8,13 +8,14 @@ const Spinner = ({ height = 300 }) => {
     autoplay: true,
     animationData: SpinnerAnimation,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
+      preserveAspectRatio: 'xMidYMid slice',
+    },
   }
   return (
-    <div className="w-full a-center"
+    <div
+      className="w-full a-center"
       style={{
-        height: `max(${height}px, 100%)`
+        height: `max(${height}px, 100%)`,
       }}
     >
       <div className="h-[200px]">
@@ -25,7 +26,7 @@ const Spinner = ({ height = 300 }) => {
 }
 
 Spinner.propTypes = {
-  height: PropTypes.number
+  height: PropTypes.number,
 }
 
 export default Spinner

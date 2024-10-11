@@ -1,16 +1,17 @@
-import { PropTypes } from "prop-types"
-import { VscEye, VscEyeClosed, VscSignIn, VscClose } from "react-icons/vsc"
-import Button from "/src/components/Button"
-import { useEffect, useState, useContext } from "react"
-import { MdAlternateEmail } from "react-icons/md"
-import { FaShieldAlt } from "react-icons/fa"
-import Logo from "/src/components/Logo"
-import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
-import backend from "/src/services/backend"
-import Loading from "/src/components/Button/Loading"
-import { useNavigate } from "react-router-dom"
-import { Context } from "/src/context"
+import { PropTypes } from 'prop-types'
+import { VscEye, VscEyeClosed, VscSignIn, VscClose } from 'react-icons/vsc'
+import Button from '/src/components/Button'
+import { useEffect, useState, useContext } from 'react'
+import { MdAlternateEmail } from 'react-icons/md'
+import { FaShieldAlt } from 'react-icons/fa'
+import Logo from '/src/components/Logo'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import backend from '/src/services/backend'
+import Loading from '/src/components/Button/Loading'
+import { useNavigate } from 'react-router-dom'
+import { Context } from '/src/context'
+import { ROUTES } from '/src/services/untils'
 
 const Container = ({ modal, close }) => {
   const navigate = useNavigate()
@@ -26,10 +27,10 @@ const Container = ({ modal, close }) => {
       if (modal) {
         close()
       } else {
-        navigate('/home', { replace: true })
+        navigate(ROUTES.HOME, { replace: true })
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   useEffect(() => {
@@ -58,7 +59,8 @@ const Container = ({ modal, close }) => {
     if (validate({ email, passwd })) {
       setLoading(true)
       const body = { usermail: email, passwd }
-      backend.post('/api/user/login', body)
+      backend
+        .post('/api/user/login', body)
         .then(({ data }) => {
           if (data.error) {
             setError(data.error)
@@ -70,7 +72,7 @@ const Container = ({ modal, close }) => {
             data,
           })
         })
-        .catch(error => {
+        .catch((error) => {
           setError('An Error occured')
           console.log(error)
         })
@@ -94,17 +96,15 @@ const Container = ({ modal, close }) => {
 
   return (
     <div className="w-[330px] glass v-center">
-      <form
-        className="w-full h-full"
-        onSubmit={handleSubmit}
-      >
+      <form className="w-full h-full" onSubmit={handleSubmit}>
         <div className="h-[60px] flex justify-between p-5 pt-8">
           <Logo />
           <div className="a-center -mt-1">
-            {
-              modal &&
-              <Button btnType="icon" onClick={close}><VscClose className="text-xl" /></Button>
-            }
+            {modal && (
+              <Button btnType="icon" onClick={close}>
+                <VscClose className="text-xl" />
+              </Button>
+            )}
           </div>
         </div>
         <div className="flex float-start p-5 pt-3 w-full">
@@ -130,7 +130,7 @@ const Container = ({ modal, close }) => {
               <FaShieldAlt className="text-gray-400" />
             </div>
             <input
-              type={showPasswd ? "text" : "password"}
+              type={showPasswd ? 'text' : 'password'}
               value={passwd}
               name="passwd"
               onChange={handlePasswd}
@@ -141,63 +141,58 @@ const Container = ({ modal, close }) => {
             />
             <div className="absolute top-0 h-8 right-0 px-3 a-center">
               <button onClick={handleShowPasswd} type="button">
-                {
-                  showPasswd
-                    ? <VscEye className="text-gray-200" />
-                    : <VscEyeClosed className="text-gray-200" />
-                }
+                {showPasswd ? (
+                  <VscEye className="text-gray-200" />
+                ) : (
+                  <VscEyeClosed className="text-gray-200" />
+                )}
               </button>
             </div>
           </div>
         </div>
-        {
-          error &&
+        {error && (
           <div className="px-5 pb-3">
-            <p className="text-red-300 text-xs">
-              {error}
-            </p>
+            <p className="text-red-300 text-xs">{error}</p>
           </div>
-        }
+        )}
 
         <div className="p-5 pt-0 pb-3 flex justify-between">
           <div className="pr-3 flex v-center">
-            <Link to="/signup">
-              <p className="text-sgreen text-xs cursor-pointer">Don&#39;t have an account?</p>
+            <Link to={ROUTES.SIGNUP}>
+              <p className="text-sgreen text-xs cursor-pointer">
+                Don&#39;t have an account?
+              </p>
             </Link>
           </div>
-          {
-            loading
-              ? <Loading>
-                <span>Loging...</span>
-              </Loading>
-              : <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <button
-                  type="submit"
-                  className="inline-flex items-center px-4 py-2
+          {loading ? (
+            <Loading>
+              <span>Loging...</span>
+            </Loading>
+          ) : (
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <button
+                type="submit"
+                className="inline-flex items-center px-4 py-2
                   rounded-md font-semibold text-xs uppercase tracking-widest shadow-sm
                   transition ease-in-out duration-150
                   text-[#111827] bg-[#cbd5e1cc]
                   hover:bg-[#e5e7ebee]
                   disabled:opacity-25"
-                >
-                  <div className="flex justify-center">
-                    <div className="mr-1 a-center">
-                      <span className="text-xs inline-flex">Login</span>
-                    </div>
-                    <div className="a-center">
-                      <VscSignIn className="text-lg" />
-                    </div>
+              >
+                <div className="flex justify-center">
+                  <div className="mr-1 a-center">
+                    <span className="text-xs inline-flex">Login</span>
                   </div>
-                </button >
-              </motion.div>
-
-          }
+                  <div className="a-center">
+                    <VscSignIn className="text-lg" />
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+          )}
         </div>
       </form>
-    </div >
+    </div>
   )
 }
 
@@ -205,6 +200,5 @@ Container.propTypes = {
   modal: PropTypes.bool,
   close: PropTypes.any,
 }
-
 
 export default Container

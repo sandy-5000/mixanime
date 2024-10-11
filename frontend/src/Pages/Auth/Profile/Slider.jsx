@@ -1,8 +1,8 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { useEffect, useState } from "react"
-import { motion, useMotionValue, useTransform } from "framer-motion"
-import Card from "/src/components/Card"
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { useEffect, useState } from 'react'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
+import Card from '/src/components/Card'
 
 const scrollState = {
   LEFT: -1,
@@ -16,7 +16,7 @@ const Slider = ({ list, name }) => {
   const background = useTransform(
     x,
     [-100, 0, 100],
-    ["#ffe4e622", "#ffe4e628", "#ffe4e622"]
+    ['#ffe4e622', '#ffe4e628', '#ffe4e622']
   )
 
   useEffect(() => {
@@ -72,22 +72,23 @@ const Slider = ({ list, name }) => {
           <div
             className={`${name}-container slider-container slider`}
             style={{
-              mask: 'linear-gradient(90deg, transparent, white 2%, white 98%, transparent)'
+              mask: 'linear-gradient(90deg, transparent, white 2%, white 98%, transparent)',
             }}
           >
             <div className="px-2"></div>
-            {
-              list.map((data, index) => <Card type="item" key={`item-${index}`} data={data} />)
-            }
+            {list.map((data, index) => (
+              <Card type="item" key={`item-${index}`} data={data} />
+            ))}
             <div className="px-2"></div>
           </div>
         </div>
       </div>
       <div className="w-full a-center mt-3 mb-8 px-2">
-        <motion.div className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center"
+        <motion.div
+          className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center"
           style={{
             background,
-            scrollBehavior: 'revert'
+            scrollBehavior: 'revert',
           }}
         >
           <motion.div
@@ -99,8 +100,7 @@ const Slider = ({ list, name }) => {
             onDragEnd={() => setScroll(scrollState.MID)}
           >
             <div className="w-8 h-8 p-2 a-center rounded-lg bg-[#f0fdfa66]">
-              <div className="h-full w-full rounded-full ring-2 ring-white a-center">
-              </div>
+              <div className="h-full w-full rounded-full ring-2 ring-white a-center"></div>
             </div>
           </motion.div>
         </motion.div>

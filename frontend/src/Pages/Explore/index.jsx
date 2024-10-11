@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
-import Filter from "./Filter"
-import MainLayout from "/src/layouts/MainLayout"
-import Anilist from "/src/services/anilist"
-import Spinner from "/src/components/Spinner"
-import { useNavigate, useLocation } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-import Container from "./Container"
+import { useEffect, useState } from 'react'
+import Filter from './Filter'
+import MainLayout from '/src/layouts/MainLayout'
+import Anilist from '/src/services/anilist'
+import Spinner from '/src/components/Spinner'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import Container from './Container'
+import { ROUTES } from '/src/services/untils'
 
 const defaultFilter = () => {
   return {
@@ -17,7 +18,7 @@ const defaultFilter = () => {
     sort: '',
     status: '',
     averageScore: -1,
-    genres: {}
+    genres: {},
   }
 }
 
@@ -31,7 +32,7 @@ const getVariables = (variables) => {
     year,
     sort,
     status,
-    averageScore
+    averageScore,
   } = variables
 
   if (!animename || animename.trim() == '') {
@@ -57,10 +58,26 @@ const getVariables = (variables) => {
   if (isNaN(year) || 1940 > year || year > nextYear) {
     year = null
   }
-  if (!['TITLE_ENGLISH', 'TITLE_ENGLISH_DESC', 'START_DATE_DESC', 'POPULARITY', 'POPULARITY_DESC'].includes(sort)) {
+  if (
+    ![
+      'TITLE_ENGLISH',
+      'TITLE_ENGLISH_DESC',
+      'START_DATE_DESC',
+      'POPULARITY',
+      'POPULARITY_DESC',
+    ].includes(sort)
+  ) {
     sort = null
   }
-  if (!['RELEASING', 'FINISHED', 'NOT_YET_RELEASED', 'CANCELLED', 'HIATUS'].includes(status)) {
+  if (
+    ![
+      'RELEASING',
+      'FINISHED',
+      'NOT_YET_RELEASED',
+      'CANCELLED',
+      'HIATUS',
+    ].includes(status)
+  ) {
     status = null
   }
   averageScore = parseInt(averageScore)
@@ -81,7 +98,6 @@ const getVariables = (variables) => {
   return build
 }
 
-
 const Explore = () => {
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
@@ -100,7 +116,7 @@ const Explore = () => {
     }
     setList(null)
     if (flag) {
-      navigate('/explore' + getQueryParams({ page: value }))
+      navigate(ROUTES.EXPLORE + getQueryParams({ page: value }))
       query.set('page', value)
     }
     setVariables({ ...variables, page: value })
@@ -134,10 +150,11 @@ const Explore = () => {
 
   return (
     <MainLayout>
-      {
-        show && <div className="z-[5] w-[90vw] mx-[5vw] flex justify-end"
+      {show && (
+        <div
+          className="z-[5] w-[90vw] mx-[5vw] flex justify-end"
           style={{
-            position: 'fixed'
+            position: 'fixed',
           }}
         >
           <Filter
@@ -147,7 +164,7 @@ const Explore = () => {
             setFilter={setFilter}
           />
         </div>
-      }
+      )}
       <div
         style={{
           filter: show ? 'blur(10px)' : 'blur(0)',

@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
-import MainLayout from "/src/layouts/MainLayout"
-import Anilist from "/src/services/anilist"
-import Spinner from "/src/components/Spinner"
-import { TbBrandGoogleAnalytics } from "react-icons/tb"
-import Card from "/src/components/Card"
-import { useNavigate, useLocation } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-import PageButtons from "/src/components/PageButtons"
+import { useEffect, useState } from 'react'
+import MainLayout from '/src/layouts/MainLayout'
+import Anilist from '/src/services/anilist'
+import Spinner from '/src/components/Spinner'
+import { TbBrandGoogleAnalytics } from 'react-icons/tb'
+import Card from '/src/components/Card'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import PageButtons from '/src/components/PageButtons'
+import { ROUTES } from '/src/services/untils'
 
 const seasons = ['WINTER', 'SPRING', 'SUMMER', 'FALL']
 
@@ -31,7 +32,7 @@ const Trending = () => {
     }
     setList(null)
     if (flag) {
-      navigate('/trending' + getQueryParams({ page: value }))
+      navigate(ROUTES.TRENDING + getQueryParams({ page: value }))
       query.set('page', value)
     }
     setVariables({ ...variables, page: value })
@@ -71,7 +72,9 @@ const Trending = () => {
               <TbBrandGoogleAnalytics className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
-              <h1 className="text-slate-200 text-sm side-heading">This year <span className="text-sgreen">{season} RELEASES</span></h1>
+              <h1 className="text-slate-200 text-sm side-heading">
+                This year <span className="text-sgreen">{season} RELEASES</span>
+              </h1>
             </div>
           </div>
           <div className="mt-8 md:mt-0">
@@ -83,16 +86,16 @@ const Trending = () => {
           </div>
         </div>
         <div className="flex flex-wrap">
-          {
-            list.map((data, index) => {
-              return <Card
+          {list.map((data, index) => {
+            return (
+              <Card
                 type="season"
                 index={index}
                 key={'rcard-' + index}
                 data={data}
               />
-            })
-          }
+            )
+          })}
         </div>
         <div className="mt-8">
           <PageButtons

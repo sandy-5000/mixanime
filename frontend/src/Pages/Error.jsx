@@ -1,4 +1,4 @@
-import MainLayout from "/src/layouts/MainLayout"
+import MainLayout from '/src/layouts/MainLayout'
 
 const Error = () => {
   return (
@@ -9,7 +9,9 @@ const Error = () => {
           style={{
             fontSize: 16,
           }}
-        >Something went Wrong!</p>
+        >
+          Something went Wrong!
+        </p>
       </div>
     </MainLayout>
   )

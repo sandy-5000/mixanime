@@ -1,6 +1,6 @@
-import { PropTypes } from "prop-types"
-import { motion } from "framer-motion"
-import Container from "./Container"
+import { PropTypes } from 'prop-types'
+import { motion } from 'framer-motion'
+import Container from './Container'
 
 const Modal = ({ close }) => {
   return (

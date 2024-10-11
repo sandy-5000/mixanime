@@ -1,5 +1,5 @@
-import { motion } from "framer-motion"
-import { PropTypes } from "prop-types"
+import { motion } from 'framer-motion'
+import { PropTypes } from 'prop-types'
 
 const Error = ({ error }) => {
   const variants = {

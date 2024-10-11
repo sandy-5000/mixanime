@@ -1,16 +1,16 @@
-import { PropTypes } from "prop-types"
-import { getQueryParams, dateToString } from "/src/services/untils"
-import Button from "/src/components/Button"
-import { Link } from "react-router-dom"
-import { TbListDetails } from "react-icons/tb"
-import Episodes from "./Episodes"
-
+import { PropTypes } from 'prop-types'
+import { getQueryParams, dateToString } from '/src/services/untils'
+import Button from '/src/components/Button'
+import { Link } from 'react-router-dom'
+import { TbListDetails } from 'react-icons/tb'
+import Episodes from './Episodes'
+import { ROUTES } from '/src/services/untils'
 
 const Info = ({ data, setEpisode }) => {
   const totalEpisodes = data?.episodes || '?'
   const currentEpisode = data.nextAiringEpisode?.episode
-    ? (data.nextAiringEpisode?.episode - 1)
-    : (data?.episodes || '?')
+    ? data.nextAiringEpisode?.episode - 1
+    : data?.episodes || '?'
 
   return (
     <div className="m-5 lg:m-8 block md:flex">
@@ -40,11 +40,13 @@ const Info = ({ data, setEpisode }) => {
           <hr className="mb-3 text-slate-200" />
           <p className="text-slate-200 p-0 mb-3 text-xs">
             <span className="text-sgreen">Started On :</span>
-            <span className="mx-2">{dateToString(
-              data.startDate?.year,
-              data.startDate?.month,
-              data.startDate?.day
-            )}</span>
+            <span className="mx-2">
+              {dateToString(
+                data.startDate?.year,
+                data.startDate?.month,
+                data.startDate?.day
+              )}
+            </span>
           </p>
           <p className="text-slate-200 p-0 mb-3 text-xs">
             <span className="text-sgreen">Season :</span>
@@ -79,9 +81,10 @@ const Info = ({ data, setEpisode }) => {
           <div className="mt-2 mb-1 flex justify-end">
             <Link
               to={{
-                pathname: '/details',
-                search: getQueryParams({ id: data.id })
-              }}>
+                pathname: ROUTES.DETAILS,
+                search: getQueryParams({ id: data.id }),
+              }}
+            >
               <Button
                 style={{
                   color: '#111827',
@@ -115,7 +118,7 @@ const Info = ({ data, setEpisode }) => {
 
 Info.propTypes = {
   data: PropTypes.any,
-  setEpisode: PropTypes.any
+  setEpisode: PropTypes.any,
 }
 
 export default Info

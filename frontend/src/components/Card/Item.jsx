@@ -1,8 +1,9 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const Item = ({ data }) => {
   const id = data.id
@@ -17,20 +18,20 @@ const Item = ({ data }) => {
         transition: {
           delay: 0,
           duration: 0.1,
-        }
+        },
       }}
       whileTap={{
         scale: 0.97,
         transition: {
           delay: 0,
           duration: 0.1,
-        }
+        },
       }}
     >
       <Link
         to={{
-          pathname: '/details',
-          search: getQueryParams({ id })
+          pathname: ROUTES.DETAILS,
+          search: getQueryParams({ id }),
         }}
       >
         <div
@@ -41,12 +42,12 @@ const Item = ({ data }) => {
           }}
         >
           <div className="w-[120px] aspect-[2/3] p-[1px] md:p-1">
-            <div className="background w-full h-full relative p-2 rounded-lg"
+            <div
+              className="background w-full h-full relative p-2 rounded-lg"
               style={{
                 backgroundImage: `url(${background})`,
               }}
-            >
-            </div>
+            ></div>
           </div>
           <div className="w-[120px] p-[1px] md:p-1">
             <p

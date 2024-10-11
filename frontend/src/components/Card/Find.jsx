@@ -1,12 +1,13 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { useState, useContext } from "react"
-import { motion } from "framer-motion"
-import { VscPlay, VscAdd, VscClose } from "react-icons/vsc"
-import Button from "/src/components/Button"
-import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-import { Context } from "/src/context"
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { useState, useContext } from 'react'
+import { motion } from 'framer-motion'
+import { VscPlay, VscAdd, VscClose } from 'react-icons/vsc'
+import Button from '/src/components/Button'
+import { Link } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import { Context } from '/src/context'
+import { ROUTES } from '/src/services/untils'
 
 const Find = ({ data = {}, index = 0, closeButton }) => {
   const title =
@@ -67,7 +68,8 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
               variants={variants.img}
             >
               <img
-                className="object-cover rounded-md h-full w-full" src={data.coverImage.large}
+                className="object-cover rounded-md h-full w-full"
+                src={data.coverImage.large}
               />
             </motion.div>
           </div>
@@ -85,7 +87,8 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
               </div>
               <div
                 style={{ width: 'calc(100% - 50px)', maxHeight: 65 }}
-                className="overflow-hidden">
+                className="overflow-hidden"
+              >
                 <p className="text-gray-200 text-xs">{title}</p>
               </div>
             </motion.div>
@@ -101,8 +104,8 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
                 >
                   <Link
                     to={{
-                      pathname: '/details',
-                      search: getQueryParams({ id: data.id })
+                      pathname: ROUTES.DETAILS,
+                      search: getQueryParams({ id: data.id }),
                     }}
                     onClick={closeButton}
                   >
@@ -129,8 +132,8 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
                 >
                   <Link
                     to={{
-                      pathname: '/details',
-                      search: getQueryParams({ id: data.id })
+                      pathname: ROUTES.DETAILS,
+                      search: getQueryParams({ id: data.id }),
                     }}
                     onClick={closeButton}
                   >
@@ -145,17 +148,17 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
                         backgroundColor: '#e5e7eb',
                       }}
                     >
-                      {
-                        added
-                          ? <>
-                            <VscClose className="mr-1 text-lg" />
-                            <span>Remove</span>
-                          </>
-                          : <>
-                            <VscAdd className="mr-2 text-md" />
-                            <span>Add</span>
-                          </>
-                      }
+                      {added ? (
+                        <>
+                          <VscClose className="mr-1 text-lg" />
+                          <span>Remove</span>
+                        </>
+                      ) : (
+                        <>
+                          <VscAdd className="mr-2 text-md" />
+                          <span>Add</span>
+                        </>
+                      )}
                     </Button>
                   </Link>
                 </motion.div>
@@ -166,8 +169,11 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
                 </div>
                 <div
                   style={{ width: 'calc(100% - 50px)' }}
-                  className="overflow-hidden">
-                  <p className="text-gray-200 text-xs">{data?.startDate?.year || 'NO DATA'}</p>
+                  className="overflow-hidden"
+                >
+                  <p className="text-gray-200 text-xs">
+                    {data?.startDate?.year || 'NO DATA'}
+                  </p>
                 </div>
               </div>
               <div className="flex justify-start">
@@ -176,17 +182,18 @@ const Find = ({ data = {}, index = 0, closeButton }) => {
                 </div>
                 <div
                   style={{ width: 'calc(100% - 50px)' }}
-                  className="overflow-hidden">
-                  <p className="text-gray-200 text-xs">{
-                    (data?.status?.split('_') || ['NO', 'DATA']).join(' ')
-                  }</p>
+                  className="overflow-hidden"
+                >
+                  <p className="text-gray-200 text-xs">
+                    {(data?.status?.split('_') || ['NO', 'DATA']).join(' ')}
+                  </p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
-        </div >
-      </motion.div >
-    </motion.div >
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

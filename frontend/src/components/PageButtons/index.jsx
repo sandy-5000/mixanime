@@ -1,7 +1,6 @@
-import { PropTypes } from "prop-types"
-import Button from "/src/components/Button"
-import { GrFormPrevious, GrFormNext } from "react-icons/gr"
-
+import { PropTypes } from 'prop-types'
+import Button from '/src/components/Button'
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 
 const PageButtons = ({ current, prev, next }) => {
   return (
@@ -28,17 +27,20 @@ const PageButtons = ({ current, prev, next }) => {
         </div>
       </Button>
       <div className="a-center px-2">
-        <div className="min-w-8 max-w-fit px-1 a-center h-full rounded-md"
+        <div
+          className="min-w-8 max-w-fit px-1 a-center h-full rounded-md"
           style={{
-            backgroundColor: '#f3f4f6ff'
+            backgroundColor: '#f3f4f6ff',
           }}
         >
           <p
             className="text-gray-900 text-gap-2"
             style={{
-              fontSize: 14
+              fontSize: 14,
             }}
-          >{current}</p>
+          >
+            {current}
+          </p>
         </div>
       </div>
       <Button

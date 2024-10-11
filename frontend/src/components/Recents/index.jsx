@@ -1,15 +1,15 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { LuNewspaper } from "react-icons/lu"
-import { VscDebugLineByLine } from "react-icons/vsc"
-import Button from "/src/components/Button"
-import { useEffect, useState } from "react"
-import Card from "/src/components/Card"
-import { motion, useMotionValue, useTransform } from "framer-motion"
-import Spinner from "/src/components/Spinner"
-import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { LuNewspaper } from 'react-icons/lu'
+import { VscDebugLineByLine } from 'react-icons/vsc'
+import Button from '/src/components/Button'
+import { useEffect, useState } from 'react'
+import Card from '/src/components/Card'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
+import Spinner from '/src/components/Spinner'
+import { Link } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const scrollState = {
   LEFT: -1,
@@ -23,7 +23,7 @@ const Recents = ({ list = [] }) => {
   const background = useTransform(
     x,
     [-100, 0, 100],
-    ["#ffe4e622", "#ffe4e628", "#ffe4e622"]
+    ['#ffe4e622', '#ffe4e628', '#ffe4e622']
   )
 
   useEffect(() => {
@@ -74,7 +74,10 @@ const Recents = ({ list = [] }) => {
     )
   }
   list = list
-    .filter(x => x.media.countryOfOrigin === 'JP' && !x.media.genres?.includes('Hentai'))
+    .filter(
+      (x) =>
+        x.media.countryOfOrigin === 'JP' && !x.media.genres?.includes('Hentai')
+    )
     .slice(0, 24)
   return (
     <div className="xl:container mx-auto">
@@ -85,13 +88,17 @@ const Recents = ({ list = [] }) => {
               <LuNewspaper className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
-              <h1 className="text-slate-200 text-sm side-heading">Recently <span className="text-sgreen">Released</span></h1>
+              <h1 className="text-slate-200 text-sm side-heading">
+                Recently <span className="text-sgreen">Released</span>
+              </h1>
             </div>
           </div>
-          <Link to={{
-            pathname: '/recent',
-            search: getQueryParams({ page: 1 })
-          }}>
+          <Link
+            to={{
+              pathname: ROUTES.RECENT,
+              search: getQueryParams({ page: 1 }),
+            }}
+          >
             <Button
               style={{
                 height: 30,
@@ -117,28 +124,23 @@ const Recents = ({ list = [] }) => {
         <div
           className="recent-container w-full overflow-x-scroll pt-2"
           style={{
-            mask: 'linear-gradient(90deg, transparent, white 5%, white 95%, transparent)'
+            mask: 'linear-gradient(90deg, transparent, white 5%, white 95%, transparent)',
           }}
         >
           <div className="scroller">
             <div className="w-8"></div>
-            {
-              list.map((data, index) => {
-                return <Card
-                  type="recent"
-                  key={'rcard-' + index}
-                  data={data}
-                />
-              })
-            }
+            {list.map((data, index) => {
+              return <Card type="recent" key={'rcard-' + index} data={data} />
+            })}
             <div className="w-8"></div>
           </div>
         </div>
         <div className="w-full a-center">
-          <motion.div className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center"
+          <motion.div
+            className="mx-2 overflow-hidden w-full md:w-[300px] p-2 rounded-lg a-center"
             style={{
               background,
-              scrollBehavior: 'revert'
+              scrollBehavior: 'revert',
             }}
           >
             <motion.div
@@ -150,8 +152,7 @@ const Recents = ({ list = [] }) => {
               onDragEnd={() => setScroll(scrollState.MID)}
             >
               <div className="w-8 h-8 p-2 a-center rounded-lg bg-[#f0fdfa66]">
-                <div className="h-full w-full rounded-full ring-2 ring-white a-center">
-                </div>
+                <div className="h-full w-full rounded-full ring-2 ring-white a-center"></div>
               </div>
             </motion.div>
           </motion.div>

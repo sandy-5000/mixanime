@@ -1,5 +1,5 @@
-import { useEffect, useState, memo } from "react"
-import { IoLogoIonic } from "react-icons/io"
+import { useEffect, useState, memo } from 'react'
+import { IoLogoIonic } from 'react-icons/io'
 
 const Clock = () => {
   const [time, setTime] = useState({ H: '00', M: '00', S: '00' })
@@ -27,8 +27,13 @@ const Clock = () => {
       <span className="a-center">
         <IoLogoIonic className="animate-spin text-lg mr-2 text-slate-200" />
       </span>
-      {time.H}<span className="px-[1px]">:</span>{time.M}
-      <span className="text-sgreen"><span className="px-[1px]">:</span>{time.S}</span>
+      {time.H}
+      <span className="px-[1px]">:</span>
+      {time.M}
+      <span className="text-sgreen">
+        <span className="px-[1px]">:</span>
+        {time.S}
+      </span>
     </p>
   )
 }

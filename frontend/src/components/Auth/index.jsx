@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react"
-import { Context } from "/src/context"
-import backend from "/src/services/backend"
+import { useContext, useEffect } from 'react'
+import { Context } from '/src/context'
+import backend from '/src/services/backend'
 
 const Auth = () => {
   const [user, setUser] = useContext(Context)
@@ -20,7 +20,8 @@ const Auth = () => {
       loading: true,
       data: undefined,
     })
-    backend.post('/api/user/profile', {})
+    backend
+      .post('/api/user/profile', {})
       .then(({ data }) => {
         if (data.error) {
           localStorage.removeItem('token')
@@ -32,7 +33,7 @@ const Auth = () => {
           data,
         })
       })
-      .catch(error => {
+      .catch((error) => {
         localStorage.removeItem('token')
         setUser({
           loggedIn: false,

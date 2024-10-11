@@ -1,3 +1,15 @@
+const ROUTES = {
+  HOME: '/home',
+  RECENT: '/recent',
+  TRENDING: '/trending',
+  DETAILS: '/details',
+  EXPLORE: '/explore',
+  WATCH: '/watch',
+  LOGIN: '/user/login',
+  SIGNUP: '/user/signup',
+  PROFILE: '/user/profile',
+}
+
 const getQueryParams = (object) => {
   const arr = []
   for (let [k, v] of Object.entries(object)) {
@@ -13,7 +25,8 @@ const getQueryParams = (object) => {
 
 const getDate = (x) => {
   let p = new Date(x * 1000)
-  let dateExtention = 'th', date = p.getDate()
+  let dateExtention = 'th',
+    date = p.getDate()
   if (date < 11 || 13 < date) {
     if (date % 10 == 1) {
       dateExtention = 'st'
@@ -23,12 +36,20 @@ const getDate = (x) => {
       dateExtention = 'rd'
     }
   }
-  return date + dateExtention + ' ' + p.toString().slice(4, 7) + ' ' + p.toString().slice(16, 21)
+  return (
+    date +
+    dateExtention +
+    ' ' +
+    p.toString().slice(4, 7) +
+    ' ' +
+    p.toString().slice(16, 21)
+  )
 }
 
 const dateToString = (year, month, day) => {
   let p = new Date(year, month - 1, day)
-  let dateExtention = 'th', date = p.getDate()
+  let dateExtention = 'th',
+    date = p.getDate()
   if (date < 11 || 13 < date) {
     if (date % 10 == 1) {
       dateExtention = 'st'
@@ -38,7 +59,14 @@ const dateToString = (year, month, day) => {
       dateExtention = 'rd'
     }
   }
-  return date + dateExtention + ' ' + p.toString().slice(4, 7) + ', ' + p.getFullYear()
+  return (
+    date +
+    dateExtention +
+    ' ' +
+    p.toString().slice(4, 7) +
+    ', ' +
+    p.getFullYear()
+  )
 }
 
 const truncate = (longString, length) => {
@@ -51,4 +79,4 @@ const truncate = (longString, length) => {
   return longString
 }
 
-export { getQueryParams, getDate, dateToString, truncate }
+export { ROUTES, getQueryParams, getDate, dateToString, truncate }

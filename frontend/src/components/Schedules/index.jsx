@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
-import Anilist from "/src/services/anilist"
-import Container from "./Container"
-import Spinner from "/src/components/Spinner"
-
+import { useEffect, useState } from 'react'
+import Anilist from '/src/services/anilist'
+import Container from './Container'
+import Spinner from '/src/components/Spinner'
 
 const Schedules = () => {
   const shift = -1
@@ -22,21 +21,33 @@ const Schedules = () => {
 
     setHead(current.toString().slice(0, 15))
 
-    const today = new Date(current.getFullYear(), current.getMonth(), current.getDate())
+    const today = new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      current.getDate()
+    )
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
 
     const airingAtGreater = Math.floor(today.getTime() / 1000) - 1
     const airingAtLesser = Math.floor(tomorrow.getTime() / 1000)
 
-    Anilist('schedule', {
-      ...variables,
-      airingAtGreater,
-      airingAtLesser
-    }, (data) => {
-      data = data.filter((x) => x.media.countryOfOrigin != 'CN' && !x.media.genres?.includes('Hentai'))
-      setList(data)
-    })
+    Anilist(
+      'schedule',
+      {
+        ...variables,
+        airingAtGreater,
+        airingAtLesser,
+      },
+      (data) => {
+        data = data.filter(
+          (x) =>
+            x.media.countryOfOrigin != 'CN' &&
+            !x.media.genres?.includes('Hentai')
+        )
+        setList(data)
+      }
+    )
   }
 
   useEffect(() => {

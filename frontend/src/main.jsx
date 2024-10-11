@@ -1,68 +1,64 @@
-import React, { useState } from "react"
-import ReactDOM from "react-dom/client"
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom"
-import "./index.css"
-import Home from "/src/Pages/Home"
-import Recent from "/src/Pages/Recent"
-import Trending from "/src/Pages/Trending"
-import Details from "/src/Pages/Details"
-import Explore from "/src/Pages/Explore"
-import Watch from "/src/Pages/Watch"
-import Error from "/src/Pages/Error"
-import Login from "/src/Pages/Auth/Login"
-import SignUp from "/src/Pages/Auth/SignUp"
-import Profile from "/src/Pages/Auth/Profile"
-import { Context } from "/src/context"
-import { PropTypes } from "prop-types"
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import './index.css'
+import Home from '/src/Pages/Home'
+import Recent from '/src/Pages/Recent'
+import Trending from '/src/Pages/Trending'
+import Details from '/src/Pages/Details'
+import Explore from '/src/Pages/Explore'
+import Watch from '/src/Pages/Watch'
+import Error from '/src/Pages/Error'
+import Login from '/src/Pages/Auth/Login'
+import SignUp from '/src/Pages/Auth/SignUp'
+import Profile from '/src/Pages/Auth/Profile'
+import { Context } from '/src/context'
+import { PropTypes } from 'prop-types'
+import { ROUTES } from '/src/services/untils'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/home" />,
+    element: <Navigate to={ROUTES.HOME} />,
     errorElement: <Error />,
   },
   {
-    path: '/home',
+    path: ROUTES.HOME,
     element: <Home />,
   },
   {
-    path: '/recent',
+    path: ROUTES.RECENT,
     element: <Recent />,
   },
   {
-    path: '/trending',
+    path: ROUTES.TRENDING,
     element: <Trending />,
   },
   {
-    path: '/details',
+    path: ROUTES.DETAILS,
     element: <Details />,
   },
   {
-    path: '/explore',
+    path: ROUTES.EXPLORE,
     element: <Explore />,
   },
   {
-    path: '/watch',
+    path: ROUTES.WATCH,
     element: <Watch />,
   },
   {
-    path: '/login',
+    path: ROUTES.LOGIN,
     element: <Login />,
   },
   {
-    path: '/signup',
+    path: ROUTES.SIGNUP,
     element: <SignUp />,
   },
   {
-    path: '/profile',
+    path: ROUTES.PROFILE,
     element: <Profile />,
   },
 ])
-
 
 // eslint-disable-next-line react-refresh/only-export-components
 const StateProvider = ({ children }) => {
@@ -71,11 +67,7 @@ const StateProvider = ({ children }) => {
     loading: true,
     data: undefined,
   })
-  return (
-    <Context.Provider value={[user, setUser]}>
-      {children}
-    </Context.Provider>
-  )
+  return <Context.Provider value={[user, setUser]}>{children}</Context.Provider>
 }
 
 StateProvider.propTypes = {
@@ -87,5 +79,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <StateProvider>
       <RouterProvider router={router} />
     </StateProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

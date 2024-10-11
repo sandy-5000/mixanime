@@ -1,13 +1,13 @@
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
-import { VscMenu } from "react-icons/vsc"
-import { LuNewspaper } from "react-icons/lu"
-import { TbBrandGoogleAnalytics } from "react-icons/tb"
-import { TbDatabaseSearch } from "react-icons/tb"
-import { PiUserCircleDuotone } from "react-icons/pi"
-import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { VscMenu } from 'react-icons/vsc'
+import { LuNewspaper } from 'react-icons/lu'
+import { TbBrandGoogleAnalytics } from 'react-icons/tb'
+import { TbDatabaseSearch } from 'react-icons/tb'
+import { PiUserCircleDuotone } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const NavBar = () => {
   const scale = {
@@ -30,13 +30,14 @@ const NavBar = () => {
   }, [])
 
   return (
-    <motion.div className="fixed z-[5]"
+    <motion.div
+      className="fixed z-[5]"
       style={{
         bottom: 10,
-        left: 'calc(50vw - 150px)'
+        left: 'calc(50vw - 150px)',
       }}
       animate={{
-        y: yShift
+        y: yShift,
       }}
     >
       <div className="relative w-[300px] h-[50px] p-2 rounded-lg bg-[#f3f4f6dd]">
@@ -50,15 +51,15 @@ const NavBar = () => {
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: scale.hover
+              scale: scale.hover,
             }}
             whileTap={{
-              scale: scale.tap
+              scale: scale.tap,
             }}
           >
             <Link
               to={{
-                pathname: '/recent',
+                pathname: ROUTES.RECENT,
                 search: getQueryParams({ page: 1 }),
               }}
             >
@@ -68,15 +69,15 @@ const NavBar = () => {
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: scale.hover
+              scale: scale.hover,
             }}
             whileTap={{
-              scale: scale.tap
+              scale: scale.tap,
             }}
           >
             <Link
               to={{
-                pathname: '/trending',
+                pathname: ROUTES.TRENDING,
                 search: getQueryParams({ page: 1 }),
               }}
             >
@@ -86,33 +87,35 @@ const NavBar = () => {
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: scale.hover
+              scale: scale.hover,
             }}
             whileTap={{
-              scale: scale.tap
+              scale: scale.tap,
             }}
           >
             <Link
               to={{
-                pathname: "/explore",
+                pathname: ROUTES.EXPLORE,
                 search: getQueryParams({ page: 1 }),
-              }}>
+              }}
+            >
               <TbDatabaseSearch className="text-2xl text-gray-950" />
             </Link>
           </motion.div>
           <motion.div
             className="a-center cursor-pointer"
             whileHover={{
-              scale: scale.hover
+              scale: scale.hover,
             }}
             whileTap={{
-              scale: scale.tap
+              scale: scale.tap,
             }}
           >
             <Link
               to={{
-                pathname: "/profile",
-              }}>
+                pathname: ROUTES.PROFILE,
+              }}
+            >
               <PiUserCircleDuotone className="text-2xl text-gray-950" />
             </Link>
           </motion.div>

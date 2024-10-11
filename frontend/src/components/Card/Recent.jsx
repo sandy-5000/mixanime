@@ -1,8 +1,9 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
-import { getQueryParams, getDate } from "/src/services/untils"
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { getQueryParams, getDate } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const MAX_TITLE_SIZE = 25
 
@@ -35,8 +36,8 @@ const Recent = ({ data = {} }) => {
     >
       <Link
         to={{
-          pathname: '/watch',
-          search: getQueryParams({ id, name, episode })
+          pathname: ROUTES.WATCH,
+          search: getQueryParams({ id, name, episode }),
         }}
       >
         <div className="p-1 glass glass-hard w-full h-full">
@@ -46,12 +47,12 @@ const Recent = ({ data = {} }) => {
               backgroundImage: `url(${backgound})`,
             }}
           >
-            <div
-              className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[12px] md:text-[15px] font-[550]">
-              {format}</div>
-            <div
-              className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 py-[2px] text-[12px] md:text-[15px] font-[550]">
-              {duration}</div>
+            <div className="rounded-sm bg-[#5de4b5] absolute top-2 left-2 bg-opacity-80 px-2 text-[12px] md:text-[15px] font-[550]">
+              {format}
+            </div>
+            <div className="rounded-sm absolute bottom-2 right-2 bg-black bg-opacity-60 text-slate-200 px-2 py-[2px] text-[12px] md:text-[15px] font-[550]">
+              {duration}
+            </div>
           </div>
           <h1 className="text-[11px] md:text-[12px] pt-2 flex justify-between text-gray-100">
             <span>Episode:</span>

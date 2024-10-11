@@ -1,9 +1,9 @@
-import MainLayout from "/src/layouts/MainLayout"
-import { useLocation } from "react-router-dom"
-import Anilist from "/src/services/anilist"
-import { useEffect, useState } from "react"
-import Spinner from "/src/components/Spinner"
-import Container from "./Container"
+import MainLayout from '/src/layouts/MainLayout'
+import { useLocation } from 'react-router-dom'
+import Anilist from '/src/services/anilist'
+import { useEffect, useState } from 'react'
+import Spinner from '/src/components/Spinner'
+import Container from './Container'
 
 const Watch = () => {
   const [data, setData] = useState(null)
@@ -15,7 +15,7 @@ const Watch = () => {
     Anilist('watch', { id }, (data) => {
       setData(data)
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (!data) {

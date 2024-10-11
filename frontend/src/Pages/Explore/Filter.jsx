@@ -1,11 +1,10 @@
-import { PropTypes } from "prop-types"
-import Button from "/src/components/Button"
-import { motion } from "framer-motion"
-import { VscClose } from "react-icons/vsc"
-import { LuSearch } from "react-icons/lu"
-import Select from "./Select"
-import { useState } from "react"
-
+import { PropTypes } from 'prop-types'
+import Button from '/src/components/Button'
+import { motion } from 'framer-motion'
+import { VscClose } from 'react-icons/vsc'
+import { LuSearch } from 'react-icons/lu'
+import Select from './Select'
+import { useState } from 'react'
 
 const Filter = ({ filter, setFilter, defaultFilter, close }) => {
   const year = new Date().getFullYear()
@@ -18,8 +17,24 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
     }
   }
   const genres = [
-    'Action', 'Adventure', 'Comedy', 'Drama', 'Ecchi', 'Fantasy', 'Horror', 'Mahou Shoujo', 'Mecha', 'Music',
-    'Mystery', 'Psychological', 'Romance', 'Sci-Fi', 'Slice Of Life', 'Sports', 'Supernatural', 'Thriller'
+    'Action',
+    'Adventure',
+    'Comedy',
+    'Drama',
+    'Ecchi',
+    'Fantasy',
+    'Horror',
+    'Mahou Shoujo',
+    'Mecha',
+    'Music',
+    'Mystery',
+    'Psychological',
+    'Romance',
+    'Sci-Fi',
+    'Slice Of Life',
+    'Sports',
+    'Supernatural',
+    'Thriller',
   ]
 
   const [state, setState] = useState(filter)
@@ -82,10 +97,7 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
     >
       <div className="absolute top-0 right-0 h-[88vh] filter-width z-[5]">
         <div className="flex justify-end px-5 pt-5">
-          <Button
-            btnType="icon"
-            onClick={() => close()}
-          >
+          <Button btnType="icon" onClick={() => close()}>
             <VscClose className="text-xl" />
           </Button>
         </div>
@@ -102,13 +114,11 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
                   <LuSearch className="text-gray-400" />
                 </div>
                 <div className="absolute h-8 right-0 px-3 a-center">
-                  {
-                    state.name && state.name.length > 0 && <button
-                      onClick={clearText}
-                    >
+                  {state.name && state.name.length > 0 && (
+                    <button onClick={clearText}>
                       <VscClose className="text-gray-200" />
                     </button>
-                  }
+                  )}
                 </div>
                 <input
                   type="text"
@@ -170,19 +180,23 @@ const Filter = ({ filter, setFilter, defaultFilter, close }) => {
               </div>
             </div>
             <div className="flex flex-wrap justify-around w-[310px] mt-2">
-              {
-                genres.map((genre, index) => (
-                  <span className="w-5/12 py-1" key={`genre-${index}`}>
-                    <label className="checkbox">
-                      <span
-                        className="checkbox__label text-gray-200 text-xs font-normal tracking-wider"
-                      >{genre}</span>
-                      <input type="checkbox" checked={state.genres[genre]} value={genre} onChange={handleCheck} name="genre" />
-                      <div className="checkbox__indicator"></div>
-                    </label>
-                  </span>
-                ))
-              }
+              {genres.map((genre, index) => (
+                <span className="w-5/12 py-1" key={`genre-${index}`}>
+                  <label className="checkbox">
+                    <span className="checkbox__label text-gray-200 text-xs font-normal tracking-wider">
+                      {genre}
+                    </span>
+                    <input
+                      type="checkbox"
+                      checked={state.genres[genre]}
+                      value={genre}
+                      onChange={handleCheck}
+                      name="genre"
+                    />
+                    <div className="checkbox__indicator"></div>
+                  </label>
+                </span>
+              ))}
             </div>
             <div className="flex justify-between w-[310px]">
               <div className="px-1 mt-3 w-1/2">

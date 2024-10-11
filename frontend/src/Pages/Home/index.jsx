@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import MainLayout from "/src/layouts/MainLayout"
-import Anilist from "/src/services/anilist"
-import Carousel from "/src/components/Carousel"
-import Recents from "/src/components/Recents"
-import Trending from "/src/components/Trending"
-import Schedules from "/src/components/Schedules"
+import { useEffect, useState } from 'react'
+import MainLayout from '/src/layouts/MainLayout'
+import Anilist from '/src/services/anilist'
+import Carousel from '/src/components/Carousel'
+import Recents from '/src/components/Recents'
+import Trending from '/src/components/Trending'
+import Schedules from '/src/components/Schedules'
 
 const variables = {
   carousel: {
@@ -18,7 +18,7 @@ const variables = {
   season: {
     page: 1,
     perPage: 12,
-  }
+  },
 }
 
 const seasons = ['WINTER', 'SPRING', 'SUMMER', 'FALL']

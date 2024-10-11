@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
-import MainLayout from "/src/layouts/MainLayout"
-import Anilist from "/src/services/anilist"
-import Spinner from "/src/components/Spinner"
-import { LuNewspaper } from "react-icons/lu"
-import Card from "/src/components/Card"
-import { useNavigate, useLocation } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-import PageButtons from "/src/components/PageButtons"
+import { useEffect, useState } from 'react'
+import MainLayout from '/src/layouts/MainLayout'
+import Anilist from '/src/services/anilist'
+import Spinner from '/src/components/Spinner'
+import { LuNewspaper } from 'react-icons/lu'
+import Card from '/src/components/Card'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import PageButtons from '/src/components/PageButtons'
+import { ROUTES } from '/src/services/untils'
 
 const Recent = () => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const Recent = () => {
     }
     setList(null)
     if (flag) {
-      navigate('/recent' + getQueryParams({ page: value }))
+      navigate(ROUTES.RECENT + getQueryParams({ page: value }))
       query.set('page', value)
     }
     setVariables({ ...variables, page: value })
@@ -64,7 +65,9 @@ const Recent = () => {
               <LuNewspaper className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
-              <h1 className="text-slate-200 text-sm side-heading">Recently <span className="text-sgreen">Released</span></h1>
+              <h1 className="text-slate-200 text-sm side-heading">
+                Recently <span className="text-sgreen">Released</span>
+              </h1>
             </div>
           </div>
           <div className="mt-8 md:mt-0">
@@ -76,15 +79,9 @@ const Recent = () => {
           </div>
         </div>
         <div className="flex flex-wrap">
-          {
-            list.map((data, index) => {
-              return <Card
-                type="recent"
-                key={'rcard-' + index}
-                data={data}
-              />
-            })
-          }
+          {list.map((data, index) => {
+            return <Card type="recent" key={'rcard-' + index} data={data} />
+          })}
         </div>
         <div className="mt-8">
           <PageButtons

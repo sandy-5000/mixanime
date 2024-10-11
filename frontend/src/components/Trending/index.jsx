@@ -1,13 +1,13 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { VscDebugLineByLine } from "react-icons/vsc"
-import { TbBrandGoogleAnalytics } from "react-icons/tb"
-import Button from "/src/components/Button"
-import Card from "/src/components/Card"
-import Spinner from "/src/components/Spinner"
-import { Link } from "react-router-dom"
-import { getQueryParams } from "/src/services/untils"
-
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { VscDebugLineByLine } from 'react-icons/vsc'
+import { TbBrandGoogleAnalytics } from 'react-icons/tb'
+import Button from '/src/components/Button'
+import Card from '/src/components/Card'
+import Spinner from '/src/components/Spinner'
+import { Link } from 'react-router-dom'
+import { getQueryParams } from '/src/services/untils'
+import { ROUTES } from '/src/services/untils'
 
 const Trending = ({ list = [], season }) => {
   if (!list || list.length === 0) {
@@ -28,13 +28,17 @@ const Trending = ({ list = [], season }) => {
               <TbBrandGoogleAnalytics className="text-sgreen text-[22px] mr-2" />
             </div>
             <div className="a-center font-semibold">
-              <h1 className="text-slate-200 text-sm side-heading">This year <span className="text-sgreen">{season} RELEASES</span></h1>
+              <h1 className="text-slate-200 text-sm side-heading">
+                This year <span className="text-sgreen">{season} RELEASES</span>
+              </h1>
             </div>
           </div>
-          <Link to={{
-            pathname: '/trending',
-            search: getQueryParams({ page: 1 })
-          }}>
+          <Link
+            to={{
+              pathname: ROUTES.TRENDING,
+              search: getQueryParams({ page: 1 }),
+            }}
+          >
             <Button
               style={{
                 height: 30,
@@ -58,11 +62,16 @@ const Trending = ({ list = [], season }) => {
           </Link>
         </div>
         <div className="season-container mt-3 w-full flex flex-wrap relative">
-          {
-            list.map((data, index) => {
-              return <Card type="season" key={'scard-' + index} index={index} data={data} />
-            })
-          }
+          {list.map((data, index) => {
+            return (
+              <Card
+                type="season"
+                key={'scard-' + index}
+                index={index}
+                data={data}
+              />
+            )
+          })}
         </div>
       </div>
     </div>

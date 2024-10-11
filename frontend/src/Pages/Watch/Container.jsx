@@ -1,28 +1,33 @@
-import { PropTypes } from "prop-types"
-import Video from "./Video"
-import Info from "./Info"
-import { useNavigate, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { getQueryParams } from "/src/services/untils"
-import backend from "/src/services/backend"
-import scrapper from "/src/services/scraper"
+import { PropTypes } from 'prop-types'
+import Video from './Video'
+import Info from './Info'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getQueryParams } from '/src/services/untils'
+import backend from '/src/services/backend'
+import scrapper from '/src/services/scraper'
+import { ROUTES } from '/src/services/untils'
 
 const getEpisode = ({ id, episode, romaji, callback }) => {
-  romaji = romaji?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-') || ''
+  romaji =
+    romaji
+      ?.trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-') || ''
   backend
     .get(`/api/anime/${id}/${episode}/${romaji}`, {})
     .then(({ data }) => {
       if (!data) {
         callback({
-          "link": null,
-          "status": 200
+          link: null,
+          status: 200,
         })
         return
       }
       if (data.linkURL?.link) {
         callback({
           link: data.linkURL.link,
-          status: data.linkURL.status || 200
+          status: data.linkURL.status || 200,
         })
         return
       }
@@ -34,21 +39,21 @@ const getEpisode = ({ id, episode, romaji, callback }) => {
       scrapper.scrape(uuid, (urlData) => {
         if (!urlData.link) {
           callback({
-            "link": null,
-            "status": 200
+            link: null,
+            status: 200,
           })
           return
         }
         callback({
-          "link": urlData.link,
-          "status": 200
+          link: urlData.link,
+          status: 200,
         })
       })
     })
     .catch(() => {
       callback({
-        "link": null,
-        "status": 200
+        link: null,
+        status: 200,
       })
     })
 }
@@ -64,13 +69,13 @@ const Container = ({ data }) => {
   const id = data.id
   const romaji = data.title.romaji
   const airedUpTo = data?.nextAiringEpisode?.episode
-    ? (data?.nextAiringEpisode?.episode - 1)
-    : (data?.episodes || 1)
+    ? data?.nextAiringEpisode?.episode - 1
+    : data?.episodes || 1
 
   const setCurrentEpisode = (value, flag = true) => {
     if (0 < value && value <= airedUpTo) {
       if (flag) {
-        navigate('/watch' + getQueryParams({ name, id, episode: value }))
+        navigate(ROUTES.WATCH + getQueryParams({ name, id, episode: value }))
       }
       setEpisode(value)
     }
@@ -79,10 +84,12 @@ const Container = ({ data }) => {
   useEffect(() => {
     setLink(null)
     getEpisode({
-      id, episode, romaji,
+      id,
+      episode,
+      romaji,
       callback: (response) => {
         setLink(response)
-      }
+      },
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [episode])
@@ -109,7 +116,7 @@ const Container = ({ data }) => {
     return () => {
       removeEventListener('keydown', handleKeyBinding)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [episode])
 
   return (
@@ -143,7 +150,8 @@ const Container = ({ data }) => {
             >
               <span className="px-1">:</span> {romaji}
             </p>
-            <p className="pr-3 text-gray-200 text-gap-2 uppercase"
+            <p
+              className="pr-3 text-gray-200 text-gap-2 uppercase"
               style={{
                 fontSize: 10,
               }}
@@ -167,7 +175,7 @@ const Container = ({ data }) => {
 }
 
 Container.propTypes = {
-  data: PropTypes.any
+  data: PropTypes.any,
 }
 
 export default Container

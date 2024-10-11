@@ -1,21 +1,21 @@
-import { PropTypes } from "prop-types"
-import Button from "/src/components/Button"
-import { HiOutlineChevronUpDown } from "react-icons/hi2"
-import { useState } from "react"
+import { PropTypes } from 'prop-types'
+import Button from '/src/components/Button'
+import { HiOutlineChevronUpDown } from 'react-icons/hi2'
+import { useState } from 'react'
 
 const weekday = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
 ]
 
 const Options = ({ index, setIndex }) => {
   const options = ['Yesterday', 'Today', 'Tomorrow', 2, 3, 4, 5].map((x) => {
-    if (typeof (x) === 'number') {
+    if (typeof x === 'number') {
       const current = new Date()
       current.setDate(current.getDate() + x)
       return weekday[current.getDay()]
@@ -52,21 +52,21 @@ const Options = ({ index, setIndex }) => {
           </div>
         </div>
       </Button>
-      {
-        show && <div className="absolute z-[3] right-0 top-full pt-2">
+      {show && (
+        <div className="absolute z-[3] right-0 top-full pt-2">
           <div className="py-3 rounded-lg text-gray-900 bg-[#e5e7ebdd] flex flex-col">
-            {
-              options.map((x, index) => (
-                <div
-                  key={'option-' + index}
-                  onClick={() => handleSelect(index)}
-                  className="cursor-pointer py-2 px-5 text-sm hover:bg-[#111827dd] hover:text-gray-200 w-[150px]"
-                >{x}</div>
-              ))
-            }
+            {options.map((x, index) => (
+              <div
+                key={'option-' + index}
+                onClick={() => handleSelect(index)}
+                className="cursor-pointer py-2 px-5 text-sm hover:bg-[#111827dd] hover:text-gray-200 w-[150px]"
+              >
+                {x}
+              </div>
+            ))}
           </div>
         </div>
-      }
+      )}
     </div>
   )
 }

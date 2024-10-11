@@ -1,9 +1,9 @@
-import { PropTypes } from "prop-types"
-import Find from "./Find"
-import Recent from "./Recent"
-import Season from "./Season"
-import Schedule from "./Schedule"
-import Item from "./Item"
+import { PropTypes } from 'prop-types'
+import Find from './Find'
+import Recent from './Recent'
+import Season from './Season'
+import Schedule from './Schedule'
+import Item from './Item'
 
 const Card = ({ type, data = {}, index = 0, closeButton }) => {
   switch (type) {

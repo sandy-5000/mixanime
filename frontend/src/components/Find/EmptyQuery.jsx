@@ -1,6 +1,6 @@
-import { memo } from "react"
-import Lottie from "react-lottie"
-import GirlFlyingAnimation from "/src/assets/animations/girl_flying.json"
+import { memo } from 'react'
+import Lottie from 'react-lottie'
+import GirlFlyingAnimation from '/src/assets/animations/girl_flying.json'
 
 const EmptyQuery = () => {
   const options = {
@@ -8,8 +8,8 @@ const EmptyQuery = () => {
     autoplay: true,
     animationData: GirlFlyingAnimation,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
+      preserveAspectRatio: 'xMidYMid slice',
+    },
   }
   return (
     <div style={{ height: 'calc(100vh - 150px)' }} className="a-center">

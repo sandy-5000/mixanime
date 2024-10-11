@@ -1,10 +1,10 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import { getDate, truncate, getQueryParams } from "/src/services/untils"
-import { HiCalendarDays } from "react-icons/hi2"
-import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
-
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import { getDate, truncate, getQueryParams } from '/src/services/untils'
+import { HiCalendarDays } from 'react-icons/hi2'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ROUTES } from '/src/services/untils'
 
 const Schedule = ({ data }) => {
   const id = data.media.id
@@ -17,17 +17,17 @@ const Schedule = ({ data }) => {
   const episode = data.episode
 
   return (
-    <div className="relative py-5 mb-6 sm:mb-0" >
-      <div className="cursor-pointer min-w-[300px] flex items-center" >
-        <div
-          className="z-10 flex items-center justify-center w-6 h-6 rounded-full ring-[5px] bg-sgreen ring-[#ffffff44] shrink-0">
+    <div className="relative py-5 mb-6 sm:mb-0">
+      <div className="cursor-pointer min-w-[300px] flex items-center">
+        <div className="z-10 flex items-center justify-center w-6 h-6 rounded-full ring-[5px] bg-sgreen ring-[#ffffff44] shrink-0">
           <HiCalendarDays className="text-md" />
         </div>
         <div className="w-full h-[3px] bg-[#ffffff44] mx-[5px]"></div>
-      </div >
+      </div>
       <div className="mt-3 h-fit pr-8">
         <h3 className="text-sm truncate cursor-pointer font-semibold text-slate-200 pb-1">
-          {truncate(title, 40)}</h3>
+          {truncate(title, 40)}
+        </h3>
         <time className="block mb-2 text-[13px] font-normal leading-none text-slate-300 pb-2">
           Releases on <span className="text-sgreen">{date}</span>
         </time>
@@ -39,8 +39,8 @@ const Schedule = ({ data }) => {
           >
             <Link
               to={{
-                pathname: '/details',
-                search: getQueryParams({ id })
+                pathname: ROUTES.DETAILS,
+                search: getQueryParams({ id }),
               }}
             >
               <img
@@ -65,9 +65,12 @@ const Schedule = ({ data }) => {
             </span>
           </div>
         </div>
-        <p className="text-xs font-normal text-slate-300"
+        <p
+          className="text-xs font-normal text-slate-300"
           type="desc"
-          dangerouslySetInnerHTML={{ __html: truncate(data.media.description, 200) }}
+          dangerouslySetInnerHTML={{
+            __html: truncate(data.media.description, 200),
+          }}
         ></p>
       </div>
     </div>
@@ -75,7 +78,7 @@ const Schedule = ({ data }) => {
 }
 
 Schedule.propTypes = {
-  data: PropTypes.any
+  data: PropTypes.any,
 }
 
 const MemoSchedule = memo(Schedule)

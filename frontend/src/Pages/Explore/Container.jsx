@@ -1,10 +1,9 @@
-import { memo } from "react"
-import { PropTypes } from "prop-types"
-import PageButtons from "/src/components/PageButtons"
-import Card from "/src/components/Card"
-import { VscFilter } from "react-icons/vsc"
-import { TbDatabaseSearch } from "react-icons/tb"
-
+import { memo } from 'react'
+import { PropTypes } from 'prop-types'
+import PageButtons from '/src/components/PageButtons'
+import Card from '/src/components/Card'
+import { VscFilter } from 'react-icons/vsc'
+import { TbDatabaseSearch } from 'react-icons/tb'
 
 const Container = ({ page, setPage, list, setShow }) => {
   return (
@@ -16,10 +15,15 @@ const Container = ({ page, setPage, list, setShow }) => {
             <TbDatabaseSearch className="text-sgreen text-[22px] mr-2" />
           </div>
           <div className="a-center font-semibold">
-            <h1 className="text-slate-200 text-sm side-heading">Search <span className="text-sgreen">Results</span></h1>
+            <h1 className="text-slate-200 text-sm side-heading">
+              Search <span className="text-sgreen">Results</span>
+            </h1>
           </div>
           <div className="a-center cursor-pointer">
-            <VscFilter className="text-sgreen text-[22px] ml-4" onClick={() => setShow(true)} />
+            <VscFilter
+              className="text-sgreen text-[22px] ml-4"
+              onClick={() => setShow(true)}
+            />
           </div>
         </div>
         <div className="mt-8 md:mt-0">
@@ -31,25 +35,24 @@ const Container = ({ page, setPage, list, setShow }) => {
         </div>
       </div>
       <div className="flex flex-wrap">
-        {
-          list.length && list.map((data, index) => {
-            return <Card
-              type="season"
-              index={index}
-              key={'rcard-' + index}
-              data={data}
-            />
-          })
-        }
-        {
-          list.length === 0 && (
-            <div className="xl:container mx-auto">
-              <div className="lg:m-10 m-3 h-[70vh] a-center">
-                <p className="text-gray-200">Nothing Avaliable!</p>
-              </div>
+        {list.length &&
+          list.map((data, index) => {
+            return (
+              <Card
+                type="season"
+                index={index}
+                key={'rcard-' + index}
+                data={data}
+              />
+            )
+          })}
+        {list.length === 0 && (
+          <div className="xl:container mx-auto">
+            <div className="lg:m-10 m-3 h-[70vh] a-center">
+              <p className="text-gray-200">Nothing Avaliable!</p>
             </div>
-          )
-        }
+          </div>
+        )}
       </div>
       <div className="mt-8">
         <PageButtons
