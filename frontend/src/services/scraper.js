@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { load } from 'cheerio'
 
+const source = 's3embtaku.pro'
+
 class Scrapper {
   constructor() {}
 
   scrape(id, callback) {
     try {
-      const url = 'https://s3taku.com/videos/' + id
+      const url = `https://${source}/videos/${id}`
       const linkURL = localStorage.getItem(id)
       if (linkURL) {
         callback(JSON.parse(linkURL))
