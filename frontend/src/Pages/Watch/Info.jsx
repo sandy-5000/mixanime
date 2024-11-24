@@ -4,13 +4,16 @@ import Button from '/src/components/Button'
 import { Link } from 'react-router-dom'
 import { TbListDetails } from 'react-icons/tb'
 import Episodes from './Episodes'
-import { ROUTES } from '/src/services/untils'
+import { ROUTES, getAiredUpTo } from '/src/services/untils'
 
 const Info = ({ data, setEpisode }) => {
   const totalEpisodes = data?.episodes || '?'
-  const currentEpisode = data.nextAiringEpisode?.episode
-    ? data.nextAiringEpisode?.episode - 1
-    : data?.episodes || '?'
+  const currentEpisode = getAiredUpTo(
+    data.id,
+    data?.nextAiringEpisode?.episode
+      ? data?.nextAiringEpisode?.episode - 1
+      : data?.episodes || 1
+  )
 
   return (
     <div className="m-5 lg:m-8 block md:flex">

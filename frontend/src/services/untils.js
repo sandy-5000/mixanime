@@ -80,4 +80,11 @@ const truncate = (longString, length) => {
   return longString
 }
 
-export { ROUTES, getQueryParams, getDate, dateToString, truncate }
+const getAiredUpTo = (id, value) => {
+  const airedUpTo = {
+    21: 1122,
+  }
+  return Math.max(airedUpTo[id] || 1, value)
+}
+
+export { ROUTES, getQueryParams, getDate, dateToString, truncate, getAiredUpTo }
