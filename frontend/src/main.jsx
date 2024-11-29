@@ -12,7 +12,7 @@ import Error from '/src/Pages/Error'
 import Login from '/src/Pages/Auth/Login'
 import SignUp from '/src/Pages/Auth/SignUp'
 import Profile from '/src/Pages/Auth/Profile'
-import Dev from '/src/Pages/_Dev'
+import UnderScore from '/src/Pages/_____'
 import { Context } from '/src/context'
 import { PropTypes } from 'prop-types'
 import { ROUTES } from '/src/services/untils'
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.DEVELOPER,
-    element: <Dev />,
+    element: <UnderScore />,
   },
 ])
 

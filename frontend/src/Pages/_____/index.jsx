@@ -1,7 +1,7 @@
 import MainLayout from '/src/layouts/MainLayout'
 import { VscGithub } from 'react-icons/vsc'
 
-const Error = () => {
+const UnderScore = () => {
   return (
     <MainLayout>
       <div className="h-[80vh] a-center">
@@ -34,4 +34,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default UnderScore

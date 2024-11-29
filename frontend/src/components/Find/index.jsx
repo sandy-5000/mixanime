@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types'
 import Button from '/src/components/Button'
 import { VscClose } from 'react-icons/vsc'
 import { LuSearch } from 'react-icons/lu'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Anilist from '/src/services/anilist.js'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
@@ -37,6 +37,16 @@ const Find = ({ toggleFind: closeButton }) => {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState(null)
+
+  const queryInputRef = useRef(null)
+
+  useEffect(() => {
+    queryInputRef.current?.focus()
+    const timeout = setTimeout(() => {
+      setQuery('')
+    }, 0)
+    return () => clearTimeout(timeout)
+  }, [])
 
   const handleQueryChange = (e) => {
     const value = e.target.value || ''
@@ -82,10 +92,11 @@ const Find = ({ toggleFind: closeButton }) => {
             <input
               type="text"
               value={query}
+              ref={queryInputRef}
               onChange={handleQueryChange}
               className="h-8 w-[250px] md:w-[300px] bg-transparent py-2 px-8 text-gray-200
               rounded-3xl ring-2 ring-teal-900 focus:ring-2 focus:ring-teal-600
-              uppercase tracking-wide text-xs"
+              tracking-wide text-xs"
               placeholder="Search..."
             />
           </motion.div>

@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types'
 import { VscEye, VscEyeClosed, VscSignIn, VscClose } from 'react-icons/vsc'
 import Button from '/src/components/Button'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { MdAlternateEmail } from 'react-icons/md'
 import { FaShieldAlt } from 'react-icons/fa'
 import Logo from '/src/components/Logo'
@@ -21,6 +21,8 @@ const Container = ({ modal, close }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [user, setUser] = useContext(Context)
+
+  const emailInputRef = useRef(null)
 
   useEffect(() => {
     if (user.loggedIn) {
@@ -44,6 +46,10 @@ const Container = ({ modal, close }) => {
       clearTimeout(interval)
     }
   }, [error])
+
+  useEffect(() => {
+    emailInputRef.current?.focus()
+  }, [])
 
   const handleEmail = (event) => {
     setEmail(event.target.value)
@@ -116,6 +122,7 @@ const Container = ({ modal, close }) => {
               type="email"
               value={email}
               name="email"
+              ref={emailInputRef}
               onChange={handleEmail}
               className="h-8 w-[270px] bg-transparent py-2 px-10 text-gray-200
                   rounded-lg ring-2 ring-teal-400 focus:ring-2 focus:ring-teal-300

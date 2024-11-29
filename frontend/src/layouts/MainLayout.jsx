@@ -1,20 +1,70 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { PropTypes } from 'prop-types'
 import { VscSignIn, VscSignOut } from 'react-icons/vsc'
 import Auth from '/src/components/Auth'
 import Logo from '/src/components/Logo'
 import Button from '/src/components/Button'
 import wall from '/src/assets/images/pic_1.jpg'
-import Find from '/src/components/Find'
+// import Find from '/src/components/Find'
+import FindAnime from '/src/components/FindAnime'
 import Footer from '/src/components/Footer'
 import NavBar from '/src/components/NavBar'
 import Login from '/src/components/Login/Modal'
 import { Context } from '/src/context'
+import { useNavigate, useLocation } from 'react-router'
+import { ROUTES, getQueryParams } from '/src/services/untils'
 
 const MainLayout = ({ children }) => {
   const [user, setUser] = useContext(Context)
-  const [find, setFind] = useState(false)
-  const [modal, setModal] = useState(false)
+  const [findModal, setFindModal] = useState(false)
+  const [loginModal, setLoginModal] = useState(false)
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const query = new URLSearchParams(location.search)
+
+  useEffect(() => {
+    const handleKeyBinding = (event) => {
+      if (event.ctrlKey) {
+        switch (event.key) {
+          case 'l':
+            event.preventDefault()
+            setLoginModal(true)
+            break
+        }
+      } else if (event.shiftKey) {
+        switch (event.key) {
+          case 'H':
+            if (location.pathname !== ROUTES.HOME) {
+              navigate(ROUTES.HOME)
+            }
+            break
+          case 'D':
+            if (location.pathname === ROUTES.WATCH) {
+              navigate(ROUTES.DETAILS + getQueryParams({ id: query.get('id') }))
+            }
+            break
+        }
+      } else {
+        switch (event.key) {
+          case '/':
+            if (location.pathname !== ROUTES.WATCH) {
+              setFindModal(true)
+            }
+            break
+          case 'Escape':
+            setLoginModal(false)
+            setFindModal(false)
+            break
+        }
+      }
+    }
+    addEventListener('keydown', handleKeyBinding)
+    return () => {
+      removeEventListener('keydown', handleKeyBinding)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, navigate])
 
   const handleAuth = () => {
     if (user.loggedIn) {
@@ -30,32 +80,35 @@ const MainLayout = ({ children }) => {
   }
 
   const getBlur = () => {
-    return find
+    return loginModal || findModal
   }
   const getOpacity = () => {
-    return modal
+    return loginModal || findModal
   }
   const toggleFind = () => {
-    setFind(!find)
+    setFindModal(!findModal)
   }
   const openModal = () => {
-    setModal(true)
+    setLoginModal(true)
   }
   const closeModal = () => {
-    setModal(false)
+    setLoginModal(false)
   }
 
   return (
     <div className="relative">
-      {find && (
+      {/* {findModal && (
         <div className="z-[5] fixed h-screen w-screen">
           <Find toggleFind={toggleFind} />
         </div>
-      )}
-      {modal && (
+      )} */}
+      {loginModal && (
         <div className="z-[5] fixed h-screen w-screen">
           <Login close={closeModal} />
         </div>
+      )}
+      {findModal && (
+        <FindAnime close={!findModal} closeButton={() => setFindModal(false)} />
       )}
       <Auth />
       <header

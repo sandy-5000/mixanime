@@ -144,7 +144,7 @@ const Container = ({ data }) => {
 
   const handleEpisodeSubmit = () => {
     setShowModal(false)
-    setEpisode(episodeToFind)
+    setCurrentEpisode(episodeToFind)
     setEpisodeToFind('')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

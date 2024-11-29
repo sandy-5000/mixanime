@@ -5,7 +5,7 @@ import Button from '/src/components/Button'
 import { VscClose } from 'react-icons/vsc'
 import Logo from '/src/components/Logo'
 
-const Modal = ({ children, close, closeModal }) => {
+const Modal = ({ children, close, closeModal, style }) => {
   if (close) {
     return null
   }
@@ -17,6 +17,7 @@ const Modal = ({ children, close, closeModal }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.1 }}
         className="glass"
+        style={style || {}}
       >
         <div className="h-[60px] flex justify-between p-5 pt-8">
           <Logo />
@@ -38,6 +39,7 @@ Modal.propTypes = {
   close: PropTypes.bool,
   submitCallback: PropTypes.any,
   closeModal: PropTypes.any,
+  style: PropTypes.any,
 }
 
 export default Modal
