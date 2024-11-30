@@ -57,13 +57,14 @@ const FindAnime = ({ close = true, closeButton }) => {
       close={close}
       closeModal={closeButton}
       style={{
-        background: '#02061788',
-        border: '3px solid #02061799',
+        marginTop: -100,
+        background: '#042f2e44',
+        border: '3px solid #042f2e',
       }}
     >
-      <div className="">
-        <div className="px-3">
-          <div className="relative w-full">
+      <div>
+        <div className="px-3 a-center w-full">
+          <div className="relative">
             <div className="absolute h-10 left-0 px-3 a-center">
               <BiSearchAlt className="text-gray-400 text-lg" />
             </div>

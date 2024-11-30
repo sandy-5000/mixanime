@@ -5,7 +5,7 @@ import Auth from '/src/components/Auth'
 import Logo from '/src/components/Logo'
 import Button from '/src/components/Button'
 import wall from '/src/assets/images/pic_1.jpg'
-// import Find from '/src/components/Find'
+import Find from '/src/components/Find'
 import FindAnime from '/src/components/FindAnime'
 import Footer from '/src/components/Footer'
 import NavBar from '/src/components/NavBar'
@@ -95,21 +95,28 @@ const MainLayout = ({ children }) => {
     setLoginModal(false)
   }
 
+  const getFindModal = () => {
+    if (!findModal) {
+      return null
+    }
+    const newType = true
+    return newType ? (
+      <FindAnime close={!findModal} closeButton={() => setFindModal(false)} />
+    ) : (
+      <div className="z-[5] fixed h-screen w-screen">
+        <Find toggleFind={toggleFind} />
+      </div>
+    )
+  }
+
   return (
     <div className="relative">
-      {/* {findModal && (
-        <div className="z-[5] fixed h-screen w-screen">
-          <Find toggleFind={toggleFind} />
-        </div>
-      )} */}
       {loginModal && (
         <div className="z-[5] fixed h-screen w-screen">
           <Login close={closeModal} />
         </div>
       )}
-      {findModal && (
-        <FindAnime close={!findModal} closeButton={() => setFindModal(false)} />
-      )}
+      {getFindModal()}
       <Auth />
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"

@@ -13,6 +13,7 @@ import { Context } from '/src/context'
 import { useContext, useEffect, useState } from 'react'
 import Error from './Error'
 import { ROUTES } from '/src/services/untils'
+import { useNavigate } from 'react-router'
 
 const API_ROUTES = {
   ATL: 'add-to-list',
@@ -59,6 +60,7 @@ const updateList = (
 const Container = ({ data, onMedia: goToMedia }) => {
   const [user, setUser] = useContext(Context)
   const [error, setError] = useState(undefined)
+  const navigate = useNavigate()
 
   useEffect(() => {
     let interval = null
@@ -72,7 +74,6 @@ const Container = ({ data, onMedia: goToMedia }) => {
     }
   }, [error])
 
-  // console.log('cont', id, data.id)
   const id = data.id
   const name =
     data.title.romaji ||
@@ -99,6 +100,21 @@ const Container = ({ data, onMedia: goToMedia }) => {
       ? user.data?.favourites?.filter((x) => x.id === id)?.length > 0
       : false,
   })
+
+  useEffect(() => {
+    const handleKeyBinding = (event) => {
+      if (event.shiftKey) {
+        switch (event.key) {
+          case 'W':
+            navigate(ROUTES.WATCH + getQueryParams({ id, name, episode: 1 }))
+        }
+      }
+    }
+    addEventListener('keydown', handleKeyBinding)
+    return () => {
+      removeEventListener('keydown', handleKeyBinding)
+    }
+  }, [id, name, navigate])
 
   useEffect(() => {
     setPropState({

@@ -108,6 +108,8 @@ const queries = {
 							native
 						}
 						startDate {
+							day
+							month
 							year
 						}
 						format
