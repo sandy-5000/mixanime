@@ -39,6 +39,11 @@ const MainLayout = ({ children }) => {
               navigate(ROUTES.HOME)
             }
             break
+          case 'P':
+            if (location.pathname !== ROUTES.PROFILE) {
+              navigate(ROUTES.PROFILE)
+            }
+            break
           case 'D':
             if (location.pathname === ROUTES.WATCH) {
               navigate(ROUTES.DETAILS + getQueryParams({ id: query.get('id') }))
