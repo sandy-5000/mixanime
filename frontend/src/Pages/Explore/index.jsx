@@ -6,6 +6,7 @@ import Spinner from '/src/components/Spinner'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { getQueryParams } from '/src/services/untils'
 import Container from './Container'
+import Modal from '/src/components/Modal'
 import { ROUTES } from '/src/services/untils'
 
 const defaultFilter = () => {
@@ -99,9 +100,9 @@ const getVariables = (variables) => {
 }
 
 const Explore = () => {
-  const [show, setShow] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
+  const [showFilter, setShowFilter] = useState(false)
   const query = new URLSearchParams(location.search)
   const [list, setList] = useState(null)
   const [variables, setVariables] = useState({
@@ -131,6 +132,40 @@ const Explore = () => {
   }, [filter, variables])
 
   useEffect(() => {
+    const handleKeyBinding = (event) => {
+      if (event.shiftKey) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            event.preventDefault()
+            setPage(variables.page - 1)
+            break
+          case 'ArrowRight':
+            event.preventDefault()
+            setPage(variables.page + 1)
+            break
+          case '?':
+            if (!showFilter) {
+              event.preventDefault()
+              setShowFilter(true)
+            }
+            break
+        }
+      } else {
+        switch (event.key) {
+          case 'Escape':
+            setShowFilter(false)
+            break
+        }
+      }
+    }
+    addEventListener('keydown', handleKeyBinding)
+    return () => {
+      removeEventListener('keydown', handleKeyBinding)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setPage])
+
+  useEffect(() => {
     const page = Math.max(query.get('page'), 1) || 1
     setPage(page, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -150,32 +185,34 @@ const Explore = () => {
 
   return (
     <MainLayout>
-      {show && (
-        <div
-          className="z-[5] w-[90vw] mx-[5vw] flex justify-end"
+      {showFilter && (
+        <Modal
+          close={!showFilter}
+          closeModal={() => setShowFilter(false)}
           style={{
-            position: 'fixed',
+            background: '#042f2e44',
+            border: '2px solid #f1f5f944',
           }}
         >
           <Filter
             defaultFilter={defaultFilter}
-            close={() => setShow(false)}
+            close={() => setShowFilter(false)}
             filter={filter}
             setFilter={setFilter}
           />
-        </div>
+        </Modal>
       )}
       <div
         style={{
-          filter: show ? 'blur(10px)' : 'blur(0)',
-          opacity: show ? 0.15 : 1,
+          filter: showFilter ? 'blur(10px)' : 'blur(0)',
+          opacity: showFilter ? 0.2 : 1,
         }}
       >
         <Container
           page={variables.page}
           setPage={setPage}
           list={list}
-          setShow={setShow}
+          setShow={setShowFilter}
         />
       </div>
     </MainLayout>

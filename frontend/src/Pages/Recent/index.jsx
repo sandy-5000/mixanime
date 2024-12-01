@@ -38,6 +38,28 @@ const Recent = () => {
   }, [variables, navigate])
 
   useEffect(() => {
+    const handleKeyBinding = (event) => {
+      if (event.shiftKey) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            event.preventDefault()
+            setPage(variables.page - 1)
+            break
+          case 'ArrowRight':
+            event.preventDefault()
+            setPage(variables.page + 1)
+            break
+        }
+      }
+    }
+    addEventListener('keydown', handleKeyBinding)
+    return () => {
+      removeEventListener('keydown', handleKeyBinding)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setPage])
+
+  useEffect(() => {
     const page = Math.max(query.get('page'), 1) || 1
     setPage(page, false)
     // eslint-disable-next-line react-hooks/exhaustive-deps

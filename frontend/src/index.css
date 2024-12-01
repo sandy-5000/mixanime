@@ -187,7 +187,7 @@ input:focus {
 }
 
 .filter-width {
-  @apply w-[90vw] md:w-[400px];
+  @apply w-[80vw] md:w-[400px];
 }
 
 .checkbox {

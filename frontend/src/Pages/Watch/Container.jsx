@@ -121,18 +121,26 @@ const Container = ({ data }) => {
 
   useEffect(() => {
     const handleKeyBinding = (event) => {
-      if (event.ctrlKey) {
-        if (event.key === 'ArrowLeft') {
-          event.preventDefault()
-          setCurrentEpisode(episode - 1)
-        } else if (event.key === 'ArrowRight') {
-          event.preventDefault()
-          setCurrentEpisode(episode + 1)
+      if (event.shiftKey) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            event.preventDefault()
+            setCurrentEpisode(episode - 1)
+            break
+          case 'ArrowRight':
+            event.preventDefault()
+            setCurrentEpisode(episode + 1)
+            break
         }
-      } else if (event.key === '/') {
-        setShowModal(true)
-      } else if (event.key === 'Escape') {
-        setShowModal(false)
+      } else {
+        switch (event.key) {
+          case '/':
+            setShowModal(true)
+            break
+          case 'Escape':
+            setShowModal(false)
+            break
+        }
       }
     }
     addEventListener('keydown', handleKeyBinding)

@@ -23,6 +23,10 @@ const MainLayout = ({ children }) => {
   const location = useLocation()
   const query = new URLSearchParams(location.search)
 
+  const modalOpened = () => {
+    return findModal || loginModal
+  }
+
   useEffect(() => {
     const handleKeyBinding = (event) => {
       if (event.ctrlKey) {
@@ -34,19 +38,40 @@ const MainLayout = ({ children }) => {
         }
       } else if (event.shiftKey) {
         switch (event.key) {
-          case 'H':
-            if (location.pathname !== ROUTES.HOME) {
-              navigate(ROUTES.HOME)
+          case 'D':
+            if (!modalOpened()) {
+              if (location.pathname === ROUTES.WATCH) {
+                navigate(
+                  ROUTES.DETAILS + getQueryParams({ id: query.get('id') })
+                )
+              } else if (location.pathname !== ROUTES.HOME) {
+                navigate(ROUTES.HOME)
+              }
             }
             break
-          case 'P':
-            if (location.pathname !== ROUTES.PROFILE) {
+          case 'E':
+            if (!modalOpened() && location.pathname !== ROUTES.EXPLORE) {
+              navigate(ROUTES.EXPLORE + getQueryParams({ page: 1 }))
+            }
+            break
+          case 'F':
+            if (!modalOpened() && location.pathname !== ROUTES.PROFILE) {
               navigate(ROUTES.PROFILE)
             }
             break
-          case 'D':
-            if (location.pathname === ROUTES.WATCH) {
-              navigate(ROUTES.DETAILS + getQueryParams({ id: query.get('id') }))
+          case 'R':
+            if (!modalOpened() && location.pathname !== ROUTES.RECENT) {
+              navigate(ROUTES.RECENT + getQueryParams({ page: 1 }))
+            }
+            break
+          case 'T':
+            if (!modalOpened() && location.pathname !== ROUTES.TRENDING) {
+              navigate(ROUTES.TRENDING + getQueryParams({ page: 1 }))
+            }
+            break
+          case 'X':
+            if (!modalOpened() && location.pathname !== ROUTES.DEVELOPER) {
+              navigate(ROUTES.DEVELOPER)
             }
             break
         }
@@ -69,7 +94,7 @@ const MainLayout = ({ children }) => {
       removeEventListener('keydown', handleKeyBinding)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, navigate])
+  }, [location, navigate, findModal, loginModal])
 
   const handleAuth = () => {
     if (user.loggedIn) {
