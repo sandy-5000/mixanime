@@ -13,6 +13,7 @@ import Login from '/src/components/Login/Modal'
 import { Context } from '/src/context'
 import { useNavigate, useLocation } from 'react-router'
 import { ROUTES, getQueryParams } from '/src/services/untils'
+import WebSiteBroken from '/src/components/WebSiteBroken'
 
 const MainLayout = ({ children }) => {
   const [user, setUser] = useContext(Context)
@@ -147,6 +148,7 @@ const MainLayout = ({ children }) => {
         </div>
       )}
       {getFindModal()}
+      <WebSiteBroken />
       <Auth />
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"

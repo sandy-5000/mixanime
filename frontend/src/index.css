@@ -242,3 +242,14 @@ input:focus {
   display: block;
   @apply border-r-slate-800 border-t-slate-800;
 }
+
+.web-site-broken {
+  @apply fixed z-[4] bottom-16 sm:bottom-8 w-[300px] bg-black;
+  left: calc(50% - 150px);
+}
+
+@media (width >= 640px) {
+  .web-site-broken {
+    left: 40px;
+  }
+}
