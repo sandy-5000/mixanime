@@ -9,8 +9,8 @@ const episodeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  links: {
-    type: [String],
+  link: {
+    type: String,
     required: true,
   },
 })

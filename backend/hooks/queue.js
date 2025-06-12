@@ -21,7 +21,7 @@ const postMQueueFindOneAndUpdate = function (result) {
       { anilist_id, episode_no },
       {
         $set: {
-          links: [urlData.link],
+          link: urlData.link,
         },
       },
       { upsert: true }

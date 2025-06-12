@@ -35,7 +35,7 @@ export default function AnimeController() {
         ])
         if (result.length === 1) {
           defaultRes.uuid = result[0]?.title?.romaji || null
-          defaultRes.linkURL.link = result[0]?.links[0] || null
+          defaultRes.linkURL.link = result[0]?.link || null
           return callback({
             result: defaultRes,
             status: 200,

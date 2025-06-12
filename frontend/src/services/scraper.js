@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { load } from 'cheerio'
 
-const source = 's3embtaku.pro'
+const source = 's3taku.one'
 
 class Scrapper {
   constructor() {}
 
   scrape(id, callback) {
     try {
-      const url = `https://${source}/videos/${id}`
+      const url = `https://${source}/${id}`
       const linkURL = localStorage.getItem(id)
       if (linkURL) {
         callback(JSON.parse(linkURL))
@@ -18,7 +18,7 @@ class Scrapper {
         .get(url)
         .then((response) => {
           const $ = load(response.data)
-          const link = 'https:' + $('iframe:first-child').attr('src') || null
+          const link = $('iframe:first-child').attr('src') || null
           if (link) {
             localStorage.setItem(id, JSON.stringify({ link, status: 200 }))
           }

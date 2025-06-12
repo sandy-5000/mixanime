@@ -9,7 +9,7 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({ origin: '*' }))
 const PORT = process.env.PORT || 5000
 const HOST = process.env.HOST || 'localhost'
 const MONGO_DB_URL = process.env.MONGO_DB_URL
