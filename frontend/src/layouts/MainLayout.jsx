@@ -24,6 +24,8 @@ const MainLayout = ({ children }) => {
   const location = useLocation()
   const query = new URLSearchParams(location.search)
 
+  const websiteBorken = false
+
   const modalOpened = () => {
     return findModal || loginModal
   }
@@ -148,7 +150,7 @@ const MainLayout = ({ children }) => {
         </div>
       )}
       {getFindModal()}
-      <WebSiteBroken />
+      {websiteBorken && <WebSiteBroken />}
       <Auth />
       <header
         className="bg-gradient-to-b from-gray-950 z-[4] fixed w-screen"
