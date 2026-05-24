@@ -60,10 +60,10 @@ export default function UserController() {
             result: { error: 'User not found' },
           }
         }
-        if (user.userList.length >= 50) {
+        if (user.userList.length >= 500) {
           return {
             status: 400,
-            result: { error: "Can't add more than 50 items" },
+            result: { error: "Can't add more than 500 items" },
           }
         }
         for (let item of user.userList) {
